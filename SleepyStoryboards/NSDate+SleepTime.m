@@ -1,0 +1,29 @@
+//
+//  NSDate+SleepTime.m
+//  SleepyTimeUpdate
+//
+//  Created by Alexander Figueroa on 11/25/2013.
+//  Copyright (c) 2013 Alexander Figueroa. All rights reserved.
+//
+
+#import "NSDate+SleepTime.h"
+
+@implementation NSDate (SleepTime)
+
+- (NSString *)stringUsingFormatter:(NSDateFormatter *)formatter;
+{
+    // Return the formatter specific string
+    return [formatter stringFromDate:self];
+}
+
+- (NSString *)stringShortTime
+{
+    // Return the short time variant of the date (ex. 3:30 PM)
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+    [timeFormatter setDateStyle:NSDateFormatterNoStyle];
+    [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    return [timeFormatter stringFromDate:self];
+}
+
+@end

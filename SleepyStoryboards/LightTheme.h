@@ -1,0 +1,18 @@
+//
+//  LightTheme.h
+//  SleepyStoryboards
+//
+//  Created by Alexander Figueroa on 12/31/2013.
+//  Copyright (c) 2013 Alexander Figueroa. All rights reserved.
+//
+//  Provide the base class to use for themes that are light in theme (status + nav bar)
+
+#import <Foundation/Foundation.h>
+#import "Theme.h"
+
+@interface LightTheme : NSObject <Theme>
+
+// Theme the status bar, if it complements the navigation bar
+- (void)themeStatusBar;
+
+@end
