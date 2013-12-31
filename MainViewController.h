@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Theme.h"
 
 @interface MainViewController : UIViewController
 
-// Manage the theming of the view
-@property (nonatomic, strong) id <Theme> themeSetter;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *themeSegmentedControl;
 
 

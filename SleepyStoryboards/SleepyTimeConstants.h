@@ -14,7 +14,8 @@ static NSString *const kAppTheme = @"AppTheme";
 
 typedef enum {
     kBlueBeigeTheme,
-    kBlackGrayTheme
+    kBlackGrayTheme,
+    kRedRoseTheme
 } ThemeSelectionOption;
 
 /*
@@ -34,5 +35,8 @@ typedef enum {
     kAscending,
     kDescending
 } ColorMappingOrder;
+
+// Notifications
+static NSString *const AFThemeHasChangedNotification = @"AFThemeHasChangedNotification";
 
 #endif

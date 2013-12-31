@@ -9,6 +9,7 @@
 #import "ThemeProvider.h"
 #import "BlueBeigeTheme.h"
 #import "BlackGrayTheme.h"
+#import "RedRoseTheme.h"
 
 static NSMutableDictionary *themeDictionary;
 
@@ -35,6 +36,9 @@ static NSMutableDictionary *themeDictionary;
                 break;
             case kBlackGrayTheme:
                 theme = [[BlackGrayTheme alloc] init];
+                break;
+            case kRedRoseTheme:
+                theme = [[RedRoseTheme alloc] init];
                 break;
             default:
                 // Use default theme

@@ -37,12 +37,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f9y-je-O2R">
-                                <rect key="frame" x="116" y="270" width="89" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f9y-je-O2R">
+                                <rect key="frame" x="89" y="270" width="142" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Light"/>
+                                    <segment title="Blue"/>
                                     <segment title="Dark"/>
+                                    <segment title="Red"/>
                                 </segments>
                                 <connections>
                                     <action selector="changeTheme:" destination="ku1-BR-TGP" eventType="valueChanged" id="ZBl-3T-37O"/>
@@ -51,8 +52,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="f9y-je-O2R" secondAttribute="centerY" id="SaG-Sq-sFN"/>
-                            <constraint firstAttribute="centerX" secondItem="f9y-je-O2R" secondAttribute="centerX" id="Tpz-Kh-M4m"/>
+                            <constraint firstAttribute="centerY" secondItem="f9y-je-O2R" secondAttribute="centerY" id="5Cj-qZ-JM6"/>
+                            <constraint firstAttribute="centerX" secondItem="f9y-je-O2R" secondAttribute="centerX" id="cpM-X0-Qsi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SleepCycle" id="vIF-9q-R2K"/>

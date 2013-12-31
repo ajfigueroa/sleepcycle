@@ -11,40 +11,38 @@
 
 @interface MainViewController ()
 
+// Manage the theming of the view
+@property (nonatomic, strong) id <Theme> themeSetter;
+
 @end
 
 @implementation MainViewController
+{}
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+#pragma mark - View Initialization
+- (void)awakeFromNib
 {
-    self = [super initWithCoder:aDecoder];
+    [super awakeFromNib];
+    NSLog(@"Awaking from nib");
     
-    if (self)
-    {
-        // Grab the theme from the theme factory if it isn't provided already
-        if (!self.themeSetter)
-        {
-            self.themeSetter = [ThemeProvider theme];
-        }
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setTheme) name:@"ThemeHasChangedNotification" object:nil];
-        
-        // Configure the segmented control
-        [self.themeSegmentedControl addTarget:self action:@selector(changeTheme:) forControlEvents:UIControlEventValueChanged];
-        
-    }
-    
-    return self;
+    // Configure the segmented control
+    [self.themeSegmentedControl addTarget:self action:@selector(changeTheme:) forControlEvents:UIControlEventValueChanged];
 }
 
-- (void)setTheme
+#pragma mark - View Management
+- (void)viewWillAppear:(BOOL)animated
 {
-    // Set (or reset) the theme with the appropriate theme object
-    self.themeSetter = [ThemeProvider theme];
-    // Theme the appropriate views using the appropriate theme object
-    // conforming to <Theme>
-    [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
-    [self.themeSetter themeViewBackground:self.view];
+    [super viewWillAppear:animated];
+    
+    // Register for Theme Change Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self applyTheme];
 }
 
 - (void)viewDidLoad
@@ -53,55 +51,76 @@
     
     NSInteger currentThemeSelection = [[NSUserDefaults standardUserDefaults] integerForKey:kAppTheme];
     
+    NSInteger selectedIndex = 0;
+    
     switch (currentThemeSelection) {
         case kBlueBeigeTheme:
-            self.themeSegmentedControl.selectedSegmentIndex = 0;
+            selectedIndex = 0;
             break;
         case kBlackGrayTheme:
-            self.themeSegmentedControl.selectedSegmentIndex = 1;
+            selectedIndex = 1;
             break;
-            
+        case kRedRoseTheme:
+            selectedIndex = 2;
+            break;
         default:
             break;
     }
     
-    [self setTheme];
+    self.themeSegmentedControl.selectedSegmentIndex = selectedIndex;
 }
 
-
-- (void)didReceiveMemoryWarning
+#pragma mark - Theme Change Methods
+- (void)applyTheme
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    // Set (or reset) the theme with the appropriate theme object
+    self.themeSetter = [ThemeProvider theme];
+    
+    // Theme the appropriate views
+    [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+    [self.themeSetter themeViewBackground:self.view];
 }
 
 - (void)changeTheme:(UISegmentedControl *)segmentedControl
 {
     NSLog(@"Theme is being changed");
-    NSLog(@"Sender is of type: %@", [[segmentedControl class] description]);
+    
+    ThemeSelectionOption themeSelection;
     
     switch (segmentedControl.selectedSegmentIndex) {
         case 0:
-            [[NSUserDefaults standardUserDefaults] setInteger:kBlueBeigeTheme forKey:kAppTheme];
-            NSLog(@"Theme is going bluebeige");
+            themeSelection = kBlueBeigeTheme;
+            NSLog(@"Theme is going Blue and Beige");
             break;
         case 1:
-            [[NSUserDefaults standardUserDefaults] setInteger:kBlackGrayTheme forKey:kAppTheme];
-            NSLog(@"Theme is going blackgray");
+            themeSelection = kBlackGrayTheme;
+            NSLog(@"Theme is going Black and Gray");
+            break;
+        case 2:
+            themeSelection = kRedRoseTheme;
+            NSLog(@"Theme is going Reddish");
             break;
         default:
+            themeSelection = kBlueBeigeTheme;
+            NSLog(@"Default");
             break;
     }
+    
+    // Write the theme to defaults
+    [[NSUserDefaults standardUserDefaults] setInteger:(NSInteger)themeSelection forKey:kAppTheme];
     
     // Syncronize the views and update
     NSLog(@"Syncronizing and updating");
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ThemeHasChangedNotification" object:self];
+    NSLog(@"Posting notification");
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:self];
 }
 
+#pragma mark - End of Life
 - (void)dealloc
 {
+    // Remove observer so notification is not sent to null object
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }

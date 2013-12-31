@@ -1,22 +1,22 @@
 //
-//  BlackGrayTheme.m
-//  SleepCycleSeven
+//  RedRoseTheme.m
+//  SleepyStoryboards
 //
-//  Created by Alexander Figueroa on 12/23/2013.
+//  Created by Alexander Figueroa on 12/31/2013.
 //  Copyright (c) 2013 Alexander Figueroa. All rights reserved.
 //
 
-#import "BlackGrayTheme.h"
+#import "RedRoseTheme.h"
 #import "UIColor+Colours.h"
 #import "UINavigationBar+FlatUI.h"
 
-@implementation BlackGrayTheme
+@implementation RedRoseTheme
 {}
 
 #pragma mark - Theme protocol methods
 - (void)themeViewBackground:(UIView *)view
 {
-    view.backgroundColor = [UIColor black25PercentColor];
+    view.backgroundColor = [UIColor paleRoseColor];
 }
 
 - (void)themeNavigationBar:(UINavigationBar *)navBar
@@ -26,7 +26,6 @@
     [self themeStatusBar];
     
     // Set the navigation bar color
-    [navBar configureFlatNavigationBarWithColor:[UIColor coolGrayColor]];
+    [navBar configureFlatNavigationBarWithColor:[UIColor crimsonColor]];
 }
-
 @end
