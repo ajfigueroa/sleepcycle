@@ -27,6 +27,8 @@
             self.themeSetter = [ThemeProvider theme];
         }
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setTheme) name:@"ThemeHasChangedNotification" object:nil];
+        
         // Configure the segmented control
         [self.themeSegmentedControl addTarget:self action:@selector(changeTheme:) forControlEvents:UIControlEventValueChanged];
         
@@ -58,13 +60,10 @@
     {
         self.themeSegmentedControl.selectedSegmentIndex = 1;
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+    
     [self setTheme];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -94,10 +93,13 @@
     NSLog(@"Syncronizing and updating");
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    double delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self setTheme];
-    });
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ThemeHasChangedNotification" object:self];
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
 @end
