@@ -50,15 +50,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSString *currentTheme = [[NSUserDefaults standardUserDefaults] valueForKey:kAppTheme];
     
-    if ([currentTheme isEqualToString:kBlueBeigeTheme])
-    {
-        self.themeSegmentedControl.selectedSegmentIndex = 0;
-    }
-    else if ([currentTheme isEqualToString:kBlackGrayTheme])
-    {
-        self.themeSegmentedControl.selectedSegmentIndex = 1;
+    NSInteger currentThemeSelection = [[NSUserDefaults standardUserDefaults] integerForKey:kAppTheme];
+    
+    switch (currentThemeSelection) {
+        case kBlueBeigeTheme:
+            self.themeSegmentedControl.selectedSegmentIndex = 0;
+            break;
+        case kBlackGrayTheme:
+            self.themeSegmentedControl.selectedSegmentIndex = 1;
+            break;
+            
+        default:
+            break;
     }
     
     [self setTheme];
@@ -78,11 +82,11 @@
     
     switch (segmentedControl.selectedSegmentIndex) {
         case 0:
-            [[NSUserDefaults standardUserDefaults] setObject:kBlueBeigeTheme forKey:kAppTheme];
+            [[NSUserDefaults standardUserDefaults] setInteger:kBlueBeigeTheme forKey:kAppTheme];
             NSLog(@"Theme is going bluebeige");
             break;
         case 1:
-            [[NSUserDefaults standardUserDefaults] setObject:kBlackGrayTheme forKey:kAppTheme];
+            [[NSUserDefaults standardUserDefaults] setInteger:kBlackGrayTheme forKey:kAppTheme];
             NSLog(@"Theme is going blackgray");
             break;
         default:

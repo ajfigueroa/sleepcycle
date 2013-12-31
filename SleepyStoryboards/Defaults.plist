@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>AppTheme</key>
-	<string>bluebeigetheme</string>
+	<integer>0</integer>
 </dict>
 </plist>

@@ -17,10 +17,10 @@ static NSMutableDictionary *themeDictionary;
 + (id <Theme>)theme
 {
     // Grab theme name for user defaults
-    NSString *themeName = [[NSUserDefaults standardUserDefaults] valueForKey:kAppTheme];
+    NSInteger themeSelection = [[NSUserDefaults standardUserDefaults] integerForKey:kAppTheme];
     
     // Grab the theme
-    id <Theme> theme = [themeDictionary objectForKey:themeName];
+    id <Theme> theme = [themeDictionary objectForKey:[@(themeSelection) stringValue]];
     
     if (!themeDictionary){
         // Lazy initialize dict if non-existent
@@ -29,19 +29,21 @@ static NSMutableDictionary *themeDictionary;
     
     if (!theme){
         // Apply appropriate theme
-        if ([themeName isEqualToString:kBlueBeigeTheme]){
-            theme = [[BlueBeigeTheme alloc] init];
-        }
-        else if ([themeName isEqualToString:kBlackGrayTheme]){
-            theme = [[BlackGrayTheme alloc] init];
-        }
-        else{
-            // Use default theme
-            NSLog(@"Default theme called in %s", __PRETTY_FUNCTION__);
-            theme = [[BlueBeigeTheme alloc] init];
+        switch (themeSelection) {
+            case kBlueBeigeTheme:
+                theme = [[BlueBeigeTheme alloc] init];
+                break;
+            case kBlackGrayTheme:
+                theme = [[BlackGrayTheme alloc] init];
+                break;
+            default:
+                // Use default theme
+                NSLog(@"Default theme called in %s", __PRETTY_FUNCTION__);
+                theme = [[BlueBeigeTheme alloc] init];
+                break;
         }
         
-        [themeDictionary setValue:theme forKey:themeName];
+        [themeDictionary setValue:theme forKey:[@(themeSelection) stringValue]];
     }
     
     return theme;

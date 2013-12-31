@@ -11,8 +11,11 @@
 
 // Key for accessing themes across view controllers (NSUserDefaults key)
 static NSString *const kAppTheme = @"AppTheme";
-static NSString *const kBlueBeigeTheme = @"bluebeigetheme";
-static NSString *const kBlackGrayTheme = @"blackgraytheme";
+
+typedef enum {
+    kBlueBeigeTheme,
+    kBlackGrayTheme
+} ThemeSelectionOption;
 
 /*
  The SelectedUserMode enum is used to keep track of the buttons entered by
