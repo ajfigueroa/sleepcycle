@@ -80,6 +80,7 @@
     
     // Theme the appropriate views
     [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+    
     [self.themeSetter themeViewBackground:self.view];
     
     // Theme the buttons

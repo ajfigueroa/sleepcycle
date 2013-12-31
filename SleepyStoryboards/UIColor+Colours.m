@@ -550,6 +550,16 @@
 	return [UIColor colorWithRed:187/255.0f green:18/255.0f blue:36/255.0f alpha:1.0];
 }
 
++ (UIColor *)lightCrimsonColor
+{
+    return [UIColor colorWithRed:234/255.0f green:46/255.0f blue:65/255.0f alpha:1.0];
+}
+
++ (UIColor *)lightRoseColor
+{
+    return [UIColor colorWithRed:245/255.0f green:158/255.0f blue:166/255.0f alpha:1.0];
+}
+
 
 #pragma mark - Purples
 + (UIColor *)eggplantColor

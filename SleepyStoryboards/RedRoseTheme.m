@@ -18,7 +18,7 @@
     self = [super init];
     if (self)
     {
-        self.primaryColor = [UIColor crimsonColor];
+        self.primaryColor = [UIColor lightCrimsonColor];
         self.secondaryColor = [UIColor paleRoseColor];
         self.textColor = [UIColor whiteColor];
     }

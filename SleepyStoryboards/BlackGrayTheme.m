@@ -20,7 +20,7 @@
     {
         self.primaryColor = [UIColor coolGrayColor];
         self.secondaryColor = [UIColor black25PercentColor];
-        self.textColor = [UIColor blackColor];
+        self.textColor = [UIColor whiteColor];
     }
     
     return self;

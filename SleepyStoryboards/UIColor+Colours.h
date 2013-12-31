@@ -180,6 +180,8 @@ typedef enum
 + (UIColor *)pinkLipstickColor;
 + (UIColor *)paleRoseColor;
 + (UIColor *)crimsonColor;
++ (UIColor *)lightCrimsonColor;
++ (UIColor *)lightRoseColor;
 
 // Purples
 + (UIColor *)eggplantColor;
