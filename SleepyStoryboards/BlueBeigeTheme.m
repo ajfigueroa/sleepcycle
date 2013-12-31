@@ -13,11 +13,24 @@
 @implementation BlueBeigeTheme
 {}
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        self.primaryColor = [UIColor blueberryColor];
+        self.secondaryColor = [UIColor eggshellColor];
+        self.textColor = [UIColor whiteColor];
+    }
+    
+    return self;
+}
+
 #pragma mark - Theme protocol methods
 - (void)themeViewBackground:(UIView *)view
 {
     // Configure the background color
-    view.backgroundColor = [UIColor eggshellColor];
+    view.backgroundColor = self.secondaryColor;
 }
 
 - (void)themeNavigationBar:(UINavigationBar *)navBar
@@ -27,7 +40,15 @@
     [self themeStatusBar];
     
     // Set the navigation bar color
-    [navBar configureFlatNavigationBarWithColor:[UIColor blueberryColor]];
+    [navBar configureFlatNavigationBarWithColor:self.primaryColor];
+}
+
+- (void)themeButton:(UIButton *)button withFont:(UIFont *)font
+{
+    button.backgroundColor = self.primaryColor;
+    button.titleLabel.font = font;
+    [button setTitleColor:self.textColor forState:UIControlStateNormal];
+    [button setTitleColor:self.textColor forState:UIControlStateHighlighted];
 }
 
 @end

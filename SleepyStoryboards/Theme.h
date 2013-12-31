@@ -16,5 +16,6 @@
 // Theming general UI Controls and Views
 - (void)themeViewBackground:(UIView *)view;
 - (void)themeNavigationBar:(UINavigationBar *)navBar;
+- (void)themeButton:(UIButton *)button withFont:(UIFont *)font;
 
 @end

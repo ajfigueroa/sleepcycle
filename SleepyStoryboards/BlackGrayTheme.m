@@ -13,10 +13,23 @@
 @implementation BlackGrayTheme
 {}
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        self.primaryColor = [UIColor coolGrayColor];
+        self.secondaryColor = [UIColor black25PercentColor];
+        self.textColor = [UIColor blackColor];
+    }
+    
+    return self;
+}
+
 #pragma mark - Theme protocol methods
 - (void)themeViewBackground:(UIView *)view
 {
-    view.backgroundColor = [UIColor black25PercentColor];
+    view.backgroundColor = self.secondaryColor;
 }
 
 - (void)themeNavigationBar:(UINavigationBar *)navBar
@@ -26,7 +39,15 @@
     [self themeStatusBar];
     
     // Set the navigation bar color
-    [navBar configureFlatNavigationBarWithColor:[UIColor coolGrayColor]];
+    [navBar configureFlatNavigationBarWithColor:self.primaryColor];
+}
+
+- (void)themeButton:(UIButton *)button withFont:(UIFont *)font
+{
+    button.backgroundColor = self.primaryColor;
+    button.titleLabel.font = font;
+    [button setTitleColor:self.textColor forState:UIControlStateNormal];
+    [button setTitleColor:self.textColor forState:UIControlStateHighlighted];
 }
 
 @end

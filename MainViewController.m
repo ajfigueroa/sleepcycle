@@ -9,6 +9,8 @@
 #import "MainViewController.h"
 #import "ThemeProvider.h"
 
+#define DEFAULT_BUTTON_WIDTH 259.0
+
 @interface MainViewController ()
 
 // Manage the theming of the view
@@ -79,6 +81,13 @@
     // Theme the appropriate views
     [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
     [self.themeSetter themeViewBackground:self.view];
+    
+    // Theme the buttons
+    for (FUIButton *button in @[self.calculateBedTimeButton, self.calculateWakeTimeButton, self.settingsButton])
+    {
+        UIFont *buttonFont = [UIFont fontWithName:@"Futura-Medium" size:[UIFont systemFontSize]];
+        [self.themeSetter themeButton:button withFont:buttonFont];
+    }
 }
 
 - (void)changeTheme:(UISegmentedControl *)segmentedControl

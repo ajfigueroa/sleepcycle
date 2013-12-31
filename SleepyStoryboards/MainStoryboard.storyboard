@@ -37,8 +37,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f9y-je-O2R">
-                                <rect key="frame" x="89" y="270" width="142" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f9y-je-O2R">
+                                <rect key="frame" x="89" y="520" width="142" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Blue"/>
@@ -49,15 +49,55 @@
                                     <action selector="changeTheme:" destination="ku1-BR-TGP" eventType="valueChanged" id="ZBl-3T-37O"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W51-4G-Nk1" customClass="FUIButton">
+                                <rect key="frame" x="31" y="261" width="259" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="259" id="by9-1s-MI5"/>
+                                    <constraint firstAttribute="height" constant="45" id="mTA-3A-Qnh"/>
+                                </constraints>
+                                <state key="normal" title="Calculate Wake Up Time">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSN-3m-RhB" customClass="FUIButton">
+                                <rect key="frame" x="31" y="184" width="259" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="259" id="7RZ-Jk-Zi8"/>
+                                    <constraint firstAttribute="height" constant="45" id="Yl4-ia-4tx"/>
+                                </constraints>
+                                <state key="normal" title="Calculate Bed Time">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpe-dE-QGY" customClass="FUIButton">
+                                <rect key="frame" x="31" y="338" width="259" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="ddO-DZ-E1y"/>
+                                    <constraint firstAttribute="width" constant="259" id="eeI-Hw-fSd"/>
+                                </constraints>
+                                <state key="normal" title="Settings">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="f9y-je-O2R" secondAttribute="centerY" id="5Cj-qZ-JM6"/>
-                            <constraint firstAttribute="centerX" secondItem="f9y-je-O2R" secondAttribute="centerX" id="cpM-X0-Qsi"/>
+                            <constraint firstItem="W51-4G-Nk1" firstAttribute="top" secondItem="tSN-3m-RhB" secondAttribute="bottom" constant="32" id="CSR-af-BE7"/>
+                            <constraint firstAttribute="centerX" secondItem="tSN-3m-RhB" secondAttribute="centerX" id="FLx-wd-VPX"/>
+                            <constraint firstItem="rpe-dE-QGY" firstAttribute="top" secondItem="W51-4G-Nk1" secondAttribute="bottom" constant="32" id="JmT-CN-zmP"/>
+                            <constraint firstAttribute="centerX" secondItem="rpe-dE-QGY" secondAttribute="centerX" id="WQ3-5e-j75"/>
+                            <constraint firstAttribute="centerY" secondItem="W51-4G-Nk1" secondAttribute="centerY" id="YMM-la-XvE"/>
+                            <constraint firstAttribute="centerX" secondItem="W51-4G-Nk1" secondAttribute="centerX" id="hPf-ad-Xo2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SleepCycle" id="vIF-9q-R2K"/>
                     <connections>
+                        <outlet property="calculateBedTimeButton" destination="tSN-3m-RhB" id="xX0-Di-ssy"/>
+                        <outlet property="calculateWakeTimeButton" destination="W51-4G-Nk1" id="C3I-lQ-vHo"/>
+                        <outlet property="settingsButton" destination="rpe-dE-QGY" id="K2j-eU-TlP"/>
                         <outlet property="themeSegmentedControl" destination="f9y-je-O2R" id="eWW-4q-cOv"/>
                     </connections>
                 </viewController>

@@ -12,6 +12,12 @@
 
 @interface LightTheme : NSObject <Theme>
 
+// Primary refers to navigation bar color and buttons
+@property (nonatomic, strong) UIColor *primaryColor;
+// Secondary refers to background views
+@property (nonatomic, strong) UIColor *secondaryColor;
+@property (nonatomic, strong) UIColor *textColor;
+
 // Theme the status bar, if it complements the navigation bar
 - (void)themeStatusBar;
 

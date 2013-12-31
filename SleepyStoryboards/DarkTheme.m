@@ -15,6 +15,7 @@
 
 @implementation DarkTheme
 
+#pragma mark - Theme Protocol
 - (void)themeNavigationBar:(UINavigationBar *)navBar
 {
     // Theme the navigation bar to conform to the Light content
@@ -27,6 +28,13 @@
     NSAssert(NO, assertionMessage);
 }
 
+- (void)themeButton:(UIButton *)button withFont:(UIFont *)font
+{
+    NSString *assertionMessage = [NSString stringWithFormat:@"%s: This is an abstract method and should be overridden", __PRETTY_FUNCTION__];
+    NSAssert(NO, assertionMessage);
+}
+
+# pragma mark - Helper
 - (void)themeStatusBar
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
