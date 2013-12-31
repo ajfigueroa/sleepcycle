@@ -37,7 +37,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f9y-je-O2R">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f9y-je-O2R">
                                 <rect key="frame" x="89" y="520" width="142" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -89,6 +89,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="W51-4G-Nk1" firstAttribute="top" secondItem="tSN-3m-RhB" secondAttribute="bottom" constant="32" id="CSR-af-BE7"/>
+                            <constraint firstAttribute="bottom" secondItem="f9y-je-O2R" secondAttribute="bottom" constant="20" id="FHm-L7-uHd"/>
                             <constraint firstAttribute="centerX" secondItem="tSN-3m-RhB" secondAttribute="centerX" id="FLx-wd-VPX"/>
                             <constraint firstItem="rpe-dE-QGY" firstAttribute="top" secondItem="W51-4G-Nk1" secondAttribute="bottom" constant="32" id="JmT-CN-zmP"/>
                             <constraint firstAttribute="centerX" secondItem="rpe-dE-QGY" secondAttribute="centerX" id="WQ3-5e-j75"/>
@@ -152,15 +153,41 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
 </mutableData>
                                 </timeZone>
                             </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJj-KR-EYx" customClass="FUIButton">
+                                <rect key="frame" x="31" y="385" width="259" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="259" id="3zy-U4-Jib"/>
+                                    <constraint firstAttribute="height" constant="49" id="rDs-1F-5tW"/>
+                                </constraints>
+                                <state key="normal" title="Confirm Time">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9V4-5X-8ko" customClass="FUIButton">
+                                <rect key="frame" x="31" y="454" width="259" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="WNA-y4-5sO"/>
+                                    <constraint firstAttribute="width" constant="259" id="gyJ-Ke-wtW"/>
+                                </constraints>
+                                <state key="normal" title="Sleep Now">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="sJj-KR-EYx" firstAttribute="top" secondItem="onO-yO-atJ" secondAttribute="bottom" constant="20" id="Z47-y0-2Wp"/>
                             <constraint firstAttribute="centerX" secondItem="onO-yO-atJ" secondAttribute="centerX" id="lIl-mi-vAb"/>
                             <constraint firstAttribute="centerY" secondItem="onO-yO-atJ" secondAttribute="centerY" id="mik-dx-Xfb"/>
+                            <constraint firstItem="9V4-5X-8ko" firstAttribute="top" secondItem="sJj-KR-EYx" secondAttribute="bottom" constant="20" id="otN-gB-5F4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Times" id="wJl-3w-8Iy"/>
                     <connections>
+                        <outlet property="confirmTimeButton" destination="sJj-KR-EYx" id="7YE-G1-5hx"/>
+                        <outlet property="sleepNowButton" destination="9V4-5X-8ko" id="Ob0-ZL-joG"/>
                         <outlet property="timeSelectionDatePicker" destination="onO-yO-atJ" id="XiT-pq-jNf"/>
                     </connections>
                 </viewController>

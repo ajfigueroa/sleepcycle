@@ -53,6 +53,12 @@
     {
        [self.themeSetter themeViewBackground:self.view];
     }
+    
+    for (FUIButton *button in @[self.confirmTimeButton, self.sleepNowButton])
+    {
+        UIFont *buttonFont = [UIFont fontWithName:@"Futura-Medium" size:[UIFont systemFontSize]];
+        [self.themeSetter themeButton:button withFont:buttonFont];
+    }
 }
 
 #pragma mark - End of Life
