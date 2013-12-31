@@ -21,6 +21,7 @@
 {
     // Theme the navigation bar to conform to the Light content
     navBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    navBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)themeViewBackground:(UIView *)view

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DarkTheme.h"
 #import "LightTheme.h"
 
 @interface BlackGrayTheme : LightTheme

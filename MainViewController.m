@@ -8,8 +8,7 @@
 
 #import "MainViewController.h"
 #import "ThemeProvider.h"
-
-#define DEFAULT_BUTTON_WIDTH 259.0
+#import "TimeSelectionViewController.h"
 
 @interface MainViewController ()
 
@@ -25,7 +24,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    NSLog(@"Awaking from nib");
+    NSLog(@"Awaking from nib: %s", __PRETTY_FUNCTION__);
     
     // Configure the segmented control
     [self.themeSegmentedControl addTarget:self action:@selector(changeTheme:) forControlEvents:UIControlEventValueChanged];
@@ -49,6 +48,7 @@
 
 - (void)viewDidLoad
 {
+    // This will not be in final release.
     [super viewDidLoad];
     
     NSInteger currentThemeSelection = [[NSUserDefaults standardUserDefaults] integerForKey:kAppTheme];
@@ -126,6 +126,7 @@
     NSLog(@"Posting notification");
     [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:self];
 }
+
 
 #pragma mark - End of Life
 - (void)dealloc

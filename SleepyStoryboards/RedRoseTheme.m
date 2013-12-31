@@ -19,7 +19,7 @@
     if (self)
     {
         self.primaryColor = [UIColor lightCrimsonColor];
-        self.secondaryColor = [UIColor paleRoseColor];
+        self.secondaryColor = [UIColor whiteColor];
         self.textColor = [UIColor whiteColor];
     }
     
@@ -48,6 +48,13 @@
     button.titleLabel.font = font;
     [button setTitleColor:self.textColor forState:UIControlStateNormal];
     [button setTitleColor:self.textColor forState:UIControlStateHighlighted];
+}
+
+// Optional
+- (void)themeViewBackgroundAlternate:(UIView *)view
+{
+    // Configure view with alternate background cover
+    view.backgroundColor = self.primaryColor;
 }
 
 @end

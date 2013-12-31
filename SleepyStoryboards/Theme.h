@@ -18,4 +18,8 @@
 - (void)themeNavigationBar:(UINavigationBar *)navBar;
 - (void)themeButton:(UIButton *)button withFont:(UIFont *)font;
 
+@optional
+
+- (void)themeViewBackgroundAlternate:(UIView *)view;
+
 @end

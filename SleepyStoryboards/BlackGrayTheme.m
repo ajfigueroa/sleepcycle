@@ -50,4 +50,11 @@
     [button setTitleColor:self.textColor forState:UIControlStateHighlighted];
 }
 
+// Optional
+- (void)themeViewBackgroundAlternate:(UIView *)view
+{
+    // Configure view with alternate background cover
+    view.backgroundColor = self.primaryColor;
+}
+
 @end
