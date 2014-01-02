@@ -179,12 +179,20 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Placeholder Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYm-o7-Z3j">
+                                <rect key="frame" x="26" y="105" width="269" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="hYm-o7-Z3j" secondAttribute="centerX" id="4Ns-vd-ebt"/>
                             <constraint firstAttribute="centerX" secondItem="sJj-KR-EYx" secondAttribute="centerX" id="OLo-KG-oDn"/>
                             <constraint firstItem="sJj-KR-EYx" firstAttribute="top" secondItem="onO-yO-atJ" secondAttribute="bottom" constant="20" id="Z47-y0-2Wp"/>
                             <constraint firstAttribute="centerX" secondItem="9V4-5X-8ko" secondAttribute="centerX" id="aM2-Tv-nMB"/>
+                            <constraint firstItem="onO-yO-atJ" firstAttribute="top" secondItem="hYm-o7-Z3j" secondAttribute="bottom" constant="66" id="ejV-9F-Tdh"/>
                             <constraint firstAttribute="centerX" secondItem="onO-yO-atJ" secondAttribute="centerX" id="lIl-mi-vAb"/>
                             <constraint firstAttribute="centerY" secondItem="onO-yO-atJ" secondAttribute="centerY" id="mik-dx-Xfb"/>
                             <constraint firstItem="9V4-5X-8ko" firstAttribute="top" secondItem="sJj-KR-EYx" secondAttribute="bottom" constant="20" id="otN-gB-5F4"/>
@@ -193,6 +201,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="Times" id="wJl-3w-8Iy"/>
                     <connections>
                         <outlet property="confirmTimeButton" destination="sJj-KR-EYx" id="7YE-G1-5hx"/>
+                        <outlet property="informationLabel" destination="hYm-o7-Z3j" id="CxI-OR-Wtc"/>
                         <outlet property="sleepNowButton" destination="9V4-5X-8ko" id="Ob0-ZL-joG"/>
                         <outlet property="timeSelectionDatePicker" destination="onO-yO-atJ" id="XiT-pq-jNf"/>
                     </connections>

@@ -28,7 +28,7 @@
     return self;
 }
 
-#pragma mark - Theme protocol methods
+#pragma mark - Required Theme protocol methods
 - (void)themeViewBackground:(UIView *)view
 {
     // Configure the background color
@@ -53,7 +53,15 @@
     [button setTitleColor:self.textColor forState:UIControlStateHighlighted];
 }
 
-// Optional
+- (void)themeLabel:(UILabel *)label withFont:(UIFont *)font
+{
+    label.font = font;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = self.textColor;
+    label.backgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - Optional Theme Protocol Methods
 - (void)alternateThemeViewBackground:(UIView *)view
 {
     // Configure view with alternate background cover

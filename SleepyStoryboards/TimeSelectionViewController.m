@@ -35,15 +35,16 @@
     
 }
 
-#pragma mark - View Management
+#pragma mark - Control View Management
 - (void)updateViewWithNotification:(NSNotification *)notification
 {
     if ([notification.name isEqualToString:AFSelectedCalculateWakeTimeNotification])
     {
-        NSLog(@"%@", AFSelectedCalculateWakeTimeNotification);
+        self.informationLabel.text = @"Choose your bed time";
     }
     else if ([notification.name isEqualToString:AFSelectedCalculateBedTimeNotification])
     {
+        self.informationLabel.text = @"Choose your wake-up time";
         self.sleepNowButton.hidden = YES;
     }
 }
@@ -74,6 +75,10 @@
         [self.themeSetter alternateThemeButton:self.sleepNowButton withFont:buttonFont];
     else
         [self.themeSetter themeButton:self.sleepNowButton withFont:buttonFont];
+    
+    // Theme the information label view
+    UIFont *labelFont = buttonFont;
+    [self.themeSetter themeLabel:self.informationLabel withFont:labelFont];
 }
 
 #pragma mark - End of Life

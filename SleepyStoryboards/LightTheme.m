@@ -36,6 +36,12 @@
     NSAssert(NO, assertionMessage);
 }
 
+- (void)themeLabel:(UILabel *)label withFont:(UIFont *)font
+{
+    NSString *assertionMessage = [NSString stringWithFormat:@"%s: This is an abstract method and should be overridden", __PRETTY_FUNCTION__];
+    NSAssert(NO, assertionMessage);
+}
+
 # pragma mark - Helper
 - (void)themeStatusBar
 {

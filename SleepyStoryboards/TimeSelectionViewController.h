@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *timeSelectionDatePicker;
 @property (weak, nonatomic) IBOutlet FUIButton *confirmTimeButton;
 @property (weak, nonatomic) IBOutlet FUIButton *sleepNowButton;
+@property (weak, nonatomic) IBOutlet UILabel *informationLabel;
 
 @end
