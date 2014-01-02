@@ -31,8 +31,10 @@
 {
     [super viewDidLayoutSubviews];
     
-    self.pongRefreshControl = [BOZPongRefreshControl attachToTableView:self.resultsTableView withRefreshTarget:self andRefreshAction:@selector(refreshTriggered)];
-    
+    // Add the pong refresh target to the refreshTriggered action
+    self.pongRefreshControl = [BOZPongRefreshControl attachToTableView:self.resultsTableView
+                                                     withRefreshTarget:self
+                                                      andRefreshAction:@selector(refreshTriggered)];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -59,6 +61,11 @@
     cell.textLabel.text = (NSString *)self.resultTimes[(NSUInteger)indexPath.row];
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"";
 }
 
 #pragma mark - Target Action Methods
