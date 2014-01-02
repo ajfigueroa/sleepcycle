@@ -19,7 +19,7 @@
     if (self)
     {
         self.primaryColor = [UIColor lightCrimsonColor];
-        self.secondaryColor = [UIColor whiteColor];
+        self.secondaryColor = [UIColor paleRoseColor];
         self.textColor = [UIColor whiteColor];
         self.alternateSecondaryColor = [UIColor lightCrimsonColor];
         self.alternateTextColor = [UIColor blackColor];

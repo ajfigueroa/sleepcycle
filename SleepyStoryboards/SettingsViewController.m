@@ -52,6 +52,7 @@
     if (!self.themeDictionary)
         self.themeDictionary = [[NSMutableDictionary alloc] init];
     
+    // Map the indices as strings to the theme name values
     for (int i = 0; i < AVAILABLE_THEMES_COUNT; i++)
     {
         self.themeDictionary[[@(i) stringValue]] = [self themeName:i];
@@ -68,7 +69,7 @@
             return @"Black & Gray";
             break;
         case AFRedRoseTheme:
-            return @"Red & White";
+            return @"Red & Rose";
             break;
         default:
             return @"";

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ResultsViewController : UIViewController
+@interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
 @end

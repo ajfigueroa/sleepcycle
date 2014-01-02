@@ -28,7 +28,7 @@
 
     self.themes = @[@"Blue & Beige",
                     @"Black & Gray",
-                    @"Red & White"];
+                    @"Red & Rose"];
     
     self.selectedThemeIndex = [self.themes indexOfObject:self.themeName];
 }
@@ -57,8 +57,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThemeCell"];
+
     cell.textLabel.text = (NSString *)self.themes[indexPath.row];
     
+    // Apply Checkmark accessory to the selected indexpath
     if (indexPath.row == self.selectedThemeIndex)
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     else
@@ -69,6 +71,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    // Return an empty header title
     return @"";
 }
 

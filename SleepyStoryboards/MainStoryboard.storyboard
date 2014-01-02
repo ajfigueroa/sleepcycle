@@ -204,10 +204,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1161" y="20"/>
         </scene>
-        <!--View Controller - Results-->
+        <!--Results View Controller - Results-->
         <scene sceneID="l0I-Tb-Bn9">
             <objects>
-                <viewController id="6Aq-bQ-WOs" sceneMemberID="viewController">
+                <viewController id="6Aq-bQ-WOs" customClass="ResultsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="E8a-dz-LoF"/>
                         <viewControllerLayoutGuide type="bottom" id="eIy-6e-d66"/>
@@ -221,7 +221,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Udy-7G-fKM">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResultsCell" id="Udy-7G-fKM">
                                         <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Udy-7G-fKM" id="PXv-eB-NhU">
@@ -230,11 +230,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="6Aq-bQ-WOs" id="4b3-cq-htb"/>
+                                    <outlet property="delegate" destination="6Aq-bQ-WOs" id="Oc5-wX-6oG"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Results" id="mAT-Xh-fE3"/>
+                    <connections>
+                        <outlet property="resultsTableView" destination="rlm-Ze-PvF" id="aiq-cG-rHQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IWd-go-d4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
