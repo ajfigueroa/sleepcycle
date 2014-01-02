@@ -7,11 +7,14 @@
 //
 
 #import "SettingsViewController.h"
+#import "ThemeProvider.h"
 
 @interface SettingsViewController ()
 
 @property (nonatomic, strong) NSString *currentThemeName;
 @property (nonatomic, strong) NSMutableDictionary *themeDictionary;
+// Manage the theming of the view
+@property (nonatomic, strong) id <Theme> themeSetter;
 
 @end
 
@@ -79,6 +82,10 @@
     
     if (validIndices.count > 0)
     {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:nil];
+        });
+        
         NSInteger option = [(NSString *)validIndices.firstObject integerValue];
         [[NSUserDefaults standardUserDefaults] setInteger:option forKey:AFAppTheme];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -93,6 +100,22 @@
     self.themeSelectionLabel.text = self.currentThemeName;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // Register for Theme Change Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+}
+
+#pragma mark - Theme Management
+- (void)applyTheme
+{
+    self.themeSetter = [ThemeProvider theme];
+    
+    [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+}
+
 #pragma mark - ThemeSelectionViewControllerDelegate
 - (void)themeSelectionViewController:(ThemeSelectionViewController *)controller didSelectTheme:(NSString *)themeName
 {
@@ -101,7 +124,11 @@
     
     [self setCurrentApplicationTheme:themeName];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.navigationController popViewControllerAnimated:YES];
+    });
 }
 
 #pragma mark - Segue
@@ -113,6 +140,14 @@
         themeSelectionViewController.delegate = self;
         themeSelectionViewController.themeName = self.currentThemeName;
     }
+}
+
+#pragma mark - End of Life
+- (void)dealloc
+{
+    // Remove observer so notification is not sent to null object
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 
 @end

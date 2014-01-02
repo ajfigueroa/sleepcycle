@@ -11,7 +11,6 @@
 
 @interface MainViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *themeSegmentedControl;
 @property (weak, nonatomic) IBOutlet FUIButton *calculateBedTimeButton;
 @property (weak, nonatomic) IBOutlet FUIButton *calculateWakeTimeButton;
 @property (weak, nonatomic) IBOutlet FUIButton *settingsButton;

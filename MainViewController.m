@@ -28,9 +28,6 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
 {
     [super awakeFromNib];
     NSLog(@"Awaking from nib: %s", __PRETTY_FUNCTION__);
-    
-    // Configure the segmented control
-    [self.themeSegmentedControl addTarget:self action:@selector(changeTheme:) forControlEvents:UIControlEventValueChanged];
 }
 
 #pragma mark - View Management
@@ -42,32 +39,6 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
     
     // Register for Theme Change Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
-}
-
-- (void)viewDidLoad
-{
-    // This will not be in final release.
-    [super viewDidLoad];
-    
-    NSInteger currentThemeSelection = [[NSUserDefaults standardUserDefaults] integerForKey:AFAppTheme];
-    
-    NSInteger selectedIndex = 0;
-    
-    switch (currentThemeSelection) {
-        case AFBlueBeigeTheme:
-            selectedIndex = 0;
-            break;
-        case AFBlackGrayTheme:
-            selectedIndex = 1;
-            break;
-        case AFRedRoseTheme:
-            selectedIndex = 2;
-            break;
-        default:
-            break;
-    }
-    
-    self.themeSegmentedControl.selectedSegmentIndex = selectedIndex;
 }
 
 #pragma mark - Theme Change Methods
@@ -87,42 +58,6 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
         UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
         [self.themeSetter themeButton:button withFont:buttonFont];
     }
-}
-
-- (void)changeTheme:(UISegmentedControl *)segmentedControl
-{
-    NSLog(@"Theme is being changed");
-    
-    AFThemeSelectionOption themeSelection;
-    
-    switch (segmentedControl.selectedSegmentIndex) {
-        case 0:
-            themeSelection = AFBlueBeigeTheme;
-            NSLog(@"Theme is going Blue and Beige");
-            break;
-        case 1:
-            themeSelection = AFBlackGrayTheme;
-            NSLog(@"Theme is going Black and Gray");
-            break;
-        case 2:
-            themeSelection = AFRedRoseTheme;
-            NSLog(@"Theme is going Reddish");
-            break;
-        default:
-            themeSelection = AFBlueBeigeTheme;
-            NSLog(@"Default");
-            break;
-    }
-    
-    // Write the theme to defaults
-    [[NSUserDefaults standardUserDefaults] setInteger:(NSInteger)themeSelection forKey:AFAppTheme];
-    
-    // Syncronize the views and update
-    NSLog(@"Syncronizing and updating");
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    NSLog(@"Posting notification");
-    [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:self];
 }
 
 #pragma mark - Segue

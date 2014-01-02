@@ -37,18 +37,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f9y-je-O2R">
-                                <rect key="frame" x="89" y="520" width="142" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Blue"/>
-                                    <segment title="Dark"/>
-                                    <segment title="Red"/>
-                                </segments>
-                                <connections>
-                                    <action selector="changeTheme:" destination="ku1-BR-TGP" eventType="valueChanged" id="ZBl-3T-37O"/>
-                                </connections>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W51-4G-Nk1" customClass="FUIButton">
                                 <rect key="frame" x="31" y="261" width="259" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -95,13 +83,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="W51-4G-Nk1" firstAttribute="top" secondItem="tSN-3m-RhB" secondAttribute="bottom" constant="32" id="CSR-af-BE7"/>
-                            <constraint firstAttribute="bottom" secondItem="f9y-je-O2R" secondAttribute="bottom" constant="20" id="FHm-L7-uHd"/>
                             <constraint firstAttribute="centerX" secondItem="tSN-3m-RhB" secondAttribute="centerX" id="FLx-wd-VPX"/>
                             <constraint firstItem="rpe-dE-QGY" firstAttribute="top" secondItem="W51-4G-Nk1" secondAttribute="bottom" constant="32" id="JmT-CN-zmP"/>
                             <constraint firstAttribute="centerX" secondItem="rpe-dE-QGY" secondAttribute="centerX" id="WQ3-5e-j75"/>
                             <constraint firstAttribute="centerY" secondItem="W51-4G-Nk1" secondAttribute="centerY" id="YMM-la-XvE"/>
                             <constraint firstAttribute="centerX" secondItem="W51-4G-Nk1" secondAttribute="centerX" id="hPf-ad-Xo2"/>
-                            <constraint firstAttribute="centerX" secondItem="f9y-je-O2R" secondAttribute="centerX" id="vuD-Pt-7su"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SleepCycle" id="vIF-9q-R2K"/>
@@ -109,7 +95,6 @@
                         <outlet property="calculateBedTimeButton" destination="tSN-3m-RhB" id="xX0-Di-ssy"/>
                         <outlet property="calculateWakeTimeButton" destination="W51-4G-Nk1" id="C3I-lQ-vHo"/>
                         <outlet property="settingsButton" destination="rpe-dE-QGY" id="K2j-eU-TlP"/>
-                        <outlet property="themeSegmentedControl" destination="f9y-je-O2R" id="eWW-4q-cOv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9yh-1J-Uns" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -326,13 +311,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="CfN-p8-ONy">
             <objects>
                 <tableViewController id="dHc-k8-C4z" customClass="ThemeSelectionViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UVx-fo-Ugj">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="UVx-fo-Ugj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ThemeCell" id="8zl-4M-fq7">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8zl-4M-fq7" id="oCE-bb-vzf">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>

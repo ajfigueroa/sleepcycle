@@ -7,11 +7,14 @@
 //
 
 #import "ThemeSelectionViewController.h"
+#import "ThemeProvider.h"
 
 @interface ThemeSelectionViewController ()
 
 @property (nonatomic, strong) NSArray *themes;
 @property (nonatomic) NSUInteger selectedThemeIndex;
+// Manage the theming of the view
+@property (nonatomic, strong) id <Theme> themeSetter;
 
 @end
 
@@ -28,6 +31,14 @@
                     @"Red & White"];
     
     self.selectedThemeIndex = [self.themes indexOfObject:self.themeName];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // Register for Theme Change Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
 }
 
 #pragma mark - UITableViewDataSource
@@ -56,20 +67,47 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"";
+}
+
+#pragma mark - Theme Management
+- (void)applyTheme
+{
+    self.themeSetter = [ThemeProvider theme];
+    
+    [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+}
+
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    NSIndexPath *previousIndexPath = [NSIndexPath indexPathForRow:self.selectedThemeIndex inSection:0];
+    [tableView deselectRowAtIndexPath:previousIndexPath animated:YES];
     
+    UITableViewCell *previousCell = [tableView cellForRowAtIndexPath:previousIndexPath];
+    previousCell.accessoryType = UITableViewCellAccessoryNone;
+
     // Update the selected theme by adding the checkmark
     self.selectedThemeIndex = indexPath.row;
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    
+
+        
     // Send the now selected theme to the delegate
     NSString *selectedThemeName = (NSString *)self.themes[indexPath.row];
     [self.delegate themeSelectionViewController:self didSelectTheme:selectedThemeName];
+}
+
+#pragma mark - End of Life
+- (void)dealloc
+{
+    // Remove observer so notification is not sent to null object
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 
 @end
