@@ -44,5 +44,6 @@ static NSString *const AFSelectedCalculateWakeTimeNotification = @"AFSelectedCal
 // Segue Identifier
 static NSString *const AFCalculateBedTimeSegue = @"CalculateBedTimeSegue";
 static NSString *const AFCalculateWakeTimeSegue = @"CalculateWakeTimeSegue";
+static NSString *const AFSettingsSegue = @"SettingsSegue";
 
 #endif
