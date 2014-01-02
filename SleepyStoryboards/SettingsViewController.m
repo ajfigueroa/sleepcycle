@@ -33,7 +33,6 @@
         // Build Theme Dictionary
         [self buildThemeDictionary];
         
-        self.currentThemeName = [self currentApplicationTheme];
     }
     
     return self;
@@ -114,11 +113,18 @@
 }
 
 #pragma mark - View Management
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+//- (void)viewDidLoad
+//{
+//    [super viewDidLoad];
+//
+//    [self updateThemeSelectionLabel];
+//}
 
-    self.themeSelectionLabel.text = self.currentThemeName;
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self updateAllSettings];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -141,7 +147,7 @@
 - (void)themeSelectionViewController:(ThemeSelectionViewController *)controller didSelectTheme:(NSString *)themeName
 {
     self.currentThemeName = themeName;
-    self.themeSelectionLabel.text = self.currentThemeName;
+    [self updateThemeSelectionLabel];
     
     [self setCurrentApplicationTheme:themeName];
     
@@ -172,7 +178,8 @@
 {
     switch (behaviourOption) {
         case SHOW_PINGPONG_EASTER_EGG_ROW:
-            [self updateShowPingPongEasterEggSetting];
+            // Toggle the setting
+            NSLog(@"Toggling PINGPONG");
             break;
             
         default:
@@ -180,22 +187,30 @@
     }
 }
 
+- (void)updateThemeSelectionLabel
+{
+    if (!self.currentThemeName)
+        self.currentThemeName = [self currentApplicationTheme];
+    
+    self.themeSelectionLabel.text = self.currentThemeName;
+}
+
 - (void)updateShowPingPongEasterEggSetting
 {
-    // Update the show ping pong easter egg setting
+    // Update the show ping pong easter egg setting based on the user defaults
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:SHOW_PINGPONG_EASTER_EGG_ROW inSection:BEHAVIOUR_SECTION]];
     
-    // Determine current state and toggle
-    BOOL isVisible = (cell.accessoryType == UITableViewCellAccessoryCheckmark);
+    // Grab current setting from user defaults
+    BOOL isVisible = [[NSUserDefaults standardUserDefaults] boolForKey:AFShowEasterEgg];
     
-    if (isVisible)
-    {
-        // Toggle and update default settings to NOT show this easter egg
-    }
-    else
-    {
-        // Toggle and update default settings to show this easter egg
-    }
+    cell.accessoryType = isVisible ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+}
+
+- (void)updateAllSettings
+{
+    // Update all settings based on their initialization methods
+    [self updateThemeSelectionLabel];
+    [self updateShowPingPongEasterEggSetting];
 }
 
 #pragma mark - Segue
