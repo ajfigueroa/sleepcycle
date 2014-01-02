@@ -20,6 +20,7 @@
 
 @protocol ThemeSelectionViewControllerDelegate <NSObject>
 
-- (void)themeSelectionViewController:(ThemeSelectionViewController *)controller didSelectTheme:(NSString *)themeName;
+- (void)themeSelectionViewController:(ThemeSelectionViewController *)controller
+                      didSelectTheme:(NSString *)themeName;
 
 @end

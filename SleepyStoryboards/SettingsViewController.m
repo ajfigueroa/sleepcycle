@@ -9,11 +9,12 @@
 #import "SettingsViewController.h"
 #import "ThemeProvider.h"
 #import "SettingsSelectionConstants.h"
+#import "ThemeSettingsManager.h"
 
 @interface SettingsViewController ()
 
-@property (nonatomic, strong) NSString *currentThemeName;
-@property (nonatomic, strong) NSMutableDictionary *themeDictionary;
+// Theme Settings
+@property (nonatomic, strong) ThemeSettingsManager *themeSettingsManager;
 // Manage the theming of the view
 @property (nonatomic, strong) id <Theme> themeSetter;
 
@@ -26,87 +27,13 @@
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        // Build Theme Dictionary
-        [self buildThemeDictionary];
-        
+        // Setup ThemeSettingManager
+        self.themeSettingsManager = [[ThemeSettingsManager alloc] init];
     }
     
     return self;
 }
 
-#pragma mark - Updating Theme
-- (NSString *)currentApplicationTheme
-{
-    AFThemeSelectionOption option = (AFThemeSelectionOption)[[NSUserDefaults standardUserDefaults] integerForKey:AFAppTheme];
-    
-    if (!self.themeDictionary)
-        [self buildThemeDictionary];
-    
-    return (NSString *)self.themeDictionary[[@(option) stringValue]];
-}
-
-- (void)buildThemeDictionary
-{
-    if (!self.themeDictionary)
-        self.themeDictionary = [[NSMutableDictionary alloc] init];
-    
-    // Map the indices as strings to the theme name values
-    for (int i = 0; i < AFAvailableThemesCount; i++)
-    {
-        self.themeDictionary[[@(i) stringValue]] = [self themeName:i];
-    }
-}
-
-- (NSArray *)sortedThemeNames
-{
-    // Assumes the theme dictionary has been built
-    if (!self.themeDictionary)
-        [self buildThemeDictionary];
-    
-    NSArray *sortedKeys = [[self.themeDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    NSMutableArray *sortedValues = [NSMutableArray array];
-    
-    for (NSString *key in sortedKeys)
-    {
-        [sortedValues addObject:[self.themeDictionary objectForKey:key]];
-    }
-    
-    return (NSArray *)sortedValues;
-}
-
-- (NSString *)themeName:(AFThemeSelectionOption)option
-{
-    switch (option) {
-        case AFBlueBeigeTheme:
-            return @"Blue & Beige";
-            break;
-        case AFBlackGrayTheme:
-            return @"Black & Gray";
-            break;
-        case AFRedRoseTheme:
-            return @"Red & Rose";
-            break;
-        default:
-            return @"";
-            break;
-    }
-}
-
-- (void)setCurrentApplicationTheme:(NSString *)newThemeName
-{
-    NSArray *validIndices = [self.themeDictionary allKeysForObject:newThemeName];
-    
-    if (validIndices.count > 0)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:nil];
-        });
-        
-        NSInteger option = [(NSString *)validIndices.firstObject integerValue];
-        [[NSUserDefaults standardUserDefaults] setInteger:option forKey:AFAppTheme];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-}
 
 #pragma mark - View Management
 - (void)viewWillAppear:(BOOL)animated
@@ -135,10 +62,10 @@
 #pragma mark - ThemeSelectionViewControllerDelegate
 - (void)themeSelectionViewController:(ThemeSelectionViewController *)controller didSelectTheme:(NSString *)themeName
 {
-    self.currentThemeName = themeName;
+    self.themeSettingsManager.themeName = themeName;
     [self updateThemeSelectionLabel];
     
-    [self setCurrentApplicationTheme:themeName];
+    [self.themeSettingsManager setDefaultApplicationTheme:themeName];
 }
 
 #pragma mark - UITableViewDelegate
@@ -172,10 +99,8 @@
 
 - (void)updateThemeSelectionLabel
 {
-    if (!self.currentThemeName)
-        self.currentThemeName = [self currentApplicationTheme];
-    
-    self.themeSelectionLabel.text = self.currentThemeName;
+    // Update the label based on the current theme inside the manager
+    self.themeSelectionLabel.text = self.themeSettingsManager.themeName;
 }
 
 - (void)updateShowPingPongEasterEggSetting
@@ -227,8 +152,8 @@
     {
         ThemeSelectionViewController *themeSelectionViewController = (ThemeSelectionViewController *)segue.destinationViewController;
         themeSelectionViewController.delegate = self;
-        themeSelectionViewController.themeName = self.currentThemeName;
-        themeSelectionViewController.themes = [self sortedThemeNames];
+        themeSelectionViewController.themeName = self.themeSettingsManager.themeName;
+        themeSelectionViewController.themes = [self.themeSettingsManager themeNamesSortedByIndex];
     }
 }
 
