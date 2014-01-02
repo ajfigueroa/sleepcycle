@@ -12,10 +12,13 @@
 
 @interface ThemeSelectionViewController : UITableViewController
 
+@property (nonatomic, weak) id <ThemeSelectionViewControllerDelegate> delegate;
+@property (nonatomic) NSString *themeName;
+
 @end
 
 @protocol ThemeSelectionViewControllerDelegate <NSObject>
 
-- (void)themeSelectionViewController:(ThemeSelectionViewController *)controller didSelectTheme:(AFThemeSelectionOption)themeSelection;
+- (void)themeSelectionViewController:(ThemeSelectionViewController *)controller didSelectTheme:(NSString *)themeName;
 
 @end
