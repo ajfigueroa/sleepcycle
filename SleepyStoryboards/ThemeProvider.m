@@ -18,7 +18,7 @@ static NSMutableDictionary *themeDictionary;
 + (id <Theme>)theme
 {
     // Grab theme name for user defaults
-    NSInteger themeSelection = [[NSUserDefaults standardUserDefaults] integerForKey:kAppTheme];
+    NSInteger themeSelection = [[NSUserDefaults standardUserDefaults] integerForKey:AFAppTheme];
     
     // Grab the theme
     id <Theme> theme = [themeDictionary objectForKey:[@(themeSelection) stringValue]];
@@ -31,13 +31,13 @@ static NSMutableDictionary *themeDictionary;
     if (!theme){
         // Apply appropriate theme
         switch (themeSelection) {
-            case kBlueBeigeTheme:
+            case AFBlueBeigeTheme:
                 theme = [[BlueBeigeTheme alloc] init];
                 break;
-            case kBlackGrayTheme:
+            case AFBlackGrayTheme:
                 theme = [[BlackGrayTheme alloc] init];
                 break;
-            case kRedRoseTheme:
+            case AFRedRoseTheme:
                 theme = [[RedRoseTheme alloc] init];
                 break;
             default:

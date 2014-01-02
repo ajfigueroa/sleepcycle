@@ -85,7 +85,7 @@
        [self.themeSetter themeViewBackground:self.view];
     
     // Set up the button font
-    UIFont *buttonFont = [UIFont fontWithName:@"Futura-Medium" size:[UIFont systemFontSize]];
+    UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
     
     // Theme the confirm button normally
     [self.themeSetter themeButton:self.confirmTimeButton withFont:buttonFont];
@@ -97,7 +97,7 @@
         [self.themeSetter themeButton:self.sleepNowButton withFont:buttonFont];
     
     // Theme the information label view and increase the font slightly
-    UIFont *labelFont = [buttonFont fontWithSize:([UIFont systemFontSize] + 1.5f)];
+    UIFont *labelFont = [buttonFont fontWithSize:([UIFont labelFontSize])];
     [self.themeSetter themeLabel:self.informationLabel withFont:labelFont];
 }
 

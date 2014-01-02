@@ -10,31 +10,31 @@
 #define SleepyTimeUpdate_SleepyTimeConstants_h
 
 // Key for accessing themes across view controllers (NSUserDefaults key)
-static NSString *const kAppTheme = @"AppTheme";
+static NSString *const AFAppTheme = @"AppTheme";
 
 typedef enum {
-    kBlueBeigeTheme,
-    kBlackGrayTheme,
-    kRedRoseTheme
-} ThemeSelectionOption;
+    AFBlueBeigeTheme,
+    AFBlackGrayTheme,
+    AFRedRoseTheme
+} AFThemeSelectionOption;
 
 /*
  The SelectedUserMode enum is used to keep track of the buttons entered by
  the user.
  */
 typedef enum {
-    kSleepNowButton,
-    kKnowWakeUpTimeButton,
-    kKnowBedTimeButton
-} SelectedUserMode;
+    AFSleepNowButton,
+    AFKnowWakeUpTimeButton,
+    AFKnowBedTimeButton
+} AFSelectedUserMode;
 
 /*
  The ColorMappingOrder
  */
 typedef enum {
-    kAscending,
-    kDescending
-} ColorMappingOrder;
+    AFColorMappingAscending,
+    AFColorMappingDescending
+} AFColorMappingOrder;
 
 // Notifications
 static NSString *const AFThemeHasChangedNotification = @"AFThemeHasChangedNotification";

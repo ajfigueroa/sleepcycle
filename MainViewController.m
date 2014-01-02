@@ -54,18 +54,18 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
     // This will not be in final release.
     [super viewDidLoad];
     
-    NSInteger currentThemeSelection = [[NSUserDefaults standardUserDefaults] integerForKey:kAppTheme];
+    NSInteger currentThemeSelection = [[NSUserDefaults standardUserDefaults] integerForKey:AFAppTheme];
     
     NSInteger selectedIndex = 0;
     
     switch (currentThemeSelection) {
-        case kBlueBeigeTheme:
+        case AFBlueBeigeTheme:
             selectedIndex = 0;
             break;
-        case kBlackGrayTheme:
+        case AFBlackGrayTheme:
             selectedIndex = 1;
             break;
-        case kRedRoseTheme:
+        case AFRedRoseTheme:
             selectedIndex = 2;
             break;
         default:
@@ -89,7 +89,7 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
     // Theme the buttons
     for (FUIButton *button in @[self.calculateBedTimeButton, self.calculateWakeTimeButton, self.settingsButton])
     {
-        UIFont *buttonFont = [UIFont fontWithName:@"Futura-Medium" size:[UIFont systemFontSize]];
+        UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
         [self.themeSetter themeButton:button withFont:buttonFont];
     }
 }
@@ -98,29 +98,29 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
 {
     NSLog(@"Theme is being changed");
     
-    ThemeSelectionOption themeSelection;
+    AFThemeSelectionOption themeSelection;
     
     switch (segmentedControl.selectedSegmentIndex) {
         case 0:
-            themeSelection = kBlueBeigeTheme;
+            themeSelection = AFBlueBeigeTheme;
             NSLog(@"Theme is going Blue and Beige");
             break;
         case 1:
-            themeSelection = kBlackGrayTheme;
+            themeSelection = AFBlackGrayTheme;
             NSLog(@"Theme is going Black and Gray");
             break;
         case 2:
-            themeSelection = kRedRoseTheme;
+            themeSelection = AFRedRoseTheme;
             NSLog(@"Theme is going Reddish");
             break;
         default:
-            themeSelection = kBlueBeigeTheme;
+            themeSelection = AFBlueBeigeTheme;
             NSLog(@"Default");
             break;
     }
     
     // Write the theme to defaults
-    [[NSUserDefaults standardUserDefaults] setInteger:(NSInteger)themeSelection forKey:kAppTheme];
+    [[NSUserDefaults standardUserDefaults] setInteger:(NSInteger)themeSelection forKey:AFAppTheme];
     
     // Syncronize the views and update
     NSLog(@"Syncronizing and updating");
