@@ -38,6 +38,8 @@ typedef enum {
 
 // Notifications
 static NSString *const AFThemeHasChangedNotification = @"AFThemeHasChangedNotification";
+static NSString *const AFSelectedCalculateBedTimeNotification = @"AFSelectedCalculateBedTimeNotification";
+static NSString *const AFSelectedCalculateWakeTimeNotification = @"AFSelectedCalculateWakeTimeNotification";
 
 // Segue Identifier
 static NSString *const AFCalculateBedTimeSegue = @"CalculateBedTimeSegue";

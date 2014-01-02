@@ -25,15 +25,27 @@
     [super awakeFromNib];
     NSLog(@"Awaking from nib: %s", __PRETTY_FUNCTION__);
     [self applyTheme];
-}
-
-#pragma mark - View Management
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     // Register for Theme Change Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+    
+    // Register for View Update Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViewWithNotification:) name:AFSelectedCalculateWakeTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViewWithNotification:) name:AFSelectedCalculateBedTimeNotification object:nil];
+    
+}
+
+#pragma mark - View Management
+- (void)updateViewWithNotification:(NSNotification *)notification
+{
+    if ([notification.name isEqualToString:AFSelectedCalculateWakeTimeNotification])
+    {
+        NSLog(@"%@", AFSelectedCalculateWakeTimeNotification);
+    }
+    else if ([notification.name isEqualToString:AFSelectedCalculateBedTimeNotification])
+    {
+        self.sleepNowButton.hidden = YES;
+    }
 }
 
 #pragma mark - Theme Change Methods

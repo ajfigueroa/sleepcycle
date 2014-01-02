@@ -130,6 +130,19 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
     [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:self];
 }
 
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:AFCalculateBedTimeSegue])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:AFSelectedCalculateBedTimeNotification object:nil];
+    }
+    else if ([segue.identifier isEqualToString:AFCalculateWakeTimeSegue])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:AFSelectedCalculateWakeTimeNotification object:nil];
+    }
+}
+
 #pragma mark - End of Life
 - (void)dealloc
 {
