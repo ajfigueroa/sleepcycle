@@ -113,13 +113,6 @@
 }
 
 #pragma mark - View Management
-//- (void)viewDidLoad
-//{
-//    [super viewDidLoad];
-//
-//    [self updateThemeSelectionLabel];
-//}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -150,12 +143,6 @@
     [self updateThemeSelectionLabel];
     
     [self setCurrentApplicationTheme:themeName];
-    
-    double delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.navigationController popViewControllerAnimated:YES];
-    });
 }
 
 #pragma mark - UITableViewDelegate
