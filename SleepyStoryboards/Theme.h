@@ -20,6 +20,7 @@
 
 @optional
 
-- (void)themeViewBackgroundAlternate:(UIView *)view;
+- (void)alternateThemeViewBackground:(UIView *)view;
+- (void)alternateThemeButton:(UIButton *)button withFont:(UIFont *)font;
 
 @end

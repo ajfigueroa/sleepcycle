@@ -21,6 +21,8 @@
         self.primaryColor = [UIColor coolGrayColor];
         self.secondaryColor = [UIColor black25PercentColor];
         self.textColor = [UIColor whiteColor];
+        self.alternateSecondaryColor = [UIColor coolGrayColor];
+        self.alternateTextColor = [UIColor blackColor];
     }
     
     return self;
@@ -51,10 +53,18 @@
 }
 
 // Optional
-- (void)themeViewBackgroundAlternate:(UIView *)view
+- (void)alternateThemeViewBackground:(UIView *)view
 {
     // Configure view with alternate background cover
-    view.backgroundColor = self.primaryColor;
+    view.backgroundColor = self.alternateSecondaryColor;
+}
+
+- (void)alternateThemeButton:(UIButton *)button withFont:(UIFont *)font
+{
+    button.backgroundColor = self.primaryColor;
+    button.titleLabel.font = font;
+    [button setTitleColor:self.alternateTextColor forState:UIControlStateNormal];
+    [button setTitleColor:self.alternateTextColor forState:UIControlStateHighlighted];
 }
 
 @end

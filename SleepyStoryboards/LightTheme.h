@@ -17,6 +17,8 @@
 // Secondary refers to background views
 @property (nonatomic, strong) UIColor *secondaryColor;
 @property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong) UIColor *alternateSecondaryColor;
+@property (nonatomic, strong) UIColor *alternateTextColor;
 
 // Theme the status bar, if it complements the navigation bar
 - (void)themeStatusBar;

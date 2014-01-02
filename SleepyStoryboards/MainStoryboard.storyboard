@@ -37,7 +37,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f9y-je-O2R">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f9y-je-O2R">
                                 <rect key="frame" x="89" y="520" width="142" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -95,6 +95,7 @@
                             <constraint firstAttribute="centerX" secondItem="rpe-dE-QGY" secondAttribute="centerX" id="WQ3-5e-j75"/>
                             <constraint firstAttribute="centerY" secondItem="W51-4G-Nk1" secondAttribute="centerY" id="YMM-la-XvE"/>
                             <constraint firstAttribute="centerX" secondItem="W51-4G-Nk1" secondAttribute="centerX" id="hPf-ad-Xo2"/>
+                            <constraint firstAttribute="centerX" secondItem="f9y-je-O2R" secondAttribute="centerX" id="vuD-Pt-7su"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SleepCycle" id="vIF-9q-R2K"/>
@@ -153,7 +154,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
 </mutableData>
                                 </timeZone>
                             </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJj-KR-EYx" customClass="FUIButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJj-KR-EYx" customClass="FUIButton">
                                 <rect key="frame" x="31" y="385" width="259" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -164,7 +165,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9V4-5X-8ko" customClass="FUIButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9V4-5X-8ko" customClass="FUIButton">
                                 <rect key="frame" x="31" y="454" width="259" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -178,7 +179,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="sJj-KR-EYx" secondAttribute="centerX" id="OLo-KG-oDn"/>
                             <constraint firstItem="sJj-KR-EYx" firstAttribute="top" secondItem="onO-yO-atJ" secondAttribute="bottom" constant="20" id="Z47-y0-2Wp"/>
+                            <constraint firstAttribute="centerX" secondItem="9V4-5X-8ko" secondAttribute="centerX" id="aM2-Tv-nMB"/>
                             <constraint firstAttribute="centerX" secondItem="onO-yO-atJ" secondAttribute="centerX" id="lIl-mi-vAb"/>
                             <constraint firstAttribute="centerY" secondItem="onO-yO-atJ" secondAttribute="centerY" id="mik-dx-Xfb"/>
                             <constraint firstItem="9V4-5X-8ko" firstAttribute="top" secondItem="sJj-KR-EYx" secondAttribute="bottom" constant="20" id="otN-gB-5F4"/>

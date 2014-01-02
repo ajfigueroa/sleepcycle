@@ -20,6 +20,18 @@
 {}
 
 #pragma mark - View Initialization
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        // Initialize BOOL visibility of sleep now button
+        self.sleepNowButtonVisible = NO;
+    }
+    
+    return self;
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -45,20 +57,23 @@
     // Theme the appropriate views
     [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
     
-    if ([self.themeSetter respondsToSelector:@selector(themeViewBackgroundAlternate:)])
-    {
-        [self.themeSetter themeViewBackgroundAlternate:self.view];
-    }
+    // Theme the background view differently if the alternateThemeViewBackground has been implemented
+    if ([self.themeSetter respondsToSelector:@selector(alternateThemeViewBackground:)])
+        [self.themeSetter alternateThemeViewBackground:self.view];
     else
-    {
        [self.themeSetter themeViewBackground:self.view];
-    }
     
-    for (FUIButton *button in @[self.confirmTimeButton, self.sleepNowButton])
-    {
-        UIFont *buttonFont = [UIFont fontWithName:@"Futura-Medium" size:[UIFont systemFontSize]];
-        [self.themeSetter themeButton:button withFont:buttonFont];
-    }
+    // Set up the button font
+    UIFont *buttonFont = [UIFont fontWithName:@"Futura-Medium" size:[UIFont systemFontSize]];
+    
+    // Theme the confirm button normally
+    [self.themeSetter themeButton:self.confirmTimeButton withFont:buttonFont];
+    
+    // The SleepNowButton is Themed differently to differentiate it from the ConfirmTimeButton
+    if ([self.themeSetter respondsToSelector:@selector(alternateThemeButton:withFont:)])
+        [self.themeSetter alternateThemeButton:self.sleepNowButton withFont:buttonFont];
+    else
+        [self.themeSetter themeButton:self.sleepNowButton withFont:buttonFont];
 }
 
 #pragma mark - End of Life
