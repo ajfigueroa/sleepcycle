@@ -46,5 +46,7 @@ static NSString *const AFCalculateBedTimeSegue = @"CalculateBedTimeSegue";
 static NSString *const AFCalculateWakeTimeSegue = @"CalculateWakeTimeSegue";
 static NSString *const AFSettingsSegue = @"SettingsSegue";
 static NSString *const AFThemeSelectionSegue = @"ThemeSelectionSegue";
+static NSString *const AFConfirmTimeButtonSegue = @"ConfirmTimeButtonSegue";
+static NSString *const AFSleepNowButtonSegue = @"SleepNowButtonSegue";
 
 #endif

@@ -155,6 +155,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <state key="normal" title="Confirm Time">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="6Aq-bQ-WOs" kind="push" identifier="ConfirmTimeButtonSegue" id="OsZ-cI-0dt"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9V4-5X-8ko" customClass="FUIButton">
                                 <rect key="frame" x="31" y="454" width="259" height="45"/>
@@ -166,9 +169,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <state key="normal" title="Sleep Now">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="6Aq-bQ-WOs" kind="push" identifier="SleepNowButtonSegue" id="N4y-7E-gPI"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Placeholder Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYm-o7-Z3j">
-                                <rect key="frame" x="26" y="105" width="269" height="32"/>
+                                <rect key="frame" x="26" y="133" width="269" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -180,7 +186,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstAttribute="centerX" secondItem="sJj-KR-EYx" secondAttribute="centerX" id="OLo-KG-oDn"/>
                             <constraint firstItem="sJj-KR-EYx" firstAttribute="top" secondItem="onO-yO-atJ" secondAttribute="bottom" constant="20" id="Z47-y0-2Wp"/>
                             <constraint firstAttribute="centerX" secondItem="9V4-5X-8ko" secondAttribute="centerX" id="aM2-Tv-nMB"/>
-                            <constraint firstItem="onO-yO-atJ" firstAttribute="top" secondItem="hYm-o7-Z3j" secondAttribute="bottom" constant="66" id="ejV-9F-Tdh"/>
+                            <constraint firstItem="onO-yO-atJ" firstAttribute="top" secondItem="hYm-o7-Z3j" secondAttribute="bottom" constant="38" id="kAJ-CO-bOI"/>
                             <constraint firstAttribute="centerX" secondItem="onO-yO-atJ" secondAttribute="centerX" id="lIl-mi-vAb"/>
                             <constraint firstAttribute="centerY" secondItem="onO-yO-atJ" secondAttribute="centerY" id="mik-dx-Xfb"/>
                             <constraint firstItem="9V4-5X-8ko" firstAttribute="top" secondItem="sJj-KR-EYx" secondAttribute="bottom" constant="20" id="otN-gB-5F4"/>
@@ -197,6 +203,25 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kwh-Rw-YPH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1161" y="20"/>
+        </scene>
+        <!--View Controller - Results-->
+        <scene sceneID="l0I-Tb-Bn9">
+            <objects>
+                <viewController id="6Aq-bQ-WOs" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="E8a-dz-LoF"/>
+                        <viewControllerLayoutGuide type="bottom" id="eIy-6e-d66"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cw1-uO-box">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Results" id="mAT-Xh-fE3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IWd-go-d4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1673" y="23"/>
         </scene>
         <!--Settings View Controller - Settings-->
         <scene sceneID="gyH-8w-pCx">
@@ -343,6 +368,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="OsZ-cI-0dt"/>
         <segue reference="hpn-hj-DSp"/>
     </inferredMetricsTieBreakers>
 </document>
