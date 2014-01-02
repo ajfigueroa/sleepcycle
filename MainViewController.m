@@ -38,15 +38,10 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
 {
     [super viewWillAppear:animated];
     
+    [self applyTheme];
+    
     // Register for Theme Change Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self applyTheme];
 }
 
 - (void)viewDidLoad

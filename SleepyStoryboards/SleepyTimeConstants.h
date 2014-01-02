@@ -42,9 +42,9 @@ static NSString *const AFSelectedCalculateBedTimeNotification = @"AFSelectedCalc
 static NSString *const AFSelectedCalculateWakeTimeNotification = @"AFSelectedCalculateWakeTimeNotification";
 
 // Segue Identifier
-static NSString *const AFCalculateBedTimeSegue = @"AFCalculateBedTimeSegue";
-static NSString *const AFCalculateWakeTimeSegue = @"AFCalculateWakeTimeSegue";
-static NSString *const AFSettingsSegue = @"AFSettingsSegue";
-static NSString *const AFThemeSelectionSegue = @"AFThemeSelectionSegue";
+static NSString *const AFCalculateBedTimeSegue = @"CalculateBedTimeSegue";
+static NSString *const AFCalculateWakeTimeSegue = @"CalculateWakeTimeSegue";
+static NSString *const AFSettingsSegue = @"SettingsSegue";
+static NSString *const AFThemeSelectionSegue = @"ThemeSelectionSegue";
 
 #endif

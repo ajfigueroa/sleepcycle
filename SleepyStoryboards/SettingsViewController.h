@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ThemeSelectionViewController.h"
 
-@interface SettingsViewController : UITableViewController
+@interface SettingsViewController : UITableViewController <ThemeSelectionViewControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *themeSelectionLabel;
 
 @end

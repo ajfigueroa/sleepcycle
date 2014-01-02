@@ -13,7 +13,7 @@
 @interface ThemeSelectionViewController : UITableViewController
 
 @property (nonatomic, weak) id <ThemeSelectionViewControllerDelegate> delegate;
-@property (nonatomic) NSString *themeName;
+@property (nonatomic, strong) NSString *themeName;
 
 @end
 
