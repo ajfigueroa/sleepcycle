@@ -11,6 +11,7 @@
 
 // Key for accessing themes across view controllers (NSUserDefaults key)
 static NSString *const AFAppTheme = @"AppTheme";
+static NSString *const AFShowEasterEgg = @"ShowEasterEgg";
 
 typedef enum {
     AFBlueBeigeTheme,

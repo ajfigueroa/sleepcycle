@@ -19,6 +19,9 @@
 @end
 
 #define AVAILABLE_THEMES_COUNT 3
+// Manage important sections and rows of the STATIC table view cell
+#define BEHAVIOUR_SECTION 1
+#define SHOW_PINGPONG_EASTER_EGG_ROW 0
 
 @implementation SettingsViewController
 
@@ -147,6 +150,52 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self.navigationController popViewControllerAnimated:YES];
     });
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    switch ((NSUInteger)indexPath.section) {
+        case BEHAVIOUR_SECTION:
+            [self updateBehaviourSettings:(NSUInteger)indexPath.row];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - Settings Management
+- (void)updateBehaviourSettings:(NSUInteger)behaviourOption
+{
+    switch (behaviourOption) {
+        case SHOW_PINGPONG_EASTER_EGG_ROW:
+            [self updateShowPingPongEasterEggSetting];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)updateShowPingPongEasterEggSetting
+{
+    // Update the show ping pong easter egg setting
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:SHOW_PINGPONG_EASTER_EGG_ROW inSection:BEHAVIOUR_SECTION]];
+    
+    // Determine current state and toggle
+    BOOL isVisible = (cell.accessoryType == UITableViewCellAccessoryCheckmark);
+    
+    if (isVisible)
+    {
+        // Toggle and update default settings to NOT show this easter egg
+    }
+    else
+    {
+        // Toggle and update default settings to show this easter egg
+    }
 }
 
 #pragma mark - Segue
