@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "ThemeProvider.h"
+#import "SettingsSelectionConstants.h"
 
 @interface SettingsViewController ()
 
@@ -17,11 +18,6 @@
 @property (nonatomic, strong) id <Theme> themeSetter;
 
 @end
-
-#define AVAILABLE_THEMES_COUNT 3
-// Manage important sections and rows of the STATIC table view cell
-#define BEHAVIOUR_SECTION 1
-#define SHOW_PINGPONG_EASTER_EGG_ROW 0
 
 @implementation SettingsViewController
 
@@ -55,7 +51,7 @@
         self.themeDictionary = [[NSMutableDictionary alloc] init];
     
     // Map the indices as strings to the theme name values
-    for (int i = 0; i < AVAILABLE_THEMES_COUNT; i++)
+    for (int i = 0; i < AFAvailableThemesCount; i++)
     {
         self.themeDictionary[[@(i) stringValue]] = [self themeName:i];
     }
@@ -151,7 +147,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     switch ((NSUInteger)indexPath.section) {
-        case BEHAVIOUR_SECTION:
+        case AFBehaviourSection:
             [self updateBehaviourSettings:(NSUInteger)indexPath.row];
             break;
             
@@ -164,9 +160,9 @@
 - (void)updateBehaviourSettings:(NSUInteger)behaviourOption
 {
     switch (behaviourOption) {
-        case SHOW_PINGPONG_EASTER_EGG_ROW:
+        case AFShowPingPongEasterEggRow:
             // Toggle the setting
-            NSLog(@"Toggling PINGPONG");
+            [self toggleShowPingPongEasterEggSetting];
             break;
             
         default:
@@ -185,12 +181,36 @@
 - (void)updateShowPingPongEasterEggSetting
 {
     // Update the show ping pong easter egg setting based on the user defaults
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:SHOW_PINGPONG_EASTER_EGG_ROW inSection:BEHAVIOUR_SECTION]];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:AFShowPingPongEasterEggRow inSection:AFBehaviourSection]];
     
     // Grab current setting from user defaults
     BOOL isVisible = [[NSUserDefaults standardUserDefaults] boolForKey:AFShowEasterEgg];
     
     cell.accessoryType = isVisible ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+}
+
+- (void)toggleShowPingPongEasterEggSetting
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AFShowPingPongEasterEggRow inSection:AFBehaviourSection];
+    [self toggleBooleanSettingForTableView:self.tableView atIndexPath:indexPath forKey:AFShowEasterEgg];
+}
+
+- (void)toggleBooleanSettingForTableView:(UITableView *)tableView
+                             atIndexPath:(NSIndexPath *)indexPath
+                                  forKey:(NSString *)key
+{
+    // Assumes that state is determined by prescence of a checkmark
+    
+    // Update the show ping pong easter egg setting based on the user defaults
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    // Grab prescence of checkmark
+    BOOL hasCheckMarkAccessory = (cell.accessoryType == UITableViewCellAccessoryCheckmark);
+    
+    cell.accessoryType = hasCheckMarkAccessory ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
+    
+    // Register the new state to user defaults
+    [[NSUserDefaults standardUserDefaults] setBool:!hasCheckMarkAccessory forKey:key];
 }
 
 - (void)updateAllSettings
