@@ -130,16 +130,6 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
     [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:self];
 }
 
-#pragma mark - Segue Preparation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([segue.identifier isEqualToString:kTimeSelectionSegueIdentifier])
-//    {
-//        TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)segue.destinationViewController;
-////        timeSelectionViewController.sleepNowButtonVisible = YES;
-//    }
-//}
-
 #pragma mark - End of Life
 - (void)dealloc
 {

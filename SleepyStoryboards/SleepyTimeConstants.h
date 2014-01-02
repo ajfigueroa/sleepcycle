@@ -39,4 +39,8 @@ typedef enum {
 // Notifications
 static NSString *const AFThemeHasChangedNotification = @"AFThemeHasChangedNotification";
 
+// Segue Identifier
+static NSString *const AFCalculateBedTimeSegue = @"CalculateBedTimeSegue";
+static NSString *const AFCalculateWakeTimeSegue = @"CalculateWakeTimeSegue";
+
 #endif

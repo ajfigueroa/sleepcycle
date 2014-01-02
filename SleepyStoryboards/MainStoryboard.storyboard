@@ -60,7 +60,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="3cO-c9-6RQ" kind="push" identifier="SelectTime" id="hpn-hj-DSp"/>
+                                    <segue destination="3cO-c9-6RQ" kind="push" identifier="CalculateWakeTimeSegue" id="hpn-hj-DSp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSN-3m-RhB" customClass="FUIButton">
@@ -73,6 +73,9 @@
                                 <state key="normal" title="Calculate Bed Time">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="3cO-c9-6RQ" kind="push" identifier="CalculateBedTimeSegue" id="ttT-mV-XFU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpe-dE-QGY" customClass="FUIButton">
                                 <rect key="frame" x="31" y="338" width="259" height="45"/>
@@ -204,4 +207,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="hpn-hj-DSp"/>
+    </inferredMetricsTieBreakers>
 </document>
