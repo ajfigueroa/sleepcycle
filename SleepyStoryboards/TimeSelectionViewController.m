@@ -20,18 +20,6 @@
 {}
 
 #pragma mark - View Initialization
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self)
-    {
-        // Initialize BOOL visibility of sleep now button
-        self.sleepNowButtonVisible = NO;
-    }
-    
-    return self;
-}
-
 - (void)awakeFromNib
 {
     [super awakeFromNib];
