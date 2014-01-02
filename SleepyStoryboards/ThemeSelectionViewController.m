@@ -11,7 +11,6 @@
 
 @interface ThemeSelectionViewController ()
 
-@property (nonatomic, strong) NSArray *themes;
 @property (nonatomic) NSUInteger selectedThemeIndex;
 // Manage the theming of the view
 @property (nonatomic, strong) id <Theme> themeSetter;
@@ -25,10 +24,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.themes = @[@"Blue & Beige",
-                    @"Black & Gray",
-                    @"Red & Rose"];
     
     self.selectedThemeIndex = [self.themes indexOfObject:self.themeName];
 }

@@ -285,7 +285,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Sleep Calculation Preferences" id="umM-ie-KNX">
+                            <tableViewSection headerTitle="Behaviour" id="umM-ie-KNX">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="sdy-UH-v5N">
                                         <rect key="frame" x="0.0" y="211" width="320" height="44"/>

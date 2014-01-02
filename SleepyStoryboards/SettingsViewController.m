@@ -59,6 +59,23 @@
     }
 }
 
+- (NSArray *)sortedThemeNames
+{
+    // Assumes the theme dictionary has been built
+    if (!self.themeDictionary)
+        [self buildThemeDictionary];
+    
+    NSArray *sortedKeys = [[self.themeDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    NSMutableArray *sortedValues = [NSMutableArray array];
+    
+    for (NSString *key in sortedKeys)
+    {
+        [sortedValues addObject:[self.themeDictionary objectForKey:key]];
+    }
+    
+    return (NSArray *)sortedValues;
+}
+
 - (NSString *)themeName:(AFThemeSelectionOption)option
 {
     switch (option) {
@@ -140,6 +157,7 @@
         ThemeSelectionViewController *themeSelectionViewController = (ThemeSelectionViewController *)segue.destinationViewController;
         themeSelectionViewController.delegate = self;
         themeSelectionViewController.themeName = self.currentThemeName;
+        themeSelectionViewController.themes = [self sortedThemeNames];
     }
 }
 

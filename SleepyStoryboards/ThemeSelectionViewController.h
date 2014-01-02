@@ -14,6 +14,7 @@
 
 @property (nonatomic, weak) id <ThemeSelectionViewControllerDelegate> delegate;
 @property (nonatomic, strong) NSString *themeName;
+@property (nonatomic, strong) NSArray *themes;
 
 @end
 
