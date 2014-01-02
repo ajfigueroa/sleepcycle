@@ -36,6 +36,12 @@
 }
 
 #pragma mark - Control View Management
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self applyBorderToView:self.timeSelectionDatePicker WithColor:nil width:1.5f];
+}
+
 - (void)updateViewWithNotification:(NSNotification *)notification
 {
     if ([notification.name isEqualToString:AFSelectedCalculateWakeTimeNotification])
@@ -47,6 +53,20 @@
         self.informationLabel.text = @"Choose your wake-up time";
         self.sleepNowButton.hidden = YES;
     }
+}
+
+- (void)applyBorderToView:(UIView *)view WithColor:(UIColor *)color width:(CGFloat)width
+{
+    // If border color is nil, use default black.
+    CGColorRef borderColor;
+
+    if (!color)
+        borderColor = [[UIColor blackColor] CGColor];
+    else
+        borderColor = [color CGColor];
+    
+    view.layer.borderColor = borderColor;
+    view.layer.borderWidth = width;
 }
 
 #pragma mark - Theme Change Methods
@@ -76,8 +96,8 @@
     else
         [self.themeSetter themeButton:self.sleepNowButton withFont:buttonFont];
     
-    // Theme the information label view
-    UIFont *labelFont = buttonFont;
+    // Theme the information label view and increase the font slightly
+    UIFont *labelFont = [buttonFont fontWithSize:([UIFont systemFontSize] + 1.5f)];
     [self.themeSetter themeLabel:self.informationLabel withFont:labelFont];
 }
 
