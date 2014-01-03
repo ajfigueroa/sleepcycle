@@ -86,7 +86,8 @@
 
 - (void)themeTableView:(UITableView *)tableView
 {
-    tableView.backgroundColor = [UIColor black25PercentColor];
+    tableView.backgroundColor = self.secondaryColor;
 }
+
 
 @end

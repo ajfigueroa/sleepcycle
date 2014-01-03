@@ -46,11 +46,16 @@
     
     // Add the pong refresh target to the refreshTriggered action
     self.pongRefreshControl = [BOZPongRefreshControl attachToTableView:self.resultsTableView
-                                                     withRefreshTarget:self
-                                                      andRefreshAction:@selector(refreshTriggered)];
+                                                      withRefreshTarget:self
+                                                       andRefreshAction:@selector(refreshTriggered)];
     
     if (!self.isPongRefreshControlVisible)
         self.resultsTableView.scrollEnabled = NO;
+    else
+    {
+        self.resultsTableView.scrollEnabled = YES;
+        self.pongRefreshControl.shouldCoverRefreshControlUnderHeader = YES;
+    }
     
     [self applyTheme];
 }

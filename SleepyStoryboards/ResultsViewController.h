@@ -11,4 +11,6 @@
 @interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
+
+
 @end
