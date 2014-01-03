@@ -41,14 +41,6 @@
     
     if (!self.isPongRefreshControlVisible)
         self.resultsTableView.scrollEnabled = NO;
-//    {
-//
-//    }
-//    else
-//    {
-//        self.resultsTableView.scrollEnabled = NO;
-//        self.resultsTableView.contentOffset = CGPointMake(0.0f, -29.0f);
-//    }
 }
 
 #pragma mark - UIScrollViewDelegate
