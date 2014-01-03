@@ -16,6 +16,8 @@
 @property (nonatomic, strong) BOZPongRefreshControl *pongRefreshControl;
 @property (nonatomic) BOOL isPongRefreshControlVisible;
 @property (nonatomic, strong) id <Theme> themeSetter;
+@property (weak, nonatomic) IBOutlet UIView *topMaskView;
+@property (weak, nonatomic) IBOutlet UIView *bottomMaskView;
 
 @end
 
@@ -75,6 +77,8 @@
     
     // Theme the background view
     [self.themeSetter themeViewBackground:self.view];
+    [self.themeSetter themeViewBackground:self.topMaskView];
+    [self.themeSetter themeViewBackground:self.bottomMaskView];
     
     // Theme table view but theme cells in UITableViewDelegate method tableView:cellForRowAtIndexPath:
     [self.themeSetter themeTableView:self.resultsTableView];

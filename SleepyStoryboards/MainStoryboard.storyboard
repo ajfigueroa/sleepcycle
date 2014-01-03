@@ -253,7 +253,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="Results" id="mAT-Xh-fE3"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="bottomMaskView" destination="yV3-Fu-CFq" id="nWi-2y-t2h"/>
                         <outlet property="resultsTableView" destination="MjK-k6-6Dd" id="7I4-12-Ggj"/>
+                        <outlet property="topMaskView" destination="Rvh-v9-9p2" id="d80-ST-tjc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IWd-go-d4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
