@@ -59,13 +59,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResultsCell"];
     
     cell.textLabel.text = (NSString *)self.resultTimes[(NSUInteger)indexPath.row];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
     return cell;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return @"";
 }
 
 #pragma mark - Target Action Methods

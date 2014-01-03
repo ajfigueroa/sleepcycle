@@ -64,12 +64,6 @@
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    // Return an empty header title
-    return @"";
-}
-
 #pragma mark - Theme Management
 - (void)applyTheme
 {
