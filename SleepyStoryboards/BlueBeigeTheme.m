@@ -80,13 +80,13 @@
 - (void)themeRefreshControl:(UIView *)refreshControl
 {
     BOZPongRefreshControl *pongRefreshControl = (BOZPongRefreshControl *)refreshControl;
-    pongRefreshControl.foregroundColor = self.secondaryColor;
-    pongRefreshControl.backgroundColor = self.primaryColor;
+    pongRefreshControl.foregroundColor = self.primaryColor;
+    pongRefreshControl.backgroundColor = [UIColor black25PercentColor];
 }
 
 - (void)themeTableView:(UITableView *)tableView
 {
-    tableView.backgroundColor = self.primaryColor;
+    tableView.backgroundColor = [UIColor black25PercentColor];
 }
 
 @end
