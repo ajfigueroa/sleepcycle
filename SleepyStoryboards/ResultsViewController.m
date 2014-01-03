@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) NSArray *resultTimes;
 @property (nonatomic, strong) BOZPongRefreshControl *pongRefreshControl;
+@property (nonatomic) BOOL isPongRefreshControlVisible;
 
 @end
 
@@ -31,21 +32,36 @@
 {
     [super viewDidLayoutSubviews];
     
+    self.isPongRefreshControlVisible = [[NSUserDefaults standardUserDefaults] boolForKey:AFShowEasterEgg];
+    
     // Add the pong refresh target to the refreshTriggered action
     self.pongRefreshControl = [BOZPongRefreshControl attachToTableView:self.resultsTableView
                                                      withRefreshTarget:self
                                                       andRefreshAction:@selector(refreshTriggered)];
+    
+    if (!self.isPongRefreshControlVisible)
+        self.resultsTableView.scrollEnabled = NO;
+//    {
+//
+//    }
+//    else
+//    {
+//        self.resultsTableView.scrollEnabled = NO;
+//        self.resultsTableView.contentOffset = CGPointMake(0.0f, -29.0f);
+//    }
 }
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.pongRefreshControl scrollViewDidScroll];
+    if (self.isPongRefreshControlVisible)
+        [self.pongRefreshControl scrollViewDidScroll];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [self.pongRefreshControl scrollViewDidEndDragging];
+    if (self.isPongRefreshControlVisible)
+        [self.pongRefreshControl scrollViewDidEndDragging];
 }
 
 #pragma mark - UITableViewDataSource
