@@ -74,8 +74,23 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     switch ((NSUInteger)indexPath.section) {
-        case AFBehaviourSection:
+        case AFSectionTitleBehaviour:
             [self updateBehaviourSettings:(NSUInteger)indexPath.row];
+            break;
+        case AFSectionTitleAppearance:
+            [self updateAppearanceSettings:(NSUInteger)indexPath.row];
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - Settings Management
+- (void)updateAppearanceSettings:(NSUInteger)appearanceOption
+{
+    switch (appearanceOption) {
+        case AFAppearanceSettingShowBorder:
+            [self toggleShowBorderSetting];
             break;
             
         default:
@@ -83,11 +98,10 @@
     }
 }
 
-#pragma mark - Settings Management
 - (void)updateBehaviourSettings:(NSUInteger)behaviourOption
 {
     switch (behaviourOption) {
-        case AFShowPingPongEasterEggRow:
+        case AFBehaviourSettingShowEasterEgg:
             // Toggle the setting
             [self toggleShowPingPongEasterEggSetting];
             break;
@@ -105,18 +119,39 @@
 
 - (void)updateShowPingPongEasterEggSetting
 {
+    NSIndexPath *showPingPongSettingPath = [NSIndexPath indexPathForRow:AFBehaviourSettingShowEasterEgg inSection:AFSectionTitleBehaviour];
+    
+    [self updateBooleanSettingForTableView:self.tableView atIndexPath:showPingPongSettingPath forKey:AFShowEasterEgg];
+}
+
+- (void)updateShowBorderSetting
+{
+    NSIndexPath *showBorderSettingPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowBorder inSection:AFSectionTitleAppearance];
+    [self updateBooleanSettingForTableView:self.tableView atIndexPath:showBorderSettingPath forKey:AFShowDatePickerBorder];
+}
+
+- (void)updateBooleanSettingForTableView:(UITableView *)tableView
+                             atIndexPath:(NSIndexPath *)indexPath
+                                  forKey:(NSString *)key
+{
     // Update the show ping pong easter egg setting based on the user defaults
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:AFShowPingPongEasterEggRow inSection:AFBehaviourSection]];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     // Grab current setting from user defaults
-    BOOL isVisible = [[NSUserDefaults standardUserDefaults] boolForKey:AFShowEasterEgg];
+    BOOL isVisible = [[NSUserDefaults standardUserDefaults] boolForKey:key];
     
     cell.accessoryType = isVisible ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }
 
+- (void)toggleShowBorderSetting
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowBorder inSection:AFSectionTitleAppearance];
+    [self toggleBooleanSettingForTableView:self.tableView atIndexPath:indexPath forKey:AFShowDatePickerBorder];
+}
+
 - (void)toggleShowPingPongEasterEggSetting
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AFShowPingPongEasterEggRow inSection:AFBehaviourSection];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AFBehaviourSettingShowEasterEgg inSection:AFSectionTitleBehaviour];
     [self toggleBooleanSettingForTableView:self.tableView atIndexPath:indexPath forKey:AFShowEasterEgg];
 }
 
@@ -136,6 +171,7 @@
     
     // Register the new state to user defaults
     [[NSUserDefaults standardUserDefaults] setBool:!hasCheckMarkAccessory forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)updateAllSettings
@@ -143,6 +179,7 @@
     // Update all settings based on their initialization methods
     [self updateThemeSelectionLabel];
     [self updateShowPingPongEasterEggSetting];
+    [self updateShowBorderSetting];
 }
 
 #pragma mark - Segue

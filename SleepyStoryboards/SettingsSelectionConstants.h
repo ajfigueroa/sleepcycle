@@ -12,7 +12,20 @@
 static NSInteger const AFAvailableThemesCount = 3;
 
 // Manage important sections and rows of the STATIC table view cell
-static NSInteger const AFBehaviourSection = 1;
-static NSInteger const AFShowPingPongEasterEggRow = 0;
+typedef NS_ENUM(NSInteger, AFSectionTitles)
+{
+    AFSectionTitleAppearance,
+    AFSectionTitleBehaviour
+};
+
+typedef NS_ENUM(NSInteger, AFAppearanceSetting)
+{
+    AFAppearanceSettingShowBorder = 1
+};
+
+typedef NS_ENUM(NSInteger, AFBehaviourSetting)
+{
+    AFBehaviourSettingShowEasterEgg
+};
 
 #endif

@@ -39,7 +39,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self applyBorderToView:self.timeSelectionDatePicker WithColor:nil width:1.5f];
+    BOOL applyBorder = [[NSUserDefaults standardUserDefaults] boolForKey:AFShowDatePickerBorder];
+    
+    if (applyBorder)
+        [self applyBorderToView:self.timeSelectionDatePicker WithColor:nil width:1.5f];
 }
 
 - (void)updateViewWithNotification:(NSNotification *)notification

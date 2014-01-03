@@ -31,13 +31,13 @@ static NSMutableDictionary *themeDictionary;
     if (!theme){
         // Apply appropriate theme
         switch (themeSelection) {
-            case AFBlueBeigeTheme:
+            case AFThemeSelectionOptionBlueBeigeTheme:
                 theme = [[BlueBeigeTheme alloc] init];
                 break;
-            case AFBlackGrayTheme:
+            case AFThemeSelectionOptionBlackGrayTheme:
                 theme = [[BlackGrayTheme alloc] init];
                 break;
-            case AFRedRoseTheme:
+            case AFThemeSelectionOptionRedRoseTheme:
                 theme = [[RedRoseTheme alloc] init];
                 break;
             default:

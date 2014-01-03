@@ -12,30 +12,33 @@
 // Key for accessing themes across view controllers (NSUserDefaults key)
 static NSString *const AFAppTheme = @"AppTheme";
 static NSString *const AFShowEasterEgg = @"ShowEasterEgg";
+static NSString *const AFShowDatePickerBorder = @"ShowBorder";
 
-typedef enum {
-    AFBlueBeigeTheme,
-    AFBlackGrayTheme,
-    AFRedRoseTheme
-} AFThemeSelectionOption;
+typedef NS_ENUM(NSInteger, AFThemeSelectionOption)
+{
+    AFThemeSelectionOptionBlueBeigeTheme,
+    AFThemeSelectionOptionBlackGrayTheme,
+    AFThemeSelectionOptionRedRoseTheme
+};
 
 /*
  The SelectedUserMode enum is used to keep track of the buttons entered by
  the user.
  */
-typedef enum {
-    AFSleepNowButton,
-    AFKnowWakeUpTimeButton,
-    AFKnowBedTimeButton
-} AFSelectedUserMode;
+typedef NS_ENUM(NSInteger, AFSelectedUserMode)
+{
+    AFSelectedUserModeSleepNowButton,
+    AFSelectedUserModeKnowWakeUpTimeButton,
+    AFSelectedUserModeKnowBedTimeButton
+};
 
 /*
  The ColorMappingOrder
  */
-typedef enum {
-    AFColorMappingAscending,
-    AFColorMappingDescending
-} AFColorMappingOrder;
+typedef NS_ENUM(NSInteger, AFColorMappingOrder) {
+    AFColorMappingOrderAscending,
+    AFColorMappingOrderDescending
+};
 
 // Notifications
 static NSString *const AFThemeHasChangedNotification = @"AFThemeHasChangedNotification";
