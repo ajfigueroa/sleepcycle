@@ -8,17 +8,27 @@
 
 #import "ResultsViewController.h"
 #import "BOZPongRefreshControl.h"
+#import "ThemeProvider.h"
 
 @interface ResultsViewController ()
 
 @property (nonatomic, strong) NSArray *resultTimes;
 @property (nonatomic, strong) BOZPongRefreshControl *pongRefreshControl;
 @property (nonatomic) BOOL isPongRefreshControlVisible;
+@property (nonatomic, strong) id <Theme> themeSetter;
 
 @end
 
 @implementation ResultsViewController
 {}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    // Register for theme change notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+}
 
 #pragma mark - View Management
 - (void)viewDidLoad
@@ -41,6 +51,28 @@
     
     if (!self.isPongRefreshControlVisible)
         self.resultsTableView.scrollEnabled = NO;
+    
+    [self applyTheme];
+}
+
+#pragma mark - Theme Management
+- (void)applyTheme
+{
+    // Set (or reset) the theme with the appropriate theme object
+    self.themeSetter = [ThemeProvider theme];
+    
+    // Theme the appropriate views
+    [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+    
+    // Theme pong refresh control
+    if ([self.themeSetter respondsToSelector:@selector(themeRefreshControl:)])
+        [self.themeSetter themeRefreshControl:self.pongRefreshControl];
+    
+    // Theme the background view
+    [self.themeSetter themeViewBackground:self.view];
+    
+    // Theme table view but theme cells in UITableViewDelegate method tableView:cellForRowAtIndexPath:
+    [self.themeSetter themeTableView:self.resultsTableView];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -82,6 +114,14 @@
         // Finish loading the data, reset the refresh control
         [self.pongRefreshControl finishedLoading];
     });
+}
+
+#pragma mark - End of Life
+- (void)dealloc
+{
+    // Remove observer so notification is not sent to null object
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 
 @end

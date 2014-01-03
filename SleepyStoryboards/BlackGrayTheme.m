@@ -9,6 +9,7 @@
 #import "BlackGrayTheme.h"
 #import "UIColor+Colours.h"
 #import "UINavigationBar+FlatUI.h"
+#import "BOZPongRefreshControl.h"
 
 @implementation BlackGrayTheme
 {}
@@ -74,6 +75,18 @@
     button.titleLabel.font = font;
     [button setTitleColor:self.alternateTextColor forState:UIControlStateNormal];
     [button setTitleColor:self.alternateTextColor forState:UIControlStateHighlighted];
+}
+
+- (void)themeRefreshControl:(UIView *)refreshControl
+{
+    BOZPongRefreshControl *pongRefreshControl = (BOZPongRefreshControl *)refreshControl;
+    pongRefreshControl.foregroundColor = self.secondaryColor;
+    pongRefreshControl.backgroundColor = self.primaryColor;
+}
+
+- (void)themeTableView:(UITableView *)tableView
+{
+    tableView.backgroundColor = self.primaryColor;
 }
 
 @end
