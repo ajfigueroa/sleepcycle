@@ -21,9 +21,10 @@
 #pragma mark - Theme Protocol
 - (void)themeNavigationBar:(UINavigationBar *)navBar
 {
+
     // Theme the navigation bar to conform to the Light content
-    navBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     navBar.tintColor = [UIColor whiteColor];
+    navBar.titleTextAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"Futura" size:21.0f], NSForegroundColorAttributeName: [UIColor whiteColor]};
     
     // Theme status bar for light content
     [self themeStatusBar];
