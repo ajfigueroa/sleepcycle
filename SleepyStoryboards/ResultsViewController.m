@@ -46,12 +46,12 @@
     [super viewDidLayoutSubviews];
     
     self.isPongRefreshControlVisible = [[NSUserDefaults standardUserDefaults] boolForKey:AFShowEasterEgg];
-    
+        
     // Add the pong refresh target to the refreshTriggered action
     self.pongRefreshControl = [BOZPongRefreshControl attachToTableView:self.resultsTableView
-                                                      withRefreshTarget:self
-                                                       andRefreshAction:@selector(refreshTriggered)];
-    
+                                                     withRefreshTarget:self
+                                                      andRefreshAction:@selector(refreshTriggered)];
+
     if (!self.isPongRefreshControlVisible)
         self.resultsTableView.scrollEnabled = NO;
     else
@@ -66,23 +66,29 @@
 #pragma mark - Theme Management
 - (void)applyTheme
 {
-    // Set (or reset) the theme with the appropriate theme object
-    self.themeSetter = [ThemeProvider theme];
+    dispatch_queue_t themeQueue = dispatch_queue_create("Theme Queue", NULL);
     
-    // Theme the appropriate views
-    [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
-    
-    // Theme pong refresh control
-    if ([self.themeSetter respondsToSelector:@selector(themeRefreshControl:)])
-        [self.themeSetter themeRefreshControl:self.pongRefreshControl];
-    
-    // Theme the background view
-    [self.themeSetter themeViewBackground:self.view];
-    [self.themeSetter themeViewBackground:self.topMaskView];
-    [self.themeSetter themeViewBackground:self.bottomMaskView];
-    
-    // Theme table view but theme cells in UITableViewDelegate method tableView:cellForRowAtIndexPath:
-    [self.themeSetter themeTableView:self.resultsTableView];
+    dispatch_async(themeQueue, ^{
+        // Set (or reset) the theme with the appropriate theme object
+        self.themeSetter = [ThemeProvider theme];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Theme the appropriate views
+            [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+            
+            // Theme pong refresh control
+            if ([self.themeSetter respondsToSelector:@selector(themeRefreshControl:)])
+                [self.themeSetter themeRefreshControl:self.pongRefreshControl];
+            
+            // Theme the background view
+            [self.themeSetter themeViewBackground:self.view];
+            [self.themeSetter themeViewBackground:self.topMaskView];
+            [self.themeSetter themeViewBackground:self.bottomMaskView];
+            
+            // Theme table view but theme cells in UITableViewDelegate method tableView:cellForRowAtIndexPath:
+            [self.themeSetter themeTableView:self.resultsTableView];
+        });
+    });
 }
 
 #pragma mark - UIScrollViewDelegate

@@ -16,4 +16,7 @@
 @property (weak, nonatomic) IBOutlet FUIButton *sleepNowButton;
 @property (weak, nonatomic) IBOutlet UILabel *informationLabel;
 
+// Manage mode of calculation mode
+@property (nonatomic) AFSelectedUserMode selectedUserMode;
+
 @end

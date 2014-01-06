@@ -44,20 +44,25 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
 #pragma mark - Theme Change Methods
 - (void)applyTheme
 {
-    // Set (or reset) the theme with the appropriate theme object
-    self.themeSetter = [ThemeProvider theme];
-    
-    // Theme the appropriate views
-    [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
-    
-    [self.themeSetter themeViewBackground:self.view];
-    
-    // Theme the buttons
-    for (FUIButton *button in @[self.calculateBedTimeButton, self.calculateWakeTimeButton, self.settingsButton])
-    {
-        UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
-        [self.themeSetter themeButton:button withFont:buttonFont];
-    }
+    dispatch_queue_t setupThemeQueue = dispatch_queue_create("Theme Queue", NULL);
+    dispatch_async(setupThemeQueue, ^{
+        // Set (or reset) the theme with the appropriate theme object
+        self.themeSetter = [ThemeProvider theme];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Theme the appropriate views
+            [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+            
+            [self.themeSetter themeViewBackground:self.view];
+            
+            // Theme the buttons
+            for (FUIButton *button in @[self.calculateBedTimeButton, self.calculateWakeTimeButton, self.settingsButton])
+            {
+                UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
+                [self.themeSetter themeButton:button withFont:buttonFont];
+            }
+        });
+    });
 }
 
 #pragma mark - Segue
@@ -66,10 +71,14 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
     if ([segue.identifier isEqualToString:AFCalculateBedTimeSegue])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:AFSelectedCalculateBedTimeNotification object:nil];
+        TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)segue.destinationViewController;
+        timeSelectionViewController.selectedUserMode = AFSelectedUserModeCalculateBedTime;
     }
     else if ([segue.identifier isEqualToString:AFCalculateWakeTimeSegue])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:AFSelectedCalculateWakeTimeNotification object:nil];
+        TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)segue.destinationViewController;
+        timeSelectionViewController.selectedUserMode = AFSelectedUserModeCalculateWakeTime;
     }
 }
 
