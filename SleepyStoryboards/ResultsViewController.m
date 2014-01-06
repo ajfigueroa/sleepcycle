@@ -63,14 +63,6 @@
     [self applyTheme];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    // Clear any color mapping from previous states
-    [[NSNotificationCenter defaultCenter] postNotificationName:AFColorMappingResetNotification object:nil];
-}
-
 #pragma mark - Theme Management
 - (void)applyTheme
 {

@@ -87,6 +87,15 @@
     view.layer.borderWidth = width;
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    // Clear any color mapping from previous states
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFColorMappingResetNotification object:nil];
+}
+
+
 #pragma mark - Theme Change Methods
 - (void)applyTheme
 {
@@ -166,7 +175,7 @@
 {
     // Remove observer so notification is not sent to null object
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
+    NSLog(@"Deallocating: %s", __PRETTY_FUNCTION__);
 }
 
 @end
