@@ -12,9 +12,16 @@
 
 - (NSArray *)reverseArray
 {
-    // Flips the array
-    NSArray *reversed = [[NSArray alloc] initWithArray:self];
-    return [[reversed reverseObjectEnumerator] allObjects];
+    // Reverses the order of the elements within the array
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.count];
+    NSEnumerator *enumerator = [self reverseObjectEnumerator];
+    
+    for (id element in enumerator)
+    {
+        [array addObject:element];
+    }
+    
+    return (NSArray *)array;
 }
 
 @end

@@ -63,6 +63,14 @@
     [self applyTheme];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    // Clear any color mapping from previous states
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFColorMappingResetNotification object:nil];
+}
+
 #pragma mark - Theme Management
 - (void)applyTheme
 {
@@ -110,8 +118,14 @@
     
     cell.textLabel.text = [(NSDate *)self.resultTimes[(NSUInteger)indexPath.row] stringShortTime];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    // Theme the cell appropriately
-    [self.themeSetter themeTableViewCell:cell inTableView:tableView atIndexPath:indexPath];
+    
+    // Reverse base on the user choice
+    BOOL reverse = (self.selectedUserMode == AFSelectedUserModeCalculateBedTime) ? YES: NO;
+    
+    [self.themeSetter themeTableViewCell:cell
+                             inTableView:tableView
+                             atIndexPath:indexPath
+                            reverseOrder:reverse];
     
     return cell;
 }
@@ -119,7 +133,6 @@
 #pragma mark - Target Action Methods
 - (void)refreshTriggered
 {
-    // Ask the model for data for the data again although it won't change
     double delayInSeconds = 10.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){

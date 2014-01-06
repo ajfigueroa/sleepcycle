@@ -145,6 +145,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     ResultsViewController *resultsViewController = (ResultsViewController *)segue.destinationViewController;
+    resultsViewController.selectedUserMode = self.selectedUserMode;
     SleepyTimeModel *model = [[SleepyTimeModel alloc] init];
 
     if ([segue.identifier isEqualToString:AFConfirmTimeButtonSegue])

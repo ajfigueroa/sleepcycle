@@ -31,18 +31,11 @@ typedef NS_ENUM(NSInteger, AFSelectedUserMode)
     AFSelectedUserModeCalculateWakeTime
 };
 
-/*
- The ColorMappingOrder
- */
-typedef NS_ENUM(NSInteger, AFColorMappingOrder) {
-    AFColorMappingOrderAscending,
-    AFColorMappingOrderDescending
-};
-
 // Notifications
 static NSString *const AFThemeHasChangedNotification = @"AFThemeHasChangedNotification";
 static NSString *const AFSelectedCalculateBedTimeNotification = @"AFSelectedCalculateBedTimeNotification";
 static NSString *const AFSelectedCalculateWakeTimeNotification = @"AFSelectedCalculateWakeTimeNotification";
+static NSString *const AFColorMappingResetNotification = @"AFColorMappingResetNotification";
 
 // Segue Identifier
 static NSString *const AFCalculateBedTimeSegue = @"CalculateBedTimeSegue";

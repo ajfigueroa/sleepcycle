@@ -22,5 +22,6 @@
 - (void)alternateThemeButton:(UIButton *)button withFont:(UIFont *)font;
 - (void)themeRefreshControl:(UIView *)refreshControl;
 - (void)themeTableView:(UITableView *)tableView;
-- (void)themeTableViewCell:(UITableViewCell *)cell inTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath;
+- (void)themeTableViewCell:(UITableViewCell *)cell inTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath reverseOrder:(BOOL)reverseOrder;
+
 @end

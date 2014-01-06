@@ -26,6 +26,18 @@
 @implementation LightTheme
 {}
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        // Register for clearing notifications of the color map
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearColorMapping) name:AFColorMappingResetNotification object:nil];
+    }
+    
+    return self;
+}
+
 #pragma mark - Theme Protocol
 - (void)themeNavigationBar:(UINavigationBar *)navBar
 {
@@ -91,13 +103,21 @@
     tableView.separatorColor = self.secondaryColor;
 }
 
-- (void)themeTableViewCell:(UITableViewCell *)cell inTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath
+- (void)themeTableViewCell:(UITableViewCell *)cell inTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath reverseOrder:(BOOL)reverseOrder
 {
     //  Reinitialize color mapping array if the section is different or if it has never been created
     if (!self.tableViewCellColorMapping || self.lastSection != indexPath.section)
     {
         self.lastSection = (NSUInteger)indexPath.section;
         self.tableViewCellColorMapping = [self themeTableViewCellMappingInTableView:tableView atSection:self.lastSection];
+        
+        // Reverse the array if needed
+        if (reverseOrder)
+        {
+            NSArray *copyArray = [NSArray arrayWithArray:self.tableViewCellColorMapping];
+            self.tableViewCellColorMapping = [copyArray reverseArray];
+        }
+        
     }
     
     cell.backgroundColor = (UIColor *)self.tableViewCellColorMapping[(NSUInteger)indexPath.row];
@@ -138,7 +158,7 @@
                                           alpha:a];
     }
     
-    return [(NSArray *)colorMapping reverseArray];
+    return (NSArray *)colorMapping;
 }
 
 # pragma mark - Helper
@@ -147,5 +167,16 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
+#pragma mark - Public Methods
+- (void)clearColorMapping
+{
+    self.tableViewCellColorMapping = nil;
+}
+
+#pragma mark - End of Life
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

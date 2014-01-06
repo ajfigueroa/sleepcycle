@@ -13,5 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
 @property (nonatomic, strong) SleepyTimeModel *model;
+@property (nonatomic) AFSelectedUserMode selectedUserMode;
 
 @end
