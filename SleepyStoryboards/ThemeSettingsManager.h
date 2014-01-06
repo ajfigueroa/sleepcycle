@@ -13,7 +13,6 @@
 // Current theme name
 @property (nonatomic, strong) NSString *themeName;
 
-- (instancetype)init;
 - (NSString *)getDefaultApplicationTheme;
 - (void)setDefaultApplicationTheme:(NSString *)newThemeName;
 - (NSArray *)themeNamesSortedByIndex;

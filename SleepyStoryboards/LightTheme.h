@@ -20,7 +20,4 @@
 @property (nonatomic, strong) UIColor *alternateSecondaryColor;
 @property (nonatomic, strong) UIColor *alternateTextColor;
 
-// Theme the status bar, if it complements the navigation bar
-- (void)themeStatusBar;
-
 @end

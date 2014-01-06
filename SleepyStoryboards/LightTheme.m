@@ -12,6 +12,8 @@
 //  the nav and status bar
 
 #import "LightTheme.h"
+#import "UINavigationBar+FlatUI.h"
+#import "BOZPongRefreshControl.h"
 
 @implementation LightTheme
 {}
@@ -22,24 +24,60 @@
     // Theme the navigation bar to conform to the Light content
     navBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     navBar.tintColor = [UIColor whiteColor];
+    
+    // Theme status bar for light content
+    [self themeStatusBar];
+    
+    // Set the navigation bar color
+    [navBar configureFlatNavigationBarWithColor:self.primaryColor];
 }
 
 - (void)themeViewBackground:(UIView *)view
 {
-    NSString *assertionMessage = [NSString stringWithFormat:@"%s: This is an abstract method and should be overridden", __PRETTY_FUNCTION__];
-    NSAssert(NO, assertionMessage);
+    // Configure the background color
+    view.backgroundColor = self.secondaryColor;
 }
 
 - (void)themeButton:(UIButton *)button withFont:(UIFont *)font
 {
-    NSString *assertionMessage = [NSString stringWithFormat:@"%s: This is an abstract method and should be overridden", __PRETTY_FUNCTION__];
-    NSAssert(NO, assertionMessage);
+    button.backgroundColor = self.primaryColor;
+    button.titleLabel.font = font;
+    [button setTitleColor:self.textColor forState:UIControlStateNormal];
+    [button setTitleColor:self.textColor forState:UIControlStateHighlighted];
 }
 
 - (void)themeLabel:(UILabel *)label withFont:(UIFont *)font
 {
-    NSString *assertionMessage = [NSString stringWithFormat:@"%s: This is an abstract method and should be overridden", __PRETTY_FUNCTION__];
-    NSAssert(NO, assertionMessage);
+    label.font = font;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = self.textColor;
+    label.backgroundColor = [UIColor clearColor];
+}
+
+- (void)alternateThemeViewBackground:(UIView *)view
+{
+    // Configure view with alternate background cover
+    view.backgroundColor = self.alternateSecondaryColor;
+}
+
+- (void)alternateThemeButton:(UIButton *)button withFont:(UIFont *)font
+{
+    button.backgroundColor = self.primaryColor;
+    button.titleLabel.font = font;
+    [button setTitleColor:self.alternateTextColor forState:UIControlStateNormal];
+    [button setTitleColor:self.alternateTextColor forState:UIControlStateHighlighted];
+}
+
+- (void)themeRefreshControl:(UIView *)refreshControl
+{
+    BOZPongRefreshControl *pongRefreshControl = (BOZPongRefreshControl *)refreshControl;
+    pongRefreshControl.foregroundColor = self.secondaryColor;
+    pongRefreshControl.backgroundColor = self.primaryColor;
+}
+
+- (void)themeTableView:(UITableView *)tableView
+{
+    tableView.backgroundColor = self.primaryColor;
 }
 
 # pragma mark - Helper

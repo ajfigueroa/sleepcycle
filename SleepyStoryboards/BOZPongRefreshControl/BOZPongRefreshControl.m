@@ -446,7 +446,7 @@ typedef enum {
 
 - (CGPoint)determineReflectedDirectionOfBall
 {
-    CGPoint reflectedBallDirection;
+    CGPoint reflectedBallDirection = ballDirection;
     
     if([self didBallHitWall]) {
         reflectedBallDirection =  CGPointMake(ballDirection.x, -ballDirection.y);

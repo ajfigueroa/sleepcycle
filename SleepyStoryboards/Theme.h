@@ -18,9 +18,6 @@
 - (void)themeNavigationBar:(UINavigationBar *)navBar;
 - (void)themeButton:(UIButton *)button withFont:(UIFont *)font;
 - (void)themeLabel:(UILabel *)label withFont:(UIFont *)font;
-
-@optional
-
 - (void)alternateThemeViewBackground:(UIView *)view;
 - (void)alternateThemeButton:(UIButton *)button withFont:(UIFont *)font;
 - (void)themeRefreshControl:(UIView *)refreshControl;

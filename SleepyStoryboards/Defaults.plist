@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ShowBorder</key>
-	<true/>
+	<false/>
 	<key>ShowEasterEgg</key>
 	<true/>
 	<key>AppTheme</key>

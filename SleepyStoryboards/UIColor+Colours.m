@@ -407,8 +407,6 @@
 }
 
 
-
-
 #pragma mark - Greens
 + (UIColor *)emeraldColor
 {
@@ -561,7 +559,6 @@
 {
     return [UIColor colorWithRed:245/255.0f green:158/255.0f blue:166/255.0f alpha:1.0];
 }
-
 
 #pragma mark - Purples
 + (UIColor *)eggplantColor
