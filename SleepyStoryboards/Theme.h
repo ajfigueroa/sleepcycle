@@ -22,5 +22,5 @@
 - (void)alternateThemeButton:(UIButton *)button withFont:(UIFont *)font;
 - (void)themeRefreshControl:(UIView *)refreshControl;
 - (void)themeTableView:(UITableView *)tableView;
-
+- (void)themeTableViewCell:(UITableViewCell *)cell inTableView:(UITableView *)tableView atIndex:(NSIndexPath *)indexPath;
 @end

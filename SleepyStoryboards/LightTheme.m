@@ -15,6 +15,13 @@
 #import "UINavigationBar+FlatUI.h"
 #import "BOZPongRefreshControl.h"
 
+@interface LightTheme ()
+
+@property (nonatomic, strong) NSArray *tableViewCellColorMapping;
+@property (nonatomic) NSUInteger lastSection;
+
+@end
+
 @implementation LightTheme
 {}
 
@@ -80,6 +87,34 @@
 - (void)themeTableView:(UITableView *)tableView
 {
     tableView.backgroundColor = self.primaryColor;
+}
+
+- (void)themeTableViewCell:(UITableViewCell *)cell inTableView:(UITableView *)tableView atIndex:(NSIndexPath *)indexPath
+{
+    //  Reinitialize color mapping array if the section is different or if it has never been created
+    if (!self.tableViewCellColorMapping || self.lastSection != indexPath.section)
+    {
+        self.lastSection = (NSUInteger)indexPath.section;
+        self.tableViewCellColorMapping = [self themeTableViewCellMappingInTableView:tableView atSection:self.lastSection];
+    }
+    
+    cell.backgroundColor = (UIColor *)self.tableViewCellColorMapping[(NSUInteger)indexPath.row];
+    cell.textLabel.textColor = self.textColor;
+}
+
+- (NSArray *)themeTableViewCellMappingInTableView:(UITableView *)tableView atSection:(NSUInteger)section
+{
+    // Returns an array where each index corresponds to a different color on a row in a table section
+    NSUInteger rowCount = [tableView numberOfRowsInSection:section];
+    NSMutableArray *colorMapping = [NSMutableArray arrayWithCapacity:rowCount];
+    CGFloat alphaIncrements = 1.0f / rowCount;
+    
+    for (int i = 0; i < rowCount; i++)
+    {
+        colorMapping[i] = [self.primaryColor colorWithAlphaComponent:(i * alphaIncrements)];
+    }
+    
+    return (NSArray *)colorMapping;
 }
 
 # pragma mark - Helper
