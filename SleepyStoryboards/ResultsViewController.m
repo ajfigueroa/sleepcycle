@@ -9,6 +9,7 @@
 #import "ResultsViewController.h"
 #import "BOZPongRefreshControl.h"
 #import "ThemeProvider.h"
+#import "NSDate+SleepTime.h"
 
 @interface ResultsViewController ()
 
@@ -37,7 +38,7 @@
 {
     [super viewDidLoad];
     
-    self.resultTimes = @[@"11:30 PM", @"1:00 AM", @"2:30 AM", @"4:00 AM", @"5:30 AM", @"7:00 AM"];
+    self.resultTimes = self.model.timeDataSource;
 }
 
 - (void)viewDidLayoutSubviews
@@ -107,7 +108,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResultsCell"];
     
-    cell.textLabel.text = (NSString *)self.resultTimes[(NSUInteger)indexPath.row];
+    cell.textLabel.text = [(NSDate *)self.resultTimes[(NSUInteger)indexPath.row] stringShortTime];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
     return cell;

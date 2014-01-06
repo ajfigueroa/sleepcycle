@@ -27,9 +27,8 @@ typedef NS_ENUM(NSInteger, AFThemeSelectionOption)
  */
 typedef NS_ENUM(NSInteger, AFSelectedUserMode)
 {
-    AFSelectedUserModeSleepNowButton,
-    AFSelectedUserModeKnowWakeUpTimeButton,
-    AFSelectedUserModeKnowBedTimeButton
+    AFSelectedUserModeCalculateBedTime,
+    AFSelectedUserModeCalculateWakeTime
 };
 
 /*

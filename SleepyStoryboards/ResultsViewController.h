@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SleepyTimeModel.h"
 
 @interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
-
+@property (nonatomic, strong) SleepyTimeModel *model;
 
 @end
