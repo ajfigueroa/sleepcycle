@@ -14,6 +14,7 @@
 #import "LightTheme.h"
 #import "UINavigationBar+FlatUI.h"
 #import "BOZPongRefreshControl.h"
+#import "NSArray+Ordering.h"
 
 @interface LightTheme ()
 
@@ -87,9 +88,10 @@
 - (void)themeTableView:(UITableView *)tableView
 {
     tableView.backgroundColor = self.primaryColor;
+    tableView.separatorColor = self.secondaryColor;
 }
 
-- (void)themeTableViewCell:(UITableViewCell *)cell inTableView:(UITableView *)tableView atIndex:(NSIndexPath *)indexPath
+- (void)themeTableViewCell:(UITableViewCell *)cell inTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath
 {
     //  Reinitialize color mapping array if the section is different or if it has never been created
     if (!self.tableViewCellColorMapping || self.lastSection != indexPath.section)
@@ -107,14 +109,36 @@
     // Returns an array where each index corresponds to a different color on a row in a table section
     NSUInteger rowCount = [tableView numberOfRowsInSection:section];
     NSMutableArray *colorMapping = [NSMutableArray arrayWithCapacity:rowCount];
-    CGFloat alphaIncrements = 1.0f / rowCount;
     
-    for (int i = 0; i < rowCount; i++)
-    {
-        colorMapping[i] = [self.primaryColor colorWithAlphaComponent:(i * alphaIncrements)];
+    CGFloat h = 0, b = 0, s = 0, a = 0;
+    [self.primaryColor getHue:&h saturation:&s brightness:&b alpha:&a];
+    
+    // Split the array into two sections
+    // One half is darker, middle is normal, other half is lighter
+    NSUInteger middle = (rowCount / 2);
+    CGFloat brightnessIncrement = 0.2;
+    CGFloat brightnessDecrement = 0.15;
+    
+    for (int i = 0; i < middle - 1; i++){
+        colorMapping[i] = [UIColor colorWithHue:h
+                                     saturation:s
+                                     brightness:(b - brightnessDecrement)
+                                          alpha:a];
     }
     
-    return (NSArray *)colorMapping;
+    colorMapping[middle - 1] = self.primaryColor;
+    colorMapping[middle] = self.primaryColor;
+
+    
+    for (NSInteger i = middle + 1; i < rowCount; i++)
+    {
+        colorMapping[i] = [UIColor colorWithHue:h
+                                     saturation:s
+                                     brightness:(b + brightnessIncrement)
+                                          alpha:a];
+    }
+    
+    return [(NSArray *)colorMapping reverseArray];
 }
 
 # pragma mark - Helper

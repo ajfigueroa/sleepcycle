@@ -110,6 +110,8 @@
     
     cell.textLabel.text = [(NSDate *)self.resultTimes[(NSUInteger)indexPath.row] stringShortTime];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    // Theme the cell appropriately
+    [self.themeSetter themeTableViewCell:cell inTableView:tableView atIndexPath:indexPath];
     
     return cell;
 }
