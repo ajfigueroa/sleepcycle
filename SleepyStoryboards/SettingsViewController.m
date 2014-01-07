@@ -10,6 +10,7 @@
 #import "ThemeProvider.h"
 #import "SettingsSelectionConstants.h"
 #import "ThemeSettingsManager.h"
+#import "SettingsManager.h"
 
 @interface SettingsViewController ()
 
@@ -119,24 +120,27 @@
 {
     NSIndexPath *showPingPongSettingPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowEasterEgg inSection:AFSectionTitleAppearance];
     
-    [self updateBooleanSettingForTableView:self.tableView atIndexPath:showPingPongSettingPath forKey:AFShowEasterEgg];
+    [self updateBooleanSettingForTableView:self.tableView
+                               atIndexPath:showPingPongSettingPath
+                                   visible:[[SettingsManager sharedSettings] showEasterEgg]];
 }
 
 - (void)updateShowBorderSetting
 {
-    NSIndexPath *showBorderSettingPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowBorder inSection:AFSectionTitleAppearance];
-    [self updateBooleanSettingForTableView:self.tableView atIndexPath:showBorderSettingPath forKey:AFShowDatePickerBorder];
+    NSIndexPath *showBorderSettingPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowBorder
+                                                            inSection:AFSectionTitleAppearance];
+    
+    [self updateBooleanSettingForTableView:self.tableView
+                               atIndexPath:showBorderSettingPath
+                                   visible:[[SettingsManager sharedSettings] showBorder]];
 }
 
 - (void)updateBooleanSettingForTableView:(UITableView *)tableView
                              atIndexPath:(NSIndexPath *)indexPath
-                                  forKey:(NSString *)key
+                                 visible:(BOOL)isVisible
 {
-    // Update the show ping pong easter egg setting based on the user defaults
+    // Update the cell accessoryview for a given table view cell
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    
-    // Grab current setting from user defaults
-    BOOL isVisible = [[NSUserDefaults standardUserDefaults] boolForKey:key];
     
     cell.accessoryType = isVisible ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }
@@ -167,14 +171,13 @@
     
     cell.accessoryType = hasCheckMarkAccessory ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
     
-    // Register the new state to user defaults
-    [[NSUserDefaults standardUserDefaults] setBool:!hasCheckMarkAccessory forKey:key];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    // Register the new state to SettingsManager
+    [[SettingsManager sharedSettings] setBool:!hasCheckMarkAccessory forKey:key];
 }
 
 - (void)updateMinuteSlider
 {
-    NSInteger minutesToFallAsleep = [[NSUserDefaults standardUserDefaults] integerForKey:AFTimeToFallAsleepInMinutes];
+    NSInteger minutesToFallAsleep = [[SettingsManager sharedSettings] timeToFallAsleep];
     self.minutesSlider.value = minutesToFallAsleep;
     
     [self updateMinutesLabel:minutesToFallAsleep];
@@ -182,9 +185,8 @@
 
 - (void)commitMinutesSliderValue
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:(NSInteger)self.minutesSlider.value
-                                               forKey:AFTimeToFallAsleepInMinutes];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    // Update the settings manager with the new minutes value
+    [[SettingsManager sharedSettings] setTimeToFallAsleep:(NSInteger)self.minutesSlider.value];
 }
 
 - (void)updateMinutesLabel:(NSInteger)minutes

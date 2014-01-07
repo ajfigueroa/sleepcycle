@@ -10,6 +10,7 @@
 #import "BlueBeigeTheme.h"
 #import "BlackGrayTheme.h"
 #import "RedRoseTheme.h"
+#import "SettingsManager.h"
 
 static NSMutableDictionary *themeDictionary;
 
@@ -18,7 +19,7 @@ static NSMutableDictionary *themeDictionary;
 + (id <Theme>)theme
 {
     // Grab theme name for user defaults
-    NSInteger themeSelection = [[NSUserDefaults standardUserDefaults] integerForKey:AFAppTheme];
+    NSInteger themeSelection = [[SettingsManager sharedSettings] appTheme];
     
     // Grab the theme
     id <Theme> theme = [themeDictionary objectForKey:[@(themeSelection) stringValue]];

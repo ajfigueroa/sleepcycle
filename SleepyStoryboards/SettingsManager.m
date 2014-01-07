@@ -65,6 +65,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (BOOL)verfiyKey:(NSString *)key
+{
+    // Returns a bool indiciationg if the key is in the set of legal defaults keys
+    NSSet *keySet = [[NSSet alloc] initWithArray:@[AFTimeToFallAsleepInMinutes, AFAppTheme, AFShowDatePickerBorder, AFShowEasterEgg]];
+    return [keySet containsObject:key];
+}
+
 #pragma mark - Modified Accessor Methods
 - (void)setTimeToFallAsleep:(NSInteger)timeToFallAsleep
 {
@@ -88,6 +95,18 @@
 {
     _showEasterEgg = showEasterEgg;
     [self writeBoolToDefaultsValue:_showEasterEgg forKey:AFShowEasterEgg];
+}
+
+#pragma mark - Public Methods
+- (void)setBool:(BOOL)value forKey:(NSString *)defaultName
+{
+    BOOL validKey = [self verfiyKey:defaultName];
+    
+    if (validKey)
+    {
+        // Write the value after confirming the key is valid
+        [self writeBoolToDefaultsValue:value forKey:defaultName];
+    }
 }
 
 @end

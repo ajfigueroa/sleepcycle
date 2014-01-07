@@ -18,4 +18,6 @@
 
 + (instancetype)sharedSettings;
 
+- (void)setBool:(BOOL)value forKey:(NSString *)defaultName;
+
 @end

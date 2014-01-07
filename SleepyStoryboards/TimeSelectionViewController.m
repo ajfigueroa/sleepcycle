@@ -9,6 +9,7 @@
 #import "TimeSelectionViewController.h"
 #import "ThemeProvider.h"
 #import "ResultsViewController.h"
+#import "SettingsManager.h"
 
 @interface TimeSelectionViewController ()
 
@@ -44,7 +45,7 @@
     dispatch_queue_t borderQueue = dispatch_queue_create("Border Queue", NULL);
     
     dispatch_async(borderQueue, ^{
-        BOOL applyBorder = [[NSUserDefaults standardUserDefaults] boolForKey:AFShowDatePickerBorder];
+        BOOL applyBorder = [[SettingsManager sharedSettings] showBorder];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if (applyBorder)
@@ -138,7 +139,7 @@
 - (void)configureModel:(SleepyTimeModel *)model
 {
     // Implement with additional properties
-    model.timeToFallAsleep = [[NSUserDefaults standardUserDefaults] integerForKey:AFTimeToFallAsleepInMinutes];
+    model.timeToFallAsleep = [[SettingsManager sharedSettings] timeToFallAsleep];
 }
 
 - (void)performModelCalculation:(SleepyTimeModel *)model

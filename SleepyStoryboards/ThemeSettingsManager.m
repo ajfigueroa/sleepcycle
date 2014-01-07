@@ -8,6 +8,7 @@
 
 #import "ThemeSettingsManager.h"
 #import "SettingsSelectionConstants.h"
+#import "SettingsManager.h"
 
 @interface ThemeSettingsManager ()
 
@@ -68,7 +69,7 @@
 - (NSString *)getDefaultApplicationTheme
 {
     // Access the user defaults selected theme
-    AFThemeSelectionOption option = (AFThemeSelectionOption)[[NSUserDefaults standardUserDefaults] integerForKey:AFAppTheme];
+    AFThemeSelectionOption option = (AFThemeSelectionOption)[[SettingsManager sharedSettings] appTheme];
     
     return (NSString *)[self.themeIndexDictionary objectForKey:[@(option) stringValue]];
 }
@@ -82,8 +83,7 @@
     {
         // Update the default theme
         NSInteger option = [(NSString *)validIndices.firstObject integerValue];
-        [[NSUserDefaults standardUserDefaults] setInteger:option forKey:AFAppTheme];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[SettingsManager sharedSettings] setAppTheme:option];
         
         // Post Theme change notification
         [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:nil];
