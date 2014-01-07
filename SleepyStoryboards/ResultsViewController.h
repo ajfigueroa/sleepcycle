@@ -12,6 +12,8 @@
 @interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
+@property (weak, nonatomic) IBOutlet UILabel *resultsInformationLabel;
+
 @property (nonatomic, strong) SleepyTimeModel *model;
 @property (nonatomic) AFSelectedUserMode selectedUserMode;
 

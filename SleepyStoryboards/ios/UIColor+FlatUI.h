@@ -33,6 +33,10 @@
 + (UIColor *) asbestosColor;
 + (UIColor *) unitedNationsBlueColor;
 + (UIColor *) champagneBeigeColor;
++ (UIColor *) persianRed;
++ (UIColor *) guardsmenRed;
++ (UIColor *)lightSalmonColor;
++ (UIColor *)darkSalmonColor;
 
 + (UIColor *) blendedColorWithForegroundColor:(UIColor *)foregroundColor
                               backgroundColor:(UIColor *)backgroundColor

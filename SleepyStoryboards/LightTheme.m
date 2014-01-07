@@ -76,10 +76,16 @@
     label.backgroundColor = [UIColor clearColor];
 }
 
+- (void)alternateThemeLabel:(UILabel *)label withFont:(UIFont *)font
+{
+    [self themeLabel:label withFont:font];
+    label.textColor = self.primaryColor;
+}
+
 - (void)alternateThemeViewBackground:(UIView *)view
 {
     // Configure view with alternate background cover
-    view.backgroundColor = self.alternateSecondaryColor;
+    view.backgroundColor = self.primaryColor;
 }
 
 - (void)alternateThemeButton:(UIButton *)button withFont:(UIFont *)font
@@ -132,17 +138,17 @@
     
     CGFloat h = 0, b = 0, s = 0, a = 0;
     [self.primaryColor getHue:&h saturation:&s brightness:&b alpha:&a];
-    
+
+    NSLog(@"%f", b);
     // Split the array into two sections
     // One half is darker, middle is normal, other half is lighter
     NSUInteger middle = (rowCount / 2);
-    CGFloat brightnessIncrement = 0.2;
-    CGFloat brightnessDecrement = 0.15;
+    CGFloat brightnessIncrement = 0.15f;
     
     for (int i = 0; i < middle - 1; i++){
         colorMapping[i] = [UIColor colorWithHue:h
                                      saturation:s
-                                     brightness:(b - brightnessDecrement)
+                                     brightness:(b - brightnessIncrement)
                                           alpha:a];
     }
     
@@ -157,7 +163,7 @@
                                      brightness:(b + brightnessIncrement)
                                           alpha:a];
     }
-    
+
     return (NSArray *)colorMapping;
 }
 

@@ -8,6 +8,7 @@
 
 #import "RedRoseTheme.h"
 #import "UIColor+Colours.h"
+#import "UIColor+FlatUI.h"
 
 @implementation RedRoseTheme
 {}
@@ -17,10 +18,10 @@
     self = [super init];
     if (self)
     {
-        self.primaryColor = [UIColor lightCrimsonColor];
+        self.primaryColor = [UIColor persianRed];
         self.secondaryColor = [UIColor paleRoseColor];
         self.textColor = [UIColor whiteColor];
-        self.alternateSecondaryColor = [UIColor lightCrimsonColor];
+        self.alternateSecondaryColor = [UIColor persianRed];
         self.alternateTextColor = [UIColor blackColor];
     }
     

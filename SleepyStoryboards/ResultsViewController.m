@@ -63,6 +63,22 @@
     [self applyTheme];
 }
 
+- (void)updateViewWithSelectedUserMode:(AFSelectedUserMode)selectedUserMode
+{
+    switch (selectedUserMode) {
+        case AFSelectedUserModeCalculateWakeTime:
+            self.resultsInformationLabel.text = @"You should try to wake up at these times:";
+            break;
+            
+        case AFSelectedUserModeCalculateBedTime:
+            self.resultsInformationLabel.text = @"You should try to sleep at these times:";
+            break;
+        
+        default:
+            break;
+    }
+}
+
 #pragma mark - Theme Management
 - (void)applyTheme
 {
@@ -87,6 +103,11 @@
             
             // Theme table view but theme cells in UITableViewDelegate method tableView:cellForRowAtIndexPath:
             [self.themeSetter themeTableView:self.resultsTableView];
+            
+            // Theme the information label
+            UIFont *labelFont = [UIFont fontWithName:@"Futura" size:[UIFont labelFontSize]];
+            [self.themeSetter alternateThemeLabel:self.resultsInformationLabel withFont:labelFont];
+            [self updateViewWithSelectedUserMode:self.selectedUserMode];
         });
     });
 }

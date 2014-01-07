@@ -55,16 +55,18 @@
 
 - (void)updateViewWithSelectedUserMode:(AFSelectedUserMode)selectedUserMode
 {
+    // Modify the information label based on state and hide the sleep now button if
+    // in AFSelectedUserModeCalculateBedTime
     switch (selectedUserMode) {
         case AFSelectedUserModeCalculateWakeTime:
             self.informationLabel.text = @"Choose your bed time";
-            self.selectedUserMode = AFSelectedUserModeCalculateWakeTime;
             break;
+            
         case AFSelectedUserModeCalculateBedTime:
             self.informationLabel.text = @"Choose your wake-up time";
             self.sleepNowButton.hidden = YES;
-            self.selectedUserMode = AFSelectedUserModeCalculateBedTime;
             break;
+            
         default:
             break;
     }

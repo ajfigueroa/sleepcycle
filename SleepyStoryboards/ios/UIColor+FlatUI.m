@@ -124,6 +124,24 @@
     return [UIColor colorFromHexCode:@"F7E7CE"];
 }
 
++ (UIColor *) persianRed
+{
+    return [UIColor colorFromHexCode:@"CC3333"];
+}
+
++ (UIColor *) guardsmenRed
+{
+    return [UIColor colorFromHexCode:@"CE0000"];
+}
+
++ (UIColor *) lightSalmonColor {
+    return [UIColor colorFromHexCode:@"F39990"];
+}
+
++ (UIColor *) darkSalmonColor {
+    return [UIColor colorFromHexCode:@"962014"];
+}
+
 + (UIColor *) blendedColorWithForegroundColor:(UIColor *)foregroundColor
                               backgroundColor:(UIColor *)backgroundColor
                                  percentBlend:(CGFloat) percentBlend {

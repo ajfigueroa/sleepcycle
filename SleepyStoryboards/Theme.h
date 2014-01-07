@@ -15,13 +15,26 @@
 
 // Theming general UI Controls and Views
 - (void)themeViewBackground:(UIView *)view;
-- (void)themeNavigationBar:(UINavigationBar *)navBar;
-- (void)themeButton:(UIButton *)button withFont:(UIFont *)font;
-- (void)themeLabel:(UILabel *)label withFont:(UIFont *)font;
+
 - (void)alternateThemeViewBackground:(UIView *)view;
+
+- (void)themeNavigationBar:(UINavigationBar *)navBar;
+
+- (void)themeButton:(UIButton *)button withFont:(UIFont *)font;
+
 - (void)alternateThemeButton:(UIButton *)button withFont:(UIFont *)font;
+
+- (void)themeLabel:(UILabel *)label withFont:(UIFont *)font;
+
+- (void)alternateThemeLabel:(UILabel *)label withFont:(UIFont *)font;
+
 - (void)themeRefreshControl:(UIView *)refreshControl;
+
 - (void)themeTableView:(UITableView *)tableView;
-- (void)themeTableViewCell:(UITableViewCell *)cell inTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath reverseOrder:(BOOL)reverseOrder;
+
+- (void)themeTableViewCell:(UITableViewCell *)cell
+               inTableView:(UITableView *)tableView
+               atIndexPath:(NSIndexPath *)indexPath
+              reverseOrder:(BOOL)reverseOrder;
 
 @end
