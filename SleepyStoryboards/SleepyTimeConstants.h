@@ -13,6 +13,7 @@
 static NSString *const AFAppTheme = @"AppTheme";
 static NSString *const AFShowEasterEgg = @"ShowEasterEgg";
 static NSString *const AFShowDatePickerBorder = @"ShowBorder";
+static NSString *const AFTimeToFallAsleepInMinutes = @"TimeToFallAsleepInMinutes";
 
 typedef NS_ENUM(NSInteger, AFThemeSelectionOption)
 {
