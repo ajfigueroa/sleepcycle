@@ -143,7 +143,7 @@
     // Split the array into two sections
     // One half is darker, middle is normal, other half is lighter
     NSUInteger middle = (rowCount / 2);
-    CGFloat brightnessIncrement = 0.15f;
+    CGFloat brightnessIncrement = 0.18f;
     
     for (int i = 0; i < middle - 1; i++){
         colorMapping[i] = [UIColor colorWithHue:h
