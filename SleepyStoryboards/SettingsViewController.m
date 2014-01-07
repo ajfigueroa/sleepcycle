@@ -53,6 +53,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+   
+    // Commit any unsaved changes
+    [self commitMinutesSliderValue];
+}
+
+
 #pragma mark - Theme Management
 - (void)applyTheme
 {
@@ -183,6 +192,13 @@
     self.minutesSlider.value = minutesToFallAsleep;
     
     [self updateMinutesLabel:minutesToFallAsleep];
+}
+
+- (void)commitMinutesSliderValue
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:(NSInteger)self.minutesSlider.value
+                                               forKey:AFTimeToFallAsleepInMinutes];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)updateMinutesLabel:(NSInteger)minutes
