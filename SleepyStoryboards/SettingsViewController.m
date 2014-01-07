@@ -57,7 +57,7 @@
 {
     [super viewWillDisappear:animated];
    
-    // Commit any unsaved changes
+    // Commit any unsaved changes in case the user confirms full disappear of view
     [self commitMinutesSliderValue];
 }
 
@@ -85,9 +85,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     switch ((NSUInteger)indexPath.section) {
-        case AFSectionTitleBehaviour:
-            [self updateBehaviourSettings:(NSUInteger)indexPath.row];
-            break;
         case AFSectionTitleAppearance:
             [self updateAppearanceSettings:(NSUInteger)indexPath.row];
             break;
@@ -103,20 +100,9 @@
         case AFAppearanceSettingShowBorder:
             [self toggleShowBorderSetting];
             break;
-            
-        default:
-            break;
-    }
-}
-
-- (void)updateBehaviourSettings:(NSUInteger)behaviourOption
-{
-    switch (behaviourOption) {
-        case AFBehaviourSettingShowEasterEgg:
-            // Toggle the setting
+        case AFAppearanceSettingShowEasterEgg:
             [self toggleShowPingPongEasterEggSetting];
             break;
-            
         default:
             break;
     }
@@ -131,7 +117,7 @@
 
 - (void)updateShowPingPongEasterEggSetting
 {
-    NSIndexPath *showPingPongSettingPath = [NSIndexPath indexPathForRow:AFBehaviourSettingShowEasterEgg inSection:AFSectionTitleBehaviour];
+    NSIndexPath *showPingPongSettingPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowEasterEgg inSection:AFSectionTitleAppearance];
     
     [self updateBooleanSettingForTableView:self.tableView atIndexPath:showPingPongSettingPath forKey:AFShowEasterEgg];
 }
@@ -163,7 +149,7 @@
 
 - (void)toggleShowPingPongEasterEggSetting
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AFBehaviourSettingShowEasterEgg inSection:AFSectionTitleBehaviour];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowEasterEgg inSection:AFSectionTitleAppearance];
     [self toggleBooleanSettingForTableView:self.tableView atIndexPath:indexPath forKey:AFShowEasterEgg];
 }
 

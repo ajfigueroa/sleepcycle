@@ -14,18 +14,14 @@ static NSInteger const AFAvailableThemesCount = 3;
 // Manage important sections and rows of the STATIC table view cell
 typedef NS_ENUM(NSInteger, AFSectionTitles)
 {
-    AFSectionTitleAppearance,
-    AFSectionTitleBehaviour
+    AFSectionTitleAppearance
 };
 
 typedef NS_ENUM(NSInteger, AFAppearanceSetting)
 {
-    AFAppearanceSettingShowBorder = 1
+    AFAppearanceSettingShowBorder = 1,
+    AFAppearanceSettingShowEasterEgg
 };
 
-typedef NS_ENUM(NSInteger, AFBehaviourSetting)
-{
-    AFBehaviourSettingShowEasterEgg
-};
 
 #endif
