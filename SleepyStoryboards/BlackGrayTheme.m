@@ -27,4 +27,10 @@
     return self;
 }
 
+- (void)alternateThemeLabel:(UILabel *)label withFont:(UIFont *)font
+{
+    [super themeLabel:label withFont:font];
+    label.textColor = self.textColor;
+}
+
 @end

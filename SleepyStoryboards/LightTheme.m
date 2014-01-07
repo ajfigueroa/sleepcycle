@@ -128,6 +128,7 @@
     
     cell.backgroundColor = (UIColor *)self.tableViewCellColorMapping[(NSUInteger)indexPath.row];
     cell.textLabel.textColor = self.textColor;
+    cell.textLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont labelFontSize]];
 }
 
 - (NSArray *)themeTableViewCellMappingInTableView:(UITableView *)tableView atSection:(NSUInteger)section

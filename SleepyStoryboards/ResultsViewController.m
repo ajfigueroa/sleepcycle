@@ -67,11 +67,11 @@
 {
     switch (selectedUserMode) {
         case AFSelectedUserModeCalculateWakeTime:
-            self.resultsInformationLabel.text = @"You should try to wake up at these times:";
+            self.resultsInformationLabel.text = @"You should wake up at these times:";
             break;
             
         case AFSelectedUserModeCalculateBedTime:
-            self.resultsInformationLabel.text = @"You should try to sleep at these times:";
+            self.resultsInformationLabel.text = @"You should sleep at these times:";
             break;
         
         default:
@@ -147,6 +147,12 @@
                             reverseOrder:reverse];
     
     return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Target Action Methods
