@@ -138,6 +138,7 @@
 - (void)configureModel:(SleepyTimeModel *)model
 {
     // Implement with additional properties
+    model.timeToFallAsleep = [[NSUserDefaults standardUserDefaults] integerForKey:AFTimeToFallAsleepInMinutes];
 }
 
 - (void)performModelCalculation:(SleepyTimeModel *)model

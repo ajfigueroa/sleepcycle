@@ -38,11 +38,17 @@ const static NSInteger kTwelveHours = 43200;
     return self;
 }
 
-#pragma mark - Override Setters
+#pragma mark - Override Accessor Methods
 - (NSArray *)timeDataSource
 {
     // Return the immutable version of the data source
     return (NSArray *)self.internalTimeDataSource;
+}
+
+- (void)setTimeToFallAsleep:(NSInteger)timeToFallAsleep
+{
+    // Assumes that the time to fall asleep is being passed in seconds
+    _timeToFallAsleep = timeToFallAsleep * 60;
 }
 
 #pragma mark - Calculation Methods

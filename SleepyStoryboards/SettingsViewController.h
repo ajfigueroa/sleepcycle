@@ -12,5 +12,7 @@
 @interface SettingsViewController : UITableViewController <ThemeSelectionViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *themeSelectionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
+@property (weak, nonatomic) IBOutlet UISlider *minutesSlider;
 
 @end

@@ -46,6 +46,9 @@
 {
     [super viewDidAppear:animated];
     
+    // Register the minutes slider to update the label
+    [self.minutesSlider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    
     // Register for Theme Change Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
 }
@@ -116,6 +119,7 @@
     self.themeSelectionLabel.text = self.themeSettingsManager.themeName;
 }
 
+
 - (void)updateShowPingPongEasterEggSetting
 {
     NSIndexPath *showPingPongSettingPath = [NSIndexPath indexPathForRow:AFBehaviourSettingShowEasterEgg inSection:AFSectionTitleBehaviour];
@@ -173,12 +177,35 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)updateMinuteSlider
+{
+    NSInteger minutesToFallAsleep = [[NSUserDefaults standardUserDefaults] integerForKey:AFTimeToFallAsleepInMinutes];
+    self.minutesSlider.value = minutesToFallAsleep;
+    
+    [self updateMinutesLabel:minutesToFallAsleep];
+}
+
+- (void)updateMinutesLabel:(NSInteger)minutes
+{
+    if (minutes <= 1)
+        self.minutesLabel.text = [NSString stringWithFormat:@"%ld min", (long)minutes];
+    else
+        self.minutesLabel.text = [NSString stringWithFormat:@"%ld mins", (long)minutes];
+}
+
 - (void)updateAllSettings
 {
     // Update all settings based on their initialization methods
     [self updateThemeSelectionLabel];
     [self updateShowPingPongEasterEggSetting];
     [self updateShowBorderSetting];
+    [self updateMinuteSlider];
+}
+
+#pragma mark - Target Action Methods
+- (void)sliderValueChanged:(UISlider *)slider
+{
+    [self updateMinutesLabel:(NSInteger)slider.value];
 }
 
 #pragma mark - Segue
@@ -198,6 +225,9 @@
 {
     // Remove observer so notification is not sent to null object
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    // Deregister the minutes slider to update the label
+    [self.minutesSlider removeTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     
 }
 
