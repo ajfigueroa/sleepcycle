@@ -80,6 +80,18 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
         TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)segue.destinationViewController;
         timeSelectionViewController.selectedUserMode = AFSelectedUserModeCalculateWakeTime;
     }
+    else if ([segue.identifier isEqualToString:AFSettingsSegue])
+    {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SettingsViewController *settingsViewController = (SettingsViewController *)navController.viewControllers.firstObject;
+        settingsViewController.delegate = self;
+    }
+}
+
+#pragma mark - SettingsViewControllerDelegate
+- (void)settingsViewControllerDidFinish:(SettingsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - End of Life

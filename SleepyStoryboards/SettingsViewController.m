@@ -38,7 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self applyTheme];
     [self updateAllSettings];
 }
 
@@ -231,6 +231,12 @@
     // Deregister the minutes slider to update the label
     [self.minutesSlider removeTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     
+}
+
+- (IBAction)done:(id)sender
+{
+    // Inform delegate that business is done.
+    [self.delegate settingsViewControllerDidFinish:self];
 }
 
 @end

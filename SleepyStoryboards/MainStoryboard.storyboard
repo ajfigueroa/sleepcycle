@@ -75,9 +75,6 @@
                                 <state key="normal" title="Settings">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="oSA-Di-zUB" kind="push" identifier="SettingsSegue" id="Eoc-wq-yPM"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -90,7 +87,13 @@
                             <constraint firstAttribute="centerX" secondItem="W51-4G-Nk1" secondAttribute="centerX" id="hPf-ad-Xo2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="SleepCycle" id="vIF-9q-R2K"/>
+                    <navigationItem key="navigationItem" title="SleepCycle" id="vIF-9q-R2K">
+                        <barButtonItem key="leftBarButtonItem" image="settingsbaricon.png" id="nE1-gF-hGB">
+                            <connections>
+                                <segue destination="TyV-nr-ELG" kind="modal" identifier="SettingsSegue" id="yg3-vU-lu5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="calculateBedTimeButton" destination="tSN-3m-RhB" id="xX0-Di-ssy"/>
                         <outlet property="calculateWakeTimeButton" destination="W51-4G-Nk1" id="C3I-lQ-vHo"/>
@@ -467,7 +470,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="oSA-Di-zUB" id="SS8-2l-beA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="WT3-hV-pIQ"/>
+                    <navigationItem key="navigationItem" title="Settings" id="WT3-hV-pIQ">
+                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="done" id="xOV-S3-7Dh">
+                            <connections>
+                                <action selector="done:" destination="oSA-Di-zUB" id="3dv-zw-AtG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="minutesLabel" destination="6KF-Zr-Ybc" id="jdR-YW-qmB"/>
                         <outlet property="minutesSlider" destination="xL1-dT-B87" id="zi7-2t-cVn"/>
@@ -476,7 +485,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a24-aU-b4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1154" y="902"/>
+            <point key="canvasLocation" x="1538" y="924"/>
         </scene>
         <!--Theme Selection View Controller - Theme-->
         <scene sceneID="CfN-p8-ONy">
@@ -505,9 +514,30 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4De-tF-JAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1702" y="904"/>
+            <point key="canvasLocation" x="2146" y="924"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="l3p-vV-8bd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TyV-nr-ELG" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="R4z-OJ-T6q">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oSA-Di-zUB" kind="relationship" relationship="rootViewController" id="NVg-Hh-ZeP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pAg-Er-zwL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="840" y="924"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="settingsbaricon.png" width="22" height="22"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

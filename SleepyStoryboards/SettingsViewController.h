@@ -9,10 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "ThemeSelectionViewController.h"
 
+@protocol SettingsViewControllerDelegate;
+
 @interface SettingsViewController : UITableViewController <ThemeSelectionViewControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *themeSelectionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
-@property (weak, nonatomic) IBOutlet UISlider *minutesSlider;
+@property (nonatomic, weak) IBOutlet UILabel *themeSelectionLabel;
+@property (nonatomic, weak) IBOutlet UILabel *minutesLabel;
+@property (nonatomic, weak) IBOutlet UISlider *minutesSlider;
+@property (nonatomic, weak) id <SettingsViewControllerDelegate> delegate;
+
+- (IBAction)done:(id)sender;
+
+@end
+
+@protocol SettingsViewControllerDelegate <NSObject>
+
+- (void)settingsViewControllerDidFinish:(SettingsViewController *)controller;
 
 @end

@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "FUIButton.h"
+#import "SettingsViewController.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController <SettingsViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet FUIButton *calculateBedTimeButton;
 @property (weak, nonatomic) IBOutlet FUIButton *calculateWakeTimeButton;
 @property (weak, nonatomic) IBOutlet FUIButton *settingsButton;
-
-
 
 @end
