@@ -9,11 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "FUIButton.h"
 #import "SettingsViewController.h"
+#import "ApplicationDelegateSlidingViewControllerDelegate.h"
 
 @interface MainViewController : UIViewController <SettingsViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet FUIButton *calculateBedTimeButton;
 @property (weak, nonatomic) IBOutlet FUIButton *calculateWakeTimeButton;
-@property (weak, nonatomic) IBOutlet FUIButton *settingsButton;
+@property (weak, nonatomic) IBOutlet FUIButton *alarmButton;
+@property (nonatomic, weak) id <UIApplicationDelegate, ApplicationDelegateSlidingViewControllerDelegate> applicationDelegate;
+
+// Handling the toggling of the slider
+- (IBAction)toggleSlider:(id)sender;
+
 
 @end

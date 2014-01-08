@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "MainViewController.h"
+#import "ApplicationDelegateSlidingViewControllerDelegate.h"
 
-@interface MenuViewController : UITableViewController
+@class SettingsViewController;
+@class JSSlidingViewController;
+
+@interface MenuViewController : UITableViewController <SettingsViewControllerDelegate>
 
 @property (nonatomic, strong) UINavigationController *mainNavigationController;
+@property (nonatomic, strong) UINavigationController *settingsNavigationViewController;
+@property (nonatomic, weak) id <UIApplicationDelegate, ApplicationDelegateSlidingViewControllerDelegate> applicationDelegate;
 
 @end
+

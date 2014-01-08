@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "ThemeProvider.h"
 #import "TimeSelectionViewController.h"
+#import "JSSlidingViewController.h"
 
 @interface MainViewController ()
 
@@ -39,6 +40,26 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
     
     // Register for Theme Change Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+    
+    // Unlock the slider if this view controller is the root
+    [self.applicationDelegate slidingViewController].locked = NO;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    // Lock the slider if a view controller is pushed onto the stack
+    [self.applicationDelegate slidingViewController].locked = YES;
+}
+
+- (IBAction)toggleSlider:(id)sender
+{
+    if ([[self.applicationDelegate slidingViewController] isOpen]) {
+        [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
+    } else {
+        [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
+    }
 }
 
 #pragma mark - Theme Change Methods
@@ -56,7 +77,7 @@ static NSString *const kTimeSelectionSegueIdentifier = @"SelectTime";
             [self.themeSetter themeViewBackground:self.view];
             
             // Theme the buttons
-            for (FUIButton *button in @[self.calculateBedTimeButton, self.calculateWakeTimeButton, self.settingsButton])
+            for (FUIButton *button in @[self.calculateBedTimeButton, self.calculateWakeTimeButton, self.alarmButton])
             {
                 UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
                 [self.themeSetter themeButton:button withFont:buttonFont];

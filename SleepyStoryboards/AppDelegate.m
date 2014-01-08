@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "JSSlidingViewController.h"
-#import "MenuViewController.h"
+#import "MainViewController.h"
 
 @implementation AppDelegate
 
@@ -30,12 +29,17 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
 
     MenuViewController *menuViewController = (MenuViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MenuView"];
+    menuViewController.applicationDelegate = self;
     
-    JSSlidingViewController *viewController = [[JSSlidingViewController alloc] initWithFrontViewController:menuViewController.mainNavigationController backViewController:menuViewController];
-    viewController.showsDropShadows = NO;
-    [viewController setWidthOfVisiblePortionOfFrontViewControllerWhenSliderIsOpen:85.0f];
+    MainViewController *mainViewController = (MainViewController *)menuViewController.mainNavigationController.viewControllers.firstObject;
+    mainViewController.applicationDelegate = self;
     
-    self.window.rootViewController = viewController;
+    self.slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController:menuViewController.mainNavigationController backViewController:menuViewController];
+    self.slidingViewController.showsDropShadows = NO;
+    self.slidingViewController.useBouncyAnimations = NO;
+    [self.slidingViewController setWidthOfVisiblePortionOfFrontViewControllerWhenSliderIsOpen:85.0f];
+    
+    self.window.rootViewController = self.slidingViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
