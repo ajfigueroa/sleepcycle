@@ -69,6 +69,11 @@
     self.themeSetter = [ThemeProvider theme];
     
     [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+    [self.themeSetter themeSwitch:self.showBorderSwitch];
+    [self.themeSetter themeSwitch:self.showPingPongSwitch];
+    [self.themeSetter themeSwitch:self.showTutorialSwitch];
+    [self.themeSetter themeSlider:self.minutesSlider];
+    
 }
 
 #pragma mark - ThemeSelectionViewControllerDelegate
@@ -118,61 +123,29 @@
 
 - (void)updateShowPingPongEasterEggSetting
 {
-    NSIndexPath *showPingPongSettingPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowEasterEgg inSection:AFSectionTitleAppearance];
-    
-    [self updateBooleanSettingForTableView:self.tableView
-                               atIndexPath:showPingPongSettingPath
-                                   visible:[[SettingsManager sharedSettings] showEasterEgg]];
+    self.showPingPongSwitch.on = [[SettingsManager sharedSettings] showEasterEgg];
 }
 
 - (void)updateShowBorderSetting
 {
-    NSIndexPath *showBorderSettingPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowBorder
-                                                            inSection:AFSectionTitleAppearance];
-    
-    [self updateBooleanSettingForTableView:self.tableView
-                               atIndexPath:showBorderSettingPath
-                                   visible:[[SettingsManager sharedSettings] showBorder]];
-}
-
-- (void)updateBooleanSettingForTableView:(UITableView *)tableView
-                             atIndexPath:(NSIndexPath *)indexPath
-                                 visible:(BOOL)isVisible
-{
-    // Update the cell accessoryview for a given table view cell
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    
-    cell.accessoryType = isVisible ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    self.showBorderSwitch.on = [[SettingsManager sharedSettings] showBorder];
 }
 
 - (void)toggleShowBorderSetting
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowBorder inSection:AFSectionTitleAppearance];
-    [self toggleBooleanSettingForTableView:self.tableView atIndexPath:indexPath forKey:AFShowDatePickerBorder];
-}
+    [self toggleSwitch:self.showBorderSwitch forKey:AFShowDatePickerBorder];}
 
 - (void)toggleShowPingPongEasterEggSetting
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AFAppearanceSettingShowEasterEgg inSection:AFSectionTitleAppearance];
-    [self toggleBooleanSettingForTableView:self.tableView atIndexPath:indexPath forKey:AFShowEasterEgg];
+    [self toggleSwitch:self.showPingPongSwitch forKey:AFShowEasterEgg];
 }
 
-- (void)toggleBooleanSettingForTableView:(UITableView *)tableView
-                             atIndexPath:(NSIndexPath *)indexPath
-                                  forKey:(NSString *)key
+- (void)toggleSwitch:(UISwitch *)switchControl forKey:(NSString *)key
 {
-    // Assumes that state is determined by prescence of a checkmark
+    BOOL previousState = switchControl.on;
+    switchControl.on = !previousState;
     
-    // Update the show ping pong easter egg setting based on the user defaults
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    // Grab prescence of checkmark
-    BOOL hasCheckMarkAccessory = (cell.accessoryType == UITableViewCellAccessoryCheckmark);
-    
-    cell.accessoryType = hasCheckMarkAccessory ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
-    
-    // Register the new state to SettingsManager
-    [[SettingsManager sharedSettings] setBool:!hasCheckMarkAccessory forKey:key];
+    [[SettingsManager sharedSettings] setBool:!previousState forKey:key];
 }
 
 - (void)updateMinuteSlider

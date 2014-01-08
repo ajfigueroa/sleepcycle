@@ -35,7 +35,7 @@
     mainViewController.applicationDelegate = self;
     
     self.slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController:menuViewController.mainNavigationController backViewController:menuViewController];
-    self.slidingViewController.showsDropShadows = NO;
+    self.slidingViewController.showsDropShadows = YES;
     self.slidingViewController.useBouncyAnimations = NO;
     [self.slidingViewController setWidthOfVisiblePortionOfFrontViewControllerWhenSliderIsOpen:85.0f];
     

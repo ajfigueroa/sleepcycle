@@ -9,12 +9,30 @@
 #import "MenuViewController.h"
 #import "SettingsViewController.h"
 #import "JSSlidingViewController.h"
+#import "ThemeProvider.h"
 
 @interface MenuViewController ()
 
+@property (nonatomic, strong) id <Theme> themeSetter;
+
 @end
 
-static NSInteger const AFSettingsTableViewCellRow = 1;
+typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
+{
+    AFSettingsTableHeaderSettings,
+    AFSettingsTableHeaderCalculate = 2,
+    AFSettingsTableHeaderManage = 5
+};
+
+typedef NS_ENUM(NSInteger, AFSettingsTableOption)
+{
+    AFSettingsTableOptionSettings = 1,
+    AFSettingsTableOptionBedTime = 3,
+    AFSettingsTableOptionWakeTime,
+    AFSettingsTableOptionAlarms = 6
+};
+
+#define SETTINGS_TABLE_ROWS 7
 
 @implementation MenuViewController
 
@@ -24,6 +42,11 @@ static NSInteger const AFSettingsTableViewCellRow = 1;
     
     // Get rid of unwanted UITableViewCells
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    [self applyTheme];
+    
+    // Register for Theme Change Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
 }
 
 - (UINavigationController *)mainNavigationController
@@ -56,13 +79,48 @@ static NSInteger const AFSettingsTableViewCellRow = 1;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     switch (indexPath.row) {
-        case AFSettingsTableViewCellRow:
+        case AFSettingsTableOptionSettings:
             [self presentSettingsViewController];
             break;
             
         default:
             break;
     }
+}
+
+#pragma mark - Theming
+- (void)applyTheme
+{
+    dispatch_queue_t themeQueue = dispatch_queue_create("Theme Queue", NULL);
+    
+    dispatch_async(themeQueue, ^{
+    
+        self.themeSetter = [ThemeProvider theme];
+    
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.themeSetter themeViewBackground:self.tableView];
+            
+            for (int i = 0; i < SETTINGS_TABLE_ROWS; i++)
+            {
+                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                
+                switch (i) {
+                    case AFSettingsTableHeaderSettings:
+                        [self.themeSetter alternateThemeViewBackground:cell];
+                        break;
+                    case AFSettingsTableHeaderCalculate:
+                        [self.themeSetter alternateThemeViewBackground:cell];
+                        break;
+                    case AFSettingsTableHeaderManage:
+                        [self.themeSetter alternateThemeViewBackground:cell];
+                        break;
+                    default:
+                        [self.themeSetter themeViewBackground:cell];
+                        break;
+                }
+            }
+        });
+    });
 }
 
 #pragma mark - JSSlidingViewController Helpers
@@ -104,6 +162,12 @@ static NSInteger const AFSettingsTableViewCellRow = 1;
 - (void)settingsViewControllerDidFinish:(SettingsViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - End of Life
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

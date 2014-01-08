@@ -167,6 +167,16 @@
     return (NSArray *)colorMapping;
 }
 
+- (void)themeSwitch:(UISwitch *)switchControl
+{
+    switchControl.onTintColor = self.primaryColor;
+}
+
+- (void)themeSlider:(UISlider *)slider
+{
+    slider.tintColor = self.primaryColor;
+}
+
 # pragma mark - Helper
 - (void)themeStatusBar
 {

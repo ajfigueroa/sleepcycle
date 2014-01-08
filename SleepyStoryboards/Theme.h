@@ -37,4 +37,8 @@
                atIndexPath:(NSIndexPath *)indexPath
               reverseOrder:(BOOL)reverseOrder;
 
+- (void)themeSwitch:(UISwitch *)switchControl;
+
+- (void)themeSlider:(UISlider *)slider;
+
 @end

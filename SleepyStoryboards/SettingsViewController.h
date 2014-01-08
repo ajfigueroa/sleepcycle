@@ -18,6 +18,11 @@
 @property (nonatomic, weak) IBOutlet UISlider *minutesSlider;
 @property (nonatomic, weak) id <SettingsViewControllerDelegate> delegate;
 
+// Switches
+@property (weak, nonatomic) IBOutlet UISwitch *showBorderSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *showPingPongSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *showTutorialSwitch;
+
 - (IBAction)done:(id)sender;
 
 @end
