@@ -140,7 +140,6 @@
     CGFloat h = 0, b = 0, s = 0, a = 0;
     [self.primaryColor getHue:&h saturation:&s brightness:&b alpha:&a];
 
-    NSLog(@"%f", b);
     // Split the array into two sections
     // One half is darker, middle is normal, other half is lighter
     NSUInteger middle = (rowCount / 2);
