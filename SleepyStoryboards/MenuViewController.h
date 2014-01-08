@@ -19,5 +19,18 @@
 @property (nonatomic, strong) UINavigationController *settingsNavigationViewController;
 @property (nonatomic, weak) id <UIApplicationDelegate, ApplicationDelegateSlidingViewControllerDelegate> applicationDelegate;
 
+// Settings Text Fields
+@property (weak, nonatomic) IBOutlet UITextField *settingsTextField;
+@property (weak, nonatomic) IBOutlet UITextField *bedTimeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *wakeTimeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *alarmsTextField;
+
+// Settings Image Views
+@property (weak, nonatomic) IBOutlet UIImageView *settingsImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *bedTimeImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *wakeUpTimeImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *alarmImageView;
+
+
 @end
 

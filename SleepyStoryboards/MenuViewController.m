@@ -10,6 +10,7 @@
 #import "SettingsViewController.h"
 #import "JSSlidingViewController.h"
 #import "ThemeProvider.h"
+#import "SettingsSelectionConstants.h"
 
 @interface MenuViewController ()
 
@@ -22,14 +23,6 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     AFSettingsTableHeaderSettings,
     AFSettingsTableHeaderCalculate = 2,
     AFSettingsTableHeaderManage = 5
-};
-
-typedef NS_ENUM(NSInteger, AFSettingsTableOption)
-{
-    AFSettingsTableOptionSettings = 1,
-    AFSettingsTableOptionBedTime = 3,
-    AFSettingsTableOptionWakeTime,
-    AFSettingsTableOptionAlarms = 6
 };
 
 #define SETTINGS_TABLE_ROWS 7
@@ -100,27 +93,48 @@ typedef NS_ENUM(NSInteger, AFSettingsTableOption)
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.themeSetter themeViewBackground:self.tableView];
             
-            for (int i = 0; i < SETTINGS_TABLE_ROWS; i++)
-            {
-                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-                
-                switch (i) {
-                    case AFSettingsTableHeaderSettings:
-                        [self.themeSetter alternateThemeViewBackground:cell];
-                        break;
-                    case AFSettingsTableHeaderCalculate:
-                        [self.themeSetter alternateThemeViewBackground:cell];
-                        break;
-                    case AFSettingsTableHeaderManage:
-                        [self.themeSetter alternateThemeViewBackground:cell];
-                        break;
-                    default:
-                        [self.themeSetter themeViewBackground:cell];
-                        break;
-                }
-            }
+            [self themeTableViewCells];
         });
     });
+}
+
+- (void)themeTableViewCells
+{
+    for (int i = 0; i < SETTINGS_TABLE_ROWS; i++)
+    {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        
+        switch (i) {
+            case AFSettingsTableHeaderSettings:
+                [self.themeSetter alternateThemeViewBackground:cell];
+                break;
+            case AFSettingsTableHeaderCalculate:
+                [self.themeSetter alternateThemeViewBackground:cell];
+                break;
+            case AFSettingsTableHeaderManage:
+                [self.themeSetter alternateThemeViewBackground:cell];
+                break;
+            case AFSettingsTableOptionSettings:
+                [self.themeSetter themeOptionCell:cell withImageView:self.settingsImageView forThemeOption:AFSettingsTableOptionSettings];
+                [self.themeSetter themeTextField:self.settingsTextField];
+                break;
+            case AFSettingsTableOptionBedTime:
+                [self.themeSetter themeOptionCell:cell withImageView:self.bedTimeImageView forThemeOption:AFSettingsTableOptionBedTime];
+                [self.themeSetter themeTextField:self.bedTimeTextField];
+                break;
+            case AFSettingsTableOptionWakeTime:
+                [self.themeSetter themeOptionCell:cell withImageView:self.wakeUpTimeImageView forThemeOption:AFSettingsTableOptionWakeTime];
+                [self.themeSetter themeTextField:self.wakeTimeTextField];
+                break;
+            case AFSettingsTableOptionAlarm:
+                [self.themeSetter themeOptionCell:cell withImageView:self.alarmImageView forThemeOption:AFSettingsTableOptionAlarm];
+                [self.themeSetter themeTextField:self.alarmsTextField];
+                break;
+            default:
+                [self.themeSetter themeViewBackground:cell];
+                break;
+        }
+    }
 }
 
 #pragma mark - JSSlidingViewController Helpers

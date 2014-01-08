@@ -41,4 +41,8 @@
 
 - (void)themeSlider:(UISlider *)slider;
 
+- (void)themeOptionCell:(UITableViewCell *)cell withImageView:(UIImageView *)imageView forThemeOption:(NSInteger)themeOption;
+
+- (void)themeTextField:(UITextField *)textField;
+
 @end

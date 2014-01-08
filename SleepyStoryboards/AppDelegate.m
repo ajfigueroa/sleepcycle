@@ -37,7 +37,6 @@
     self.slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController:menuViewController.mainNavigationController backViewController:menuViewController];
     self.slidingViewController.showsDropShadows = YES;
     self.slidingViewController.useBouncyAnimations = NO;
-    [self.slidingViewController setWidthOfVisiblePortionOfFrontViewControllerWhenSliderIsOpen:85.0f];
     
     self.window.rootViewController = self.slidingViewController;
     self.window.backgroundColor = [UIColor whiteColor];

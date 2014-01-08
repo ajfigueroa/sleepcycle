@@ -23,5 +23,13 @@ typedef NS_ENUM(NSInteger, AFAppearanceSetting)
     AFAppearanceSettingShowEasterEgg
 };
 
+typedef NS_ENUM(NSInteger, AFSettingsTableOption)
+{
+    AFSettingsTableOptionSettings = 1,
+    AFSettingsTableOptionBedTime = 3,
+    AFSettingsTableOptionWakeTime,
+    AFSettingsTableOptionAlarm = 6
+};
+
 
 #endif

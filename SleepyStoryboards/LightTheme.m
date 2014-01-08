@@ -15,6 +15,7 @@
 #import "UINavigationBar+FlatUI.h"
 #import "BOZPongRefreshControl.h"
 #import "NSArray+Ordering.h"
+#import "SettingsSelectionConstants.h"
 
 @interface LightTheme ()
 
@@ -175,6 +176,34 @@
 - (void)themeSlider:(UISlider *)slider
 {
     slider.tintColor = self.primaryColor;
+}
+
+- (void)themeOptionCell:(UITableViewCell *)cell withImageView:(UIImageView *)imageView forThemeOption:(NSInteger)themeOption
+{
+    cell.backgroundColor = self.secondaryColor;
+    cell.textLabel.textColor = self.alternateTextColor;
+    
+    switch (themeOption) {
+        case AFSettingsTableOptionSettings:
+            imageView.image = [UIImage imageNamed:@"settings.png"];
+            break;
+        case AFSettingsTableOptionBedTime:
+            imageView.image = [UIImage imageNamed:@"moonicon.png"];
+            break;
+        case AFSettingsTableOptionWakeTime:
+            imageView.image = [UIImage imageNamed:@"sunicon.png"];
+            break;
+        case AFSettingsTableOptionAlarm:
+            imageView.image = [UIImage imageNamed:@"alarmclock.png"];
+        default:
+            imageView = nil;
+            break;
+    }
+}
+
+- (void)themeTextField:(UITextField *)textField
+{
+    textField.textColor = self.alternateTextColor;
 }
 
 # pragma mark - Helper
