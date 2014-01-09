@@ -60,6 +60,10 @@
    
     // Commit any unsaved changes in case the user confirms full disappear of view
     [self commitMinutesSliderValue];
+    
+    // Commit current state of toggle buttons
+    [[SettingsManager sharedSettings] setShowBorder:self.showBorderSwitch.on];
+    [[SettingsManager sharedSettings] setShowEasterEgg:self.showPingPongSwitch.on];
 }
 
 
@@ -144,18 +148,6 @@
 {
     // Inform delegate that business is done.
     [self.delegate settingsViewControllerDidFinish:self];
-}
-
-- (IBAction)toggleShowBorderSwitch:(id)sender
-{
-    UISwitch *switchControl = (UISwitch *)sender;
-    [[SettingsManager sharedSettings] setShowBorder:switchControl.on];
-}
-
-- (IBAction)toggleShowPingPongSwitch:(id)sender
-{
-    UISwitch *switchControl = (UISwitch *)sender;
-    [[SettingsManager sharedSettings] setShowEasterEgg:switchControl.on];
 }
 
 

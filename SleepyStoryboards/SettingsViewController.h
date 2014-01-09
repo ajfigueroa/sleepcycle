@@ -24,8 +24,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *showTutorialSwitch;
 
 - (IBAction)done:(id)sender;
-- (IBAction)toggleShowBorderSwitch:(id)sender;
-- (IBAction)toggleShowPingPongSwitch:(id)sender;
 
 @end
 
