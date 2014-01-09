@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) id <Theme> themeSetter;
 @property (nonatomic, strong) NSMutableArray *alarmsArray;
+@property (nonatomic, strong) UILabel *emptyTableLabel;
 
 @end
 
@@ -36,6 +37,7 @@
     
     [self applyTheme];
 }
+
 
 #pragma mark - Data Source
 - (void)populateAlarmsArray

@@ -28,6 +28,9 @@
     [super awakeFromNib];
     NSLog(@"Awaking from nib: %s", __PRETTY_FUNCTION__);
     
+    // Update theme
+    [self applyTheme];
+    
     // Register for Theme Change Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applyTheme)
@@ -50,9 +53,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    // Update theme
-    [self applyTheme];
     
     dispatch_queue_t borderQueue = dispatch_queue_create("Border Queue", NULL);
     
@@ -116,40 +116,35 @@
 #pragma mark - Theme Change Methods
 - (void)applyTheme
 {
-    dispatch_queue_t setupThemeQueue = dispatch_queue_create("Theme Queue", NULL);
-    dispatch_async(setupThemeQueue, ^{
         // Set (or reset) the theme with the appropriate theme object
         self.themeSetter = [ThemeProvider theme];
+    
+        // Theme the appropriate views
+        [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Theme the appropriate views
-            [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
-            
-            // Theme the background view differently if the alternateThemeViewBackground has been implemented
-            if ([self.themeSetter respondsToSelector:@selector(alternateThemeViewBackground:)])
-                [self.themeSetter alternateThemeViewBackground:self.view];
-            else
-                [self.themeSetter themeViewBackground:self.view];
-            
-            // Set up the button font
-            UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
-            
-            // Theme the confirm button normally
-            [self.themeSetter themeButton:self.confirmTimeButton withFont:buttonFont];
-            
-            // The SleepNowButton is Themed differently to differentiate it from the ConfirmTimeButton
-            if ([self.themeSetter respondsToSelector:@selector(alternateThemeButton:withFont:)])
-                [self.themeSetter alternateThemeButton:self.sleepNowButton withFont:buttonFont];
-            else
-                [self.themeSetter themeButton:self.sleepNowButton withFont:buttonFont];
-            
-            // Theme the information label view and increase the font slightly
-            UIFont *labelFont = [buttonFont fontWithSize:([UIFont labelFontSize])];
-            [self.themeSetter themeLabel:self.informationLabel withFont:labelFont];
-            
-            [self updateViewWithSelectedUserMode:self.selectedUserMode];
-        });
-    });
+        // Theme the background view differently if the alternateThemeViewBackground has been implemented
+        if ([self.themeSetter respondsToSelector:@selector(alternateThemeViewBackground:)])
+            [self.themeSetter alternateThemeViewBackground:self.view];
+        else
+            [self.themeSetter themeViewBackground:self.view];
+        
+        // Set up the button font
+        UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
+        
+        // Theme the confirm button normally
+        [self.themeSetter themeButton:self.confirmTimeButton withFont:buttonFont];
+        
+        // The SleepNowButton is Themed differently to differentiate it from the ConfirmTimeButton
+        if ([self.themeSetter respondsToSelector:@selector(alternateThemeButton:withFont:)])
+            [self.themeSetter alternateThemeButton:self.sleepNowButton withFont:buttonFont];
+        else
+            [self.themeSetter themeButton:self.sleepNowButton withFont:buttonFont];
+        
+        // Theme the information label view and increase the font slightly
+        UIFont *labelFont = [buttonFont fontWithSize:([UIFont labelFontSize])];
+        [self.themeSetter themeLabel:self.informationLabel withFont:labelFont];
+        
+        [self updateViewWithSelectedUserMode:self.selectedUserMode];
 }
 
 #pragma mark - Model Configuration

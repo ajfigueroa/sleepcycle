@@ -91,7 +91,7 @@
 
 - (void)alternateThemeButton:(UIButton *)button withFont:(UIFont *)font
 {
-    button.backgroundColor = self.primaryColor;
+    button.backgroundColor = [UIColor clearColor];
     button.titleLabel.font = font;
     [button setTitleColor:self.alternateTextColor forState:UIControlStateNormal];
     [button setTitleColor:self.alternateTextColor forState:UIControlStateHighlighted];
