@@ -16,6 +16,7 @@
 @interface MenuViewController ()
 
 @property (nonatomic, strong) id <Theme> themeSetter;
+@property (nonatomic, assign) NSInteger lastIndex;
 
 @end
 
@@ -33,6 +34,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    // Initial index is the Bed time row
+    self.lastIndex = AFSettingsTableOptionBedTime;
     
     // Get rid of unwanted UITableViewCells
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -72,7 +76,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     [super viewDidAppear:animated];
     
     if (![self.tableView indexPathForSelectedRow]) {
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:AFSettingsTableOptionBedTime inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.lastIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
 }
 #pragma mark - UITableViewDelegate Method
@@ -84,9 +88,11 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
             break;
         case AFSettingsTableOptionBedTime:
             [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateBedTime];
+            self.lastIndex = AFSettingsTableOptionBedTime;
             break;
         case AFSettingsTableOptionWakeTime:
             [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateWakeTime];
+            self.lastIndex = AFSettingsTableOptionWakeTime;
             break;
         default:
             break;

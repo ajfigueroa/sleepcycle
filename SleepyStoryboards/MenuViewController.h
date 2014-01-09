@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainViewController.h"
 #import "ApplicationDelegateSlidingViewControllerDelegate.h"
+#import "SettingsViewController.h"
 
-@class SettingsViewController;
 @class JSSlidingViewController;
 
 @interface MenuViewController : UITableViewController <SettingsViewControllerDelegate>
