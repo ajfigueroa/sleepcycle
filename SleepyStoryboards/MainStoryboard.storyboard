@@ -12,31 +12,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="ku1-BR-TGP" kind="relationship" relationship="rootViewController" id="jlK-ka-CnN"/>
+                        <segue destination="3cO-c9-6RQ" kind="relationship" relationship="rootViewController" id="CB0-Ak-2gb"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8gh-TJ-fh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5" y="20"/>
-        </scene>
-        <!--View Controller - Alarms-->
-        <scene sceneID="CDT-T7-oTO">
-            <objects>
-                <viewController id="dlA-xX-DkE" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HDp-cf-TlP"/>
-                        <viewControllerLayoutGuide type="bottom" id="Pag-Ua-LFp"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kza-iE-Bae">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Alarms" id="IAT-TD-WdR"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Amr-Rn-eeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1150" y="-818"/>
         </scene>
         <!--Main View Controller - SleepCycle-->
         <scene sceneID="Vux-oU-IHN">
@@ -66,9 +47,6 @@
                                 <state key="normal" title="Calculate Wake Up Time">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="3cO-c9-6RQ" kind="push" identifier="CalculateWakeTimeSegue" id="hpn-hj-DSp"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSN-3m-RhB" customClass="FUIButton">
                                 <rect key="frame" x="31" y="184" width="259" height="45"/>
@@ -80,9 +58,6 @@
                                 <state key="normal" title="Calculate Bed Time">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="3cO-c9-6RQ" kind="push" identifier="CalculateBedTimeSegue" id="ttT-mV-XFU"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpe-dE-QGY" customClass="FUIButton">
                                 <rect key="frame" x="31" y="338" width="259" height="45"/>
@@ -94,9 +69,6 @@
                                 <state key="normal" title="Alarms">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="dlA-xX-DkE" kind="push" identifier="AlarmClockSegue" id="MRT-fm-ngN"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -124,12 +96,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9yh-1J-Uns" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="511" y="20"/>
+            <point key="canvasLocation" x="639" y="-386"/>
         </scene>
-        <!--Time Selection View Controller - Times-->
+        <!--Time Selection View Controller - SleepCycle-->
         <scene sceneID="kFD-Gb-Mqw">
             <objects>
-                <viewController id="3cO-c9-6RQ" customClass="TimeSelectionViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TimeSelectionViewController" id="3cO-c9-6RQ" customClass="TimeSelectionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vmk-wr-ruV"/>
                         <viewControllerLayoutGuide type="bottom" id="HQs-gX-1Nd"/>
@@ -217,7 +189,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstItem="9V4-5X-8ko" firstAttribute="top" secondItem="sJj-KR-EYx" secondAttribute="bottom" constant="20" id="otN-gB-5F4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Times" id="wJl-3w-8Iy"/>
+                    <navigationItem key="navigationItem" title="SleepCycle" id="wJl-3w-8Iy">
+                        <barButtonItem key="leftBarButtonItem" image="listicon.png" id="c7u-35-fLt">
+                            <connections>
+                                <action selector="toggleSlider:" destination="ku1-BR-TGP" id="z1b-8i-s2m"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="confirmTimeButton" destination="sJj-KR-EYx" id="7YE-G1-5hx"/>
                         <outlet property="informationLabel" destination="hYm-o7-Z3j" id="CxI-OR-Wtc"/>
@@ -740,7 +718,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ttT-mV-XFU"/>
         <segue reference="N4y-7E-gPI"/>
     </inferredMetricsTieBreakers>
 </document>

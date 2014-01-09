@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
+#import "TimeSelectionViewController.h"
 
 @implementation AppDelegate
 
@@ -31,8 +31,8 @@
     MenuViewController *menuViewController = (MenuViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MenuView"];
     menuViewController.applicationDelegate = self;
     
-    MainViewController *mainViewController = (MainViewController *)menuViewController.mainNavigationController.viewControllers.firstObject;
-    mainViewController.applicationDelegate = self;
+    TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)menuViewController.mainNavigationController.viewControllers.firstObject;
+    timeSelectionViewController.selectedUserMode = AFSelectedUserModeCalculateBedTime;
     
     self.slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController:menuViewController.mainNavigationController backViewController:menuViewController];
     self.slidingViewController.showsDropShadows = YES;
