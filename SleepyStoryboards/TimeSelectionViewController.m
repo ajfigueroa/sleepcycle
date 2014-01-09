@@ -38,9 +38,13 @@
 #pragma mark - Accessors
 - (void)setSelectedUserMode:(AFSelectedUserMode)selectedUserMode
 {
-    _selectedUserMode = selectedUserMode;
-    [self updateViewWithSelectedUserMode:_selectedUserMode];
+    if (_selectedUserMode != selectedUserMode)
+    {
+        _selectedUserMode = selectedUserMode;
+        [self updateViewWithSelectedUserMode:_selectedUserMode];
+    }
 }
+
 
 #pragma mark - Control View Management
 - (void)viewWillAppear:(BOOL)animated

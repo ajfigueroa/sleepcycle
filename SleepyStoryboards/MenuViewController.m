@@ -89,10 +89,12 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
         case AFSettingsTableOptionBedTime:
             [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateBedTime];
             self.lastIndex = AFSettingsTableOptionBedTime;
+            [self toggleSlider];
             break;
         case AFSettingsTableOptionWakeTime:
             [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateWakeTime];
             self.lastIndex = AFSettingsTableOptionWakeTime;
+            [self toggleSlider];
             break;
         default:
             break;
@@ -185,12 +187,14 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 
 - (void)presentTimeSelectionControllerWithSelectedUserMode:(AFSelectedUserMode)option
 {
-    // Dismiss the slider
-    [self toggleSlider];
-    
     // Update the mode of the TimeSelectionViewController
     TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)self.mainNavigationController.viewControllers.firstObject;
     timeSelectionViewController.selectedUserMode = option;
+    
+    if (![[[self.applicationDelegate slidingViewController] frontViewController] isEqual:self.mainNavigationController])
+    {
+        [[self.applicationDelegate slidingViewController] setFrontViewController:self.mainNavigationController animated:YES completion:nil];
+    }
 }
 
 #pragma mark - SettingsViewControllerDelegate

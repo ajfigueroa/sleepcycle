@@ -41,6 +41,9 @@
     [super viewWillAppear:animated];
     [self applyTheme];
     [self updateAllSettings];
+
+    // Set the table view to scroll up to the top left corner on appearance
+    [self.tableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -64,9 +67,6 @@
     // Commit current state of toggle buttons
     [[SettingsManager sharedSettings] setShowBorder:self.showBorderSwitch.on];
     [[SettingsManager sharedSettings] setShowEasterEgg:self.showPingPongSwitch.on];
-    
-    // Lastly, scroll to top
-    [self.tableView scrollsToTop];
 }
 
 
