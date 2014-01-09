@@ -149,18 +149,13 @@
 - (IBAction)toggleShowBorderSwitch:(id)sender
 {
     UISwitch *switchControl = (UISwitch *)sender;
-    [self commitSwitchValue:switchControl.on forKey:AFShowDatePickerBorder];
+    [[SettingsManager sharedSettings] setShowBorder:switchControl.on];
 }
 
 - (IBAction)toggleShowPingPongSwitch:(id)sender
 {
     UISwitch *switchControl = (UISwitch *)sender;
-    [self commitSwitchValue:switchControl.on forKey:AFShowEasterEgg];
-}
-
-- (void)commitSwitchValue:(BOOL)value forKey:(NSString *)key
-{
-    [[SettingsManager sharedSettings] setBool:value forKey:key];
+    [[SettingsManager sharedSettings] setShowEasterEgg:switchControl.on];
 }
 
 
