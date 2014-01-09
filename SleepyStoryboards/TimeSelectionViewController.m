@@ -110,8 +110,6 @@
     // Clear any color mapping from previous states
     [[NSNotificationCenter defaultCenter] postNotificationName:AFColorMappingResetNotification object:nil];
     
-    // Lock the slider if a view controller is pushed onto the stack
-    [self.applicationDelegate slidingViewController].locked = YES;
 }
 
 

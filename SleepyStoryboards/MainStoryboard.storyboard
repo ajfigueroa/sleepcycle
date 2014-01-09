@@ -19,6 +19,36 @@
             </objects>
             <point key="canvasLocation" x="5" y="20"/>
         </scene>
+        <!--Alarms View Controller - Alarms-->
+        <scene sceneID="KyG-eT-bYy">
+            <objects>
+                <tableViewController storyboardIdentifier="AlarmsViewController" title="Alarms" id="KvB-CP-kop" customClass="AlarmsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ker-3Y-hpz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmCell" id="Dti-i7-vNS">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dti-i7-vNS" id="d4O-Ej-yAi">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="KvB-CP-kop" id="LI6-aL-rl5"/>
+                            <outlet property="delegate" destination="KvB-CP-kop" id="zHe-L2-lhj"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Alarms" id="395-Ts-DXg"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9ca-Ls-jjI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="825" y="-770"/>
+        </scene>
         <!--Time Selection View Controller - SleepCycle-->
         <scene sceneID="kFD-Gb-Mqw">
             <objects>
@@ -628,6 +658,24 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pAg-Er-zwL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-12" y="904"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NhJ-kh-ity">
+            <objects>
+                <navigationController storyboardIdentifier="AlarmsNav" automaticallyAdjustsScrollViewInsets="NO" id="50u-EK-wOa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kgV-Vy-mQ1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="KvB-CP-kop" kind="relationship" relationship="rootViewController" id="gIl-1d-v8i"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RUA-bS-ecP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="231" y="-776"/>
         </scene>
     </scenes>
     <resources>

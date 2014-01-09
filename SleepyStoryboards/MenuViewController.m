@@ -12,6 +12,7 @@
 #import "ThemeProvider.h"
 #import "SettingsSelectionConstants.h"
 #import "TimeSelectionViewController.h"
+#import "AlarmsViewController.h"
 
 @interface MenuViewController ()
 
@@ -94,6 +95,11 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
         case AFSettingsTableOptionWakeTime:
             [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateWakeTime];
             self.lastIndex = AFSettingsTableOptionWakeTime;
+            [self toggleSlider];
+            break;
+        case AFSettingsTableOptionAlarm:
+            [self presentAlarmViewController];
+            self.lastIndex = AFSettingsTableOptionAlarm;
             [self toggleSlider];
             break;
         default:
@@ -194,6 +200,20 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     if (![[[self.applicationDelegate slidingViewController] frontViewController] isEqual:self.mainNavigationController])
     {
         [[self.applicationDelegate slidingViewController] setFrontViewController:self.mainNavigationController animated:YES completion:nil];
+    }
+}
+
+- (void)presentAlarmViewController
+{
+    if (!self.alarmsNavigationViewController)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        self.alarmsNavigationViewController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"AlarmsNav"];
+    }
+    
+    if (![[[self.applicationDelegate slidingViewController] frontViewController] isEqual:self.alarmsNavigationViewController])
+    {
+        [[self.applicationDelegate slidingViewController] setFrontViewController:self.alarmsNavigationViewController animated:YES completion:nil];
     }
 }
 

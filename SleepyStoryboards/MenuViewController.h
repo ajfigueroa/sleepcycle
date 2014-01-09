@@ -11,11 +11,13 @@
 #import "SettingsViewController.h"
 
 @class JSSlidingViewController;
+@class AlarmsViewController;
 
 @interface MenuViewController : UITableViewController <SettingsViewControllerDelegate>
 
 @property (nonatomic, strong) UINavigationController *mainNavigationController;
 @property (nonatomic, strong) UINavigationController *settingsNavigationViewController;
+@property (nonatomic, strong) UINavigationController *alarmsNavigationViewController;
 @property (nonatomic, weak) id <UIApplicationDelegate, ApplicationDelegateSlidingViewControllerDelegate> applicationDelegate;
 
 // Settings Text Fields
