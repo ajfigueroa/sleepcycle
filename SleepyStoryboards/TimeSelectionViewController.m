@@ -71,12 +71,12 @@
     // in AFSelectedUserModeCalculateBedTime
     switch (selectedUserMode) {
         case AFSelectedUserModeCalculateWakeTime:
-            self.informationLabel.text = @"Choose your bed time";
+            self.informationLabel.text = @"I plan to sleep at:";
             self.sleepNowButton.hidden = NO;
             break;
             
         case AFSelectedUserModeCalculateBedTime:
-            self.informationLabel.text = @"Choose your wake-up time";
+            self.informationLabel.text = @"I have to wake up at";
             self.sleepNowButton.hidden = YES;
             break;
             
