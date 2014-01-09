@@ -84,18 +84,11 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 #pragma mark - Theming
 - (void)applyTheme
 {
-    dispatch_queue_t themeQueue = dispatch_queue_create("Theme Queue", NULL);
+    self.themeSetter = [ThemeProvider theme];
+
+    [self.themeSetter themeViewBackground:self.tableView];
     
-    dispatch_async(themeQueue, ^{
-    
-        self.themeSetter = [ThemeProvider theme];
-    
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.themeSetter themeViewBackground:self.tableView];
-            
-            [self themeTableViewCells];
-        });
-    });
+    [self themeTableViewCells];
 }
 
 - (void)themeTableViewCells

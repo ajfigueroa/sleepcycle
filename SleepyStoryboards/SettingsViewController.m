@@ -85,35 +85,7 @@
     [self.themeSettingsManager setDefaultApplicationTheme:themeName];
 }
 
-#pragma mark - UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    switch ((NSUInteger)indexPath.section) {
-        case AFSectionTitleAppearance:
-            [self updateAppearanceSettings:(NSUInteger)indexPath.row];
-            break;
-        default:
-            break;
-    }
-}
-
 #pragma mark - Settings Management
-- (void)updateAppearanceSettings:(NSUInteger)appearanceOption
-{
-    switch (appearanceOption) {
-        case AFAppearanceSettingShowBorder:
-            [self toggleShowBorderSetting];
-            break;
-        case AFAppearanceSettingShowEasterEgg:
-            [self toggleShowPingPongEasterEggSetting];
-            break;
-        default:
-            break;
-    }
-}
-
 - (void)updateThemeSelectionLabel
 {
     // Update the label based on the current theme inside the manager
@@ -129,23 +101,6 @@
 - (void)updateShowBorderSetting
 {
     self.showBorderSwitch.on = [[SettingsManager sharedSettings] showBorder];
-}
-
-- (void)toggleShowBorderSetting
-{
-    [self toggleSwitch:self.showBorderSwitch forKey:AFShowDatePickerBorder];}
-
-- (void)toggleShowPingPongEasterEggSetting
-{
-    [self toggleSwitch:self.showPingPongSwitch forKey:AFShowEasterEgg];
-}
-
-- (void)toggleSwitch:(UISwitch *)switchControl forKey:(NSString *)key
-{
-    BOOL previousState = switchControl.on;
-    switchControl.on = !previousState;
-    
-    [[SettingsManager sharedSettings] setBool:!previousState forKey:key];
 }
 
 - (void)updateMinuteSlider
@@ -185,6 +140,30 @@
     [self updateMinutesLabel:(NSInteger)slider.value];
 }
 
+- (IBAction)done:(id)sender
+{
+    // Inform delegate that business is done.
+    [self.delegate settingsViewControllerDidFinish:self];
+}
+
+- (IBAction)toggleShowBorderSwitch:(id)sender
+{
+    UISwitch *switchControl = (UISwitch *)sender;
+    [self commitSwitchValue:switchControl.on forKey:AFShowDatePickerBorder];
+}
+
+- (IBAction)toggleShowPingPongSwitch:(id)sender
+{
+    UISwitch *switchControl = (UISwitch *)sender;
+    [self commitSwitchValue:switchControl.on forKey:AFShowEasterEgg];
+}
+
+- (void)commitSwitchValue:(BOOL)value forKey:(NSString *)key
+{
+    [[SettingsManager sharedSettings] setBool:value forKey:key];
+}
+
+
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -206,12 +185,6 @@
     // Deregister the minutes slider to update the label
     [self.minutesSlider removeTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     
-}
-
-- (IBAction)done:(id)sender
-{
-    // Inform delegate that business is done.
-    [self.delegate settingsViewControllerDidFinish:self];
 }
 
 @end
