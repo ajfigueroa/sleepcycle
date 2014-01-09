@@ -33,6 +33,7 @@
     
     TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)menuViewController.mainNavigationController.viewControllers.firstObject;
     timeSelectionViewController.selectedUserMode = AFSelectedUserModeCalculateBedTime;
+    timeSelectionViewController.applicationDelegate = self;
     
     self.slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController:menuViewController.mainNavigationController backViewController:menuViewController];
     self.slidingViewController.showsDropShadows = YES;

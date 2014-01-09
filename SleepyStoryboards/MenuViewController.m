@@ -11,6 +11,7 @@
 #import "JSSlidingViewController.h"
 #import "ThemeProvider.h"
 #import "SettingsSelectionConstants.h"
+#import "TimeSelectionViewController.h"
 
 @interface MenuViewController ()
 
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     // Get rid of unwanted UITableViewCells
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    // Theme the UI
     [self applyTheme];
     
     // Register for Theme Change Notifications
@@ -66,18 +68,25 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     return _settingsNavigationViewController;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (![self.tableView indexPathForSelectedRow]) {
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:AFSettingsTableOptionBedTime inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    }
+}
 #pragma mark - UITableViewDelegate Method
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     switch (indexPath.row) {
         case AFSettingsTableOptionSettings:
             [self presentSettingsViewController];
             break;
         case AFSettingsTableOptionBedTime:
+            [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateBedTime];
             break;
         case AFSettingsTableOptionWakeTime:
+            [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateWakeTime];
             break;
         default:
             break;
@@ -166,6 +175,16 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
                                        completion:nil];
         });
     }
+}
+
+- (void)presentTimeSelectionControllerWithSelectedUserMode:(AFSelectedUserMode)option
+{
+    // Dismiss the slider
+    [self toggleSlider];
+    
+    // Update the mode of the TimeSelectionViewController
+    TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)self.mainNavigationController.viewControllers.firstObject;
+    timeSelectionViewController.selectedUserMode = option;
 }
 
 #pragma mark - SettingsViewControllerDelegate

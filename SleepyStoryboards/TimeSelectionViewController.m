@@ -10,6 +10,7 @@
 #import "ThemeProvider.h"
 #import "ResultsViewController.h"
 #import "SettingsManager.h"
+#import "JSSlidingViewController.h"
 
 @interface TimeSelectionViewController ()
 
@@ -32,15 +33,22 @@
                                              selector:@selector(applyTheme)
                                                  name:AFThemeHasChangedNotification
                                                object:nil];
-    // Update theme
-    [self applyTheme];
-    
+}
+
+#pragma mark - Accessors
+- (void)setSelectedUserMode:(AFSelectedUserMode)selectedUserMode
+{
+    _selectedUserMode = selectedUserMode;
+    [self updateViewWithSelectedUserMode:_selectedUserMode];
 }
 
 #pragma mark - Control View Management
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // Update theme
+    [self applyTheme];
     
     dispatch_queue_t borderQueue = dispatch_queue_create("Border Queue", NULL);
     
@@ -52,6 +60,9 @@
                 [self applyBorderToView:self.timeSelectionDatePicker WithColor:nil width:1.5f];
         });
     });
+    
+    // Unlock the slider if this view controller is the root
+    [self.applicationDelegate slidingViewController].locked = NO;
 }
 
 - (void)updateViewWithSelectedUserMode:(AFSelectedUserMode)selectedUserMode
@@ -61,6 +72,7 @@
     switch (selectedUserMode) {
         case AFSelectedUserModeCalculateWakeTime:
             self.informationLabel.text = @"Choose your bed time";
+            self.sleepNowButton.hidden = NO;
             break;
             
         case AFSelectedUserModeCalculateBedTime:
@@ -93,6 +105,9 @@
     
     // Clear any color mapping from previous states
     [[NSNotificationCenter defaultCenter] postNotificationName:AFColorMappingResetNotification object:nil];
+    
+    // Lock the slider if a view controller is pushed onto the stack
+    [self.applicationDelegate slidingViewController].locked = YES;
 }
 
 
@@ -158,6 +173,16 @@
     }
 }
 
+#pragma mark - Sliding View Management
+- (IBAction)toggleSlider:(id)sender
+{
+    if ([[self.applicationDelegate slidingViewController] isOpen]) {
+        [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
+    } else {
+        [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
+    }
+}
+
 #pragma mark - View Transitioning
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -178,6 +203,12 @@
     }
 }
 
+#pragma mark - SettingsViewControllerDelegate
+- (void)settingsViewControllerDidFinish:(SettingsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - End of Life
 - (void)dealloc
 {
@@ -185,5 +216,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"Deallocating: %s", __PRETTY_FUNCTION__);
 }
+
 
 @end

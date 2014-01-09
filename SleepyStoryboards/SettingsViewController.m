@@ -64,6 +64,9 @@
     // Commit current state of toggle buttons
     [[SettingsManager sharedSettings] setShowBorder:self.showBorderSwitch.on];
     [[SettingsManager sharedSettings] setShowEasterEgg:self.showPingPongSwitch.on];
+    
+    // Lastly, scroll to top
+    [self.tableView scrollsToTop];
 }
 
 

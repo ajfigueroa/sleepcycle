@@ -192,7 +192,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="SleepCycle" id="wJl-3w-8Iy">
                         <barButtonItem key="leftBarButtonItem" image="listicon.png" id="c7u-35-fLt">
                             <connections>
-                                <action selector="toggleSlider:" destination="ku1-BR-TGP" id="z1b-8i-s2m"/>
+                                <action selector="toggleSlider:" destination="3cO-c9-6RQ" id="LOC-ho-g77"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
