@@ -16,6 +16,7 @@
 #import "BOZPongRefreshControl.h"
 #import "NSArray+Ordering.h"
 #import "SettingsSelectionConstants.h"
+#import "FUIButton.h"
 
 @interface LightTheme ()
 
@@ -89,9 +90,12 @@
     view.backgroundColor = self.primaryColor;
 }
 
-- (void)alternateThemeButton:(UIButton *)button withFont:(UIFont *)font
+- (void)alternateThemeButton:(FUIButton *)button withFont:(UIFont *)font
 {
-    button.backgroundColor = [UIColor clearColor];
+    button.buttonColor = self.secondaryColor;
+    button.shadowColor = [UIColor clearColor];
+    button.shadowHeight = 0.0f;
+    button.cornerRadius = 3.0f;
     button.titleLabel.font = font;
     [button setTitleColor:self.alternateTextColor forState:UIControlStateNormal];
     [button setTitleColor:self.alternateTextColor forState:UIControlStateHighlighted];

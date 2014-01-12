@@ -130,16 +130,11 @@
         
         // Set up the button font
         UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
-        
-        // Theme the confirm button normally
-        [self.themeSetter themeButton:self.confirmTimeButton withFont:buttonFont];
-        
-        // The SleepNowButton is Themed differently to differentiate it from the ConfirmTimeButton
-        if ([self.themeSetter respondsToSelector:@selector(alternateThemeButton:withFont:)])
-            [self.themeSetter alternateThemeButton:self.sleepNowButton withFont:buttonFont];
-        else
-            [self.themeSetter themeButton:self.sleepNowButton withFont:buttonFont];
-        
+
+        // Theme both buttons the same
+        [self.themeSetter alternateThemeButton:self.confirmTimeButton withFont:buttonFont];
+        [self.themeSetter alternateThemeButton:self.sleepNowButton withFont:buttonFont];
+    
         // Theme the information label view and increase the font slightly
         UIFont *labelFont = [buttonFont fontWithSize:([UIFont labelFontSize])];
         [self.themeSetter themeLabel:self.informationLabel withFont:labelFont];

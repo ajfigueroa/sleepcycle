@@ -35,6 +35,7 @@
 {
     [super viewWillAppear:animated];
     
+    // Apply theme
     [self applyTheme];
 }
 
