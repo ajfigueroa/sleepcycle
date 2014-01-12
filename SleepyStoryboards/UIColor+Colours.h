@@ -107,7 +107,6 @@ typedef enum
  */
 - (UIColor *)blackOrWhiteContrastingColor;
 
-
 #pragma mark - Colors
 // System Colors
 + (UIColor *)infoBlueColor;
