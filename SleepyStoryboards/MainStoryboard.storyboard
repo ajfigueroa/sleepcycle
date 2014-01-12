@@ -97,11 +97,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </timeZone>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJj-KR-EYx" customClass="FUIButton">
-                                <rect key="frame" x="76" y="385" width="169" height="49"/>
+                                <rect key="frame" x="60" y="387" width="200" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="169" id="Ity-XM-kxF"/>
-                                    <constraint firstAttribute="height" constant="49" id="rDs-1F-5tW"/>
+                                    <constraint firstAttribute="width" constant="200" id="MAI-yS-nsC"/>
+                                    <constraint firstAttribute="height" constant="40" id="xoX-kP-VNN"/>
                                 </constraints>
                                 <state key="normal" title="Confirm Time">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -111,11 +111,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9V4-5X-8ko" customClass="FUIButton">
-                                <rect key="frame" x="76" y="454" width="169" height="45"/>
+                                <rect key="frame" x="60" y="454" width="200" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="WNA-y4-5sO"/>
-                                    <constraint firstAttribute="width" constant="169" id="YqR-Wj-CWm"/>
+                                    <constraint firstAttribute="height" constant="40" id="VoX-br-IJl"/>
+                                    <constraint firstAttribute="width" constant="200" id="hn6-6I-zUM"/>
                                 </constraints>
                                 <state key="normal" title="Sleep Now">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -135,12 +135,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="hYm-o7-Z3j" secondAttribute="centerX" id="4Ns-vd-ebt"/>
                             <constraint firstAttribute="centerX" secondItem="sJj-KR-EYx" secondAttribute="centerX" id="OLo-KG-oDn"/>
-                            <constraint firstItem="sJj-KR-EYx" firstAttribute="top" secondItem="onO-yO-atJ" secondAttribute="bottom" constant="20" id="Z47-y0-2Wp"/>
                             <constraint firstAttribute="centerX" secondItem="9V4-5X-8ko" secondAttribute="centerX" id="aM2-Tv-nMB"/>
+                            <constraint firstItem="9V4-5X-8ko" firstAttribute="top" secondItem="sJj-KR-EYx" secondAttribute="bottom" constant="27" id="gzc-5C-psH"/>
                             <constraint firstItem="onO-yO-atJ" firstAttribute="top" secondItem="hYm-o7-Z3j" secondAttribute="bottom" constant="38" id="kAJ-CO-bOI"/>
                             <constraint firstAttribute="centerX" secondItem="onO-yO-atJ" secondAttribute="centerX" id="lIl-mi-vAb"/>
                             <constraint firstAttribute="centerY" secondItem="onO-yO-atJ" secondAttribute="centerY" id="mik-dx-Xfb"/>
-                            <constraint firstItem="9V4-5X-8ko" firstAttribute="top" secondItem="sJj-KR-EYx" secondAttribute="bottom" constant="20" id="otN-gB-5F4"/>
+                            <constraint firstItem="sJj-KR-EYx" firstAttribute="top" secondItem="onO-yO-atJ" secondAttribute="bottom" constant="22" id="uux-aG-BzP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SleepCycle" id="wJl-3w-8Iy">

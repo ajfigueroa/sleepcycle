@@ -62,4 +62,18 @@
     textField.textColor = self.textColor;
 }
 
+- (void)themeBorderForView:(UIView *)view
+{
+    BOOL applyBorder = [[SettingsManager sharedSettings] showBorder];
+    CGColorRef borderColor;
+    
+    if (applyBorder)
+        borderColor = [[UIColor whiteColor] CGColor];
+    else
+        borderColor = [[UIColor clearColor] CGColor];
+    
+    view.layer.borderColor = borderColor;
+    view.layer.borderWidth = 1.5f;
+}
+
 @end

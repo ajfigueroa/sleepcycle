@@ -92,13 +92,13 @@
 
 - (void)alternateThemeButton:(FUIButton *)button withFont:(UIFont *)font
 {
-    button.buttonColor = self.secondaryColor;
+    button.buttonColor = self.primaryColor;
     button.shadowColor = [UIColor clearColor];
     button.shadowHeight = 0.0f;
     button.cornerRadius = 3.0f;
     button.titleLabel.font = font;
-    [button setTitleColor:self.alternateTextColor forState:UIControlStateNormal];
-    [button setTitleColor:self.alternateTextColor forState:UIControlStateHighlighted];
+    [button setTitleColor:self.textColor forState:UIControlStateNormal];
+    [button setTitleColor:self.textColor forState:UIControlStateHighlighted];
 }
 
 - (void)themeRefreshControl:(UIView *)refreshControl
@@ -208,6 +208,20 @@
 - (void)themeTextField:(UITextField *)textField
 {
     textField.textColor = self.alternateTextColor;
+}
+
+- (void)themeBorderForView:(UIView *)view
+{
+    BOOL applyBorder = [[SettingsManager sharedSettings] showBorder];
+    CGColorRef borderColor;
+    
+    if (applyBorder)
+        borderColor = [[UIColor blackColor] CGColor];
+    else
+        borderColor = [[UIColor clearColor] CGColor];
+    
+    view.layer.borderColor = borderColor;
+    view.layer.borderWidth = 1.5f;
 }
 
 # pragma mark - Helper

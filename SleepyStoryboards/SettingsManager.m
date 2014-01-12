@@ -89,6 +89,9 @@
 {
     _showBorder = showBorder;
     [self writeBoolToDefaultsValue:_showBorder forKey:AFShowDatePickerBorder];
+    
+    // Due to this method affecting how the view will appear directly, post notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:nil];
 }
 
 - (void)setShowEasterEgg:(BOOL)showEasterEgg

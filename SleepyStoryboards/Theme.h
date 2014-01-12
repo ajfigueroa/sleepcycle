@@ -45,4 +45,6 @@
 
 - (void)themeTextField:(UITextField *)textField;
 
+- (void)themeBorderForView:(UIView *)view;
+
 @end

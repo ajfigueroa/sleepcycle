@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Theme.h"
+#import "SettingsManager.h"
 
 @interface LightTheme : NSObject <Theme>
 

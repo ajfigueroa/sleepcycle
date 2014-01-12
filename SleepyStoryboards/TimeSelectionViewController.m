@@ -54,17 +54,6 @@
 {
     [super viewWillAppear:animated];
     
-    dispatch_queue_t borderQueue = dispatch_queue_create("Border Queue", NULL);
-    
-    dispatch_async(borderQueue, ^{
-        BOOL applyBorder = [[SettingsManager sharedSettings] showBorder];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (applyBorder)
-                [self applyBorderToView:self.timeSelectionDatePicker WithColor:nil width:1.5f];
-        });
-    });
-    
     // Unlock the slider if this view controller is the root
     [self.applicationDelegate slidingViewController].locked = NO;
 }
@@ -89,20 +78,6 @@
     }
 }
 
-- (void)applyBorderToView:(UIView *)view WithColor:(UIColor *)color width:(CGFloat)width
-{
-    // If border color is nil, use default black.
-    CGColorRef borderColor;
-
-    if (!color)
-        borderColor = [[UIColor blackColor] CGColor];
-    else
-        borderColor = [color CGColor];
-    
-    view.layer.borderColor = borderColor;
-    view.layer.borderWidth = width;
-}
-
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -122,11 +97,8 @@
         // Theme the appropriate views
         [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
         
-        // Theme the background view differently if the alternateThemeViewBackground has been implemented
-        if ([self.themeSetter respondsToSelector:@selector(alternateThemeViewBackground:)])
-            [self.themeSetter alternateThemeViewBackground:self.view];
-        else
-            [self.themeSetter themeViewBackground:self.view];
+        // Theme the background view
+        [self.themeSetter themeViewBackground:self.view];
         
         // Set up the button font
         UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
@@ -137,9 +109,11 @@
     
         // Theme the information label view and increase the font slightly
         UIFont *labelFont = [buttonFont fontWithSize:([UIFont labelFontSize])];
-        [self.themeSetter themeLabel:self.informationLabel withFont:labelFont];
-        
+        [self.themeSetter alternateThemeLabel:self.informationLabel withFont:labelFont];
         [self updateViewWithSelectedUserMode:self.selectedUserMode];
+    
+        // Lastly theme and add border if needed
+        [self.themeSetter themeBorderForView:self.timeSelectionDatePicker];
 }
 
 #pragma mark - Model Configuration
