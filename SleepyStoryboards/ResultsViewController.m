@@ -88,6 +88,21 @@
     }
 }
 
+#pragma mark - Model Management
+- (void)updateCell:(UITableViewCell *)cell atIndex:(NSIndexPath *)indexPath
+{
+    cell.textLabel.text = [(NSDate *)self.resultTimes[(NSUInteger)indexPath.row] stringShortTime];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    
+    // Reverse base on the user choice
+    BOOL reverse = (self.selectedUserMode == AFSelectedUserModeCalculateBedTime) ? YES: NO;
+    
+    [self.themeSetter themeTableViewCell:cell
+                             inTableView:self.resultsTableView
+                             atIndexPath:indexPath
+                            reverseOrder:reverse];
+}
+
 #pragma mark - Theme Management
 - (void)applyTheme
 {
@@ -144,16 +159,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResultsCell"];
     
-    cell.textLabel.text = [(NSDate *)self.resultTimes[(NSUInteger)indexPath.row] stringShortTime];
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    
-    // Reverse base on the user choice
-    BOOL reverse = (self.selectedUserMode == AFSelectedUserModeCalculateBedTime) ? YES: NO;
-    
-    [self.themeSetter themeTableViewCell:cell
-                             inTableView:tableView
-                             atIndexPath:indexPath
-                            reverseOrder:reverse];
+    [self updateCell:cell atIndex:indexPath];
     
     return cell;
 }
