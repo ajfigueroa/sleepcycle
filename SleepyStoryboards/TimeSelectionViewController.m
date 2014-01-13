@@ -69,7 +69,7 @@
             break;
             
         case AFSelectedUserModeCalculateBedTime:
-            self.informationLabel.text = @"I have to wake up at";
+            self.informationLabel.text = @"I would like to wake up at";
             self.sleepNowButton.hidden = YES;
             break;
             

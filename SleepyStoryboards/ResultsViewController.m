@@ -44,7 +44,7 @@
     
     // Create long press gesture recognizer
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longPressGestureRecognizer.minimumPressDuration = 1.5f; // seconds
+    longPressGestureRecognizer.minimumPressDuration = 1.0f; // seconds
     longPressGestureRecognizer.delegate = self;
     
     // Add to table view
@@ -173,9 +173,35 @@
         
         NSIndexPath *indexPath = [self.resultsTableView indexPathForRowAtPoint:rowPoint];
         
+        // Grab date
+        NSDate *date = (NSDate *)self.resultTimes[indexPath.row];
+        
         if (indexPath)
-            NSLog(@"Long press at row: %ld", indexPath.row);
+            [self buildActionSheetForState:self.selectedUserMode andDate:date];
     }
+}
+
+- (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date
+{
+    NSString *buttonMessage;
+    
+    switch (state) {
+        case AFSelectedUserModeCalculateBedTime:
+            buttonMessage = [NSString stringWithFormat:@"Set Reminder for %@", [date stringShortTime]];
+            break;
+            
+        case AFSelectedUserModeCalculateWakeTime:
+            buttonMessage = [NSString stringWithFormat:@"Set Alarm for %@", [date stringShortTime]];
+            break;
+            
+        default:
+            buttonMessage = @"";
+            break;
+    }
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:buttonMessage, nil];
+    
+    [actionSheet showInView:self.view.window];
 }
 
 #pragma mark - Target Action Methods
