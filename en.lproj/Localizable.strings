@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  SleepyStoryboards
+
+  Created by Alexander Figueroa on 1/13/2014.
+  Copyright (c) 2014 Alexander Figueroa. All rights reserved.
+*/
+
+"I would like to wake up at" = "I would like to wake up at";
+
+"I plan to sleep at" = "I plan to sleep at";
+
+"Confirm Time" = "Confirm Time";
+
+"Sleep Now" = "Sleep Now";
+
+"Settings" = "Settings";
+
+"Calculate" = "Calculate";
+
+"Bed Time" = "Bed Time";
+
+"Wake Up Time" = "Wake Up Time";
+
+"Alarms" = "Alarmes";
+
+"You should fall asleep at these times" = "You should fall asleep at these times";
+
+"Results" = "Results";
+
+"Set Reminder for %@" = "Set Reminder for %@";
+
+"Today" = "Today";
+
+"Tomorrow" = "Tomorrow";
+
+"Set Alarm for %@" = "Set Alarm for %@";
+
+"Cancel" = "Cancel";

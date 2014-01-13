@@ -64,12 +64,12 @@
     // in AFSelectedUserModeCalculateBedTime
     switch (selectedUserMode) {
         case AFSelectedUserModeCalculateWakeTime:
-            self.informationLabel.text = @"I plan to sleep at:";
+            self.informationLabel.text = NSLocalizedString(@"I plan to sleep at", nil);
             self.sleepNowButton.hidden = NO;
             break;
             
         case AFSelectedUserModeCalculateBedTime:
-            self.informationLabel.text = @"I would like to wake up at";
+            self.informationLabel.text = NSLocalizedString(@"I would like to wake up at", nil);
             self.sleepNowButton.hidden = YES;
             break;
             

@@ -80,7 +80,7 @@
             break;
             
         case AFSelectedUserModeCalculateBedTime:
-            self.resultsInformationLabel.text = @"You should fall sleep at these times:";
+            self.resultsInformationLabel.text = @"You should fall asleep at these times:";
             break;
         
         default:
