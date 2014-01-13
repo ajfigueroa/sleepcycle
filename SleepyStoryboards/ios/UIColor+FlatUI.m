@@ -142,18 +142,6 @@
     return [UIColor colorFromHexCode:@"962014"];
 }
 
-+ (UIColor *) belizeHoleComplementShadeColor {
-    return [UIColor colorFromHexCode:@"7EB7DC"];
-}
-
-+ (UIColor *) belizeHoleComplementBeigeColor {
-    return [UIColor colorFromHexCode:@"FFD9A8"];
-}
-
-+ (UIColor *) alizarinComplementShadeColor {
-    return [UIColor colorFromHexCode:@"F39990"];
-}
-
 + (UIColor *) blendedColorWithForegroundColor:(UIColor *)foregroundColor
                               backgroundColor:(UIColor *)backgroundColor
                                  percentBlend:(CGFloat) percentBlend {

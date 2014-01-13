@@ -98,7 +98,7 @@
         [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
         
         // Theme the background view
-        [self.themeSetter themeViewBackground:self.view];
+        [self.themeSetter alternateThemeViewBackground:self.view];
         
         // Set up the button font
         UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
@@ -109,7 +109,7 @@
     
         // Theme the information label view and increase the font slightly
         UIFont *labelFont = [buttonFont fontWithSize:([UIFont labelFontSize])];
-        [self.themeSetter alternateThemeLabel:self.informationLabel withFont:labelFont];
+        [self.themeSetter themeLabel:self.informationLabel withFont:labelFont];
         [self updateViewWithSelectedUserMode:self.selectedUserMode];
     
         // Lastly theme and add border if needed
@@ -138,6 +138,7 @@
             break;
     }
 }
+
 
 #pragma mark - Sliding View Management
 - (IBAction)toggleSlider:(id)sender

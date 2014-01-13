@@ -92,7 +92,7 @@
 
 - (void)alternateThemeButton:(FUIButton *)button withFont:(UIFont *)font
 {
-    button.buttonColor = self.primaryColor;
+    button.buttonColor = [UIColor clearColor];
     button.shadowColor = [UIColor clearColor];
     button.shadowHeight = 0.0f;
     button.cornerRadius = 3.0f;

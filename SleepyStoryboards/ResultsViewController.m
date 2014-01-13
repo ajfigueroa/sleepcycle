@@ -154,7 +154,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDate *date = (NSDate *)self.resultTimes[(NSUInteger)indexPath.row];
+    
+    NSString *message = [NSString stringWithFormat:@"%@", [date descriptionWithLocale:[NSLocale currentLocale]]];
+    UIAlertView *timeDisplay = [[UIAlertView alloc] initWithTitle:@"Time Selected" message:message delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    [timeDisplay show];
+    
 }
+
 
 #pragma mark - Target Action Methods
 - (void)refreshTriggered

@@ -37,9 +37,6 @@
 + (UIColor *) guardsmenRed;
 + (UIColor *) lightSalmonColor;
 + (UIColor *) darkSalmonColor;
-+ (UIColor *) belizeHoleComplementShadeColor;
-+ (UIColor *) belizeHoleComplementBeigeColor;
-+ (UIColor *) alizarinComplementShadeColor;
 
 + (UIColor *) blendedColorWithForegroundColor:(UIColor *)foregroundColor
                               backgroundColor:(UIColor *)backgroundColor
