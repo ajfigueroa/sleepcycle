@@ -10,7 +10,7 @@
 
 @interface TimeSelectionHandler : NSObject
 
-- (NSDate *)offsetInputDate:(NSDate *)inputDate;
-- (NSInteger)hourComponent:(NSDate *)date;
+- (instancetype)initWithWindow:(UIWindow *)window;
+- (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date;
 
 @end

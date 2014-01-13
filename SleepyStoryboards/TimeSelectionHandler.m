@@ -7,22 +7,62 @@
 //
 
 #import "TimeSelectionHandler.h"
+#import "NSDate+SleepTime.h"
+
+@interface TimeSelectionHandler ()
+
+@property (nonatomic, strong) UIWindow *window;
+
+@end
 
 @implementation TimeSelectionHandler
 
-- (NSDate *)offsetInputDate:(NSDate *)inputDate
+- (instancetype)initWithWindow:(UIWindow *)window
 {
-    // If the wake up time chosen is in the AM, offset the time by 24 hours
-    // so that the bed times are for the current date
-    NSDate *offsetDate = inputDate;
-    NSInteger dayInSeconds = 24 * 60 * 60;
+    self = [super init];
     
-    if ([self hourComponent:inputDate] >= 0 && [self hourComponent:inputDate] <= 12)
+    if (self)
     {
-        [offsetDate dateByAddingTimeInterval:dayInSeconds];
+        self.window = window;
     }
     
-    return offsetDate;
+    return self;
+}
+
+- (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date
+{
+    UIActionSheet *actionSheet;
+    
+    switch (state) {
+        case AFSelectedUserModeCalculateWakeTime:
+        {
+            NSString *title = [NSString stringWithFormat:@"Set Alarm for %@", [date stringShortTime]];
+            actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                      delegate:nil
+                                             cancelButtonTitle:@"Cancel"
+                                        destructiveButtonTitle:nil
+                                             otherButtonTitles:@"Today", @"Tomorrow", nil];
+        }
+            break;
+            
+        case AFSelectedUserModeCalculateBedTime:
+        {
+            NSString *title  = [NSString stringWithFormat:@"Set a reminder to be in bed at %@", [date stringShortTime]];
+            actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                      delegate:nil
+                                             cancelButtonTitle:@"Cancel"
+                                        destructiveButtonTitle:nil
+                                             otherButtonTitles:@"Today", @"Tomorrow", nil];
+        }
+            break;
+            
+        default:
+            NSLog(@"%s: Performing no action sheet display", __PRETTY_FUNCTION__);
+            break;
+    }
+    
+    // Display action sheet
+    [actionSheet showInView:self.window];
 }
 
 @end

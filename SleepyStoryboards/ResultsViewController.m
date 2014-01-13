@@ -11,6 +11,7 @@
 #import "ThemeProvider.h"
 #import "NSDate+SleepTime.h"
 #import "SettingsManager.h"
+#import "TimeSelectionHandler.h"
 
 @interface ResultsViewController ()
 
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) id <Theme> themeSetter;
 @property (weak, nonatomic) IBOutlet UIView *topMaskView;
 @property (weak, nonatomic) IBOutlet UIView *bottomMaskView;
+@property (nonatomic, strong) TimeSelectionHandler *timeSelectionHandler;
 
 @end
 
@@ -183,35 +185,13 @@
         NSDate *date = (NSDate *)self.resultTimes[indexPath.row];
         
         if (indexPath)
-            [self buildActionSheetForState:self.selectedUserMode andDate:date];
-    }
-}
-
-- (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date
-{
-    UIActionSheet *actionSheet;
-    
-    switch (state) {
-        case AFSelectedUserModeCalculateWakeTime:
         {
-            NSString *title = [NSString stringWithFormat:@"Set Alarm for %@", [date stringShortTime]];
-            actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today", @"Tomorrow", nil];
+            if (!self.timeSelectionHandler)
+                self.timeSelectionHandler = [[TimeSelectionHandler alloc] initWithWindow:self.view.window];
+            
+            [self.timeSelectionHandler buildActionSheetForState:self.selectedUserMode andDate:date];
         }
-        break;
-            
-        case AFSelectedUserModeCalculateBedTime:
-        {
-            NSString *title  = [NSString stringWithFormat:@"Set Reminder for %@", [date stringShortTime]];
-            actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today", @"Tomorrow", nil];
-        }
-        break;
-            
-        default:
-            
-            break;
     }
-    
-    [actionSheet showInView:self.view.window];
 }
 
 
