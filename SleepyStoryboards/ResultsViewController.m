@@ -39,7 +39,16 @@
 {
     [super viewDidLoad];
     
+    // Set up model
     self.resultTimes = self.model.timeDataSource;
+    
+    // Create long press gesture recognizer
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longPressGestureRecognizer.minimumPressDuration = 1.5f; // seconds
+    longPressGestureRecognizer.delegate = self;
+    
+    // Add to table view
+    [self.resultsTableView addGestureRecognizer:longPressGestureRecognizer];
 }
 
 - (void)viewDidLayoutSubviews
@@ -153,15 +162,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    NSDate *date = (NSDate *)self.resultTimes[(NSUInteger)indexPath.row];
-    
-    NSString *message = [NSString stringWithFormat:@"%@", [date descriptionWithLocale:[NSLocale currentLocale]]];
-    UIAlertView *timeDisplay = [[UIAlertView alloc] initWithTitle:@"Time Selected" message:message delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    [timeDisplay show];
-    
 }
 
+#pragma mark - UIGestureRecognizerDelegate
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
+    {
+        CGPoint rowPoint = [gestureRecognizer locationInView:self.resultsTableView];
+        
+        NSIndexPath *indexPath = [self.resultsTableView indexPathForRowAtPoint:rowPoint];
+        
+        if (indexPath)
+            NSLog(@"Long press at row: %ld", indexPath.row);
+    }
+}
 
 #pragma mark - Target Action Methods
 - (void)refreshTriggered
