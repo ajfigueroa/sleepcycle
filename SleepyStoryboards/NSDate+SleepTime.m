@@ -26,4 +26,22 @@
     return [timeFormatter stringFromDate:self];
 }
 
+- (NSInteger)hourComponent
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSHourCalendarUnit fromDate:self];
+    return components.hour;
+}
+
+- (NSArray *)allDateComponents
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:self];
+    
+    return @[@(components.day),
+             @(components.hour),
+             @(components.minute),
+             @(components.second)];
+}
+
 @end

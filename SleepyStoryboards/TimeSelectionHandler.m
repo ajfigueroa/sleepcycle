@@ -25,11 +25,4 @@
     return offsetDate;
 }
 
-- (NSInteger)hourComponent:(NSDate *)date
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:NSHourCalendarUnit fromDate:date];
-    return [components hour];
-}
-
 @end

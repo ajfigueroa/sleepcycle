@@ -55,8 +55,7 @@
 
     if (!self.isPongRefreshControlVisible)
         self.resultsTableView.scrollEnabled = NO;
-    else
-    {
+    else {
         self.resultsTableView.scrollEnabled = YES;
         self.pongRefreshControl.shouldCoverRefreshControlUnderHeader = YES;
     }
