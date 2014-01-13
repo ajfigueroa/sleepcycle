@@ -71,7 +71,7 @@ const static NSInteger kTwelveHours = 43200;
 
 - (void)calculateBedTimesWithWakeTime:(NSDate *)wakeTime
 {
-    // Shift wake time back by 12 hours so timing works out
+    // Shift wake time back by 12 hours so problem becomes a Wake Time problem
     wakeTime = [wakeTime dateByAddingTimeInterval:-kTwelveHours];
     
     // Update array of shifted sleep times given the wake time

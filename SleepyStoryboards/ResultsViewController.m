@@ -183,26 +183,31 @@
 
 - (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date
 {
-    NSString *buttonMessage;
+    UIActionSheet *actionSheet;
     
     switch (state) {
-        case AFSelectedUserModeCalculateBedTime:
-            buttonMessage = [NSString stringWithFormat:@"Set Reminder for %@", [date stringShortTime]];
-            break;
-            
         case AFSelectedUserModeCalculateWakeTime:
-            buttonMessage = [NSString stringWithFormat:@"Set Alarm for %@", [date stringShortTime]];
-            break;
+        {
+            NSString *title = [NSString stringWithFormat:@"Set Alarm for %@", [date stringShortTime]];
+            actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today", @"Tomorrow", nil];
+        }
+        break;
+            
+        case AFSelectedUserModeCalculateBedTime:
+        {
+            NSString *title  = [NSString stringWithFormat:@"Set Reminder for %@", [date stringShortTime]];
+            actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today", @"Tomorrow", nil];
+        }
+        break;
             
         default:
-            buttonMessage = @"";
+            
             break;
     }
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:buttonMessage, nil];
-    
     [actionSheet showInView:self.view.window];
 }
+
 
 #pragma mark - Target Action Methods
 - (void)refreshTriggered
