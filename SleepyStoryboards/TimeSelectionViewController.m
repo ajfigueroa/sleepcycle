@@ -82,6 +82,9 @@
 {
     [super viewDidDisappear:animated];
     
+    // Lock the slider
+    [self.applicationDelegate slidingViewController].locked = YES;
+    
     // Clear any color mapping from previous states
     [[NSNotificationCenter defaultCenter] postNotificationName:AFColorMappingResetNotification object:nil];
     
