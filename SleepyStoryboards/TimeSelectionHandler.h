@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TimeSelectionHandler : NSObject
+@interface TimeSelectionHandler : NSObject <UIActionSheetDelegate>
 
 - (instancetype)initWithWindow:(UIWindow *)window;
 - (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date;

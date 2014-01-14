@@ -16,8 +16,12 @@
 @interface TimeSelectionHandler ()
 
 @property (nonatomic, strong) UIWindow *window;
+@property (nonatomic) AFSelectedUserMode selectedUserMode;
 
 @end
+
+static NSInteger const ReminderActionSheet = 0;
+static NSInteger const AlarmActionSheet = 1;
 
 @implementation TimeSelectionHandler
 
@@ -42,12 +46,14 @@
         case AFSelectedUserModeCalculateWakeTime:
         {
             actionSheet = [self alarmActionSheetForWakeTime:date];
+            actionSheet.tag = AlarmActionSheet;
         }
             break;
             
         case AFSelectedUserModeCalculateBedTime:
         {
             actionSheet = [self reminderActionSheetForSleepTime:date];
+            actionSheet.tag = ReminderActionSheet;
         }
             break;
             
@@ -75,7 +81,7 @@
     NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)", [tomorrowsDate stringUsingFormatter:dateFormatter]];
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
-                                                             delegate:nil
+                                                             delegate:self
                                                     cancelButtonTitle:@"Cancel"
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:tomorrowButtonTitle, todayButtonTitle, nil];
@@ -102,12 +108,28 @@
     NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)", [tomorrowsDate stringUsingFormatter:dateFormatter]];
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
-                                                             delegate:nil
+                                                             delegate:self
                                                     cancelButtonTitle:@"Cancel"
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:todayButtonTitle, tomorrowButtonTitle, nil];
     
     return actionSheet;
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (actionSheet.tag) {
+        case AlarmActionSheet:
+            NSLog(@"Alarm Action Sheet");
+            break;
+        case ReminderActionSheet:
+            NSLog(@"Reminder Action Sheet");
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end
