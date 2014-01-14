@@ -9,6 +9,9 @@
 #import "TimeSelectionHandler.h"
 #import "NSDate+SleepTime.h"
 
+#define MINUTES_AS_SECONDS(x) (x * 60)
+#define HOURS_AS_SECONDS(x) (x * 60 * 60)
+
 @interface TimeSelectionHandler ()
 
 @property (nonatomic, strong) UIWindow *window;
@@ -29,6 +32,7 @@
     return self;
 }
 
+#pragma mark - Action Sheet Methods
 - (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date
 {
     UIActionSheet *actionSheet;
@@ -36,12 +40,7 @@
     switch (state) {
         case AFSelectedUserModeCalculateWakeTime:
         {
-            NSString *title = [NSString stringWithFormat:@"Set Alarm for %@", [date stringShortTime]];
-            actionSheet = [[UIActionSheet alloc] initWithTitle:title
-                                                      delegate:nil
-                                             cancelButtonTitle:@"Cancel"
-                                        destructiveButtonTitle:nil
-                                             otherButtonTitles:@"Today", @"Tomorrow", nil];
+            actionSheet = [self alarmActionSheetForWakeTime:date];
         }
             break;
             
@@ -63,6 +62,29 @@
     
     // Display action sheet
     [actionSheet showInView:self.window];
+}
+
+- (UIActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime
+{
+    NSString *title = [NSString stringWithFormat:@"Set Alarm for %@", [wakeTime stringShortTime]];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    
+    NSString *todayButtonTitle = [NSString stringWithFormat:@"Today (%@)", [wakeTime stringUsingFormatter:dateFormatter]];
+    
+    // Shift date by 24 hours forward
+    NSDate *tomorrowsDate = [wakeTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
+    NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)", [tomorrowsDate stringUsingFormatter:dateFormatter]];
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:todayButtonTitle, tomorrowButtonTitle, nil];
+    
+    return actionSheet;
 }
 
 @end
