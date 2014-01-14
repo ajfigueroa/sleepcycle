@@ -16,7 +16,7 @@
     return [formatter stringFromDate:self];
 }
 
-- (NSString *)stringShortTime
+- (NSString *)shortTime
 {
     // Return the short time variant of the date (ex. 3:30 PM)
     NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
@@ -25,6 +25,7 @@
     
     return [timeFormatter stringFromDate:self];
 }
+
 
 - (NSInteger)hourComponent
 {

@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
 
 - (UIActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime
 {
-    NSString *title = [NSString stringWithFormat:@"Set Alarm for %@", [wakeTime stringShortTime]];
+    NSString *title = [NSString stringWithFormat:@"Set Alarm for %@", [wakeTime shortTime]];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateStyle = NSDateFormatterShortStyle;
@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     NSInteger timeToFallAsleep = [[SettingsManager sharedSettings] timeToFallAsleep];
     NSDate *earlierTime = [sleepTime dateByAddingTimeInterval:(-1 * (MINUTES_AS_SECONDS(timeToFallAsleep)))];
     
-    NSString *title = [NSString stringWithFormat:@"Remind me to be in bed at %@", [earlierTime stringShortTime]];
+    NSString *title = [NSString stringWithFormat:@"Remind me to be in bed at %@", [earlierTime shortTime]];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateStyle = NSDateFormatterMediumStyle;
@@ -190,7 +190,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
             reminder.timeZone = [NSTimeZone defaultTimeZone];
             reminder.notes = [NSString stringWithFormat:@"SleepCycle here!\nYou should be in bed now so that when you"
                                                         @"fall asleep, you'll wake up at your desired time of %@",
-                                                        [self.destinationTime stringShortTime]];
+                                                        [self.destinationTime shortTime]];
             
             EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:reminderTime];
             [reminder addAlarm:alarm];

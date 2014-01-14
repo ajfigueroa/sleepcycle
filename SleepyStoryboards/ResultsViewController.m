@@ -94,7 +94,7 @@
 #pragma mark - Model Management
 - (void)updateCell:(UITableViewCell *)cell atIndex:(NSIndexPath *)indexPath
 {
-    cell.textLabel.text = [(NSDate *)self.resultTimes[(NSUInteger)indexPath.row] stringShortTime];
+    cell.textLabel.text = [(NSDate *)self.resultTimes[(NSUInteger)indexPath.row] shortTime];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
     // Reverse base on the user choice

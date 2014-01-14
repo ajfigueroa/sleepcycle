@@ -35,7 +35,7 @@
 }
 
 #pragma mark - Testing NSDate Category
-- (void)testStringShortTime
+- (void)testShortTime
 {
     // Test the appropriate strings are coming through assuming non-military time
     NSArray *controlTimeStrings = @[@"12:00 PM",
@@ -66,7 +66,7 @@
     // Verify the strings are equal for each string representation of the dates
     [dates enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *controlDateString = (NSString *)controlTimeStrings[idx];
-        NSString *testDateString = (NSString *)[(NSDate *)obj stringShortTime];
+        NSString *testDateString = (NSString *)[(NSDate *)obj shortTime];
         XCTAssert([controlDateString isEqualToString:testDateString], @"The string and returned string from date do not match");
     }];
 }

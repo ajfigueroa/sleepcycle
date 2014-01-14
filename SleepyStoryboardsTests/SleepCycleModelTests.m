@@ -74,7 +74,7 @@
     
     NSMutableArray *timeStrings = [[NSMutableArray alloc] init];
     for (NSDate *date in self.model.timeDataSource){
-        [timeStrings addObject:[date stringShortTime]];
+        [timeStrings addObject:[date shortTime]];
     }
     
     XCTAssertEqualObjects(timeStrings, wakeTimes, @"The known values and what is returned as wake times do not agree");
@@ -98,7 +98,7 @@
     
     NSMutableArray *timeStrings = [[NSMutableArray alloc] init];
     for (NSDate *date in self.model.timeDataSource){
-        [timeStrings addObject:[date stringShortTime]];
+        [timeStrings addObject:[date shortTime]];
     }
     
     XCTAssertEqualObjects(timeStrings, bedTimes, @"The known values and what is returned as wake times do not agree");

@@ -11,7 +11,7 @@
 @interface NSDate (SleepTime)
 
 - (NSString *)stringUsingFormatter:(NSDateFormatter *)formatter;
-- (NSString *)stringShortTime;
+- (NSString *)shortTime;
 - (NSInteger)hourComponent;
 - (NSArray *)allDateComponents;
 - (NSDate *)zeroDateSeconds;
