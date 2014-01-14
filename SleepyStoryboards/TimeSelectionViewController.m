@@ -171,6 +171,8 @@
         [model calculateWakeTimeWithCurrentTime];
         resultsViewController.model = model;
     }
+    
+    resultsViewController.selectedTime = self.timeSelectionDatePicker.date;
 }
 
 #pragma mark - SettingsViewControllerDelegate

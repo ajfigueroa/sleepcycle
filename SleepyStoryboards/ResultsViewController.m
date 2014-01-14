@@ -53,6 +53,7 @@
     [self.resultsTableView addGestureRecognizer:longPressGestureRecognizer];
 }
 
+
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -181,13 +182,18 @@
         
         NSIndexPath *indexPath = [self.resultsTableView indexPathForRowAtPoint:rowPoint];
         
-        // Grab date
-        NSDate *date = (NSDate *)self.resultTimes[indexPath.row];
+        // Grab date and reset to current date based on string
+        NSDate *oldDate = (NSDate *)self.resultTimes[indexPath.row];
+        
+        NSDate *date = [oldDate currentDateVersion];
         
         if (indexPath)
         {
             if (!self.timeSelectionHandler)
+            {
                 self.timeSelectionHandler = [[TimeSelectionHandler alloc] initWithWindow:self.view.window];
+                self.timeSelectionHandler.destinationTime = self.selectedTime;
+            }
             
             [self.timeSelectionHandler buildActionSheetForState:self.selectedUserMode andDate:date];
         }

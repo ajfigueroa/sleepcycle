@@ -13,8 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
 @property (weak, nonatomic) IBOutlet UILabel *resultsInformationLabel;
-
 @property (nonatomic, strong) SleepyTimeModel *model;
 @property (nonatomic) AFSelectedUserMode selectedUserMode;
+@property (nonatomic, strong) NSDate *selectedTime;
 
 @end

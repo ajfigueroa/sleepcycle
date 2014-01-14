@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@import EventKit;
 
 @interface TimeSelectionHandler : NSObject <UIActionSheetDelegate>
+
+@property (nonatomic, strong) EKEventStore *eventStore;
+@property (nonatomic, strong) NSDate *destinationTime;
 
 - (instancetype)initWithWindow:(UIWindow *)window;
 - (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date;

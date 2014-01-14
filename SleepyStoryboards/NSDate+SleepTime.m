@@ -44,4 +44,31 @@
              @(components.second)];
 }
 
+- (NSDate *)zeroDateSeconds
+{
+    NSTimeInterval time = round([self timeIntervalSinceReferenceDate] / 60.0f) * 60.0f;
+    return [NSDate dateWithTimeIntervalSinceReferenceDate:time];
+}
+
+- (NSDate *)currentDateVersion
+{
+    NSDate *oldDate = self;
+    NSDate *currentDate = [NSDate date];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *oldComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSTimeZoneCalendarUnit) fromDate:oldDate];
+    
+    NSDateComponents *currentComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSTimeZoneCalendarUnit) fromDate:currentDate];
+    
+    [currentComponents setHour:oldComponents.hour];
+    [currentComponents setMinute:oldComponents.minute];
+    [currentComponents setSecond:0];
+    [currentComponents setDay:oldComponents.day];
+    [currentComponents setMonth:oldComponents.month];
+    [currentComponents setYear:oldComponents.year];
+    [currentComponents setTimeZone:currentComponents.timeZone];
+    
+    return [calendar dateFromComponents:currentComponents];
+}
+
 @end

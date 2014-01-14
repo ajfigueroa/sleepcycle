@@ -17,11 +17,28 @@
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic) AFSelectedUserMode selectedUserMode;
+@property (nonatomic, strong) NSDate *reminderTime;
+@property (nonatomic, strong) NSDate *alarmTime;
 
 @end
 
-static NSInteger const ReminderActionSheet = 0;
-static NSInteger const AlarmActionSheet = 1;
+typedef NS_ENUM(NSInteger, ActionSheetMode)
+{
+    ActionSheetModeReminder,
+    ActionSheetModeAlarm
+};
+
+typedef NS_ENUM(NSInteger, ActionSheetReminder)
+{
+    ActionSheetReminderToday,
+    ActionSheetReminderTomorrow
+};
+
+typedef NS_ENUM(NSInteger, ActionSheetAlarm)
+{
+    ActionSheetAlarmTomorrow,
+    ActionSheetAlarmToday
+};
 
 @implementation TimeSelectionHandler
 
@@ -32,6 +49,9 @@ static NSInteger const AlarmActionSheet = 1;
     if (self)
     {
         self.window = window;
+        
+        if (!self.eventStore)
+            self.eventStore = [[EKEventStore alloc] init];
     }
     
     return self;
@@ -46,14 +66,16 @@ static NSInteger const AlarmActionSheet = 1;
         case AFSelectedUserModeCalculateWakeTime:
         {
             actionSheet = [self alarmActionSheetForWakeTime:date];
-            actionSheet.tag = AlarmActionSheet;
+            actionSheet.tag = ActionSheetModeAlarm;
+            self.alarmTime = date;
         }
             break;
             
         case AFSelectedUserModeCalculateBedTime:
         {
             actionSheet = [self reminderActionSheetForSleepTime:date];
-            actionSheet.tag = ReminderActionSheet;
+            actionSheet.tag = ActionSheetModeReminder;
+            self.reminderTime = date;
         }
             break;
             
@@ -119,17 +141,70 @@ static NSInteger const AlarmActionSheet = 1;
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    switch (actionSheet.tag) {
-        case AlarmActionSheet:
-            NSLog(@"Alarm Action Sheet");
-            break;
-        case ReminderActionSheet:
-            NSLog(@"Reminder Action Sheet");
-            break;
-            
-        default:
-            break;
+    if (buttonIndex != actionSheet.cancelButtonIndex){
+        switch (actionSheet.tag) {
+            case ActionSheetModeAlarm:
+                NSLog(@"Alarm Action Sheet");
+                break;
+            case ActionSheetModeReminder:
+                [self performReminderActionForIndex:buttonIndex];
+                break;
+                
+            default:
+                break;
+        }
     }
+}
+
+#pragma mark - Reminder Set Up
+- (void)performReminderActionForIndex:(ActionSheetReminder)index
+{
+    // First zero seconds
+    NSDate *reminderTargetTime = [self.reminderTime zeroDateSeconds];
+    
+    if (index == ActionSheetReminderTomorrow)
+    {
+        // Offset by 24 hours
+        reminderTargetTime = [self.reminderTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
+    }
+    
+    [self addReminderForTime:reminderTargetTime];
+}
+
+- (void)addReminderForTime:(NSDate *)reminderTime
+{
+    [self.eventStore requestAccessToEntityType:EKEntityTypeReminder completion:^(BOOL granted, NSError *error) {
+        
+        if (granted)
+        {
+            
+            NSLog(@"Setting reminder for: %@\n%@", reminderTime, [reminderTime stringShortTime]);
+            EKReminder *reminder = [EKReminder reminderWithEventStore:self.eventStore];
+            reminder.title = @"You should be in bed now!";
+            reminder.timeZone = [NSTimeZone defaultTimeZone];
+            reminder.notes = [NSString stringWithFormat:@"SleepCycle here!\nYou should be in bed now so that when you fall asleep, you'll wake up at your desired time of %@", [self.destinationTime stringShortTime]];
+            
+            EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:reminderTime];
+            [reminder addAlarm:alarm];
+            
+            EKCalendar *defaultReminderList = [self.eventStore defaultCalendarForNewReminders];
+            [reminder setCalendar:defaultReminderList];
+            
+            NSError *error = nil;
+            BOOL success = [self.eventStore saveReminder:reminder commit:YES error:&error];
+            
+            if (!success)
+                NSLog(@"Error saving reminder: %@", error.localizedDescription);
+            
+            NSLog(@"Done adding reminder for time: %@", [reminderTime stringShortTime]);
+            
+            
+        } else {
+            NSLog(@"Error: %@", error.localizedDescription);
+            UIAlertView *deniedAlertView = [[UIAlertView alloc] initWithTitle:@"I'm sorry, Dave." message:@"I'm afraid I can't do that.\nTo turn Reminders back on, go to:\nSettings > Privacy > Reminders\nand enable SleepCycle!" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+            [deniedAlertView show];
+        }
+    }];
 }
 
 @end

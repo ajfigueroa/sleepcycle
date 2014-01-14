@@ -14,5 +14,7 @@
 - (NSString *)stringShortTime;
 - (NSInteger)hourComponent;
 - (NSArray *)allDateComponents;
+- (NSDate *)zeroDateSeconds;
+- (NSDate *)currentDateVersion;
 
 @end
