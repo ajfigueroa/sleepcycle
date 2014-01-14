@@ -96,11 +96,13 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     dateFormatter.dateStyle = NSDateFormatterShortStyle;
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
     
-    NSString *todayButtonTitle = [NSString stringWithFormat:@"Today (%@)", [wakeTime stringUsingFormatter:dateFormatter]];
+    NSString *todayButtonTitle = [NSString stringWithFormat:@"Today (%@)",
+                                  [wakeTime stringUsingFormatter:dateFormatter]];
     
     // Shift date by 24 hours forward
     NSDate *tomorrowsDate = [wakeTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
-    NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)", [tomorrowsDate stringUsingFormatter:dateFormatter]];
+    NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)",
+                                     [tomorrowsDate stringUsingFormatter:dateFormatter]];
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
                                                              delegate:self
@@ -123,11 +125,13 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     dateFormatter.dateStyle = NSDateFormatterMediumStyle;
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
     
-    NSString *todayButtonTitle = [NSString stringWithFormat:@"Today - %@", [earlierTime stringUsingFormatter:dateFormatter]];
+    NSString *todayButtonTitle = [NSString stringWithFormat:@"Today - %@",
+                                  [earlierTime stringUsingFormatter:dateFormatter]];
     
     // Shift date by 24 hours forward
     NSDate *tomorrowsDate = [earlierTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
-    NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow - %@", [tomorrowsDate stringUsingFormatter:dateFormatter]];
+    NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow - %@",
+                                     [tomorrowsDate stringUsingFormatter:dateFormatter]];
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
                                                              delegate:self
@@ -184,7 +188,9 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
             EKReminder *reminder = [EKReminder reminderWithEventStore:self.eventStore];
             reminder.title = @"You should be in bed now!";
             reminder.timeZone = [NSTimeZone defaultTimeZone];
-            reminder.notes = [NSString stringWithFormat:@"SleepCycle here!\nYou should be in bed now so that when you fall asleep, you'll wake up at your desired time of %@", [self.destinationTime stringShortTime]];
+            reminder.notes = [NSString stringWithFormat:@"SleepCycle here!\nYou should be in bed now so that when you"
+                                                        @"fall asleep, you'll wake up at your desired time of %@",
+                                                        [self.destinationTime stringShortTime]];
             
             EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:reminderTime];
             [reminder addAlarm:alarm];
@@ -201,7 +207,13 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
             
         } else {
             NSLog(@"Error: %@", error.localizedDescription);
-            UIAlertView *deniedAlertView = [[UIAlertView alloc] initWithTitle:@"I'm sorry, Dave." message:@"I'm afraid I can't do that.\nTo turn Reminders back on, go to:\nSettings > Privacy > Reminders\nand enable SleepCycle!" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+            UIAlertView *deniedAlertView = [[UIAlertView alloc] initWithTitle:@"I'm sorry, Dave."
+                                                                      message:@"I'm afraid I can't do that.\nTo turn "
+                                                                              @"Reminders back on, go to:\nSettings > "
+                                                                              @"Privacy > Reminders\nand enable SleepCycle!"
+                                                                     delegate:nil
+                                                            cancelButtonTitle:@"Dismiss"
+                                                            otherButtonTitles:nil];
             [deniedAlertView show];
         }
     }];
