@@ -8,6 +8,7 @@
 
 #import "TimeSelectionHandler.h"
 #import "NSDate+SleepTime.h"
+#import "SettingsManager.h"
 
 #define MINUTES_AS_SECONDS(x) (x * 60)
 #define HOURS_AS_SECONDS(x) (x * 60 * 60)
@@ -46,12 +47,7 @@
             
         case AFSelectedUserModeCalculateBedTime:
         {
-            NSString *title  = [NSString stringWithFormat:@"Set a reminder to be in bed at %@", [date stringShortTime]];
-            actionSheet = [[UIActionSheet alloc] initWithTitle:title
-                                                      delegate:nil
-                                             cancelButtonTitle:@"Cancel"
-                                        destructiveButtonTitle:nil
-                                             otherButtonTitles:@"Today", @"Tomorrow", nil];
+            actionSheet = [self reminderActionSheetForSleepTime:date];
         }
             break;
             
@@ -76,6 +72,33 @@
     
     // Shift date by 24 hours forward
     NSDate *tomorrowsDate = [wakeTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
+    NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)", [tomorrowsDate stringUsingFormatter:dateFormatter]];
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:tomorrowButtonTitle, todayButtonTitle, nil];
+    
+    return actionSheet;
+}
+
+- (UIActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime
+{
+    // Create date set back by the user defined time to fall asleep (default 14)
+    NSInteger timeToFallAsleep = [[SettingsManager sharedSettings] timeToFallAsleep];
+    NSDate *earlierTime = [sleepTime dateByAddingTimeInterval:(-1 * (MINUTES_AS_SECONDS(timeToFallAsleep)))];
+    
+    NSString *title = [NSString stringWithFormat:@"Remind me to be in bed at %@", [earlierTime stringShortTime]];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    
+    NSString *todayButtonTitle = [NSString stringWithFormat:@"Today (%@)", [earlierTime stringUsingFormatter:dateFormatter]];
+    
+    // Shift date by 24 hours forward
+    NSDate *tomorrowsDate = [earlierTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
     NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)", [tomorrowsDate stringUsingFormatter:dateFormatter]];
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
