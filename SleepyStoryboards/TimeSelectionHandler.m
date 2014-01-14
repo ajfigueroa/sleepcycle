@@ -120,14 +120,14 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     NSString *title = [NSString stringWithFormat:@"Remind me to be in bed at %@", [earlierTime stringShortTime]];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
     
-    NSString *todayButtonTitle = [NSString stringWithFormat:@"Today (%@)", [earlierTime stringUsingFormatter:dateFormatter]];
+    NSString *todayButtonTitle = [NSString stringWithFormat:@"Today - %@", [earlierTime stringUsingFormatter:dateFormatter]];
     
     // Shift date by 24 hours forward
     NSDate *tomorrowsDate = [earlierTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
-    NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)", [tomorrowsDate stringUsingFormatter:dateFormatter]];
+    NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow - %@", [tomorrowsDate stringUsingFormatter:dateFormatter]];
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
                                                              delegate:self
@@ -160,15 +160,19 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
 - (void)performReminderActionForIndex:(ActionSheetReminder)index
 {
     // First zero seconds
-    NSDate *reminderTargetTime = [self.reminderTime zeroDateSeconds];
+    NSDate *reminderTargetTime;
     
     if (index == ActionSheetReminderTomorrow)
     {
         // Offset by 24 hours
         reminderTargetTime = [self.reminderTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
     }
+    else {
+        NSInteger timeToFallAsleep = [[SettingsManager sharedSettings] timeToFallAsleep];
+        reminderTargetTime = [self.reminderTime dateByAddingTimeInterval:(-1 * (MINUTES_AS_SECONDS(timeToFallAsleep)))];
+    }
     
-    [self addReminderForTime:reminderTargetTime];
+    [self addReminderForTime:[reminderTargetTime zeroDateSeconds]];
 }
 
 - (void)addReminderForTime:(NSDate *)reminderTime
@@ -177,8 +181,6 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
         
         if (granted)
         {
-            
-            NSLog(@"Setting reminder for: %@\n%@", reminderTime, [reminderTime stringShortTime]);
             EKReminder *reminder = [EKReminder reminderWithEventStore:self.eventStore];
             reminder.title = @"You should be in bed now!";
             reminder.timeZone = [NSTimeZone defaultTimeZone];
@@ -195,8 +197,6 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
             
             if (!success)
                 NSLog(@"Error saving reminder: %@", error.localizedDescription);
-            
-            NSLog(@"Done adding reminder for time: %@", [reminderTime stringShortTime]);
             
             
         } else {
