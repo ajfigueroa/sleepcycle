@@ -26,6 +26,15 @@
     return [timeFormatter stringFromDate:self];
 }
 
+- (NSString *)shortDate
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    
+    return [self stringUsingFormatter:dateFormatter];
+}
+
 
 - (NSInteger)hourComponent
 {

@@ -92,17 +92,13 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
 {
     NSString *title = [NSString stringWithFormat:@"Set Alarm for %@", [wakeTime shortTime]];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateStyle = NSDateFormatterShortStyle;
-    dateFormatter.timeStyle = NSDateFormatterNoStyle;
-    
     NSString *todayButtonTitle = [NSString stringWithFormat:@"Today (%@)",
-                                  [wakeTime stringUsingFormatter:dateFormatter]];
+                                  [wakeTime shortDate]];
     
     // Shift date by 24 hours forward
     NSDate *tomorrowsDate = [wakeTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
     NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)",
-                                     [tomorrowsDate stringUsingFormatter:dateFormatter]];
+                                     [tomorrowsDate shortDate]];
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
                                                              delegate:self
@@ -121,17 +117,13 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     
     NSString *title = [NSString stringWithFormat:@"Remind me to be in bed at %@", [earlierTime shortTime]];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-    dateFormatter.timeStyle = NSDateFormatterNoStyle;
-    
     NSString *todayButtonTitle = [NSString stringWithFormat:@"Today - %@",
-                                  [earlierTime stringUsingFormatter:dateFormatter]];
+                                  [earlierTime shortDate]];
     
     // Shift date by 24 hours forward
     NSDate *tomorrowsDate = [earlierTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
     NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow - %@",
-                                     [tomorrowsDate stringUsingFormatter:dateFormatter]];
+                                     [tomorrowsDate shortDate]];
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
                                                              delegate:self
