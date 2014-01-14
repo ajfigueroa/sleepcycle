@@ -52,23 +52,25 @@
 
 - (NSDate *)currentDateVersion
 {
-    NSDate *oldDate = self;
-    NSDate *currentDate = [NSDate date];
+    NSDate *oldDate = [self copy];
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *oldComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSTimeZoneCalendarUnit) fromDate:oldDate];
     
-    NSDateComponents *currentComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSTimeZoneCalendarUnit) fromDate:currentDate];
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *currentComponents = [calendar components:NSDayCalendarUnit fromDate:currentDate];
     
-    [currentComponents setHour:oldComponents.hour];
-    [currentComponents setMinute:oldComponents.minute];
-    [currentComponents setSecond:0];
-    [currentComponents setDay:oldComponents.day];
-    [currentComponents setMonth:oldComponents.month];
-    [currentComponents setYear:oldComponents.year];
-    [currentComponents setTimeZone:currentComponents.timeZone];
+    NSDateComponents *newComponents = [[NSDateComponents alloc] init];
     
-    return [calendar dateFromComponents:currentComponents];
+    [newComponents setHour:oldComponents.hour];
+    [newComponents setMinute:oldComponents.minute];
+    [newComponents setSecond:oldComponents.second];
+    [newComponents setDay:currentComponents.day];
+    [newComponents setMonth:oldComponents.month];
+    [newComponents setYear:oldComponents.year];
+    [newComponents setTimeZone:newComponents.timeZone];
+    
+    return [calendar dateFromComponents:newComponents];
 }
 
 @end

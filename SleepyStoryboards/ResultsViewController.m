@@ -184,7 +184,6 @@
         
         // Grab date and reset to current date based on string
         NSDate *oldDate = (NSDate *)self.resultTimes[indexPath.row];
-        
         NSDate *date = [oldDate currentDateVersion];
         
         if (indexPath)
