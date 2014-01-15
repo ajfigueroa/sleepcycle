@@ -179,7 +179,7 @@
     }];
 
     [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XCTAssertEqual(YES, [self.timeSelectionHandler validReminderTime:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
+        XCTAssertEqual(YES, [self.timeSelectionHandler isTriggerTimeValid:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
     }];
 }
 
@@ -202,7 +202,7 @@
     }];
     
     [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XCTAssertEqual(NO, [self.timeSelectionHandler validReminderTime:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
+        XCTAssertEqual(NO, [self.timeSelectionHandler isTriggerTimeValid:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
     }];
 }
 

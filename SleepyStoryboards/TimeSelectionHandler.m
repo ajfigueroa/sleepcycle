@@ -100,11 +100,25 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)",
                                      [tomorrowsDate shortDate]];
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:tomorrowButtonTitle, todayButtonTitle, nil];
+    // 
+    UIActionSheet *actionSheet;
+    
+    if ([self isTriggerTimeValid:wakeTime])
+    {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                  delegate:self
+                                         cancelButtonTitle:@"Cancel"
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:tomorrowButtonTitle, todayButtonTitle, nil];
+    } else {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                  delegate:self
+                                         cancelButtonTitle:@"Cancel"
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:tomorrowButtonTitle, nil];
+    }
+    
+
     
     return actionSheet;
 }
@@ -127,7 +141,8 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     
     UIActionSheet *actionSheet;
     
-    if ([self validReminderTime:earlierTime])
+    // Verify if the time is actually a valid time
+    if ([self isTriggerTimeValid:earlierTime])
     {
         actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:todayButtonTitle, tomorrowButtonTitle, nil];
     } else {
@@ -215,7 +230,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
 }
 
 #pragma mark - Reminder Time Sanitation
-- (BOOL)validReminderTime:(NSDate *)candidateReminderTime
+- (BOOL)isTriggerTimeValid:(NSDate *)triggerTime
 {
     // Compare the candidate reminder time with the current time
     // If the hour is much earlier than suggeset tomorrow reminder
@@ -223,7 +238,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     // and return YES.
     
     NSDate *currentDate = [NSDate date];
-    NSComparisonResult timeCompare = [candidateReminderTime compareTimes:currentDate];
+    NSComparisonResult timeCompare = [triggerTime compareTimes:currentDate];
     
     switch (timeCompare) {
         case NSOrderedAscending:

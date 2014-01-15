@@ -16,6 +16,6 @@
 
 - (instancetype)initWithWindow:(UIWindow *)window;
 - (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date;
-- (BOOL)validReminderTime:(NSDate *)candidateReminderTime;
+- (BOOL)isTriggerTimeValid:(NSDate *)triggerTime;
 
 @end
