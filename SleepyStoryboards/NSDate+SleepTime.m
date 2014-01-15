@@ -108,8 +108,44 @@
         return NSOrderedDescending;
     else
         return NSOrderedAscending;
+}
+
+- (NSComparisonResult)compareMinutes:(NSDate *)anotherDate
+{
+    // Compare the given minutes of two dates
     
+    // Grab the minutes of both dates
+    NSInteger selfMinute, anotherMinute;
     
+    // Grab hour of receiver
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [calendar components:NSMinuteCalendarUnit fromDate:self];
+    
+    selfMinute = dateComponents.minute;
+    
+    // Grab the hour of the anotherDate
+    dateComponents = [calendar components:NSMinuteCalendarUnit fromDate:anotherDate];
+    
+    anotherMinute = dateComponents.minute;
+    
+    // Compare the hours
+    if (selfMinute == anotherMinute)
+        return NSOrderedSame;
+    else if (selfMinute > anotherMinute)
+        return NSOrderedDescending;
+    else
+        return NSOrderedAscending;
+}
+
+- (NSComparisonResult)compareTimes:(NSDate *)anotherDate
+{
+    NSComparisonResult hourCompare = [self compareHours:anotherDate];
+    NSComparisonResult minuteCompare = [self compareMinutes:anotherDate];
+    
+    if (hourCompare == NSOrderedSame)
+        return minuteCompare;
+    else
+        return hourCompare;
 }
 
 @end

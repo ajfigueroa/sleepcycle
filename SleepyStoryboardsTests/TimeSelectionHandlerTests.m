@@ -104,7 +104,7 @@
     
 }
 
-- (void)testHourCompareOrderedDescending
+- (void)testTimeCompareOrderedDescending
 {
     // Create control time (12:00 pm)
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -124,12 +124,12 @@
     }
     
     [beforeNoon enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XCTAssertEqual(NSOrderedDescending, [noon compareHours:obj], @"The hours are not earlier than noon");
+        XCTAssertEqual(NSOrderedDescending, [noon compareTimes:(NSDate *)obj], @"The hours are not earlier than noon");
     }];
     
 }
 
-- (void)testHourCompareOrderedAscending
+- (void)testTimeCompareOrderedAscending
 {
     // Create control time (12:00 pm)
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -147,11 +147,11 @@
     }
     
     [afterNoon enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XCTAssertEqual(NSOrderedAscending, [noon compareHours:obj], @"The hours are not later than noon");
+        XCTAssertEqual(NSOrderedAscending, [noon compareTimes:(NSDate *)obj], @"The hours are not later than noon");
     }];
 }
 
-- (void)testHourCompareOrderedSame
+- (void)testTimeCompareOrderedSame
 {
     // Create control time (12:00 pm)
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -160,7 +160,50 @@
     
     NSDate *noon = [calendar dateFromComponents:controlDateComponents];
     
-    XCTAssertEqual(NSOrderedSame, [noon compareHours:noon], @"The hours are not the same");
+    XCTAssertEqual(NSOrderedSame, [noon compareTimes:noon], @"The hours are not the same");
+}
+
+- (void)testReminderTimeValid
+{
+    // Create control time (12:00 pm)
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *controlDateComponents = [[NSDateComponents alloc] init];
+    controlDateComponents.hour = 12;
+    
+    NSDate *noon = [calendar dateFromComponents:controlDateComponents];
+
+    // Populate the array with times shifted by multipled of 1.5 hours
+    NSMutableArray *testTimes = [NSMutableArray arrayWithCapacity:8];
+    [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        testTimes[idx] = [noon dateByAddingTimeInterval:(idx * 1.5) * 60 * 60];
+    }];
+
+    [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        XCTAssertEqual(YES, [self.timeSelectionHandler validReminderTime:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
+    }];
+}
+
+- (void)testReminderTimeInvalid
+{
+    // Create control time (12:00 pm)
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *controlDateComponents = [[NSDateComponents alloc] init];
+    controlDateComponents.hour = 12;
+    
+    NSDate *noon = [calendar dateFromComponents:controlDateComponents];
+    
+    // Populate the array with times shifted by multipled of 1.5 hours
+    NSMutableArray *testTimes = [NSMutableArray arrayWithCapacity:7];
+    [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (idx == 0)
+            testTimes[idx] = noon;
+        else
+            testTimes[idx] = [noon dateByAddingTimeInterval:(-idx * 1.5) * 60 * 60];
+    }];
+    
+    [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        XCTAssertEqual(NO, [self.timeSelectionHandler validReminderTime:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
+    }];
 }
 
 @end

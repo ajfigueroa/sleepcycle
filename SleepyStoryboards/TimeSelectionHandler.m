@@ -211,4 +211,34 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     }];
 }
 
+#pragma mark - Reminder Time Sanitation
+- (BOOL)validReminderTime:(NSDate *)candidateReminderTime
+{
+    // Compare the candidate reminder time with the current time
+    // If the hour is much earlier than suggeset tomorrow reminder
+    // by returning NO. Otherwise suggest today and tomorrow reminder
+    // and return YES.
+    
+    NSDate *currentDate = [NSDate date];
+    NSComparisonResult timeCompare = [candidateReminderTime compareTimes:currentDate];
+    
+    switch (timeCompare) {
+        case NSOrderedAscending:
+            return NO;
+            break;
+            
+        case NSOrderedDescending:
+            return YES;
+            break;
+            
+        case NSOrderedSame:
+            return NO;
+            break;
+            
+        default:
+            return NO;
+            break;
+    }
+}
+
 @end
