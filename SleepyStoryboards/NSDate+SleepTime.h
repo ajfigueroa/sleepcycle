@@ -17,5 +17,6 @@
 - (NSArray *)allDateComponents;
 - (NSDate *)zeroDateSeconds;
 - (NSDate *)currentDateVersion;
+- (NSComparisonResult)compareHours:(NSDate *)anotherDate;
 
 @end

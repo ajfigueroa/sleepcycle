@@ -104,4 +104,63 @@
     
 }
 
+- (void)testHourCompareOrderedDescending
+{
+    // Create control time (12:00 pm)
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *controlDateComponents = [[NSDateComponents alloc] init];
+    controlDateComponents.hour = 12;
+    
+    NSDate *noon = [calendar dateFromComponents:controlDateComponents];
+    
+    // Build array of hours before noon
+    NSMutableArray *beforeNoon = [NSMutableArray arrayWithCapacity:11];
+    
+    for (NSInteger i = 12; i > 0; i--)
+    {
+        // Shift back by i hours
+        // ranging from 12 to
+        [beforeNoon addObject:[noon dateByAddingTimeInterval:-i * 60 * 60]];
+    }
+    
+    [beforeNoon enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        XCTAssertEqual(NSOrderedDescending, [noon compareHours:obj], @"The hours are not earlier than noon");
+    }];
+    
+}
+
+- (void)testHourCompareOrderedAscending
+{
+    // Create control time (12:00 pm)
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *controlDateComponents = [[NSDateComponents alloc] init];
+    controlDateComponents.hour = 12;
+    
+    NSDate *noon = [calendar dateFromComponents:controlDateComponents];
+    
+    // Build array of hours after noon
+    NSMutableArray *afterNoon = [NSMutableArray arrayWithCapacity:11];
+    
+    for (NSInteger i = 0; i < afterNoon.count; i++)
+    {
+        [afterNoon addObject:[noon dateByAddingTimeInterval:(i + 1) * 60 * 60]];
+    }
+    
+    [afterNoon enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        XCTAssertEqual(NSOrderedAscending, [noon compareHours:obj], @"The hours are not later than noon");
+    }];
+}
+
+- (void)testHourCompareOrderedSame
+{
+    // Create control time (12:00 pm)
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *controlDateComponents = [[NSDateComponents alloc] init];
+    controlDateComponents.hour = 12;
+    
+    NSDate *noon = [calendar dateFromComponents:controlDateComponents];
+    
+    XCTAssertEqual(NSOrderedSame, [noon compareHours:noon], @"The hours are not the same");
+}
+
 @end

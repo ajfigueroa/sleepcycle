@@ -83,4 +83,33 @@
     return [calendar dateFromComponents:newComponents];
 }
 
+- (NSComparisonResult)compareHours:(NSDate *)anotherDate
+{
+    // Compare the given hours of two dates.
+    
+    // Grab the hours of both dates
+    NSInteger selfHour, anotherHour;
+    
+    // Grab hour of receiver
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [calendar components:NSHourCalendarUnit fromDate:self];
+    
+    selfHour = dateComponents.hour;
+    
+    // Grab the hour of the anotherDate
+    dateComponents = [calendar components:NSHourCalendarUnit fromDate:anotherDate];
+    
+    anotherHour = dateComponents.hour;
+    
+    // Compare the hours
+    if (selfHour == anotherHour)
+        return NSOrderedSame;
+    else if (selfHour > anotherHour)
+        return NSOrderedDescending;
+    else
+        return NSOrderedAscending;
+    
+    
+}
+
 @end
