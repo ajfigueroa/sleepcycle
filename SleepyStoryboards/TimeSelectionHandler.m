@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow (%@)",
                                      [tomorrowsDate shortDate]];
     
-    // 
+    // Santizing the inputs of the alarm action sheet
     UIActionSheet *actionSheet;
     
     if ([self isTriggerTimeValid:wakeTime])
@@ -158,17 +158,25 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     if (buttonIndex != actionSheet.cancelButtonIndex){
         switch (actionSheet.tag) {
             case ActionSheetModeAlarm:
-                NSLog(@"Alarm Action Sheet");
+                [self performAlarmActionForIndex:buttonIndex];
                 break;
             case ActionSheetModeReminder:
                 [self performReminderActionForIndex:buttonIndex];
                 break;
                 
             default:
+                NSLog(@"%s: %@", __PRETTY_FUNCTION__, @"Default case");
                 break;
         }
     }
 }
+
+#pragma mark - Alarm Local Notifications Set Up
+- (void)performAlarmActionForIndex:(ActionSheetAlarm)index
+{
+#warning Implementation Missing
+}
+
 
 #pragma mark - Reminder Set Up
 - (void)performReminderActionForIndex:(ActionSheetReminder)index
@@ -229,7 +237,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     }];
 }
 
-#pragma mark - Reminder Time Sanitation
+#pragma mark - Trigger Time Sanitation
 - (BOOL)isTriggerTimeValid:(NSDate *)triggerTime
 {
     // Compare the candidate reminder time with the current time
