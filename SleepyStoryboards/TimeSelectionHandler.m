@@ -125,11 +125,14 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     NSString *tomorrowButtonTitle = [NSString stringWithFormat:@"Tomorrow - %@",
                                      [tomorrowsDate shortDate]];
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:todayButtonTitle, tomorrowButtonTitle, nil];
+    UIActionSheet *actionSheet;
+    
+    if ([self validReminderTime:earlierTime])
+    {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:todayButtonTitle, tomorrowButtonTitle, nil];
+    } else {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:tomorrowButtonTitle, nil];
+    }
     
     return actionSheet;
 }
