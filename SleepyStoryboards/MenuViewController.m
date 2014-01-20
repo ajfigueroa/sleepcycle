@@ -50,9 +50,6 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     
     // Register for Theme Change Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
-    
-    // Register for unlock notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockSliderResponse) name:AFUnlockSliderNotification object:nil];
 }
 
 - (UINavigationController *)mainNavigationController
@@ -77,6 +74,17 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     }
     
     return _settingsNavigationViewController;
+}
+
+- (UINavigationController *)alarmsNavigationViewController
+{
+    if (!_alarmsNavigationViewController)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        _alarmsNavigationViewController = [storyboard instantiateViewControllerWithIdentifier:@"AlarmsNav"];
+    }
+    
+    return _alarmsNavigationViewController;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

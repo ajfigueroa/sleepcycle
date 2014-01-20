@@ -37,7 +37,6 @@ static NSString *const AFThemeHasChangedNotification = @"AFThemeHasChangedNotifi
 static NSString *const AFSelectedCalculateBedTimeNotification = @"AFSelectedCalculateBedTimeNotification";
 static NSString *const AFSelectedCalculateWakeTimeNotification = @"AFSelectedCalculateWakeTimeNotification";
 static NSString *const AFColorMappingResetNotification = @"AFColorMappingResetNotification";
-static NSString *const AFUnlockSliderNotification = @"AFUnlockSliderNotification";
 
 // Segue Identifier
 static NSString *const AFCalculateBedTimeSegue = @"CalculateBedTimeSegue";
