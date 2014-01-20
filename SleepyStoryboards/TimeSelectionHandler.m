@@ -65,17 +65,17 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     switch (state) {
         case AFSelectedUserModeCalculateWakeTime:
         {
-            actionSheet = [self alarmActionSheetForWakeTime:date];
-            actionSheet.tag = ActionSheetModeAlarm;
             self.alarmTime = date;
+            actionSheet = [self alarmActionSheetForWakeTime:self.alarmTime];
+            actionSheet.tag = ActionSheetModeAlarm;
         }
             break;
             
         case AFSelectedUserModeCalculateBedTime:
         {
-            actionSheet = [self reminderActionSheetForSleepTime:date];
-            actionSheet.tag = ActionSheetModeReminder;
             self.reminderTime = date;
+            actionSheet = [self reminderActionSheetForSleepTime:self.reminderTime];
+            actionSheet.tag = ActionSheetModeReminder;
         }
             break;
             
@@ -160,6 +160,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
             case ActionSheetModeAlarm:
                 [self performAlarmActionForIndex:buttonIndex];
                 break;
+                
             case ActionSheetModeReminder:
                 [self performReminderActionForIndex:buttonIndex];
                 break;
@@ -174,9 +175,33 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
 #pragma mark - Alarm Local Notifications Set Up
 - (void)performAlarmActionForIndex:(ActionSheetAlarm)index
 {
-#warning Implementation Missing
+    // Zero the alarm seconds
+    NSDate *alarmTime = self.alarmTime;
+    
+    if (index == ActionSheetAlarmTomorrow)
+        alarmTime = [self.alarmTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
+    
+    [self addAlarmForTime:[alarmTime zeroDateSeconds]];
 }
 
+- (void)addAlarmForTime:(NSDate *)alarmDate
+{
+    // Create and subsribe alarmNotification
+    UILocalNotification *alarmNotification = [[UILocalNotification alloc] init];
+    
+    if (!alarmNotification)
+        return;
+    
+    alarmNotification.fireDate = alarmDate;
+    alarmNotification.timeZone = [NSTimeZone localTimeZone];
+    alarmNotification.alertBody = [NSString stringWithFormat:@"Time to wake up for your %@ alarm", [alarmDate shortTime]];
+    alarmNotification.alertAction = @"I'm awake";
+    alarmNotification.soundName = UILocalNotificationDefaultSoundName;
+    alarmNotification.applicationIconBadgeNumber = 0;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:alarmNotification];
+    NSLog(@"Adding notification");
+}
 
 #pragma mark - Reminder Set Up
 - (void)performReminderActionForIndex:(ActionSheetReminder)index

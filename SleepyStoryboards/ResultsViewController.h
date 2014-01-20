@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SleepyTimeModel.h"
+#import "ApplicationDelegateSlidingViewControllerDelegate.h"
 
 @interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
@@ -16,5 +17,6 @@
 @property (nonatomic, strong) SleepyTimeModel *model;
 @property (nonatomic) AFSelectedUserMode selectedUserMode;
 @property (nonatomic, strong) NSDate *selectedTime;
+@property (nonatomic, weak) id <UIApplicationDelegate, ApplicationDelegateSlidingViewControllerDelegate> applicationDelegate;
 
 @end

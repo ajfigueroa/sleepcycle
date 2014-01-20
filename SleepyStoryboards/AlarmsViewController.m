@@ -8,6 +8,8 @@
 
 #import "AlarmsViewController.h"
 #import "ThemeProvider.h"
+#import "NSDate+SleepTime.h"
+#import "JSSlidingViewController.h"
 
 @interface AlarmsViewController ()
 
@@ -27,8 +29,11 @@
     // Get rid of unwanted UITableViewCells
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    [self populateAlarmsArray];
+    
     // Register for theme change notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -37,6 +42,7 @@
     
     // Apply theme
     [self applyTheme];
+
 }
 
 
@@ -45,9 +51,7 @@
 {
     // Lazy initialize the array
     if (!self.alarmsArray)
-    {
-        self.alarmsArray = [NSMutableArray array];
-    }
+        self.alarmsArray = [[[UIApplication sharedApplication] scheduledLocalNotifications] mutableCopy];
 }
 
 #pragma mark - Theming
@@ -59,8 +63,27 @@
     [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
     [self.themeSetter alternateThemeViewBackground:self.view];
     [self.themeSetter themeTableView:self.tableView];
+    self.tableView.separatorColor = [UIColor blackColor];
 }
 
+- (void)updateCell:(UITableViewCell *)cell atIndex:(NSIndexPath *)indexPath
+{
+    NSDate *alarmTime = [(UILocalNotification *)self.alarmsArray[indexPath.row] fireDate];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [alarmTime shortTime]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [alarmTime shortDate]];
+    cell.textLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize] + 2];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont labelFontSize]];
+}
+
+#pragma mark - SlidingViewController calls
+- (IBAction)toggleSlider:(id)sender
+{
+    if ([[self.applicationDelegate slidingViewController] isOpen]) {
+        [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
+    } else {
+        [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
+    }
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -81,6 +104,8 @@
     // Theme the cells with the primary theme
     [self.themeSetter themeViewBackground:cell];
     
+    [self updateCell:cell atIndex:indexPath];
+    
     return cell;
 }
 
@@ -89,5 +114,6 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 
 @end

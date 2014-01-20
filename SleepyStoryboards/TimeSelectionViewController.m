@@ -83,7 +83,7 @@
     [super viewDidDisappear:animated];
     
     // Lock the slider
-    [self.applicationDelegate slidingViewController].locked = YES;
+//    [self.applicationDelegate slidingViewController].locked = YES;
     
     // Clear any color mapping from previous states
     [[NSNotificationCenter defaultCenter] postNotificationName:AFColorMappingResetNotification object:nil];
@@ -158,6 +158,7 @@
 {
     ResultsViewController *resultsViewController = (ResultsViewController *)segue.destinationViewController;
     resultsViewController.selectedUserMode = self.selectedUserMode;
+    resultsViewController.applicationDelegate = self.applicationDelegate;
     SleepyTimeModel *model = [[SleepyTimeModel alloc] init];
 
     if ([segue.identifier isEqualToString:AFConfirmTimeButtonSegue])

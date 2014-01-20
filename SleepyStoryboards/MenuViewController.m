@@ -47,6 +47,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     
     // Register for Theme Change Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+    
+    // Register for unlock notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockSliderResponse) name:AFUnlockSliderNotification object:nil];
 }
 
 - (UINavigationController *)mainNavigationController
@@ -79,7 +82,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     if (![self.tableView indexPathForSelectedRow]) {
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.lastIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
+
 }
+
 #pragma mark - UITableViewDelegate Method
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -209,6 +214,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         self.alarmsNavigationViewController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"AlarmsNav"];
+        AlarmsViewController *alarmsViewController = (AlarmsViewController *)self.alarmsNavigationViewController.viewControllers.firstObject;
+        alarmsViewController.applicationDelegate = self.applicationDelegate;
+        
     }
     
     if (![[[self.applicationDelegate slidingViewController] frontViewController] isEqual:self.alarmsNavigationViewController])

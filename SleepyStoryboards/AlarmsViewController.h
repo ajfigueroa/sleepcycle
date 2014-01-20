@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ApplicationDelegateSlidingViewControllerDelegate.h"
 
 @interface AlarmsViewController : UITableViewController
+
+@property (nonatomic, weak) id <UIApplicationDelegate, ApplicationDelegateSlidingViewControllerDelegate> applicationDelegate;
+
+- (IBAction)toggleSlider:(id)sender;
 
 @end

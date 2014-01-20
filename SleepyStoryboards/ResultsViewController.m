@@ -12,6 +12,7 @@
 #import "NSDate+SleepTime.h"
 #import "SettingsManager.h"
 #import "TimeSelectionHandler.h"
+#import "JSSlidingViewController.h"
 
 @interface ResultsViewController ()
 
@@ -37,6 +38,20 @@
 }
 
 #pragma mark - View Management
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.applicationDelegate slidingViewController].locked = YES;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [self.applicationDelegate slidingViewController].locked = NO;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
