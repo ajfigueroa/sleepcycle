@@ -17,7 +17,10 @@
 @interface MenuViewController ()
 
 @property (nonatomic, strong) id <Theme> themeSetter;
+// Keep track of which index was touched last
 @property (nonatomic, assign) NSInteger lastIndex;
+// Keep track of the current UINavigationController on the stack
+@property (nonatomic, strong) UINavigationController *currentNavigationController;
 
 @end
 
