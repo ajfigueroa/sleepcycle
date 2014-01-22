@@ -87,7 +87,7 @@
     NSDate *currentDate = [NSDate date];
     NSDateComponents *currentComponents = [calendar components:NSDayCalendarUnit fromDate:currentDate];
     
-    // Create a new date with componenets set to everything from oldDate minus the NSCalendarDayUnit
+    // Create a new date with componenets set to everything from oldDate minus the NSDayCalendarUnit
     NSDateComponents *newComponents = [[NSDateComponents alloc] init];
     
     [newComponents setHour:oldComponents.hour];
@@ -117,7 +117,7 @@
     
     anotherHour = dateComponents.hour;
     
-    // Compare the hours
+    // Compare the NSHourCalendarUnit
     if (selfHour == anotherHour)
         return NSOrderedSame;
     else if (selfHour > anotherHour)
@@ -128,8 +128,6 @@
 
 - (NSComparisonResult)compareMinutes:(NSDate *)anotherDate
 {
-    // Compare the given minutes of two dates
-    
     // Grab the minutes of both dates
     NSInteger selfMinute, anotherMinute;
     
@@ -155,6 +153,7 @@
 
 - (NSComparisonResult)compareTimes:(NSDate *)anotherDate
 {
+    // Compare the time where if the hours are equal, minutes comparison determines result
     NSComparisonResult hourCompare = [self compareHours:anotherDate];
     NSComparisonResult minuteCompare = [self compareMinutes:anotherDate];
     
