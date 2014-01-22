@@ -12,6 +12,7 @@
 #import "ResultsViewController.h"
 #import "SettingsManager.h"
 #import "JSSlidingViewController.h"
+#import "SleepyTimeModel.h"
 
 @interface TimeSelectionViewController ()
 
@@ -119,13 +120,13 @@
 }
 
 #pragma mark - Model Configuration
-- (void)configureModel:(SleepyTimeModel *)model
+- (void)configureModel:(id <SleepTimeModelProtocol>)model
 {
     // Implement with additional properties
     model.timeToFallAsleep = [[SettingsManager sharedSettings] timeToFallAsleep];
 }
 
-- (void)performModelCalculation:(SleepyTimeModel *)model
+- (void)performModelCalculation:(id <SleepTimeModelProtocol>)model
 {
     NSDate *selectedDate = self.timeSelectionDatePicker.date;
     
@@ -158,20 +159,23 @@
     ResultsViewController *resultsViewController = (ResultsViewController *)segue.destinationViewController;
     resultsViewController.selectedUserMode = self.selectedUserMode;
     resultsViewController.applicationDelegate = self.applicationDelegate;
-    SleepyTimeModel *model = [[SleepyTimeModel alloc] init];
+    
+    // Create the model to be used with the resultsViewController
+    SleepyTimeModel *model = (id <SleepTimeModelProtocol>)[[SleepyTimeModel alloc] init];
 
+    // Configure the model depending on the button segue
     if ([segue.identifier isEqualToString:AFConfirmTimeButtonSegue])
     {
         [self configureModel:model];
         [self performModelCalculation:model];
-        resultsViewController.model = model;
     } else if ([segue.identifier isEqualToString:AFSleepNowButtonSegue])
     {
         [self configureModel:model];
         [model calculateWakeTimeWithCurrentTime];
-        resultsViewController.model = model;
     }
     
+    // Assign the model and selectedTime
+    resultsViewController.model = model;
     resultsViewController.selectedTime = self.timeSelectionDatePicker.date;
 }
 

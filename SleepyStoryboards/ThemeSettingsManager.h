@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Alexander Figueroa. All rights reserved.
 //
 
+//  Responsible for handling all interactions with Settings and internal Theme
+
 #import <Foundation/Foundation.h>
 
 @interface ThemeSettingsManager : NSObject

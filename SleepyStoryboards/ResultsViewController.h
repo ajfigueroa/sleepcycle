@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SleepyTimeModel.h"
+#import "SleepTimeModelProtocol.h"
 #import "ApplicationDelegateSlidingViewControllerDelegate.h"
 
 @interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
 @property (weak, nonatomic) IBOutlet UILabel *resultsInformationLabel;
-@property (nonatomic, strong) SleepyTimeModel *model;
 @property (nonatomic) AFSelectedUserMode selectedUserMode;
 @property (nonatomic, strong) NSDate *selectedTime;
 @property (nonatomic, weak) id <UIApplicationDelegate, ApplicationDelegateSlidingViewControllerDelegate> applicationDelegate;
+
+// Model to be used for populating the TableView
+@property (nonatomic, strong) id <SleepTimeModelProtocol> model;
 
 @end
