@@ -7,13 +7,12 @@
 //
 
 #import "ThemeSelectionViewController.h"
-#import "ThemeProvider.h"
+#import "BaseTheme.h"
+#import "ThemeFactory.h"
 
 @interface ThemeSelectionViewController ()
 
 @property (nonatomic) NSUInteger selectedThemeIndex;
-// Manage the theming of the view
-@property (nonatomic, strong) id <Theme> themeSetter;
 
 @end
 
@@ -67,9 +66,9 @@
 #pragma mark - Theme Management
 - (void)applyTheme
 {
-    self.themeSetter = [ThemeProvider theme];
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
     
-    [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+    [themeSetter themeNavigationBar:self.navigationController.navigationBar];
 }
 
 #pragma mark - UITableViewDelegate

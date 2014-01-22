@@ -7,13 +7,13 @@
 //
 
 #import "AlarmsViewController.h"
-#import "ThemeProvider.h"
+#import "BaseTheme.h"
+#import "ThemeFactory.h"
 #import "NSDate+SleepTime.h"
 #import "JSSlidingViewController.h"
 
 @interface AlarmsViewController ()
 
-@property (nonatomic, strong) id <Theme> themeSetter;
 @property (nonatomic, strong) NSMutableArray *alarmsArray;
 @property (nonatomic, strong) UILabel *emptyTableLabel;
 
@@ -58,11 +58,11 @@
 - (void)applyTheme
 {
     // Apply the theme through the Theme factory
-    self.themeSetter = [ThemeProvider theme];
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
     
-    [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
-    [self.themeSetter alternateThemeViewBackground:self.view];
-    [self.themeSetter themeTableView:self.tableView];
+    [themeSetter themeNavigationBar:self.navigationController.navigationBar];
+    [themeSetter alternateThemeViewBackground:self.view];
+    [themeSetter themeTableView:self.tableView];
     self.tableView.separatorColor = [UIColor blackColor];
 }
 
@@ -102,7 +102,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlarmCell"];
     
     // Theme the cells with the primary theme
-    [self.themeSetter themeViewBackground:cell];
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
+    [themeSetter themeViewBackground:cell];
     
     [self updateCell:cell atIndex:indexPath];
     

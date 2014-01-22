@@ -8,7 +8,8 @@
 
 #import "ResultsViewController.h"
 #import "BOZPongRefreshControl.h"
-#import "ThemeProvider.h"
+#import "ThemeFactory.h"
+#import "BaseTheme.h"
 #import "NSDate+SleepTime.h"
 #import "SettingsManager.h"
 #import "TimeSelectionHandler.h"
@@ -19,7 +20,6 @@
 @property (nonatomic, strong) NSArray *resultTimes;
 @property (nonatomic, strong) BOZPongRefreshControl *pongRefreshControl;
 @property (nonatomic) BOOL isPongRefreshControlVisible;
-@property (nonatomic, strong) id <Theme> themeSetter;
 @property (weak, nonatomic) IBOutlet UIView *topMaskView;
 @property (weak, nonatomic) IBOutlet UIView *bottomMaskView;
 @property (nonatomic, strong) TimeSelectionHandler *timeSelectionHandler;
@@ -115,7 +115,8 @@
     // Reverse base on the user choice
     BOOL reverse = (self.selectedUserMode == AFSelectedUserModeCalculateBedTime) ? YES: NO;
     
-    [self.themeSetter themeTableViewCell:cell
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
+    [themeSetter themeTableViewCell:cell
                              inTableView:self.resultsTableView
                              atIndexPath:indexPath
                             reverseOrder:reverse];
@@ -128,27 +129,27 @@
     
     dispatch_async(themeQueue, ^{
         // Set (or reset) the theme with the appropriate theme object
-        self.themeSetter = [ThemeProvider theme];
+        id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Theme the appropriate views
-            [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+            [themeSetter themeNavigationBar:self.navigationController.navigationBar];
             
             // Theme pong refresh control
-            if ([self.themeSetter respondsToSelector:@selector(themeRefreshControl:)])
-                [self.themeSetter themeRefreshControl:self.pongRefreshControl];
+            if ([themeSetter respondsToSelector:@selector(themeRefreshControl:)])
+                [themeSetter themeRefreshControl:self.pongRefreshControl];
             
             // Theme the background view
-            [self.themeSetter themeViewBackground:self.view];
-            [self.themeSetter themeViewBackground:self.topMaskView];
-            [self.themeSetter themeViewBackground:self.bottomMaskView];
+            [themeSetter themeViewBackground:self.view];
+            [themeSetter themeViewBackground:self.topMaskView];
+            [themeSetter themeViewBackground:self.bottomMaskView];
             
             // Theme table view but theme cells in UITableViewDelegate method tableView:cellForRowAtIndexPath:
-            [self.themeSetter themeTableView:self.resultsTableView];
+            [themeSetter themeTableView:self.resultsTableView];
             
             // Theme the information label
             UIFont *labelFont = [UIFont fontWithName:@"Futura" size:[UIFont labelFontSize]];
-            [self.themeSetter alternateThemeLabel:self.resultsInformationLabel withFont:labelFont];
+            [themeSetter alternateThemeLabel:self.resultsInformationLabel withFont:labelFont];
             [self updateViewWithSelectedUserMode:self.selectedUserMode];
         });
     });

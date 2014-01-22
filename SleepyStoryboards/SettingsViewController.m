@@ -7,17 +7,16 @@
 //
 
 #import "SettingsViewController.h"
-#import "ThemeProvider.h"
 #import "SettingsSelectionConstants.h"
 #import "ThemeSettingsManager.h"
 #import "SettingsManager.h"
+#import "BaseTheme.h"
+#import "ThemeFactory.h"
 
 @interface SettingsViewController ()
 
 // Theme Settings
 @property (nonatomic, strong) ThemeSettingsManager *themeSettingsManager;
-// Manage the theming of the view
-@property (nonatomic, strong) id <Theme> themeSetter;
 
 @end
 
@@ -73,13 +72,13 @@
 #pragma mark - Theme Management
 - (void)applyTheme
 {
-    self.themeSetter = [ThemeProvider theme];
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
     
-    [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
-    [self.themeSetter themeSwitch:self.showBorderSwitch];
-    [self.themeSetter themeSwitch:self.showPingPongSwitch];
-    [self.themeSetter themeSwitch:self.showTutorialSwitch];
-    [self.themeSetter themeSlider:self.minutesSlider];
+    [themeSetter themeNavigationBar:self.navigationController.navigationBar];
+    [themeSetter themeSwitch:self.showBorderSwitch];
+    [themeSetter themeSwitch:self.showPingPongSwitch];
+    [themeSetter themeSwitch:self.showTutorialSwitch];
+    [themeSetter themeSlider:self.minutesSlider];
     
 }
 

@@ -7,15 +7,13 @@
 //
 
 #import "TimeSelectionViewController.h"
-#import "ThemeProvider.h"
+#import "ThemeFactory.h"
+#import "BaseTheme.h"
 #import "ResultsViewController.h"
 #import "SettingsManager.h"
 #import "JSSlidingViewController.h"
 
 @interface TimeSelectionViewController ()
-
-// Manage the theming of the view
-@property (nonatomic, strong) id <Theme> themeSetter;
 
 @end
 
@@ -95,29 +93,29 @@
 - (void)applyTheme
 {
         // Set (or reset) the theme with the appropriate theme object
-        self.themeSetter = [ThemeProvider theme];
+        id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
     
         // Theme the appropriate views
-        [self.themeSetter themeNavigationBar:self.navigationController.navigationBar];
+        [themeSetter themeNavigationBar:self.navigationController.navigationBar];
         
         // Theme the background view
-        [self.themeSetter alternateThemeViewBackground:self.view];
+        [themeSetter alternateThemeViewBackground:self.view];
         
         // Set up the button font
         UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
 
         // Theme both buttons the same
-        [self.themeSetter alternateThemeButton:self.confirmTimeButton withFont:buttonFont];
-        [self.themeSetter alternateThemeButton:self.sleepNowButton withFont:buttonFont];
+        [themeSetter alternateThemeButton:self.confirmTimeButton withFont:buttonFont];
+        [themeSetter alternateThemeButton:self.sleepNowButton withFont:buttonFont];
     
         // Theme the information label view and increase the font slightly
         UIFont *labelFont = [buttonFont fontWithSize:([UIFont labelFontSize])];
-        [self.themeSetter themeLabel:self.informationLabel withFont:labelFont];
+        [themeSetter themeLabel:self.informationLabel withFont:labelFont];
         [self updateViewWithSelectedUserMode:self.selectedUserMode];
     
         // Lastly theme and add border if needed
         BOOL applyBorder = [[SettingsManager sharedSettings] showBorder];
-        [self.themeSetter themeBorderForView:self.timeSelectionDatePicker visible:applyBorder];
+        [themeSetter themeBorderForView:self.timeSelectionDatePicker visible:applyBorder];
 }
 
 #pragma mark - Model Configuration

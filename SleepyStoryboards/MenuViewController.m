@@ -9,14 +9,14 @@
 #import "MenuViewController.h"
 #import "SettingsViewController.h"
 #import "JSSlidingViewController.h"
-#import "ThemeProvider.h"
+#import "ThemeFactory.h"
+#import "BaseTheme.h"
 #import "SettingsSelectionConstants.h"
 #import "TimeSelectionViewController.h"
 #import "AlarmsViewController.h"
 
 @interface MenuViewController ()
 
-@property (nonatomic, strong) id <Theme> themeSetter;
 // Keep track of which index was touched last
 @property (nonatomic, assign) NSInteger lastIndex;
 // Keep track of the current UINavigationController on the stack
@@ -45,11 +45,12 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     // Get rid of unwanted UITableViewCells
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    // Register for theme change notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+    
     // Theme the UI
     [self applyTheme];
     
-    // Register for Theme Change Notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
 }
 
 - (UINavigationController *)mainNavigationController
@@ -126,14 +127,14 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 #pragma mark - Theming
 - (void)applyTheme
 {
-    self.themeSetter = [ThemeProvider theme];
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
 
-    [self.themeSetter themeViewBackground:self.tableView];
+    [themeSetter themeViewBackground:self.tableView];
     
-    [self themeTableViewCells];
+    [self themeTableViewCellsWithThemeSetter:themeSetter];
 }
 
-- (void)themeTableViewCells
+- (void)themeTableViewCellsWithThemeSetter:(id <Theme>)themeSetter
 {
     for (int i = 0; i < SETTINGS_TABLE_ROWS; i++)
     {
@@ -141,32 +142,41 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
         
         switch (i) {
             case AFSettingsTableHeaderSettings:
-                [self.themeSetter alternateThemeViewBackground:cell];
+                [themeSetter alternateThemeViewBackground:cell];
                 break;
+                
             case AFSettingsTableHeaderCalculate:
-                [self.themeSetter alternateThemeViewBackground:cell];
+                [themeSetter alternateThemeViewBackground:cell];
                 break;
+                
             case AFSettingsTableHeaderManage:
-                [self.themeSetter alternateThemeViewBackground:cell];
+                [themeSetter alternateThemeViewBackground:cell];
                 break;
+                
             case AFSettingsTableOptionSettings:
-                [self.themeSetter themeOptionCell:cell withImageView:self.settingsImageView forThemeOption:AFSettingsTableOptionSettings];
-                [self.themeSetter themeTextField:self.settingsTextField];
+                [themeSetter themeOptionCell:cell
+                               withImageView:self.settingsImageView
+                              forThemeOption:AFSettingsTableOptionSettings];
+                [themeSetter themeTextField:self.settingsTextField];
                 break;
+                
             case AFSettingsTableOptionBedTime:
-                [self.themeSetter themeOptionCell:cell withImageView:self.bedTimeImageView forThemeOption:AFSettingsTableOptionBedTime];
-                [self.themeSetter themeTextField:self.bedTimeTextField];
+                [themeSetter themeOptionCell:cell withImageView:self.bedTimeImageView forThemeOption:AFSettingsTableOptionBedTime];
+                [themeSetter themeTextField:self.bedTimeTextField];
                 break;
+                
             case AFSettingsTableOptionWakeTime:
-                [self.themeSetter themeOptionCell:cell withImageView:self.wakeUpTimeImageView forThemeOption:AFSettingsTableOptionWakeTime];
-                [self.themeSetter themeTextField:self.wakeTimeTextField];
+                [themeSetter themeOptionCell:cell withImageView:self.wakeUpTimeImageView forThemeOption:AFSettingsTableOptionWakeTime];
+                [themeSetter themeTextField:self.wakeTimeTextField];
                 break;
+                
             case AFSettingsTableOptionAlarm:
-                [self.themeSetter themeOptionCell:cell withImageView:self.alarmImageView forThemeOption:AFSettingsTableOptionAlarm];
-                [self.themeSetter themeTextField:self.alarmsTextField];
+                [themeSetter themeOptionCell:cell withImageView:self.alarmImageView forThemeOption:AFSettingsTableOptionAlarm];
+                [themeSetter themeTextField:self.alarmsTextField];
                 break;
+                
             default:
-                [self.themeSetter themeViewBackground:cell];
+                [themeSetter themeViewBackground:cell];
                 break;
         }
     }

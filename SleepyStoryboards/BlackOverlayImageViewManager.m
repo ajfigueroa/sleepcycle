@@ -12,22 +12,22 @@
 
 - (UIImage *)settingsImage
 {
-    return [UIImage imageNamed:@"settingswhite.png"];
+    return [UIImage imageNamed:@"settings.png"];
 }
 
 - (UIImage *)bedTimeImage
 {
-    return [UIImage imageNamed:@"mooniconwhite.png"];
+    return [UIImage imageNamed:@"moonicon.png"];
 }
 
 - (UIImage *)wakeTimeImage
 {
-    return [UIImage imageNamed:@"suniconwhite.png"];
+    return [UIImage imageNamed:@"sunicon.png"];
 }
 
 - (UIImage *)alarmImage
 {
-    return [UIImage imageNamed:@"alarmclockwhite.png"];
+    return [UIImage imageNamed:@"alarmclock.png"];
 }
 
 @end

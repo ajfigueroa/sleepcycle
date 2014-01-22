@@ -26,7 +26,7 @@
     return sharedThemeFactory;
 }
 
-- (id <Theme>)makeThemeForKey:(AFThemeSelectionOption)themeKey
+- (id <Theme>)buildThemeForKey:(AFThemeSelectionOption)themeKey
 {
     // Return Theme object based on on key
     switch (themeKey) {
@@ -49,12 +49,12 @@
     }
 }
 
-- (id <Theme>)makeThemeForSettingsKey
+- (id <Theme>)buildThemeForSettingsKey
 {
     // Access userDefaults theme
     AFThemeSelectionOption themeSelection = (AFThemeSelectionOption)[[SettingsManager sharedSettings] appTheme];
     
-    return [self makeThemeForKey:themeSelection];
+    return [self buildThemeForKey:themeSelection];
 }
 
 @end
