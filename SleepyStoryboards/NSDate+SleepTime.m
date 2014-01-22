@@ -12,7 +12,7 @@
 
 - (NSString *)stringUsingFormatter:(NSDateFormatter *)formatter;
 {
-    // Return the formatter specific string
+    // Format the string according to the supplied formatter
     return [formatter stringFromDate:self];
 }
 
@@ -28,6 +28,7 @@
 
 - (NSString *)shortDate
 {
+    // Format the date in the short variant (ex. 12/20/14)
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateStyle = NSDateFormatterMediumStyle;
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
@@ -45,6 +46,7 @@
 
 - (NSArray *)allDateComponents
 {
+    // Return the day, hour, minute, and second components as an array
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:(NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:self];
     
@@ -56,20 +58,36 @@
 
 - (NSDate *)zeroDateSeconds
 {
+    // Zero the seconds of the current date's time
     NSTimeInterval time = round([self timeIntervalSinceReferenceDate] / 60.0f) * 60.0f;
     return [NSDate dateWithTimeIntervalSinceReferenceDate:time];
 }
 
 - (NSDate *)currentDateVersion
 {
+    // Transform the self date to the current date implementation
     NSDate *oldDate = [self copy];
     
+    // Get the current calendar instance
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *oldComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSTimeZoneCalendarUnit) fromDate:oldDate];
     
+    // Define NSCalendarUnits to extract from oldDate
+    NSCalendarUnit units = (NSYearCalendarUnit |
+                            NSMonthCalendarUnit |
+                            NSDayCalendarUnit |
+                            NSHourCalendarUnit |
+                            NSMinuteCalendarUnit |
+                            NSSecondCalendarUnit |
+                            NSTimeZoneCalendarUnit);
+    
+    
+    NSDateComponents *oldComponents = [calendar components:units fromDate:oldDate];
+    
+    // Extract the day unit from currentDate (today)
     NSDate *currentDate = [NSDate date];
     NSDateComponents *currentComponents = [calendar components:NSDayCalendarUnit fromDate:currentDate];
     
+    // Create a new date with componenets set to everything from oldDate minus the NSCalendarDayUnit
     NSDateComponents *newComponents = [[NSDateComponents alloc] init];
     
     [newComponents setHour:oldComponents.hour];
@@ -85,8 +103,6 @@
 
 - (NSComparisonResult)compareHours:(NSDate *)anotherDate
 {
-    // Compare the given hours of two dates.
-    
     // Grab the hours of both dates
     NSInteger selfHour, anotherHour;
     
