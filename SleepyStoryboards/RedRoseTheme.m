@@ -11,20 +11,19 @@
 #import "UIColor+FlatUI.h"
 
 @implementation RedRoseTheme
-{}
 
 - (instancetype)init
 {
-    self = [super init];
-    if (self)
-    {
-        self.primaryColor = [UIColor persianRed];
-        self.secondaryColor = [UIColor paleRoseColor];
-        self.textColor = [UIColor whiteColor];
-        self.alternateSecondaryColor = [UIColor persianRed];
-        self.alternateTextColor = [UIColor blackColor];
-    }
+    // Init with base class implementations
+    self = [super initWithBackgroundColor:[UIColor persianRed]
+                 secondaryBackgroundColor:[UIColor paleRoseColor]
+        alternateSecondaryBackgroundColor:[UIColor persianRed]
+                                textColor:[UIColor whiteColor]
+                       secondaryTextColor:[UIColor blackColor]];
     
+    // Assign themeEnum to allow for ImageViewManagerFactory to handle images properly
+    self.themeEnum = AFThemeSelectionOptionRedRoseTheme;
+
     return self;
 }
 

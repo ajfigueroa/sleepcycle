@@ -116,7 +116,8 @@
         [self updateViewWithSelectedUserMode:self.selectedUserMode];
     
         // Lastly theme and add border if needed
-        [self.themeSetter themeBorderForView:self.timeSelectionDatePicker];
+        BOOL applyBorder = [[SettingsManager sharedSettings] showBorder];
+        [self.themeSetter themeBorderForView:self.timeSelectionDatePicker visible:applyBorder];
 }
 
 #pragma mark - Model Configuration

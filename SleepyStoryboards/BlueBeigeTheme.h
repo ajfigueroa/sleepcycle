@@ -9,8 +9,8 @@
 //  blue background
 
 #import <Foundation/Foundation.h>
-#import "LightTheme.h"
+#import "BaseTheme.h"
 
-@interface BlueBeigeTheme : LightTheme
+@interface BlueBeigeTheme : BaseTheme
 
 @end

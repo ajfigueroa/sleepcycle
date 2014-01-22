@@ -8,66 +8,41 @@
 
 #import "BlackGrayTheme.h"
 #import "UIColor+Colours.h"
-#import "SettingsSelectionConstants.h"
 
 @implementation BlackGrayTheme
-{}
 
 - (instancetype)init
 {
-    self = [super init];
-    if (self)
-    {
-        self.primaryColor = [UIColor coolGrayColor];
-        self.secondaryColor = [UIColor black25PercentColor];
-        self.textColor = [UIColor whiteColor];
-        self.alternateSecondaryColor = [UIColor coolGrayColor];
-        self.alternateTextColor = [UIColor blackColor];
-    }
+    // Init with base class implementations
+    self = [super initWithBackgroundColor:[UIColor coolGrayColor]
+                 secondaryBackgroundColor:[UIColor black25PercentColor]
+        alternateSecondaryBackgroundColor:[UIColor coolGrayColor]
+                                textColor:[UIColor whiteColor]
+                       secondaryTextColor:[UIColor blackColor]];
+    
+    // Assign themeEnum to allow for ImageViewManagerFactory to handle images properly
+    self.themeEnum = AFThemeSelectionOptionBlackGrayTheme;
     
     return self;
 }
 
-#pragma mark - Overrides
+#pragma mark - Overrides from BaseThemes implementation of Theme protocol
 - (void)alternateThemeLabel:(UILabel *)label withFont:(UIFont *)font
 {
     [super themeLabel:label withFont:font];
-    label.textColor = self.textColor;
-}
-
-- (void)themeOptionCell:(UITableViewCell *)cell withImageView:(UIImageView *)imageView forThemeOption:(NSInteger)themeOption
-{
-    cell.backgroundColor = self.secondaryColor;
-    
-    switch (themeOption) {
-        case AFSettingsTableOptionSettings:
-            imageView.image = [UIImage imageNamed:@"settingswhite.png"];
-            break;
-        case AFSettingsTableOptionBedTime:
-            imageView.image = [UIImage imageNamed:@"mooniconwhite.png"];
-            break;
-        case AFSettingsTableOptionWakeTime:
-            imageView.image = [UIImage imageNamed:@"suniconwhite.png"];
-            break;
-        case AFSettingsTableOptionAlarm:
-            imageView.image = [UIImage imageNamed:@"alarmclockwhite.png"];
-        default:
-            imageView = nil;
-            break;
-    }
+    label.textColor = self.primaryTextColor;
 }
 
 - (void)themeTextField:(UITextField *)textField
 {
-    textField.textColor = self.textColor;
+    textField.textColor = self.primaryTextColor;
 }
 
-- (void)themeBorderForView:(UIView *)view
+- (void)themeBorderForView:(UIView *)view visible:(BOOL)isVisible
 {
-    BOOL applyBorder = [[SettingsManager sharedSettings] showBorder];
     CGColorRef borderColor;
     
-    if (applyBorder)
+    if (isVisible)
         borderColor = [[UIColor whiteColor] CGColor];
     else
         borderColor = [[UIColor clearColor] CGColor];

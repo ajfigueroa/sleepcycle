@@ -11,18 +11,25 @@
 
 @interface BaseTheme : NSObject <Theme>
 
-// Primary refers to navigation bar color and buttons
-@property (nonatomic, strong) UIColor *primaryColor;
-// Secondary refers to background views
-@property (nonatomic, strong) UIColor *secondaryColor;
-@property (nonatomic, strong) UIColor *textColor;
-@property (nonatomic, strong) UIColor *alternateSecondaryColor;
-@property (nonatomic, strong) UIColor *alternateTextColor;
+// Primary color is usually the UINavigationBar background color
+@property (nonatomic, strong) UIColor *primaryBackgroundColor;
 
-- (instancetype)initWithPrimaryColor:(UIColor *)primaryColor
-                      secondaryColor:(UIColor *)secondaryColor
-                           textColor:(UIColor *)textColor
-             alternateSecondaryColor:(UIColor *)altSecondryColor
-                  alternateTextColor:(UIColor *)altTextColor;
+// Secondary color is the actual view background color and alternate can be used for dark themes
+@property (nonatomic, strong) UIColor *secondaryBackgroundColor;
+@property (nonatomic, strong) UIColor *alternateSecondaryBackgroundColor;
+
+// The text colors to be used to contrast with the background colors
+@property (nonatomic, strong) UIColor *primaryTextColor;
+@property (nonatomic, strong) UIColor *secondaryTextColor;
+
+// The enum to be used for any factory methods
+@property (assign) NSInteger themeEnum;
+
+
+- (instancetype)initWithBackgroundColor:(UIColor *)backgroundColor
+               secondaryBackgroundColor:(UIColor *)secondaryBackgroundColor
+      alternateSecondaryBackgroundColor:(UIColor *)altSecondaryBackgroundColor
+                              textColor:(UIColor *)textColor
+                     secondaryTextColor:(UIColor *)secondaryTextColor;
 
 @end

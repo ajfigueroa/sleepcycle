@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Alexander Figueroa. All rights reserved.
 //
 
-#import "LightTheme.h"
+#import <Foundation/Foundation.h>
+#import "BaseTheme.h"
 
-@interface RedRoseTheme : LightTheme
+@interface RedRoseTheme : BaseTheme 
 
 @end
