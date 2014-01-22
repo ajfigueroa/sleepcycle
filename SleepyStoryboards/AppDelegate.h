@@ -10,7 +10,7 @@
 #import "JSSlidingViewController.h"
 #import "MenuViewController.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, ApplicationSlidingViewControllerProtocol>
+@interface AppDelegate : UIResponder <ApplicationSlidingViewControllerProtocol>
 
 @property (nonatomic, strong) UIWindow *window;
 
