@@ -11,6 +11,9 @@
 
 @implementation AppDelegate
 
+// Synthesizing property to conform to Sliding
+@synthesize slidingViewController;
+
 + (void)initialize
 {
     // Get the "default defaults" filename

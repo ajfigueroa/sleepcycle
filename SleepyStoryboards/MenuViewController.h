@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ApplicationDelegateSlidingViewControllerDelegate.h"
+#import "ApplicationSlidingViewControllerProtocol.h"
 #import "SettingsViewController.h"
 
 @class JSSlidingViewController;
@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UINavigationController *mainNavigationController;
 @property (nonatomic, strong) UINavigationController *settingsNavigationViewController;
 @property (nonatomic, strong) UINavigationController *alarmsNavigationViewController;
-@property (nonatomic, weak) id <UIApplicationDelegate, ApplicationDelegateSlidingViewControllerDelegate> applicationDelegate;
+@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 
 // Settings Text Fields
 @property (weak, nonatomic) IBOutlet UITextField *settingsTextField;

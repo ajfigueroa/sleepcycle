@@ -13,6 +13,5 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, ApplicationDelegateSlidingViewControllerDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, strong) JSSlidingViewController *slidingViewController;
 
 @end

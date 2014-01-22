@@ -8,9 +8,12 @@
 
 #import "SleepyTimeModel.h"
 
+#define MINUTES_TO_SECONDS(x) (x * 60)
+
 @interface SleepyTimeModel ()
 
 @property (nonatomic, strong) NSMutableArray *internalTimeDataSource;
+@property (nonatomic, assign) NSInteger _timeToFallAsleep;
 
 @end
 
@@ -18,6 +21,9 @@
 const static NSInteger kTwelveHours = 43200;
 
 @implementation SleepyTimeModel
+
+// Synthesize the properties from the SleepTImeModelProtocol
+@synthesize internalTimeDataSource, sleepCycleInterval, timeToFallAsleep, totalSleepCycles, timeDataSource;
 
 - (instancetype)init
 {
@@ -45,10 +51,14 @@ const static NSInteger kTwelveHours = 43200;
     return (NSArray *)self.internalTimeDataSource;
 }
 
-- (void)setTimeToFallAsleep:(NSInteger)timeToFallAsleep
+- (void)setTimeToFallAsleep:(NSInteger)aTimeToFallAsleep
 {
-    // Assumes that the time to fall asleep is being passed in seconds
-    _timeToFallAsleep = timeToFallAsleep * 60;
+    __timeToFallAsleep = MINUTES_TO_SECONDS(aTimeToFallAsleep);
+}
+
+- (NSInteger)timeToFallAsleep
+{
+    return __timeToFallAsleep;
 }
 
 #pragma mark - Calculation Methods
