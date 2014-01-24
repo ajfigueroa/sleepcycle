@@ -10,12 +10,39 @@
 
 @implementation SettingsPersistencyManager
 
-- (void)updateAllSettings
+- (instancetype)init
 {
+    self = [super init];
+    
+    // Read in all settings values upon initialization
+    if (self)
+        [self loadAllSettings];
+    
+    return self;
+}
+
+- (void)saveSettings
+{
+    [self commitAllSettings];
+}
+
+#pragma mark - Settings Read and Write
+- (void)loadAllSettings
+{
+    // Read in all current values from NSUserDefaults
     _timeToFallAsleep = [self readIntegerValueForKey:AFTimeToFallAsleepInMinutes];
     _appTheme = [self readIntegerValueForKey:AFAppTheme];
     _showEasterEgg = [self readBoolValueForKey:AFShowEasterEgg];
     _showBorder = [self readBoolValueForKey:AFShowDatePickerBorder];
+}
+
+- (void)commitAllSettings
+{
+    // Write all settings to the NSUserDefaults
+    [self writeIntegerToDefaultsValue:_timeToFallAsleep forKey:AFTimeToFallAsleepInMinutes];
+    [self writeIntegerToDefaultsValue:_appTheme forKey:AFAppTheme];
+    [self writeBoolToDefaultsValue:_showBorder forKey:AFShowDatePickerBorder];
+    [self writeBoolToDefaultsValue:_showEasterEgg forKey:AFShowEasterEgg];
 }
 
 #pragma mark - NSUserDefaults Helpers
@@ -39,32 +66,6 @@
 {
     [[NSUserDefaults standardUserDefaults] setBool:value forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#pragma mark - Modified Accessor Methods
-- (void)setTimeToFallAsleep:(NSInteger)timeToFallAsleep
-{
-    _timeToFallAsleep = timeToFallAsleep;
-    [self writeIntegerToDefaultsValue:_timeToFallAsleep
-                               forKey:AFTimeToFallAsleepInMinutes];
-}
-
-- (void)setAppTheme:(NSInteger)appTheme
-{
-    _appTheme = appTheme;
-    [self writeIntegerToDefaultsValue:_appTheme forKey:AFAppTheme];
-}
-
-- (void)setShowBorder:(BOOL)showBorder
-{
-    _showBorder = showBorder;
-    [self writeBoolToDefaultsValue:_showBorder forKey:AFShowDatePickerBorder];
-}
-
-- (void)setShowEasterEgg:(BOOL)showEasterEgg
-{
-    _showEasterEgg = showEasterEgg;
-    [self writeBoolToDefaultsValue:_showEasterEgg forKey:AFShowEasterEgg];
 }
 
 @end

@@ -16,4 +16,6 @@
 @property (nonatomic) BOOL showBorder;
 @property (nonatomic) BOOL showEasterEgg;
 
+- (void)saveSettings;
+
 @end
