@@ -52,13 +52,13 @@
     // Get the readable representation of the themes
     switch (option) {
         case AFThemeSelectionOptionBlueBeigeTheme:
-            return AFThemeBlueBeigeThemeName;
+            return NSLocalizedString(@"Default", nil);
             break;
         case AFThemeSelectionOptionBlackGrayTheme:
-            return AFThemeBlackGrayThemeName;
+            return NSLocalizedString(@"Dark", nil);
             break;
         case AFThemeSelectionOptionRedRoseTheme:
-            return AFThemeRedRoseThemeName;
+            return NSLocalizedString(@"Red Rose", nil);
             break;
         default:
             return @"";

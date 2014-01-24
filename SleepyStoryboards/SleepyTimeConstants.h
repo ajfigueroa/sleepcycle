@@ -22,11 +22,6 @@ typedef NS_ENUM(NSInteger, AFThemeSelectionOption)
     AFThemeSelectionOptionRedRoseTheme
 };
 
-// Theme Names as they should appear in the static theme table view
-static NSString *const AFThemeBlueBeigeThemeName = NSLocalizedString(@"Default", nil);
-static NSString *const AFThemeBlackGrayThemeName = NSLocalizedString(@"Dark", nil);
-static NSString *const AFThemeRedRoseThemeName = NSLocalizedString(@"Rose Red", nil);
-
 /*
  The SelectedUserMode enum is used to keep track of the buttons entered by
  the user.
