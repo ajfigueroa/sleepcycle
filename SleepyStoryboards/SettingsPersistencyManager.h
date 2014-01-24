@@ -16,6 +16,7 @@
 @property (nonatomic) BOOL showBorder;
 @property (nonatomic) BOOL showEasterEgg;
 
+// Save all settings to local defaults
 - (void)saveSettings;
 
 @end

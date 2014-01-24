@@ -10,19 +10,12 @@
 
 @interface SettingsAPI : NSObject
 
+// Interface for Settings properties of the same name
+@property (nonatomic) NSInteger timeToFallAsleep;
+@property (nonatomic) NSInteger appTheme;
+@property (nonatomic) BOOL showBorder;
+@property (nonatomic) BOOL showEasterEgg;
+
 + (instancetype)sharedSettingsAPI;
-
-// Setting Internal Representations
-- (NSInteger)timeToFallAsleep;
-- (void)setTimeToFallAsleep:(NSInteger)timeToFallAsleep;
-
-- (NSInteger)appTheme;
-- (void)setAppTheme:(NSInteger)appTheme;
-
-- (BOOL)showBorder;
-- (void)setShowBorder:(BOOL)showBorder;
-
-- (BOOL)showEasterEgg;
-- (void)setShowEasterEgg:(BOOL)showEasterEgg;
 
 @end

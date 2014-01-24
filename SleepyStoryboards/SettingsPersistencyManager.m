@@ -21,6 +21,7 @@
     return self;
 }
 
+#pragma mark - Public Save Method
 - (void)saveSettings
 {
     [self commitAllSettings];
