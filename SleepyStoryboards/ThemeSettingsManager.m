@@ -52,13 +52,13 @@
     // Get the readable representation of the themes
     switch (option) {
         case AFThemeSelectionOptionBlueBeigeTheme:
-            return @"Default";
+            return AFThemeBlueBeigeThemeName;
             break;
         case AFThemeSelectionOptionBlackGrayTheme:
-            return @"Dark";
+            return AFThemeBlackGrayThemeName;
             break;
         case AFThemeSelectionOptionRedRoseTheme:
-            return @"Red Roses";
+            return AFThemeRedRoseThemeName;
             break;
         default:
             return @"";
