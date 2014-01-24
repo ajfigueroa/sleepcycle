@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ThemeSelectionViewController.h"
+#import "ThemeSettingsProtocol.h"
 
 @protocol SettingsViewControllerDelegate;
 
@@ -17,6 +18,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *minutesLabel;
 @property (nonatomic, weak) IBOutlet UISlider *minutesSlider;
 @property (nonatomic, weak) id <SettingsViewControllerDelegate> delegate;
+// Theme Settings Manager
+@property (nonatomic, strong) id <ThemeSettingsProtocol> themeSettingsManager;
 
 // Switches
 @property (weak, nonatomic) IBOutlet UISwitch *showBorderSwitch;

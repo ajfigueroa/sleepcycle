@@ -8,31 +8,15 @@
 
 #import "SettingsViewController.h"
 #import "SettingsSelectionConstants.h"
-#import "ThemeSettingsManager.h"
 #import "SettingsManager.h"
 #import "BaseTheme.h"
 #import "ThemeFactory.h"
 
 @interface SettingsViewController ()
 
-// Theme Settings
-@property (nonatomic, strong) ThemeSettingsManager *themeSettingsManager;
-
 @end
 
 @implementation SettingsViewController
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self)
-    {
-        // Setup ThemeSettingManager
-        self.themeSettingsManager = [[ThemeSettingsManager alloc] init];
-    }
-    
-    return self;
-}
 
 #pragma mark - View Management
 - (void)viewWillAppear:(BOOL)animated
@@ -86,7 +70,6 @@
 - (void)themeSelectionViewController:(ThemeSelectionViewController *)controller
                       didSelectTheme:(NSString *)themeName
 {
-    self.themeSettingsManager.themeName = themeName;
     [self updateThemeSelectionLabel];
     
     [self.themeSettingsManager setDefaultApplicationTheme:themeName];
@@ -96,7 +79,7 @@
 - (void)updateThemeSelectionLabel
 {
     // Update the label based on the current theme inside the manager
-    self.themeSelectionLabel.text = self.themeSettingsManager.themeName;
+    self.themeSelectionLabel.text = [self.themeSettingsManager getDefaultApplicationTheme];
 }
 
 
@@ -161,7 +144,7 @@
     {
         ThemeSelectionViewController *themeSelectionViewController = (ThemeSelectionViewController *)segue.destinationViewController;
         themeSelectionViewController.delegate = self;
-        themeSelectionViewController.themeName = self.themeSettingsManager.themeName;
+        themeSelectionViewController.themeName = [self.themeSettingsManager getDefaultApplicationTheme];
         themeSelectionViewController.themes = [self.themeSettingsManager themeNamesSortedByIndex];
     }
 }

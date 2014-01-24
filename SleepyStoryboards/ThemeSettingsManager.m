@@ -27,8 +27,6 @@
         if (!self.themeIndexDictionary) {
             self.themeIndexDictionary = [self buildThemeIndexDictionary];
         }
-        
-        self.themeName = [self getDefaultApplicationTheme];
     }
     
     return self;
