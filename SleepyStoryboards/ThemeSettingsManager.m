@@ -66,6 +66,7 @@
     }
 }
 
+#pragma mark - Theme Settings Protocol Methods
 - (NSString *)getDefaultApplicationTheme
 {
     // Access the user defaults selected theme

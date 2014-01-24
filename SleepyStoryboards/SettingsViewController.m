@@ -83,7 +83,8 @@
 }
 
 #pragma mark - ThemeSelectionViewControllerDelegate
-- (void)themeSelectionViewController:(ThemeSelectionViewController *)controller didSelectTheme:(NSString *)themeName
+- (void)themeSelectionViewController:(ThemeSelectionViewController *)controller
+                      didSelectTheme:(NSString *)themeName
 {
     self.themeSettingsManager.themeName = themeName;
     [self updateThemeSelectionLabel];

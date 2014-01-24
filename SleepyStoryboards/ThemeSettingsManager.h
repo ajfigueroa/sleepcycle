@@ -9,15 +9,8 @@
 //  Responsible for handling all interactions with Settings and internal Theme
 
 #import <Foundation/Foundation.h>
+#import "ThemeSettingsProtocol.h"
 
-@interface ThemeSettingsManager : NSObject
-
-// Current theme name
-@property (nonatomic, strong) NSString *themeName;
-
-- (NSString *)getDefaultApplicationTheme;
-- (void)setDefaultApplicationTheme:(NSString *)newThemeName;
-- (NSArray *)themeNamesSortedByIndex;
-
+@interface ThemeSettingsManager : NSObject <ThemeSettingsProtocol>
 
 @end
