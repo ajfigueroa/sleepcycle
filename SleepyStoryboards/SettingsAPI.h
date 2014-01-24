@@ -5,6 +5,8 @@
 //  Created by Alexander Figueroa on 1/24/2014.
 //  Copyright (c) 2014 Alexander Figueroa. All rights reserved.
 //
+//  SettingsAPI is making use of the Facade Pattern to handle all setting related
+//  state changes
 
 #import <Foundation/Foundation.h>
 
@@ -17,5 +19,7 @@
 @property (nonatomic) BOOL showEasterEgg;
 
 + (instancetype)sharedSettingsAPI;
+
+- (void)saveAllSettings;
 
 @end
