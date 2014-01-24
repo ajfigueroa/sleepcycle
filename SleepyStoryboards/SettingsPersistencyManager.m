@@ -41,4 +41,30 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - Modified Accessor Methods
+- (void)setTimeToFallAsleep:(NSInteger)timeToFallAsleep
+{
+    _timeToFallAsleep = timeToFallAsleep;
+    [self writeIntegerToDefaultsValue:_timeToFallAsleep
+                               forKey:AFTimeToFallAsleepInMinutes];
+}
+
+- (void)setAppTheme:(NSInteger)appTheme
+{
+    _appTheme = appTheme;
+    [self writeIntegerToDefaultsValue:_appTheme forKey:AFAppTheme];
+}
+
+- (void)setShowBorder:(BOOL)showBorder
+{
+    _showBorder = showBorder;
+    [self writeBoolToDefaultsValue:_showBorder forKey:AFShowDatePickerBorder];
+}
+
+- (void)setShowEasterEgg:(BOOL)showEasterEgg
+{
+    _showEasterEgg = showEasterEgg;
+    [self writeBoolToDefaultsValue:_showEasterEgg forKey:AFShowEasterEgg];
+}
+
 @end
