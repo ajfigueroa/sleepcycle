@@ -12,4 +12,17 @@
 
 + (instancetype)sharedSettingsAPI;
 
+// Setting Internal Representations
+- (NSInteger)timeToFallAsleep;
+- (void)setTimeToFallAsleep:(NSInteger)timeToFallAsleep;
+
+- (NSInteger)appTheme;
+- (void)setAppTheme:(NSInteger)appTheme;
+
+- (BOOL)showBorder;
+- (void)setShowBorder:(BOOL)showBorder;
+
+- (BOOL)showEasterEgg;
+- (void)setShowEasterEgg:(BOOL)showEasterEgg;
+
 @end

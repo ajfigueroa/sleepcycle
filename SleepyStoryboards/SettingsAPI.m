@@ -7,6 +7,7 @@
 //
 
 #import "SettingsAPI.h"
+#import "SettingsPersistencyManager.h"
 
 @implementation SettingsAPI
 
