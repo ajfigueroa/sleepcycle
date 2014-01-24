@@ -62,8 +62,8 @@
 
 - (void)setAppTheme:(NSInteger)appTheme
 {
-    // Verify that the appTheme falls in line with valid appTheme enums
-    assert(appTheme >= AFThemeSelectionOptionBlueBeigeTheme && appTheme < AFAvailableThemesCount);
+    // Verify that the appTheme falls in range with valid appTheme enums
+    assert(appTheme >= 0 && appTheme < AFAvailableThemesCount);
     
     self.persistencyManager.appTheme = appTheme;
 }
