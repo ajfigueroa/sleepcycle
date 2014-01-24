@@ -22,16 +22,14 @@
 - (instancetype)init
 {
     self = [super init];
-    if (self)
-    {
-        if (!self.themeIndexDictionary) {
-            self.themeIndexDictionary = [self buildThemeIndexDictionary];
-        }
-    }
+    
+    if (self && !self.themeIndexDictionary)
+        self.themeIndexDictionary = [self buildThemeIndexDictionary];
     
     return self;
 }
 
+#pragma mark - Helper Function
 - (NSMutableDictionary *)buildThemeIndexDictionary
 {
     NSMutableDictionary *themeDictionary = [NSMutableDictionary dictionary];
@@ -52,12 +50,15 @@
         case AFThemeSelectionOptionBlueBeigeTheme:
             return NSLocalizedString(@"Default", nil);
             break;
+            
         case AFThemeSelectionOptionBlackGrayTheme:
             return NSLocalizedString(@"Dark", nil);
             break;
+        
         case AFThemeSelectionOptionRedRoseTheme:
             return NSLocalizedString(@"Red Rose", nil);
             break;
+        
         default:
             return @"";
             break;
@@ -67,7 +68,7 @@
 #pragma mark - Theme Settings Protocol Methods
 - (NSString *)getDefaultApplicationTheme
 {
-    // Access the user defaults selected theme
+    // Access the user defaults selected theme from the NSUserDefaults
     AFThemeSelectionOption option = (AFThemeSelectionOption)[[SettingsManager sharedSettings] appTheme];
     
     return (NSString *)[self.themeIndexDictionary objectForKey:[@(option) stringValue]];
@@ -75,9 +76,9 @@
 
 - (void)setDefaultApplicationTheme:(NSString *)newThemeName
 {
+    // Find first key where newThemeName exists in themeIndexDictionary
     NSArray *validIndices = [self.themeIndexDictionary allKeysForObject:newThemeName];
     
-    // If count is > 0, we'll set the first instance as the default theme
     if (validIndices.count > 0)
     {
         // Update the default theme
@@ -91,9 +92,11 @@
 
 - (NSArray *)themeNamesSortedByIndex
 {
+    // Return all keys and sort alphabetically
     NSArray *sortedKeys = [[self.themeIndexDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    NSMutableArray *sortedValues = [NSMutableArray array];
     
+    NSMutableArray *sortedValues = [NSMutableArray array];
+
     for (NSString *key in sortedKeys)
     {
         [sortedValues addObject:[self.themeIndexDictionary objectForKey:key]];
