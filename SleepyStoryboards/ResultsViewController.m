@@ -11,7 +11,6 @@
 #import "ThemeFactory.h"
 #import "NSDate+SleepTime.h"
 #import "TimeSelectionHandler.h"
-#import "JSSlidingViewController.h"
 #import "SettingsAPI.h"
 
 @interface ResultsViewController ()
@@ -41,14 +40,14 @@
 {
     [super viewDidAppear:animated];
     
-    [self.applicationDelegate slidingViewController].locked = YES;
+    [self.applicationDelegate lockSlider];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    [self.applicationDelegate slidingViewController].locked = NO;
+    [self.applicationDelegate unlockSlider];
 }
 
 - (void)viewDidLoad
@@ -143,7 +142,7 @@
             [themeSetter themeViewBackground:self.topMaskView];
             [themeSetter themeViewBackground:self.bottomMaskView];
             
-            // Theme table view but theme cells in UITableViewDelegate method tableView:cellForRowAtIndexPath:
+            // Theme cells in UITableViewDelegate method tableView:cellForRowAtIndexPath:
             [themeSetter themeTableView:self.resultsTableView];
             
             // Theme the information label

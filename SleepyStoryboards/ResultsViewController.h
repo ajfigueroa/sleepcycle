@@ -12,10 +12,10 @@
 
 @interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) id <SleepTimeModelProtocol> model;
 @property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 @property (nonatomic) AFSelectedUserMode selectedUserMode;
 @property (nonatomic, strong) NSDate *selectedTime;
-@property (nonatomic, strong) id <SleepTimeModelProtocol> model;
 
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
 @property (weak, nonatomic) IBOutlet UILabel *resultsInformationLabel;
