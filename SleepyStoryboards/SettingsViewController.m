@@ -8,8 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "SettingsSelectionConstants.h"
-#import "SettingsManager.h"
-#import "BaseTheme.h"
+#import "SettingsAPI.h"
 #import "ThemeFactory.h"
 
 @interface SettingsViewController ()
@@ -48,8 +47,9 @@
     [self commitMinutesSliderValue];
     
     // Commit current state of toggle buttons
-    [[SettingsManager sharedSettings] setShowBorder:self.showBorderSwitch.on];
-    [[SettingsManager sharedSettings] setShowEasterEgg:self.showPingPongSwitch.on];
+    [[SettingsAPI sharedSettingsAPI] setShowBorder:self.showBorderSwitch.on];
+    [[SettingsAPI sharedSettingsAPI] setShowEasterEgg:self.showPingPongSwitch];
+    [[SettingsAPI sharedSettingsAPI] saveAllSettings];
 }
 
 
@@ -71,31 +71,30 @@
                       didSelectTheme:(NSString *)themeName
 {
     [self updateThemeSelectionLabel];
-    
-    [self.themeSettingsManager setDefaultApplicationTheme:themeName];
+    [[SettingsAPI sharedSettingsAPI] setAppThemeName:themeName];
 }
 
 #pragma mark - Settings Management
 - (void)updateThemeSelectionLabel
 {
     // Update the label based on the current theme inside the manager
-    self.themeSelectionLabel.text = [self.themeSettingsManager getDefaultApplicationTheme];
+    self.themeSelectionLabel.text = [[SettingsAPI sharedSettingsAPI] appThemeName];
 }
 
 
 - (void)updateShowPingPongEasterEggSetting
 {
-    self.showPingPongSwitch.on = [[SettingsManager sharedSettings] showEasterEgg];
+    self.showPingPongSwitch.on = [[SettingsAPI sharedSettingsAPI] showEasterEgg];
 }
 
 - (void)updateShowBorderSetting
 {
-    self.showBorderSwitch.on = [[SettingsManager sharedSettings] showBorder];
+    self.showBorderSwitch.on = [[SettingsAPI sharedSettingsAPI] showBorder];
 }
 
 - (void)updateMinuteSlider
 {
-    NSInteger minutesToFallAsleep = [[SettingsManager sharedSettings] timeToFallAsleep];
+    NSInteger minutesToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
     self.minutesSlider.value = minutesToFallAsleep;
     
     [self updateMinutesLabel:minutesToFallAsleep];
@@ -104,7 +103,7 @@
 - (void)commitMinutesSliderValue
 {
     // Update the settings manager with the new minutes value
-    [[SettingsManager sharedSettings] setTimeToFallAsleep:(NSInteger)self.minutesSlider.value];
+    [[SettingsAPI sharedSettingsAPI] setTimeToFallAsleep:(NSInteger)self.minutesSlider.value];
 }
 
 - (void)updateMinutesLabel:(NSInteger)minutes
@@ -144,8 +143,8 @@
     {
         ThemeSelectionViewController *themeSelectionViewController = (ThemeSelectionViewController *)segue.destinationViewController;
         themeSelectionViewController.delegate = self;
-        themeSelectionViewController.themeName = [self.themeSettingsManager getDefaultApplicationTheme];
-        themeSelectionViewController.themes = [self.themeSettingsManager themeNamesSortedByIndex];
+        themeSelectionViewController.themeName = [[SettingsAPI sharedSettingsAPI] appThemeName];
+        themeSelectionViewController.themes = [[SettingsAPI sharedSettingsAPI] themeNames];
     }
 }
 
