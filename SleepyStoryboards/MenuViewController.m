@@ -7,7 +7,6 @@
 //
 
 #import "MenuViewController.h"
-#import "SettingsViewController.h"
 #import "JSSlidingViewController.h"
 #import "ThemeFactory.h"
 #import "SettingsSelectionConstants.h"
@@ -15,14 +14,7 @@
 #import "AlarmsViewController.h"
 #import "SettingsAPI.h"
 
-@interface MenuViewController ()
-
-// Keep track of which index was touched last
-@property (nonatomic, assign) NSInteger lastIndex;
-// Keep track of the current UINavigationController on the stack
-@property (nonatomic, strong) UINavigationController *currentNavigationController;
-
-@end
+#define SETTINGS_TABLE_ROWS 7
 
 typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 {
@@ -31,7 +23,15 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     AFSettingsTableHeaderManage = 5
 };
 
-#define SETTINGS_TABLE_ROWS 7
+@interface MenuViewController ()
+
+// Last index touched that is not the Settings index
+@property (nonatomic, assign) NSInteger lastIndex;
+// Keep track of the current UINavigationController on the stack
+@property (nonatomic, strong) UINavigationController *currentNavigationController;
+
+@end
+
 
 @implementation MenuViewController
 
@@ -39,27 +39,26 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 {
     [super awakeFromNib];
     
-    // Initial index is the Bed time row
+    // Initial index is the Bed Time row
     self.lastIndex = AFSettingsTableOptionBedTime;
     
-    // Get rid of unwanted UITableViewCells
+    // Get rid of blank trailing UITableViewCells
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    // Register for theme change notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
     
     // Theme the UI
     [self applyTheme];
     
+    // Register for theme change notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
 }
 
+#pragma mark - Override Accessor Methods
 - (UINavigationController *)mainNavigationController
 {
     if (!_mainNavigationController)
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         _mainNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"MainNav"];
-
     }
     
     return _mainNavigationController;
@@ -88,6 +87,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     return _alarmsNavigationViewController;
 }
 
+#pragma mark - View Management
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -104,21 +104,25 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
         case AFSettingsTableOptionSettings:
             [self presentSettingsViewController];
             break;
+            
         case AFSettingsTableOptionBedTime:
             [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateBedTime];
             self.lastIndex = AFSettingsTableOptionBedTime;
             [self toggleSlider];
             break;
+            
         case AFSettingsTableOptionWakeTime:
             [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateWakeTime];
             self.lastIndex = AFSettingsTableOptionWakeTime;
             [self toggleSlider];
             break;
+            
         case AFSettingsTableOptionAlarm:
             [self presentAlarmViewController];
             self.lastIndex = AFSettingsTableOptionAlarm;
             [self toggleSlider];
             break;
+            
         default:
             break;
     }
@@ -161,17 +165,20 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
                 break;
                 
             case AFSettingsTableOptionBedTime:
-                [themeSetter themeOptionCell:cell withImageView:self.bedTimeImageView forThemeOption:AFSettingsTableOptionBedTime];
+                [themeSetter themeOptionCell:cell withImageView:self.bedTimeImageView
+                              forThemeOption:AFSettingsTableOptionBedTime];
                 [themeSetter themeTextField:self.bedTimeTextField];
                 break;
                 
             case AFSettingsTableOptionWakeTime:
-                [themeSetter themeOptionCell:cell withImageView:self.wakeUpTimeImageView forThemeOption:AFSettingsTableOptionWakeTime];
+                [themeSetter themeOptionCell:cell withImageView:self.wakeUpTimeImageView
+                              forThemeOption:AFSettingsTableOptionWakeTime];
                 [themeSetter themeTextField:self.wakeTimeTextField];
                 break;
                 
             case AFSettingsTableOptionAlarm:
-                [themeSetter themeOptionCell:cell withImageView:self.alarmImageView forThemeOption:AFSettingsTableOptionAlarm];
+                [themeSetter themeOptionCell:cell withImageView:self.alarmImageView
+                              forThemeOption:AFSettingsTableOptionAlarm];
                 [themeSetter themeTextField:self.alarmsTextField];
                 break;
                 
@@ -184,11 +191,14 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 
 #pragma mark - JSSlidingViewController Helpers
 - (void)toggleSlider {
-    if ([[self.applicationDelegate slidingViewController] isOpen]) {
+    
+    BOOL isSliderOpen = [self.applicationDelegate slidingViewController].isOpen;
+    
+    if (isSliderOpen)
         [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
-    } else {
+    
+    else
         [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
-    }
 }
 
 - (void)presentSettingsViewController
