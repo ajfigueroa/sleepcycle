@@ -30,10 +30,10 @@
 #pragma mark - Helpers
 - (NSMutableDictionary *)buildThemeIndexDictionary
 {
-    NSMutableDictionary *themeDictionary = [NSMutableDictionary dictionaryWithCapacity:AFAvailableThemesCount];
+    NSMutableDictionary *themeDictionary = [NSMutableDictionary dictionary];
     
     // Map the string version of indices to theme name values
-    for (NSInteger i = 0; i < themeDictionary.count; i++)
+    for (NSInteger i = 0; i < AFAvailableThemesCount; i++)
     {
         NSString *key = [@(i) stringValue];
         NSString *obj = [self themeNameForIndex:i];
