@@ -29,7 +29,6 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 @property (nonatomic, assign) NSInteger lastIndex;
 // Keep track of the current UINavigationController on the stack
 @property (nonatomic, strong) UINavigationController *currentNavigationController;
-@property (nonatomic, strong) JSSlidingViewController *applicationSlidingViewController;
 
 @end
 
@@ -45,8 +44,6 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     
     // Get rid of blank trailing UITableViewCells
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    self.applicationSlidingViewController = [self.applicationDelegate slidingViewController];
     
     // Theme the UI
     [self applyTheme];
@@ -198,12 +195,12 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 #pragma mark - JSSlidingViewController Helpers
 - (void)toggleSlider {
     
-    BOOL isSliderOpen = self.applicationSlidingViewController.isOpen;
+    BOOL isSliderOpen = [self.applicationDelegate slidingViewController].isOpen;
     
     if (isSliderOpen)
-        [self.applicationSlidingViewController closeSlider:YES completion:nil];
+        [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
     else
-        [self.applicationSlidingViewController openSlider:YES completion:nil];
+        [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
 }
 
 #pragma mark - Presenters
@@ -236,7 +233,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)self.mainNavigationController.viewControllers.firstObject;
     timeSelectionViewController.selectedUserMode = option;
     
-    if (![self.applicationSlidingViewController.frontViewController isEqual:self.mainNavigationController])
+    if (![[self.applicationDelegate slidingViewController].frontViewController isEqual:self.mainNavigationController])
     {
         [self.applicationSlidingViewController setFrontViewController:self.mainNavigationController
                                                              animated:YES
@@ -256,11 +253,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
         
     }
     
-    if (![self.applicationSlidingViewController.frontViewController isEqual:self.alarmsNavigationViewController])
+    if (![[self.applicationDelegate slidingViewController].frontViewController isEqual:self.alarmsNavigationViewController])
     {
-        [self.applicationSlidingViewController setFrontViewController:self.alarmsNavigationViewController
-                                                             animated:YES
-                                                           completion:nil];
+        [[self.applicationDelegate slidingViewController] setFrontViewController:self.alarmsNavigationViewController animated:YES completion:nil];
     }
 }
 
