@@ -63,7 +63,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
         _mainNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"MainNav"];
     }
     
+    // Update the currentNavigationController
     self.currentNavigationController = _mainNavigationController;
+    
     return _mainNavigationController;
 }
 
@@ -87,7 +89,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
         _alarmsNavigationViewController = [storyboard instantiateViewControllerWithIdentifier:@"AlarmsNav"];
     }
     
+    // Update the currentNavigationController
     self.currentNavigationController = _alarmsNavigationViewController;
+    
     return _alarmsNavigationViewController;
 }
 
