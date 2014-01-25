@@ -89,4 +89,14 @@
         [self.slidingViewController openSlider:YES completion:nil];
 }
 
+- (void)lockSlider
+{
+    self.slidingViewController.locked = YES;
+}
+
+- (void)unlockSlider
+{
+    self.slidingViewController.locked = NO;
+}
+
 @end
