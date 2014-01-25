@@ -246,8 +246,6 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     AlarmsViewController *alarmsViewController = (AlarmsViewController *)self.alarmsNavigationViewController.viewControllers.firstObject;
     alarmsViewController.applicationDelegate = self.applicationDelegate;
     
-    
-    
     if (![[self.applicationDelegate slidingViewController].frontViewController isEqual:self.alarmsNavigationViewController])
     {
         [[self.applicationDelegate slidingViewController] setFrontViewController:self.alarmsNavigationViewController animated:YES completion:nil];

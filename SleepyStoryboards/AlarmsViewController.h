@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 
+// Toggle the Menu Slider
 - (IBAction)toggleSlider:(id)sender;
 
 @end

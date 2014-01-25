@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet FUIButton *sleepNowButton;
 @property (weak, nonatomic) IBOutlet UILabel *informationLabel;
 
-// Toggle the JSSlidingViewController
+// Toggle the Menu Slider
 - (IBAction)toggleSlider:(id)sender;
 
 @end
