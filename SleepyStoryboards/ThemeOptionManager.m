@@ -84,5 +84,16 @@
     return [(NSString *)validIndices.firstObject integerValue];
 }
 
+- (NSArray *)themeNamesSortedByEnumeration
+{
+    // Return an array of theme names sorted by their index (AFThemeSelectionOption)
+    NSArray *sortedKeys = [self.themeIndexDictionary.allKeys sortedArrayUsingSelector:@selector(compare:)];
+    
+    NSMutableArray *sortedValues = [NSMutableArray arrayWithCapacity:sortedKeys.count];
+    
+    [sortedKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        sortedValues[idx]  
+    }];
+}
 
 @end
