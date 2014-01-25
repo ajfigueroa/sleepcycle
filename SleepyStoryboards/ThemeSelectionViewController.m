@@ -53,7 +53,7 @@
 
     cell.textLabel.text = (NSString *)self.themes[indexPath.row];
     
-    // Apply Checkmark accessory to the selected indexpath
+    // Apply Checkmark accessory to the selected index path
     if (indexPath.row == self.selectedThemeIndex)
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     else

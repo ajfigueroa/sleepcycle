@@ -95,7 +95,7 @@
 #pragma mark - Persistency Methods
 - (void)saveAllSettings
 {
-    // Call this method to confirm changes (will write to NSUserDefaults)
+    // Call this method to confirm changes (writes to NSUserDefaults)
     [self.persistencyManager saveSettings];
 }
 
