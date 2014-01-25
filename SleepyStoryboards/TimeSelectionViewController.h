@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ApplicationSlidingViewControllerProtocol.h"
-#import "SettingsViewController.h"
+#import "SettingsViewControllerDelegate.h"
 
 @class FUIButton;
 

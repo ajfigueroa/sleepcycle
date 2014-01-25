@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ThemeSelectionViewController.h"
+#import "SettingsViewControllerDelegate.h"
 
-@protocol SettingsViewControllerDelegate;
-
-@interface SettingsViewController : UITableViewController <ThemeSelectionViewControllerDelegate>
+@interface SettingsViewController : UITableViewController <SettingsViewControllerDelegate, ThemeSelectionViewControllerDelegate>
 
 @property (nonatomic, weak) id <SettingsViewControllerDelegate> delegate;
 @property (nonatomic, weak) IBOutlet UILabel *themeSelectionLabel;
@@ -28,8 +27,3 @@
 
 @end
 
-@protocol SettingsViewControllerDelegate <NSObject>
-
-- (void)settingsViewControllerDidFinish:(SettingsViewController *)controller;
-
-@end

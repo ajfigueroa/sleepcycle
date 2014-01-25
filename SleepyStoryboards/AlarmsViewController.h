@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ApplicationSlidingViewControllerProtocol.h"
+#import "SettingsViewControllerDelegate.h"
 
-@interface AlarmsViewController : UITableViewController
+@interface AlarmsViewController : UITableViewController <SettingsViewControllerDelegate>
 
 @property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 

@@ -110,6 +110,12 @@
     return cell;
 }
 
+#pragma mark - SettingsViewControllerDelegate
+- (void)settingsViewControllerDidFinish:(SettingsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - End of Life
 - (void)dealloc
 {

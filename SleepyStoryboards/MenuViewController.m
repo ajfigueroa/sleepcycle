@@ -235,9 +235,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     
     if (![[self.applicationDelegate slidingViewController].frontViewController isEqual:self.mainNavigationController])
     {
-        [self.applicationSlidingViewController setFrontViewController:self.mainNavigationController
-                                                             animated:YES
-                                                           completion:nil];
+        [[self.applicationDelegate slidingViewController] setFrontViewController:self.mainNavigationController
+                                                                        animated:YES
+                                                                      completion:nil];
     }
 }
 

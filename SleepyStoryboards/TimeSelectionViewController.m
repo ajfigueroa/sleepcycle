@@ -8,6 +8,7 @@
 
 #import "TimeSelectionViewController.h"
 #import "ThemeFactory.h"
+#import "SettingsViewController.h"
 #import "ResultsViewController.h"
 #import "JSSlidingViewController.h"
 #import "SleepyTimeModel.h"
