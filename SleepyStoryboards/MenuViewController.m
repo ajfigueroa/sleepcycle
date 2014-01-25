@@ -17,6 +17,7 @@
 
 #define SETTINGS_TABLE_ROWS 7
 
+// These enums refer to the static table view cells in the slider menu (refer to MainStoryboard file)
 typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 {
     AFSettingsTableHeaderSettings,
