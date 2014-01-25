@@ -12,7 +12,7 @@
 
 @interface AlarmsViewController : UITableViewController <SettingsViewControllerDelegate>
 
-@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
+@property (nonatomic, strong) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 
 - (IBAction)toggleSlider:(id)sender;
 

@@ -94,7 +94,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     [super viewDidAppear:animated];
     
     if (![self.tableView indexPathForSelectedRow]) {
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.lastIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.lastIndex inSection:0]
+                                    animated:YES
+                              scrollPosition:UITableViewScrollPositionNone];
     }
 
 }
@@ -243,15 +245,13 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 
 - (void)presentAlarmViewController
 {
-    if (!self.alarmsNavigationViewController)
-    {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-        self.alarmsNavigationViewController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"AlarmsNav"];
-        
-        AlarmsViewController *alarmsViewController = (AlarmsViewController *)self.alarmsNavigationViewController.viewControllers.firstObject;
-        alarmsViewController.applicationDelegate = self.applicationDelegate;
-        
-    }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    self.alarmsNavigationViewController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"AlarmsNav"];
+    
+    AlarmsViewController *alarmsViewController = (AlarmsViewController *)self.alarmsNavigationViewController.viewControllers.firstObject;
+    alarmsViewController.applicationDelegate = self.applicationDelegate;
+    
+    
     
     if (![[self.applicationDelegate slidingViewController].frontViewController isEqual:self.alarmsNavigationViewController])
     {

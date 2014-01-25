@@ -82,7 +82,11 @@
     if (isSliderOpen)
         [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
     else
-        [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
+    {
+        [[self.applicationDelegate slidingViewController] openSlider:YES completion:^{
+            NSLog(@"Complete");
+        }];
+    }
 }
 
 #pragma mark - UITableViewDataSource
