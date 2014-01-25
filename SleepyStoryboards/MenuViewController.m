@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 @property (nonatomic, assign) NSInteger lastIndex;
 // Keep track of the current UINavigationController on the stack
 @property (nonatomic, strong) UINavigationController *currentNavigationController;
+@property (nonatomic, strong) JSSlidingViewController *applicationSlidingViewController;
 
 @end
 
@@ -44,6 +45,8 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     
     // Get rid of blank trailing UITableViewCells
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    self.applicationSlidingViewController = [self.applicationDelegate slidingViewController];
     
     // Theme the UI
     [self applyTheme];
@@ -102,6 +105,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 {
     switch (indexPath.row) {
         case AFSettingsTableOptionSettings:
+            [self toggleSlider];
             [self presentSettingsViewController];
             break;
             
@@ -192,19 +196,17 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 #pragma mark - JSSlidingViewController Helpers
 - (void)toggleSlider {
     
-    BOOL isSliderOpen = [self.applicationDelegate slidingViewController].isOpen;
+    BOOL isSliderOpen = self.applicationSlidingViewController.isOpen;
     
     if (isSliderOpen)
-        [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
+        [self.applicationSlidingViewController closeSlider:YES completion:nil];
     else
-        [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
+        [self.applicationSlidingViewController openSlider:YES completion:nil];
 }
 
+#pragma mark - Presenters
 - (void)presentSettingsViewController
 {
-    // Dismiss the slider
-    [self toggleSlider];
-    
     // Grab a reference to the main navigation controller and verify it conforms to the
     // SettingsViewControllerDelegate protocol so it can handle dismissing of the settings
     // view controller
@@ -232,9 +234,11 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)self.mainNavigationController.viewControllers.firstObject;
     timeSelectionViewController.selectedUserMode = option;
     
-    if (![[[self.applicationDelegate slidingViewController] frontViewController] isEqual:self.mainNavigationController])
+    if (![self.applicationSlidingViewController.frontViewController isEqual:self.mainNavigationController])
     {
-        [[self.applicationDelegate slidingViewController] setFrontViewController:self.mainNavigationController animated:YES completion:nil];
+        [self.applicationSlidingViewController setFrontViewController:self.mainNavigationController
+                                                             animated:YES
+                                                           completion:nil];
     }
 }
 
@@ -244,14 +248,17 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         self.alarmsNavigationViewController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"AlarmsNav"];
+        
         AlarmsViewController *alarmsViewController = (AlarmsViewController *)self.alarmsNavigationViewController.viewControllers.firstObject;
         alarmsViewController.applicationDelegate = self.applicationDelegate;
         
     }
     
-    if (![[[self.applicationDelegate slidingViewController] frontViewController] isEqual:self.alarmsNavigationViewController])
+    if (![self.applicationSlidingViewController.frontViewController isEqual:self.alarmsNavigationViewController])
     {
-        [[self.applicationDelegate slidingViewController] setFrontViewController:self.alarmsNavigationViewController animated:YES completion:nil];
+        [self.applicationSlidingViewController setFrontViewController:self.alarmsNavigationViewController
+                                                             animated:YES
+                                                           completion:nil];
     }
 }
 
