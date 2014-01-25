@@ -11,7 +11,7 @@
 
 @implementation AppDelegate
 
-// Synthesizing property to conform to Sliding
+// Synthesizing property to conform to ApplicationSlidingViewControllerProtocol
 @synthesize slidingViewController;
 
 + (void)initialize
@@ -25,6 +25,7 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
+#pragma mark - UIApplicationDelegate Methods
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -75,6 +76,17 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - ApplicationSlidingViewControllerProtocol Method
+- (void)toggleSlider
+{
+    BOOL isSliderOpen = self.slidingViewController.isOpen;
+    
+    if (isSliderOpen)
+        [self.slidingViewController closeSlider:YES completion:nil];
+    else
+        [self.slidingViewController openSlider:YES completion:nil];
 }
 
 @end
