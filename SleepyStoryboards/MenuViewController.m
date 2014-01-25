@@ -196,13 +196,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 
 #pragma mark - JSSlidingViewController Helpers
 - (void)toggleSlider {
-    
-    BOOL isSliderOpen = [self.applicationDelegate slidingViewController].isOpen;
-    
-    if (isSliderOpen)
-        [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
-    else
-        [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
+    [self.applicationDelegate toggleSlider];
 }
 
 #pragma mark - Presenters
