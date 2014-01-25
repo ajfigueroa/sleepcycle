@@ -30,7 +30,58 @@
 #pragma mark - Helpers
 - (NSMutableDictionary *)buildThemeIndexDictionary
 {
+    NSMutableDictionary *themeDictionary = [NSMutableDictionary dictionaryWithCapacity:AFAvailableThemesCount];
     
+    // Map the string version of indices to theme name values
+    for (NSInteger i = 0; i < themeDictionary.count; i++)
+    {
+        NSString *key = [@(i) stringValue];
+        NSString *obj = [self themeNameForIndex:i];
+        
+        themeDictionary[key] = obj;
+    }
+    
+    return themeDictionary;
+}
+
+- (NSString *)themeNameForIndex:(AFThemeSelectionOption)option
+{
+    // Get the readable representation of the themes
+    switch (option) {
+        case AFThemeSelectionOptionBlueBeigeTheme:
+            return NSLocalizedString(@"Default", nil);
+            break;
+            
+        case AFThemeSelectionOptionBlackGrayTheme:
+            return NSLocalizedString(@"Dark", nil);
+            break;
+            
+        case AFThemeSelectionOptionRedRoseTheme:
+            return NSLocalizedString(@"Red Rose", nil);
+            break;
+            
+        default:
+            return @"";
+            break;
+    }
+}
+
+#pragma mark - Theme Public Methods
+- (NSString *)prettyThemeName:(AFThemeSelectionOption)appThemeSelectionOption
+{
+    NSString *key = [@(appThemeSelectionOption) stringValue];
+    return (NSString *)[self.themeIndexDictionary objectForKey:key];
+}
+
+- (AFThemeSelectionOption)themeSelectionOptionForName:(NSString *)themeName
+{
+    // Find all the keys where themeName exists in themeIndexDictionary
+    NSArray *validIndices = [self.themeIndexDictionary allKeysForObject:themeName];
+    
+    assert(validIndices.count > 0);
+    
+    // Returns the integer value of the index that corresponds to themeName
+    return [(NSString *)validIndices.firstObject integerValue];
 }
 
 

@@ -41,7 +41,7 @@
     return self;
 }
 
-#pragma mark - Property Accessor Overrides
+#pragma mark - Persistency Property Accessor Overrides
 - (NSInteger)timeToFallAsleep
 {
     return self.persistencyManager.timeToFallAsleep;
@@ -94,5 +94,7 @@
     // Call this method to confirm changes (will write to NSUserDefaults)
     [self.persistencyManager saveSettings];
 }
+
+#pragma mark - ThemeOptionManager Methods
 
 @end

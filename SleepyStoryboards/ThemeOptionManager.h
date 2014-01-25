@@ -12,4 +12,11 @@
 
 @interface ThemeOptionManager : NSObject
 
+// Methods for comprehending theme options
+- (NSString *)prettyThemeName:(AFThemeSelectionOption)appThemeSelectionOption;
+- (AFThemeSelectionOption)themeSelectionOptionForName:(NSString *)themeName;
+
+// Sorted theme names (by AFThemeSelectionOption)
+- (NSArray *)themeNamesSortedByEnumeration;
+
 @end
