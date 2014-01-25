@@ -7,7 +7,6 @@
 //
 
 #import "AlarmsViewController.h"
-#import "BaseTheme.h"
 #import "ThemeFactory.h"
 #import "NSDate+SleepTime.h"
 #import "JSSlidingViewController.h"

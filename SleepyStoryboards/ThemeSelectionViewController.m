@@ -7,7 +7,6 @@
 //
 
 #import "ThemeSelectionViewController.h"
-#import "BaseTheme.h"
 #import "ThemeFactory.h"
 
 @interface ThemeSelectionViewController ()

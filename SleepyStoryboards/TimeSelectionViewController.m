@@ -8,12 +8,10 @@
 
 #import "TimeSelectionViewController.h"
 #import "ThemeFactory.h"
-#import "BaseTheme.h"
 #import "ResultsViewController.h"
-#import "SettingsManager.h"
 #import "JSSlidingViewController.h"
 #import "SleepyTimeModel.h"
-
+#import "SettingsAPI.h"
 
 @interface TimeSelectionViewController ()
 
@@ -113,7 +111,7 @@
         [self updateViewWithSelectedUserMode:self.selectedUserMode];
     
         // Lastly theme and add border if needed
-        BOOL applyBorder = [[SettingsManager sharedSettings] showBorder];
+        BOOL applyBorder = [[SettingsAPI sharedSettingsAPI] showBorder];
         [themeSetter themeBorderForView:self.timeSelectionDatePicker visible:applyBorder];
 }
 
@@ -121,7 +119,7 @@
 - (void)configureModel:(id <SleepTimeModelProtocol>)model
 {
     // Implement with additional properties
-    model.timeToFallAsleep = [[SettingsManager sharedSettings] timeToFallAsleep];
+    model.timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
 }
 
 - (void)performModelCalculation:(id <SleepTimeModelProtocol>)model

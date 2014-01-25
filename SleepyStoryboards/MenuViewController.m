@@ -10,7 +10,6 @@
 #import "SettingsViewController.h"
 #import "JSSlidingViewController.h"
 #import "ThemeFactory.h"
-#import "BaseTheme.h"
 #import "SettingsSelectionConstants.h"
 #import "TimeSelectionViewController.h"
 #import "AlarmsViewController.h"
