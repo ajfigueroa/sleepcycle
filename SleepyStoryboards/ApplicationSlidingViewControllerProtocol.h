@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) JSSlidingViewController *slidingViewController;
 
+- (void)toggleSlider;
+
 @end
