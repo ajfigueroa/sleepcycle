@@ -8,7 +8,7 @@
 
 #import "TimeSelectionHandler.h"
 #import "NSDate+SleepTime.h"
-#import "SettingsManager.h"
+#import "SettingsAPI.h"
 
 #define MINUTES_AS_SECONDS(x) (x * 60)
 #define HOURS_AS_SECONDS(x) (x * 60 * 60)
@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
 - (UIActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime
 {
     // Create date set back by the user defined time to fall asleep (default 14)
-    NSInteger timeToFallAsleep = [[SettingsManager sharedSettings] timeToFallAsleep];
+    NSInteger timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
     NSDate *earlierTime = [sleepTime dateByAddingTimeInterval:(-1 * (MINUTES_AS_SECONDS(timeToFallAsleep)))];
     
     NSString *title = [NSString stringWithFormat:@"Remind me to be in bed at %@", [earlierTime shortTime]];
@@ -215,7 +215,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
         reminderTargetTime = [self.reminderTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
     }
     else {
-        NSInteger timeToFallAsleep = [[SettingsManager sharedSettings] timeToFallAsleep];
+        NSInteger timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
         reminderTargetTime = [self.reminderTime dateByAddingTimeInterval:(-1 * (MINUTES_AS_SECONDS(timeToFallAsleep)))];
     }
     

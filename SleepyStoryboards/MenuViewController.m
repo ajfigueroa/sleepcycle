@@ -13,7 +13,7 @@
 #import "SettingsSelectionConstants.h"
 #import "TimeSelectionViewController.h"
 #import "AlarmsViewController.h"
-#import "ThemeSettingsManager.h"
+#import "SettingsAPI.h"
 
 @interface MenuViewController ()
 
@@ -205,7 +205,6 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
         // Grab a reference to the settings view controller and assign its delegate
         SettingsViewController *settingsViewController = (SettingsViewController *)self.settingsNavigationViewController.viewControllers.firstObject;
         settingsViewController.delegate = (id <SettingsViewControllerDelegate>)viewController;
-        settingsViewController.themeSettingsManager = (id <ThemeSettingsProtocol>)[[ThemeSettingsManager alloc] init];
         
         // Delay modal presentation until JSSlidingViewController is dismissed
         double delayInSeconds = 0.2;

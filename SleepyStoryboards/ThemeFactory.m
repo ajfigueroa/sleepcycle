@@ -7,10 +7,10 @@
 //
 
 #import "ThemeFactory.h"
-#import "SettingsManager.h"
 #import "BlueBeigeTheme.h"
 #import "BlackGrayTheme.h"
 #import "RedRoseTheme.h"
+#import "SettingsAPI.h"
 
 @implementation ThemeFactory
 
@@ -52,7 +52,7 @@
 - (id <Theme>)buildThemeForSettingsKey
 {
     // Access userDefaults theme
-    AFThemeSelectionOption themeSelection = (AFThemeSelectionOption)[[SettingsManager sharedSettings] appTheme];
+    AFThemeSelectionOption themeSelection = (AFThemeSelectionOption)[[SettingsAPI sharedSettingsAPI] appTheme];
     
     return [self buildThemeForKey:themeSelection];
 }

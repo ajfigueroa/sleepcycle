@@ -10,9 +10,9 @@
 #import "BOZPongRefreshControl.h"
 #import "ThemeFactory.h"
 #import "NSDate+SleepTime.h"
-#import "SettingsManager.h"
 #import "TimeSelectionHandler.h"
 #import "JSSlidingViewController.h"
+#import "SettingsAPI.h"
 
 @interface ResultsViewController ()
 
@@ -72,7 +72,7 @@
 {
     [super viewDidLayoutSubviews];
     
-    self.isPongRefreshControlVisible = [[SettingsManager sharedSettings] showEasterEgg];
+    self.isPongRefreshControlVisible = [[SettingsAPI sharedSettingsAPI] showEasterEgg];
         
     // Add the pong refresh target to the refreshTriggered action
     self.pongRefreshControl = [BOZPongRefreshControl attachToTableView:self.resultsTableView
