@@ -14,15 +14,15 @@
 
 @interface TimeSelectionViewController : UIViewController <SettingsViewControllerDelegate>
 
+@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
+@property (nonatomic) AFSelectedUserMode selectedUserMode;
+
 @property (weak, nonatomic) IBOutlet UIDatePicker *timeSelectionDatePicker;
 @property (weak, nonatomic) IBOutlet FUIButton *confirmTimeButton;
 @property (weak, nonatomic) IBOutlet FUIButton *sleepNowButton;
 @property (weak, nonatomic) IBOutlet UILabel *informationLabel;
-@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 
-// Manage mode of calculation mode
-@property (nonatomic) AFSelectedUserMode selectedUserMode;
-
+// Toggle the JSSlidingViewController
 - (IBAction)toggleSlider:(id)sender;
 
 @end
