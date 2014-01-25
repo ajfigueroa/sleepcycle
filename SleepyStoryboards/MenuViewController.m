@@ -202,18 +202,19 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 #pragma mark - Presenters
 - (void)presentSettingsViewController
 {
-    // Grab a reference to the main navigation controller and verify it conforms to the
-    // SettingsViewControllerDelegate protocol so it can handle dismissing of the settings
-    // view controller
-    UIViewController *viewController = self.currentNavigationController.viewControllers.firstObject;
+    // Take currentNavigationController and verify it conforms to the SettingsViewControllerDelegate
+    // protocol so it can dismiss SettingsViewController
+    UIViewController *viewController = (UIViewController *)self.currentNavigationController.viewControllers.firstObject;
+    
     if ([viewController conformsToProtocol:@protocol(SettingsViewControllerDelegate)])
     {
-        // Grab a reference to the settings view controller and assign its delegate
+        // Assign the SettingsViewController delegate to the current viewController
         SettingsViewController *settingsViewController = (SettingsViewController *)self.settingsNavigationViewController.viewControllers.firstObject;
         settingsViewController.delegate = (id <SettingsViewControllerDelegate>)viewController;
         
-        // Delay modal presentation until JSSlidingViewController is dismissed
+        // Present modally the settingsNavigationViewController with a delay of about 0.2s
         double delayInSeconds = 0.2;
+        
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [viewController presentViewController:self.settingsNavigationViewController
