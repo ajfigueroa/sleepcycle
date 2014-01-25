@@ -8,10 +8,12 @@
 
 #import "SettingsAPI.h"
 #import "SettingsPersistencyManager.h"
+#import "ThemeOptionManager.h"
 
 @interface SettingsAPI ()
 
 @property (nonatomic, strong) SettingsPersistencyManager *persistencyManager;
+@property (nonatomic, strong) ThemeOptionManager *themeOptionManager;
 
 @end
 
@@ -36,6 +38,7 @@
     if (self)
     {
         self.persistencyManager = [[SettingsPersistencyManager alloc] init];
+        self.themeOptionManager = [[ThemeOptionManager alloc] init];
     }
     
     return self;
@@ -55,6 +58,7 @@
     self.persistencyManager.timeToFallAsleep = timeToFallAsleep;
 }
 
+// The AppTheme's enumeration
 - (NSInteger)appTheme
 {
     return self.persistencyManager.appTheme;
@@ -96,5 +100,25 @@
 }
 
 #pragma mark - ThemeOptionManager Methods
+- (NSString *)appThemeName
+{
+    // The AppTheme enumeration's string representation
+    return [self.themeOptionManager prettyThemeName:self.persistencyManager.appTheme];
+}
+
+- (void)setAppThemeName:(NSString *)newAppThemeName
+{
+    // Grab the enumeration of the string representation of the newAppThemeName
+    // and store in persistencyManager as the enum value
+    AFThemeSelectionOption themeSelectionOption = [self.themeOptionManager themeSelectionOptionForName:newAppThemeName];
+    
+    self.persistencyManager.appTheme = themeSelectionOption;
+}
+
+- (NSArray *)themeNames
+{
+    // Grab the list of themeNames in their human readable form
+    return [self.themeOptionManager themeNamesSortedByEnumeration];
+}
 
 @end

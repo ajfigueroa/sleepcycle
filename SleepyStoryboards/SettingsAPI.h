@@ -20,6 +20,9 @@
 
 + (instancetype)sharedSettingsAPI;
 
+- (NSString *)appThemeName;
+- (void)setAppThemeName:(NSString *)newAppThemeName;
+- (NSArray *)themeNames;
 - (void)saveAllSettings;
 
 @end
