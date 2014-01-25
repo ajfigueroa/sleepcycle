@@ -10,7 +10,6 @@
 #import "ThemeFactory.h"
 #import "SettingsViewController.h"
 #import "ResultsViewController.h"
-#import "JSSlidingViewController.h"
 #import "SleepyTimeModel.h"
 #import "SettingsAPI.h"
 #import "FUIButton.h"
@@ -144,12 +143,7 @@
 #pragma mark - Sliding View Management
 - (IBAction)toggleSlider:(id)sender
 {
-    BOOL isSliderOpen = [self.applicationDelegate slidingViewController].isOpen;
-    
-    if (isSliderOpen)
-        [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
-    else
-        [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
+    [self.applicationDelegate toggleSlider];
 }
 
 #pragma mark - View Transitioning
