@@ -10,7 +10,7 @@
 
 @interface ThemeOptionManager ()
 
-// Maps the indicies (AFThemeSelectionOption) as a string to the Theme's readable names
+// Maps the indices (AFThemeSelectionOption) as a string to the Theme's readable names
 @property (nonatomic, strong) NSMutableDictionary *themeIndexDictionary;
 
 @end
