@@ -92,8 +92,10 @@
     NSMutableArray *sortedValues = [NSMutableArray arrayWithCapacity:sortedKeys.count];
     
     [sortedKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        sortedValues[idx]  
+        sortedValues[idx] = self.themeIndexDictionary[(NSString *)obj];
     }];
+    
+    return (NSArray *)sortedValues;
 }
 
 @end
