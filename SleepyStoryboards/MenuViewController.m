@@ -196,7 +196,6 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     
     if (isSliderOpen)
         [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
-    
     else
         [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
 }

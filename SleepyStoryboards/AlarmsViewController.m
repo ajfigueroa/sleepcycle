@@ -77,11 +77,12 @@
 #pragma mark - SlidingViewController calls
 - (IBAction)toggleSlider:(id)sender
 {
-    if ([[self.applicationDelegate slidingViewController] isOpen]) {
+    BOOL isSliderOpen = [self.applicationDelegate slidingViewController].isOpen;
+    
+    if (isSliderOpen)
         [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
-    } else {
+    else
         [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
-    }
 }
 
 #pragma mark - UITableViewDataSource
