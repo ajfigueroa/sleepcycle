@@ -129,9 +129,11 @@
         case AFSelectedUserModeCalculateWakeTime:
             [model calculateWakeTimesWithSleepTime:selectedDate];
             break;
+            
         case AFSelectedUserModeCalculateBedTime:
             [model calculateBedTimesWithWakeTime:selectedDate];
             break;
+        
         default:
             break;
     }
@@ -159,6 +161,7 @@
     {
         [self configureModel:model];
         [self performModelCalculation:model];
+        
     } else if ([segue.identifier isEqualToString:AFSleepNowButtonSegue])
     {
         [self configureModel:model];
@@ -181,7 +184,6 @@
 {
     // Remove observer so notification is not sent to null object
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"Deallocating: %s", __PRETTY_FUNCTION__);
 }
 
 
