@@ -64,6 +64,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
         _mainNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"MainNav"];
     }
     
+    self.currentNavigationController = _mainNavigationController;
     return _mainNavigationController;
 }
 
@@ -87,6 +88,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
         _alarmsNavigationViewController = [storyboard instantiateViewControllerWithIdentifier:@"AlarmsNav"];
     }
     
+    self.currentNavigationController = _alarmsNavigationViewController;
     return _alarmsNavigationViewController;
 }
 
@@ -210,7 +212,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     // Grab a reference to the main navigation controller and verify it conforms to the
     // SettingsViewControllerDelegate protocol so it can handle dismissing of the settings
     // view controller
-    UIViewController *viewController = self.mainNavigationController.viewControllers.firstObject;
+    UIViewController *viewController = self.currentNavigationController.viewControllers.firstObject;
     if ([viewController conformsToProtocol:@protocol(SettingsViewControllerDelegate)])
     {
         // Grab a reference to the settings view controller and assign its delegate
