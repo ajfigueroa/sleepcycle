@@ -113,6 +113,9 @@
     AFThemeSelectionOption themeSelectionOption = [self.themeOptionManager themeSelectionOptionForName:newAppThemeName];
     
     self.persistencyManager.appTheme = themeSelectionOption;
+    
+    // Post AFThemeHasChangedNotification
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:nil];
 }
 
 - (NSArray *)themeNames
