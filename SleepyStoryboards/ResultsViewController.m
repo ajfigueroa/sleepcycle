@@ -115,9 +115,9 @@
     
     id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
     [themeSetter themeTableViewCell:cell
-                             inTableView:self.resultsTableView
-                             atIndexPath:indexPath
-                            reverseOrder:reverse];
+                        inTableView:self.resultsTableView
+                        atIndexPath:indexPath
+                       reverseOrder:reverse];
 }
 
 #pragma mark - Theme Management
