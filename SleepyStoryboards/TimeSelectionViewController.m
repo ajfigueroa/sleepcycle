@@ -54,7 +54,7 @@
     [super viewWillAppear:animated];
     
     // Unlock the slider if this view controller is the root
-    [self.applicationDelegate slidingViewController].locked = NO;
+    [self.applicationDelegate unlockSlider];
 }
 
 - (void)updateViewWithSelectedUserMode:(AFSelectedUserMode)selectedUserMode

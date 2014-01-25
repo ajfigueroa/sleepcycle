@@ -9,7 +9,6 @@
 #import "AlarmsViewController.h"
 #import "ThemeFactory.h"
 #import "NSDate+SleepTime.h"
-#import "JSSlidingViewController.h"
 
 @interface AlarmsViewController ()
 
@@ -77,12 +76,7 @@
 #pragma mark - SlidingViewController calls
 - (IBAction)toggleSlider:(id)sender
 {
-    BOOL isSliderOpen = [self.applicationDelegate slidingViewController].isOpen;
-    
-    if (isSliderOpen)
-        [[self.applicationDelegate slidingViewController] closeSlider:YES completion:nil];
-    else
-        [[self.applicationDelegate slidingViewController] openSlider:YES completion:nil];
+    [self.applicationDelegate toggleSlider];
 }
 
 #pragma mark - UITableViewDataSource
