@@ -5,6 +5,7 @@
 //  Created by Alexander Figueroa on 1/7/2014.
 //  Copyright (c) 2014 Alexander Figueroa. All rights reserved.
 //
+//  Mediator for interactions between the view controller
 
 #import <UIKit/UIKit.h>
 #import "ApplicationSlidingViewControllerProtocol.h"
@@ -15,10 +16,10 @@
 
 @interface MenuViewController : UITableViewController <SettingsViewControllerDelegate>
 
+@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 @property (nonatomic, strong) UINavigationController *mainNavigationController;
 @property (nonatomic, strong) UINavigationController *settingsNavigationViewController;
 @property (nonatomic, strong) UINavigationController *alarmsNavigationViewController;
-@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 
 // Settings Text Fields
 @property (weak, nonatomic) IBOutlet UITextField *settingsTextField;

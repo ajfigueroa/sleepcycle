@@ -38,13 +38,15 @@
     timeSelectionViewController.selectedUserMode = AFSelectedUserModeCalculateBedTime;
     timeSelectionViewController.applicationDelegate = self;
     
-    self.slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController:menuViewController.mainNavigationController backViewController:menuViewController];
+    self.slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController:menuViewController.mainNavigationController
+                                                                           backViewController:menuViewController];
     self.slidingViewController.showsDropShadows = YES;
     self.slidingViewController.useBouncyAnimations = NO;
     
     self.window.rootViewController = self.slidingViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

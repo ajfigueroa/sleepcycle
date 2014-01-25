@@ -12,6 +12,7 @@
 #import "JSSlidingViewController.h"
 #import "SleepyTimeModel.h"
 #import "SettingsAPI.h"
+#import "FUIButton.h"
 
 @interface TimeSelectionViewController ()
 

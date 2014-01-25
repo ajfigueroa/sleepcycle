@@ -48,7 +48,7 @@
     
     // Commit current state of toggle buttons
     [[SettingsAPI sharedSettingsAPI] setShowBorder:self.showBorderSwitch.on];
-    [[SettingsAPI sharedSettingsAPI] setShowEasterEgg:self.showPingPongSwitch];
+    [[SettingsAPI sharedSettingsAPI] setShowEasterEgg:self.showPingPongSwitch.on];
     [[SettingsAPI sharedSettingsAPI] saveAllSettings];
 }
 

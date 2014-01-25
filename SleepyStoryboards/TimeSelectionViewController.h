@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FUIButton.h"
 #import "ApplicationSlidingViewControllerProtocol.h"
 #import "SettingsViewController.h"
+
+@class FUIButton;
 
 @interface TimeSelectionViewController : UIViewController <SettingsViewControllerDelegate>
 
