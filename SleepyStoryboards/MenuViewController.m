@@ -96,7 +96,8 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 }
 
 #pragma mark - View Management
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     
     if (![self.tableView indexPathForSelectedRow]) {

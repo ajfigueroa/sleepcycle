@@ -21,11 +21,9 @@
 @implementation TimeSelectionViewController
 {}
 
-#pragma mark - View Initialization
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    NSLog(@"Awaking from nib: %s", __PRETTY_FUNCTION__);
     
     // Update theme
     [self applyTheme];
@@ -48,19 +46,19 @@
 }
 
 
-#pragma mark - Control View Management
+#pragma mark - View Management
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    // Unlock the slider if this view controller is the root
+    // Unlock the slider if this view controller is the current frontViewController
     [self.applicationDelegate unlockSlider];
 }
 
 - (void)updateViewWithSelectedUserMode:(AFSelectedUserMode)selectedUserMode
 {
     // Modify the information label based on state and hide the sleep now button if
-    // in AFSelectedUserModeCalculateBedTime
+    // in AFSelectedUserModeCalculateBedTime mode
     switch (selectedUserMode) {
         case AFSelectedUserModeCalculateWakeTime:
             self.informationLabel.text = NSLocalizedString(@"I plan to sleep at", nil);
@@ -112,8 +110,8 @@
         [self updateViewWithSelectedUserMode:self.selectedUserMode];
     
         // Lastly theme and add border if needed
-        BOOL applyBorder = [[SettingsAPI sharedSettingsAPI] showBorder];
-        [themeSetter themeBorderForView:self.timeSelectionDatePicker visible:applyBorder];
+        BOOL showBorder = [[SettingsAPI sharedSettingsAPI] showBorder];
+        [themeSetter themeBorderForView:self.timeSelectionDatePicker visible:showBorder];
 }
 
 #pragma mark - Model Configuration
