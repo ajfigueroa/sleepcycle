@@ -70,7 +70,7 @@
 - (NSString *)prettyThemeName:(AFThemeSelectionOption)appThemeSelectionOption
 {
     NSString *key = [@(appThemeSelectionOption) stringValue];
-    return (NSString *)[self.themeIndexDictionary objectForKey:key];
+    return (NSString *)self.themeIndexDictionary[key];
 }
 
 - (AFThemeSelectionOption)themeSelectionOptionForName:(NSString *)themeName
