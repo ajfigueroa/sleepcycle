@@ -13,6 +13,7 @@
 #import "TimeSelectionViewController.h"
 #import "AlarmsViewController.h"
 #import "SettingsAPI.h"
+#import "SettingsViewController.h"
 
 #define SETTINGS_TABLE_ROWS 7
 
