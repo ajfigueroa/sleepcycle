@@ -59,7 +59,7 @@
 - (NSDate *)zeroDateSeconds
 {
     // Zero the seconds of the current date's time
-    NSTimeInterval time = round([self timeIntervalSinceReferenceDate] / 60.0f) * 60.0f;
+    NSTimeInterval time = floor([self timeIntervalSinceReferenceDate] / 60.0f) * 60.0f;
     return [NSDate dateWithTimeIntervalSinceReferenceDate:time];
 }
 

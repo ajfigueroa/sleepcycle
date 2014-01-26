@@ -206,4 +206,27 @@
     }];
 }
 
+- (void)testZeroDateSeconds
+{
+    // Create control time (12:00:30 pm)
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *controlDateComponents = [[NSDateComponents alloc] init];
+    controlDateComponents.hour = 12;
+    controlDateComponents.second = 30;
+    
+    NSDate *slightlyNoon = [calendar dateFromComponents:controlDateComponents];
+    
+    // Zero the seconds of this date and ensures it equals 0
+    NSDate *dateWithZeroSeconds = [slightlyNoon zeroDateSeconds];
+    
+    // Grab the seconds component
+    NSDateComponents *testDateComponents = [calendar components:NSCalendarUnitSecond
+                                                       fromDate:dateWithZeroSeconds];
+    NSInteger testSeconds = testDateComponents.second;
+    
+    NSInteger controlSeconds = 0;
+    
+    XCTAssertEqual(testSeconds, controlSeconds, @"The seconds have not been set to zero");
+}
+
 @end
