@@ -16,11 +16,13 @@
 @interface ResultsViewController ()
 
 @property (nonatomic, strong) NSArray *resultTimes;
-@property (nonatomic, strong) BOZPongRefreshControl *pongRefreshControl;
 @property (nonatomic) BOOL isPongRefreshControlVisible;
+@property (nonatomic, strong) BOZPongRefreshControl *pongRefreshControl;
+@property (nonatomic, strong) TimeSelectionHandler *timeSelectionHandler;
+
+// The top and bottom mask view are covering the slide to refresh view controller
 @property (weak, nonatomic) IBOutlet UIView *topMaskView;
 @property (weak, nonatomic) IBOutlet UIView *bottomMaskView;
-@property (nonatomic, strong) TimeSelectionHandler *timeSelectionHandler;
 
 @end
 
