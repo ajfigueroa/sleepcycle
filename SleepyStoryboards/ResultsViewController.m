@@ -33,7 +33,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // Register for theme change notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applyTheme)
+                                                 name:AFThemeHasChangedNotification
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
