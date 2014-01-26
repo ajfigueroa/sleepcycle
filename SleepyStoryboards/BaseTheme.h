@@ -23,7 +23,7 @@
 @property (nonatomic, strong) UIColor *secondaryTextColor;
 
 // The enum to be used for any factory methods
-@property (assign) NSInteger themeEnum;
+@property (nonatomic, assign) NSInteger themeEnum;
 
 
 - (instancetype)initWithBackgroundColor:(UIColor *)backgroundColor

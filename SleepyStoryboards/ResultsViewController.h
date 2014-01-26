@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) id <SleepTimeModelProtocol> model;
 @property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
-@property (nonatomic) AFSelectedUserMode selectedUserMode;
+@property (nonatomic, assign) AFSelectedUserMode selectedUserMode;
 @property (nonatomic, strong) NSDate *selectedTime;
 
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;

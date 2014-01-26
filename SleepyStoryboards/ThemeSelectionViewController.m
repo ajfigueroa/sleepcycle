@@ -11,7 +11,7 @@
 
 @interface ThemeSelectionViewController ()
 
-@property (nonatomic) NSUInteger selectedThemeIndex;
+@property (nonatomic, assign) NSUInteger selectedThemeIndex;
 
 @end
 

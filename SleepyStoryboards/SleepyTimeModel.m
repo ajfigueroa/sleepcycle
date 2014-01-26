@@ -13,6 +13,7 @@
 @interface SleepyTimeModel ()
 
 @property (nonatomic, strong) NSMutableArray *internalTimeDataSource;
+#warning Change this to ivar
 @property (nonatomic, assign) NSInteger _timeToFallAsleep;
 
 @end

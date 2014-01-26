@@ -18,7 +18,7 @@
 // Holds all brightness variants
 @property (nonatomic, strong) NSArray *tableViewCellColorMapping;
 // Keeps track of the last section
-@property (nonatomic) NSUInteger previousTableViewSection;
+@property (nonatomic, assign) NSUInteger previousTableViewSection;
 
 @end
 

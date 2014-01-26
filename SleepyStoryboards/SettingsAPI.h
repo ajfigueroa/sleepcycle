@@ -13,10 +13,10 @@
 @interface SettingsAPI : NSObject
 
 // Interface for Settings properties of the same name
-@property (nonatomic) NSInteger timeToFallAsleep;
-@property (nonatomic) NSInteger appTheme;
-@property (nonatomic) BOOL showBorder;
-@property (nonatomic) BOOL showEasterEgg;
+@property (nonatomic, assign) NSInteger timeToFallAsleep;
+@property (nonatomic, assign) NSInteger appTheme;
+@property (nonatomic, assign) BOOL showBorder;
+@property (nonatomic, assign) BOOL showEasterEgg;
 
 + (instancetype)sharedSettingsAPI;
 

@@ -16,7 +16,7 @@
 @interface ResultsViewController ()
 
 @property (nonatomic, strong) NSArray *resultTimes;
-@property (nonatomic) BOOL isPongRefreshControlVisible;
+@property (nonatomic, assign) BOOL isPongRefreshControlVisible;
 @property (nonatomic, strong) BOZPongRefreshControl *pongRefreshControl;
 @property (nonatomic, strong) TimeSelectionHandler *timeSelectionHandler;
 
