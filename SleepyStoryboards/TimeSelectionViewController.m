@@ -21,20 +21,6 @@
 @implementation TimeSelectionViewController
 {}
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    // Update theme
-    [self applyTheme];
-    
-    // Register for Theme Change Notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applyTheme)
-                                                 name:AFThemeHasChangedNotification
-                                               object:nil];
-}
-
 #pragma mark - Accessors
 - (void)setSelectedUserMode:(AFSelectedUserMode)selectedUserMode
 {
@@ -51,8 +37,18 @@
 {
     [super viewWillAppear:animated];
     
+    // Apply the them just before the view is about to load onto the stack
+    [self applyTheme];
+    
     // Unlock the slider if this view controller is the current frontViewController
     [self.applicationDelegate unlockSlider];
+    
+    // Register for Theme Change Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applyTheme)
+                                                 name:AFThemeHasChangedNotification
+                                               object:nil];
+    
 }
 
 - (void)updateViewWithSelectedUserMode:(AFSelectedUserMode)selectedUserMode
@@ -88,30 +84,32 @@
 #pragma mark - Theme Change Methods
 - (void)applyTheme
 {
-        // Set (or reset) the theme with the appropriate theme object
-        id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
-        // Theme the appropriate views
-        [themeSetter themeNavigationBar:self.navigationController.navigationBar];
-        
-        // Theme the background view
-        [themeSetter alternateThemeViewBackground:self.view];
-        
-        // Set up the button font
-        UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
+    // Set (or reset) the theme with the appropriate theme object
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
 
-        // Theme both buttons the same
-        [themeSetter alternateThemeButton:self.confirmTimeButton withFont:buttonFont];
-        [themeSetter alternateThemeButton:self.sleepNowButton withFont:buttonFont];
+    // Theme the appropriate views
+    [themeSetter themeNavigationBar:self.navigationController.navigationBar];
     
-        // Theme the information label view and increase the font slightly
-        UIFont *labelFont = [buttonFont fontWithSize:([UIFont labelFontSize])];
-        [themeSetter themeLabel:self.informationLabel withFont:labelFont];
-        [self updateViewWithSelectedUserMode:self.selectedUserMode];
+    // Theme the background view
+    [themeSetter alternateThemeViewBackground:self.view];
     
-        // Lastly theme and add border if needed
-        BOOL showBorder = [[SettingsAPI sharedSettingsAPI] showBorder];
-        [themeSetter themeBorderForView:self.timeSelectionDatePicker visible:showBorder];
+    // Set up the button font
+    UIFont *buttonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
+
+    // Theme both buttons the same
+    [themeSetter alternateThemeButton:self.confirmTimeButton withFont:buttonFont];
+    [themeSetter alternateThemeButton:self.sleepNowButton withFont:buttonFont];
+
+    // Theme the information label view and increase the font slightly
+    UIFont *labelFont = [buttonFont fontWithSize:([UIFont labelFontSize])];
+    [themeSetter themeLabel:self.informationLabel withFont:labelFont];
+    [self updateViewWithSelectedUserMode:self.selectedUserMode];
+
+    // Lastly theme and add border if needed
+    BOOL showBorder = [[SettingsAPI sharedSettingsAPI] showBorder];
+    [themeSetter themeBorderForView:self.timeSelectionDatePicker visible:showBorder];
 }
 
 #pragma mark - Model Configuration
