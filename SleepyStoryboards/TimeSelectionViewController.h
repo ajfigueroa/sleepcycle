@@ -14,7 +14,7 @@
 
 @interface TimeSelectionViewController : UIViewController <SettingsViewControllerDelegate>
 
-@property (nonatomic, strong) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
+@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 @property (nonatomic) AFSelectedUserMode selectedUserMode;
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *timeSelectionDatePicker;

@@ -12,7 +12,7 @@
 
 @interface AlarmsViewController : UITableViewController <SettingsViewControllerDelegate>
 
-@property (nonatomic, strong) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
+@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 
 // Toggle the Menu Slider
 - (IBAction)toggleSlider:(id)sender;
