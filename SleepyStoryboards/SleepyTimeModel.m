@@ -13,8 +13,6 @@
 @interface SleepyTimeModel ()
 
 @property (nonatomic, strong) NSMutableArray *internalTimeDataSource;
-#warning Change this to ivar
-@property (nonatomic, assign) NSInteger _timeToFallAsleep;
 
 @end
 
@@ -22,6 +20,10 @@
 const static NSInteger kTwelveHours = 43200;
 
 @implementation SleepyTimeModel
+{
+    // Instance variable to handle timeToFallAsleep changes
+    NSInteger _timeToFallAsleep;
+}
 
 // Synthesize the properties from the SleepTImeModelProtocol
 @synthesize internalTimeDataSource, sleepCycleInterval, timeToFallAsleep, totalSleepCycles, timeDataSource;
@@ -54,12 +56,12 @@ const static NSInteger kTwelveHours = 43200;
 
 - (void)setTimeToFallAsleep:(NSInteger)aTimeToFallAsleep
 {
-    __timeToFallAsleep = MINUTES_TO_SECONDS(aTimeToFallAsleep);
+    _timeToFallAsleep = MINUTES_TO_SECONDS(aTimeToFallAsleep);
 }
 
 - (NSInteger)timeToFallAsleep
 {
-    return __timeToFallAsleep;
+    return _timeToFallAsleep;
 }
 
 #pragma mark - Calculation Methods
