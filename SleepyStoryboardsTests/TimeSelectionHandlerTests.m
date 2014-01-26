@@ -223,7 +223,6 @@
     NSDateComponents *testDateComponents = [calendar components:NSCalendarUnitSecond
                                                        fromDate:dateWithZeroSeconds];
     NSInteger testSeconds = testDateComponents.second;
-    
     NSInteger controlSeconds = 0;
     
     XCTAssertEqual(testSeconds, controlSeconds, @"The seconds have not been set to zero");

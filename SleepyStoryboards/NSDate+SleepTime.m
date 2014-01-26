@@ -59,8 +59,14 @@
 - (NSDate *)zeroDateSeconds
 {
     // Zero the seconds of the current date's time
-    NSTimeInterval time = floor([self timeIntervalSinceReferenceDate] / 60.0f) * 60.0f;
-    return [NSDate dateWithTimeIntervalSinceReferenceDate:time];
+    NSDate *selfDate = [self copy];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *selfDateComponents = [calendar components:NSCalendarUnitSecond fromDate:selfDate];
+    
+    NSInteger seconds = selfDateComponents.second;
+    
+    return [selfDate dateByAddingTimeInterval:(-1 * seconds)];
 }
 
 - (NSDate *)currentDateVersion
