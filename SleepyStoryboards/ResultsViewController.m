@@ -29,15 +29,13 @@
 @implementation ResultsViewController
 {}
 
-- (void)awakeFromNib
+#pragma mark - View Management
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super awakeFromNib];
-    
     // Register for theme change notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
 }
 
-#pragma mark - View Management
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
