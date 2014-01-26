@@ -20,30 +20,26 @@
 @implementation AlarmsViewController
 {}
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    // Get rid of unwanted UITableViewCells
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    [self populateAlarmsArray];
-    
-    // Register for theme change notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
-
-}
-
+#pragma mark - View Management
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    // Set up data source
+    [self populateAlarmsArray];
+    
+    // Get rid of unwanted UITableViewCells
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
     // Apply theme
     [self applyTheme];
 
+    // Register for theme change notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applyTheme)
+                                                 name:AFThemeHasChangedNotification
+                                               object:nil];
 }
-
-
 #pragma mark - Data Source
 - (void)populateAlarmsArray
 {

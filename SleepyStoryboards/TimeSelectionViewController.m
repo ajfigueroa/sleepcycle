@@ -84,8 +84,6 @@
 #pragma mark - Theme Change Methods
 - (void)applyTheme
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
     // Set (or reset) the theme with the appropriate theme object
     id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
 
