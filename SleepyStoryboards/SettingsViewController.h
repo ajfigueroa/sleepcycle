@@ -10,7 +10,7 @@
 #import "ThemeSelectionViewController.h"
 #import "SettingsViewControllerDelegate.h"
 
-@interface SettingsViewController : UITableViewController <SettingsViewControllerDelegate, ThemeSelectionViewControllerDelegate>
+@interface SettingsViewController : UITableViewController <ThemeSelectionViewControllerDelegate>
 
 @property (nonatomic, weak) id <SettingsViewControllerDelegate> delegate;
 @property (nonatomic, weak) IBOutlet UILabel *themeSelectionLabel;
