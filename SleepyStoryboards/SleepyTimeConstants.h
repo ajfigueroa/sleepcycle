@@ -41,7 +41,8 @@ static NSString *const AFAlarmHasPostedNotification = @"AFAlarmHasPostedNotifica
 static NSString *const AFReminderHasPostedNotification = @"AFReminderHasPostedNotification";
 
 // NSNotification User Info Keys
-static NSString *const AFAlarmReminderNotificationSuccess = @"AFAlarmReminderNotificationSuccess";
+static NSString *const AFAlarmReminderNotificationSuccessKey = @"AFAlarmReminderNotificationSuccessKey";
+static NSString *const AFScheduledTimeKey = @"AFScheduledTimeKey";
 
 // Segue Identifier
 static NSString *const AFCalculateBedTimeSegue = @"CalculateBedTimeSegue";
