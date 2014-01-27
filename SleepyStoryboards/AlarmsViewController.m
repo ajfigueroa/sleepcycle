@@ -66,7 +66,7 @@
 {
     // Theme the cells with the primary theme
     id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
-    [themeSetter themeViewBackground:cell];
+    [themeSetter themeCell:cell];
     
     NSDate *alarmTime = [(UILocalNotification *)self.alarmsArray[indexPath.row] fireDate];
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [alarmTime shortTime]];
