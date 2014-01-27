@@ -63,7 +63,19 @@
 
 - (void)showReminderFailureAlert
 {
+    NSString *title = NSLocalizedString(@"I'm sorry, Dave", nil);
+    NSString *message = NSLocalizedString(@"I'm afraid I can't do that.\n"
+                                          @"It seems reminders has been disabled. To enable:\n"
+                                          @"Settings > Privacy > Reminders\n"
+                                          @"and turn the SleepCycle switch on.", nil);
+    NSString *cancelTitle = NSLocalizedString(@"Dismiss", nil);
     
+    UIAlertView *deniedReminderAccess = [[UIAlertView alloc] initWithTitle:title
+                                                                   message:message
+                                                                  delegate:nil
+                                                         cancelButtonTitle:cancelTitle
+                                                         otherButtonTitles:nil];
+    [deniedReminderAccess show];
 }
 
 
