@@ -97,11 +97,12 @@
 {
     NSInteger rowCount = self.alarmsArray.count;
     
-    if (rowCount == 0)
-        self.navigationItem.rightBarButtonItem = nil;
-    else
-        self.navigationItem.rightBarButtonItem = self.editButton;
-    
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        if (rowCount == 0)
+            [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    });
     
     return rowCount;
 }
