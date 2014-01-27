@@ -71,6 +71,42 @@
     }];
 }
 
+- (void)testShortTimeLowerCase
+{
+    // Test the appropriate strings are coming through assuming non-military time
+    NSArray *controlTimeStrings = @[@"12:00 pm",
+                                    @"1:30 pm",
+                                    @"3:00 pm",
+                                    @"4:30 pm",
+                                    @"6:00 pm",
+                                    @"7:30 pm",
+                                    @"9:00 pm",
+                                    @"10:30 pm",
+                                    @"12:00 pm"];
+    
+    // Form the first date
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.hour = 12;
+    
+    // Using created data as seed, add 1.5 hours incrementally
+    NSDate *startDate = [calendar dateFromComponents:components];
+    NSMutableArray *dates = [NSMutableArray arrayWithObject:startDate];
+    
+    for (NSInteger i = 1; i < controlTimeStrings.count; i++)
+    {
+        startDate = [startDate dateByAddingTimeInterval:1.5 * 60 * 60];
+        [dates addObject:(startDate)];
+    }
+    
+    // Verify the strings are equal for each string representation of the dates
+    [dates enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *controlDateString = (NSString *)controlTimeStrings[idx];
+        NSString *testDateString = (NSString *)[(NSDate *)obj shortTimeLowerCase];
+        XCTAssert([controlDateString isEqualToString:testDateString], @"The string and returned string from date do not match in lower case versions");
+    }];
+}
+
 - (void)testHourComponent
 {
     // Create control array of hours (nsuinteger) in 24-hour clock mode
