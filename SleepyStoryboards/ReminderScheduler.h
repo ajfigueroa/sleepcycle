@@ -10,6 +10,8 @@
 
 @interface ReminderScheduler : NSObject
 
+@property (nonatomic, readonly) NSDate *reminderTime;
+
 - (void)addReminderForTime:(NSDate *)reminderTime;
 
 @end

@@ -20,13 +20,25 @@
 
 - (void)addReminderForTime:(NSDate *)reminderTime
 {
+    _reminderTime = reminderTime;
+    
     [self.eventStore requestAccessToEntityType:EKEntityTypeReminder completion:^(BOOL granted, NSError *error) {
         
         if (granted)
-            [self setReminderForReminderTime:reminderTime];
+            [self setReminderForReminderTime];
         else
             [self showReminderFailureAlert];
     }];
+}
+
+- (void)setReminderForReminderTime
+{
+    
+}
+
+- (void)showReminderFailureAlert
+{
+    
 }
 
 
