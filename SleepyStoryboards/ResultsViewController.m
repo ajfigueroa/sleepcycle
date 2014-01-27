@@ -14,6 +14,7 @@
 #import "SettingsAPI.h"
 #import "SchedulerAPI.h"
 
+
 @interface ResultsViewController () <SchedulerDelegate>
 
 @property (nonatomic, strong) NSArray *resultTimes;
@@ -237,8 +238,9 @@
 
 - (IBAction)addSelectedTimeAlarm:(id)sender
 {
-    
+    [self postAlarmActionSheetForSelectedTime];
 }
+
 
 #pragma mark - SchedulerDelegate
 - (void)reminderPosted:(BOOL)success
