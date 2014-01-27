@@ -15,6 +15,7 @@
 
 @end
 
+// Manage whether or not any of the AlertViews are currently presenting
 static BOOL currentlyPresenting;
 
 @implementation FSAlertView
@@ -25,8 +26,10 @@ static BOOL currentlyPresenting;
     self.delegate = self;
     
     if (!currentlyPresenting)
+    {
         [self show];
         currentlyPresenting = YES;
+    }
 }
 
 // Alert View Delegate
