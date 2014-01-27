@@ -33,7 +33,32 @@
 
 - (void)setReminderForReminderTime
 {
+    EKReminder *reminder = [EKReminder reminderWithEventStore:self.eventStore];
+    reminder.title = NSLocalizedString(@"You should be in bed now", nil);
+    reminder.timeZone = [NSTimeZone localTimeZone];
     
+    // Lazy initialize the reminderNote if not already set
+    if (!self.reminderNote)
+        self.reminderNote = NSLocalizedString(@"Reminder to be in bed for this time!", nil);
+    reminder.notes = self.reminderNote;
+    
+    // Add the alarm to the reminder
+    EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:self.reminderTime];
+    [reminder addAlarm:alarm];
+    
+    // Grab the default reminders list in Reminders.app and add it to the reminder
+    EKCalendar *defaultReminderList = [self.eventStore defaultCalendarForNewReminders];
+    reminder.calendar = defaultReminderList;
+    
+    // Check if an error has occured
+    NSError *error = nil;
+    
+    BOOL success = [self.eventStore saveReminder:reminder
+                                          commit:YES
+                                           error:&error];
+    
+    if (!success)
+        NSLog(@"Error saving reminder: %@", error.localizedDescription);
 }
 
 - (void)showReminderFailureAlert
