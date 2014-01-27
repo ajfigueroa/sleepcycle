@@ -8,11 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol ReminderSchedulerDelegate;
+
 @interface ReminderScheduler : NSObject
 
 @property (nonatomic, readonly) NSDate *reminderTime;
 @property (nonatomic, assign) NSString *reminderNote;
 
 - (void)addReminderForTime:(NSDate *)reminderTime;
+
+@end
+
+@protocol ReminderSchedulerDelegate <NSObject>
+
+@optional
+- (void)reminderSchedulerDidPostReminder:(ReminderScheduler *)scheduler;
+- (void)reminderScheduler:(ReminderScheduler *)scheduler
+         didFailWithError:(NSError *)error;
 
 @end
