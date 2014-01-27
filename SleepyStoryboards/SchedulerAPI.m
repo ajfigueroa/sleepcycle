@@ -45,7 +45,7 @@
 }
 
 #pragma mark - Reminder Configuration
-- (void)configureReminderSchedulerNote:(ReminderScheduler *)reminderScheduler
+- (void)configureReminderSchedulerNote
 {
     NSString *reminderNote = [NSString stringWithFormat:NSLocalizedString(@"Hello, it's SleepCycle!\n"
                                                                           @"You should be in bed about now so that "
@@ -64,6 +64,8 @@
 
 - (void)createReminderForDate:(NSDate *)reminderDate
 {
+    // Configure the reminder note and send the reminder request
+    [self configureReminderSchedulerNote];
     [self.reminderScheduler addReminderForTime:reminderDate];
 }
 
