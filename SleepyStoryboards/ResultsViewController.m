@@ -247,6 +247,17 @@
     }
 }
 
+#pragma mark - Reminder/Alarm Notifications
+- (void)alarmPosted:(NSNotification *)aNotification
+{
+    BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccess];
+    NSLog(@"%s, %d", __PRETTY_FUNCTION__, success);
+}
+
+- (void)reminderPosted:(NSNotification *)aNotification
+{
+    BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccess];
+}
 
 #pragma mark - Target Action Methods
 - (void)refreshTriggered

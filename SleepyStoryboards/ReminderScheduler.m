@@ -22,6 +22,9 @@
 {
     _reminderTime = reminderTime;
     
+    if (!self.eventStore)
+        self.eventStore = [[EKEventStore alloc] init];
+    
     [self.eventStore requestAccessToEntityType:EKEntityTypeReminder completion:^(BOOL granted, NSError *error) {
         
         if (granted)

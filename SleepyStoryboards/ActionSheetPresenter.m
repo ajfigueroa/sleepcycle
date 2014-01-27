@@ -146,7 +146,7 @@
                                          otherButtonTitles:tomorrowButtonTitle, nil];
     }
     
-    self.reminderTimesPair = @[sleepTime, tomorrowsDate];
+    self.reminderTimesPair = @[earlierTime, tomorrowsDate];
     
     return actionSheet;
 }

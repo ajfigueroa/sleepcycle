@@ -88,7 +88,7 @@
     // Configure the reminder note and send the reminder request
     [self configureReminderSchedulerNote];
     [self.reminderScheduler createReminderForDate:reminderTime];
-        NSLog(@"Creating alarm for: %@", [reminderTime descriptionWithLocale:[NSLocale currentLocale]]);
+        NSLog(@"Creating reminder for: %@", [reminderTime descriptionWithLocale:[NSLocale currentLocale]]);
 }
 
 
