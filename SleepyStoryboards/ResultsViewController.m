@@ -259,7 +259,6 @@
 #pragma mark - Reminder/Alarm Notifications
 - (void)alarmPosted:(NSNotification *)aNotification
 {
-    NSLog(@"Observer at: %s", __PRETTY_FUNCTION__);
     BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccessKey];
     NSDate *date = (NSDate *)aNotification.userInfo[AFScheduledTimeKey];
 
