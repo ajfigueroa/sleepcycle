@@ -234,7 +234,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Results" id="mAT-Xh-fE3"/>
+                    <navigationItem key="navigationItem" title="Results" id="mAT-Xh-fE3">
+                        <barButtonItem key="rightBarButtonItem" image="alarmclockwhite.png" id="hgb-9J-gCG"/>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bottomMaskView" destination="yV3-Fu-CFq" id="nWi-2y-t2h"/>
@@ -701,6 +703,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
+        <image name="alarmclockwhite.png" width="22" height="22"/>
         <image name="listicon.png" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
