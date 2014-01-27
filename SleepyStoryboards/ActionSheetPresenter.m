@@ -7,7 +7,6 @@
 //
 
 #import "ActionSheetPresenter.h"
-#import "SchedulerAPI.h"
 #import "NSDate+SleepTime.h"
 #import "SettingsAPI.h"
 
@@ -82,7 +81,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     // Present appropriate otherButtonTitles depending on date relative to current time
     UIActionSheet *actionSheet;
     
-    if ([[SchedulerAPI sharedScheduler] spansMultipleDaysForTime:wakeTime])
+    if ([NSDate spansMultipleDaysForTime:wakeTime])
     {
         actionSheet = [[UIActionSheet alloc] initWithTitle:title
                                                   delegate:self
@@ -122,7 +121,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     // Present appropriate otherButtonTitles depending on date relative to current time
     UIActionSheet *actionSheet;
 
-    if ([[SchedulerAPI sharedScheduler] spansMultipleDaysForTime:earlierTime])
+    if ([NSDate spansMultipleDaysForTime:earlierTime])
     {
         actionSheet = [[UIActionSheet alloc] initWithTitle:title
                                                   delegate:self

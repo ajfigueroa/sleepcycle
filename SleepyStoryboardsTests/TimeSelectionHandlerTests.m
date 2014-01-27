@@ -7,12 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "SchedulerAPI.h"
 #import "NSDate+SleepTime.h"
 
 @interface TimeSelectionHandlerTests : XCTestCase
 
-@property (nonatomic, strong) SchedulerAPI *scheduler;
 
 @end
 
@@ -22,16 +20,13 @@
 {
     [super setUp];
     // Put setup code here; it will be run once, before the first test case.
-    if (!self.scheduler)
-        self.scheduler = [SchedulerAPI sharedScheduler];
+
 }
 
 - (void)tearDown
 {
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
-    
-    self.scheduler = nil;
 }
 
 #pragma mark - Testing NSDate Category
@@ -216,7 +211,7 @@
     }];
 
     [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XCTAssertEqual(YES, [self.scheduler spansMultipleDaysForTime:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
+        XCTAssertEqual(YES, [NSDate spansMultipleDaysForTime:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
     }];
 }
 
@@ -239,7 +234,7 @@
     }];
     
     [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XCTAssertEqual(NO, [self.scheduler spansMultipleDaysForTime:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
+        XCTAssertEqual(NO, [NSDate spansMultipleDaysForTime:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
     }];
 }
 
