@@ -8,11 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol AlarmNotificationSchedulerDelegate;
+
 @interface AlarmNotificationScheduler : NSObject
 
 @property (nonatomic, readonly) NSDate *alarmTime;
 @property (nonatomic, strong) NSString *alarmAlertBody;
+@property (nonatomic, weak) id <AlarmNotificationSchedulerDelegate> delegate;
 
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime;
+
+@end
+
+// Protocol Definition
+@protocol AlarmNotificationSchedulerDelegate <NSObject>
+
+@optional
+- (void)alarmNotificationDidPostNotification:(AlarmNotificationScheduler *)alarmScheduler;
+- (void)alarmNotificationSchedulerDidFailPost:(AlarmNotificationScheduler *)alarmScheduler;
 
 @end
