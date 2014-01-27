@@ -67,6 +67,7 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [alarmTime shortDate]];
     cell.textLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize] + 2];
     cell.detailTextLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont labelFontSize]];
+    cell.gestureRecognizers = nil;
 }
 
 #pragma mark - SlidingViewController calls
@@ -75,8 +76,18 @@
     [self.applicationDelegate toggleSlider];
 }
 
-#pragma mark - UITableViewDataSource
+- (IBAction)toggleEditMode:(id)sender
+{
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
+}
 
+#pragma mark - UITableViewDelegate
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -84,7 +95,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.alarmsArray.count;
+    NSInteger rowCount = self.alarmsArray.count;
+    
+    if (rowCount > 0)
+        self.navigationItem.rightBarButtonItem = nil;
+    else
+        self.navigationItem.rightBarButtonItem = self.editButton;
+    
+    
+    return rowCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,6 +117,20 @@
     [self updateCell:cell atIndex:indexPath];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UILocalNotification *localNotification = (UILocalNotification *)self.alarmsArray[(NSUInteger)indexPath.row];
+    
+    // Remove from array
+    [self.alarmsArray removeObject:localNotification];
+    
+    // Remove from application scheduled notifications
+    [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
+    
+    [tableView deleteRowsAtIndexPaths:@[indexPath]
+                     withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - SettingsViewControllerDelegate
