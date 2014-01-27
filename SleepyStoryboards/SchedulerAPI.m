@@ -9,6 +9,10 @@
 
 #import "SchedulerAPI.h"
 
+@interface SchedulerAPI ()
+
+@end
+
 @implementation SchedulerAPI
 
 

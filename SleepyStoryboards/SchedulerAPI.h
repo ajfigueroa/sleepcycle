@@ -12,8 +12,6 @@
 
 // The date/time that was selected in the TimeSelection datePicker
 @property (nonatomic, strong) NSDate *selectedTime;
-// The window on which you want to display. weak since we do NOT own it.
-@property (nonatomic, weak) UIWindow *parentWindow;
 
 + (instancetype)sharedScheduler;
 
