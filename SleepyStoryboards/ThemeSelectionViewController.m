@@ -31,7 +31,10 @@
     [super viewDidAppear:animated];
     
     // Register for Theme Change Notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applyTheme)
+                                                 name:AFThemeHasChangedNotification
+                                               object:nil];
 }
 
 #pragma mark - UITableViewDataSource
