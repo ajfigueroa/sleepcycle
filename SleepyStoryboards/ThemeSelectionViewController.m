@@ -73,18 +73,19 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     // Deselect current row to avoid highlight
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    // Remove checkmark accessory rom the previously selected index path
+    // Remove checkmark accessory from the previously selected index path
     NSIndexPath *previousIndexPath = [NSIndexPath indexPathForRow:self.selectedThemeIndex inSection:0];
     
     UITableViewCell *previousCell = [tableView cellForRowAtIndexPath:previousIndexPath];
     previousCell.accessoryType = UITableViewCellAccessoryNone;
-
+    
     // Update the selected theme by adding the checkmark accessory
     self.selectedThemeIndex = indexPath.row;
-    
+
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
 
