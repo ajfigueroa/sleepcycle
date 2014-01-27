@@ -73,6 +73,8 @@
 #pragma mark - Public Scheduling Methods
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime
 {
+    _scheduledTime = alarmTime;
+ 
     // Configure alert body and send alarm notification post
     [self configureAlarmSchedulerBody];
     [self.alarmScheduler createAlarmNotificationForDate:alarmTime];
@@ -80,6 +82,8 @@
 
 - (void)createReminderForDate:(NSDate *)reminderTime
 {
+    _scheduledTime = reminderTime;
+    
     // Configure the reminder note and send the reminder request
     [self configureReminderSchedulerNote];
     [self.reminderScheduler createReminderForDate:reminderTime];

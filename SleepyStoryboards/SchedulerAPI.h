@@ -12,6 +12,7 @@
 
 // The date/time that was selected in the TimeSelection datePicker
 @property (nonatomic, strong) NSDate *selectedTime;
+@property (nonatomic, readonly) NSDate *scheduledTime;
 
 + (instancetype)sharedScheduler;
 
