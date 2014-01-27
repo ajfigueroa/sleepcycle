@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ActionSheetConstants.h"
+
+@class ActionSheetPresenter;
 
 @protocol ActionSheetPresenterDelegate <NSObject>
 
 @required
-- (void)actionSheetPresenter:(ActionSheetPresenter *)actionSheetPresenter clickedButtonAtIndex:(NSInteger)buttonIndex forActionSheetTag:(AFActionSheetTag)tag;
+- (void)actionSheetPresenter:(ActionSheetPresenter *)actionSheetPresenter
+        clickedButtonAtIndex:(NSInteger)buttonIndex
+           forActionSheetTag:(AFActionSheetTag)tag;
 
 
 @end

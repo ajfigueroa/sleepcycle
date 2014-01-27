@@ -7,8 +7,16 @@
 //
 
 #import "ActionSheetHandler.h"
-@class 
+#import "ActionSheetConstants.h"
+#import "SchedulerAPI.h"
 
 @implementation ActionSheetHandler
+
+- (void)actionSheetPresenter:(ActionSheetPresenter *)actionSheetPresenter
+        clickedButtonAtIndex:(NSInteger)buttonIndex
+           forActionSheetTag:(AFActionSheetTag)tag
+{
+    
+}
 
 @end

@@ -8,7 +8,6 @@
 //  Responsible for presenting all action sheets and scheduling
 
 #import <Foundation/Foundation.h>
-#import "ActionSheetConstants.h"
 #import "ActionSheetPresenterDelegate.h"
 
 @interface ActionSheetPresenter : NSObject <UIActionSheetDelegate>
