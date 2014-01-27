@@ -57,7 +57,8 @@
                                           commit:YES
                                            error:&error];
     
-    if (!success) {
+    if (!success)
+    {
         NSLog(@"Error saving reminder: %@", error.localizedDescription);
         if ([self.delegate respondsToSelector:@selector(reminderScheduler:didFailWithError:)])
             [self.delegate reminderScheduler:self didFailWithError:error];

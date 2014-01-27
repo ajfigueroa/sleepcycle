@@ -12,6 +12,7 @@
 
 - (NSString *)stringUsingFormatter:(NSDateFormatter *)formatter;
 - (NSString *)shortTime;
+- (NSString *)shortTimeLowerCase;
 - (NSString *)shortDate;
 - (NSInteger)hourComponent;
 - (NSArray *)allDateComponents;

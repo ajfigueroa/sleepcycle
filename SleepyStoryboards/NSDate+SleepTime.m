@@ -26,6 +26,11 @@
     return [timeFormatter stringFromDate:self];
 }
 
+- (NSString *)shortTimeLowerCase
+{
+    return [[self shortTime] lowercaseString];
+}
+
 - (NSString *)shortDate
 {
     // Format the date in the short variant (ex. 12/20/14)
