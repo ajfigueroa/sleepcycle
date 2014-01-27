@@ -44,6 +44,18 @@
     return self;
 }
 
+#pragma mark - Reminder Configuration
+- (void)configureReminderSchedulerNote:(ReminderScheduler *)reminderScheduler
+{
+    NSString *reminderNote = [NSString stringWithFormat:NSLocalizedString(@"Hello, it's SleepCycle!\n"
+                                                                          @"You should be in bed about now so that "
+                                                                          @"you'll fall asleep in time to wake up at "
+                                                                          @"your desired time of %@"
+                                                                          , nil), [self.selectedTime shortTime]];
+    self.reminderScheduler.reminderNote = reminderNote;
+}
+
+
 #pragma mark - Public Scheduling Methods
 - (void)createAlarmNotificationForDate:(NSDate *)alarmDate
 {
