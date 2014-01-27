@@ -52,7 +52,7 @@
 
 - (void)createReminderForDate:(NSDate *)reminderDate
 {
-
+    [self.reminderScheduler addReminderForTime:reminderDate];
 }
 
 #pragma mark - Time Verification Methods
