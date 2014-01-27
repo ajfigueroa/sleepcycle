@@ -235,13 +235,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Results" id="mAT-Xh-fE3">
-                        <barButtonItem key="rightBarButtonItem" image="alarmclockwhite.png" id="hgb-9J-gCG"/>
+                        <barButtonItem key="rightBarButtonItem" image="alarmclockwhite.png" id="hgb-9J-gCG">
+                            <connections>
+                                <action selector="addSelectedTimeAlarm:" destination="6Aq-bQ-WOs" id="SVs-lF-Y6f"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bottomMaskView" destination="yV3-Fu-CFq" id="nWi-2y-t2h"/>
                         <outlet property="resultsInformationLabel" destination="Xjo-T8-R9w" id="XPl-Ib-g75"/>
                         <outlet property="resultsTableView" destination="MjK-k6-6Dd" id="7I4-12-Ggj"/>
+                        <outlet property="selectedTimeAlarmButton" destination="hgb-9J-gCG" id="IZB-VP-r06"/>
                         <outlet property="topMaskView" destination="Rvh-v9-9p2" id="d80-ST-tjc"/>
                     </connections>
                 </viewController>

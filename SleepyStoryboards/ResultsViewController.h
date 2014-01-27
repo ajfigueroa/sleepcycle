@@ -20,4 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
 @property (weak, nonatomic) IBOutlet UILabel *resultsInformationLabel;
 
+// Add Alarm for the current selectedTime property
+- (IBAction)addSelectedTimeAlarm:(id)sender;
+
 @end

@@ -23,6 +23,8 @@
 // The top and bottom mask view are covering the slide to refresh view controller
 @property (weak, nonatomic) IBOutlet UIView *topMaskView;
 @property (weak, nonatomic) IBOutlet UIView *bottomMaskView;
+// Add alarmButton outlet to control visibility
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *selectedTimeAlarmButton;
 
 @end
 
@@ -236,4 +238,6 @@
     
 }
 
+- (IBAction)addSelectedTimeAlarm:(id)sender {
+}
 @end
