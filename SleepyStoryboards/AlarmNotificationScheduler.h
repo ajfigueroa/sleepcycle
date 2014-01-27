@@ -11,6 +11,7 @@
 @interface AlarmNotificationScheduler : NSObject
 
 @property (nonatomic, readonly) NSDate *alarmTime;
+@property (nonatomic, strong) NSString *alarmAlertBody;
 
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime;
 

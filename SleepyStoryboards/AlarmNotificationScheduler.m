@@ -30,8 +30,18 @@
     alarmNotification.fireDate = self.alarmTime;
     alarmNotification.timeZone = [NSTimeZone localTimeZone];
     
-    // Configure alert body
-    NSString *alertBody = NSString stringWithFormat:<#(NSString *), ...#>
+    // Lazy intiialize alert body
+    if (!self.alarmAlertBody)
+        self.alarmAlertBody = @"Time to wake up!";
+    
+    alarmNotification.alertBody = self.alarmAlertBody;
+    alarmNotification.alertAction = NSLocalizedString(@"I'm awake...", nil);
+    alarmNotification.soundName = @"newalarmsounds.caf";
+    alarmNotification.applicationIconBadgeNumber = 0;
+    
+    // Post notification
+    [[UIApplication sharedApplication] scheduleLocalNotification:alarmNotification];
+    // Post success delegate message
 }
 
 @end
