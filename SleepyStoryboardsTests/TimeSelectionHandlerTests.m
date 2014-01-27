@@ -7,12 +7,12 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "TimeSelectionHandler.h"
+#import "SchedulerAPI.h"
 #import "NSDate+SleepTime.h"
 
 @interface TimeSelectionHandlerTests : XCTestCase
 
-@property (nonatomic, strong) TimeSelectionHandler *timeSelectionHandler;
+@property (nonatomic, strong) SchedulerAPI *scheduler;
 
 @end
 
@@ -22,8 +22,8 @@
 {
     [super setUp];
     // Put setup code here; it will be run once, before the first test case.
-    if (!self.timeSelectionHandler)
-        self.timeSelectionHandler = [[TimeSelectionHandler alloc] init];
+    if (!self.scheduler)
+        self.scheduler = [SchedulerAPI sharedScheduler];
 }
 
 - (void)tearDown
@@ -31,7 +31,7 @@
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
     
-    self.timeSelectionHandler = nil;
+    self.scheduler = nil;
 }
 
 #pragma mark - Testing NSDate Category
@@ -82,7 +82,7 @@
                                     @"7:30 pm",
                                     @"9:00 pm",
                                     @"10:30 pm",
-                                    @"12:00 pm"];
+                                    @"12:00 am"];
     
     // Form the first date
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -103,7 +103,8 @@
     [dates enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *controlDateString = (NSString *)controlTimeStrings[idx];
         NSString *testDateString = (NSString *)[(NSDate *)obj shortTimeLowerCase];
-        XCTAssert([controlDateString isEqualToString:testDateString], @"The string and returned string from date do not match in lower case versions");
+        BOOL match = [controlDateString isEqualToString:testDateString];
+        XCTAssert(match, @"The string and returned string from date do not match in lower case versions");
     }];
 }
 
@@ -215,7 +216,7 @@
     }];
 
     [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XCTAssertEqual(YES, [self.timeSelectionHandler isTriggerTimeValid:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
+        XCTAssertEqual(YES, [self.scheduler spansMultipleDaysForTime:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
     }];
 }
 
@@ -238,7 +239,7 @@
     }];
     
     [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XCTAssertEqual(NO, [self.timeSelectionHandler isTriggerTimeValid:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
+        XCTAssertEqual(NO, [self.scheduler spansMultipleDaysForTime:(NSDate *)obj], @"The object does not return whether it is a valid multiple reminder");
     }];
 }
 
