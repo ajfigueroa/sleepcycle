@@ -116,6 +116,7 @@
     
     // Post AFThemeHasChangedNotification
     [[NSNotificationCenter defaultCenter] postNotificationName:AFThemeHasChangedNotification object:nil];
+
 }
 
 - (NSArray *)themeNames

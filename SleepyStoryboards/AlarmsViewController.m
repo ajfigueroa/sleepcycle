@@ -58,16 +58,21 @@
     [themeSetter alternateThemeViewBackground:self.view];
     [themeSetter themeTableView:self.tableView];
     self.tableView.separatorColor = [UIColor blackColor];
+    
+    [self.tableView reloadData];
 }
 
 - (void)updateCell:(UITableViewCell *)cell atIndex:(NSIndexPath *)indexPath
 {
+    // Theme the cells with the primary theme
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
+    [themeSetter themeViewBackground:cell];
+    
     NSDate *alarmTime = [(UILocalNotification *)self.alarmsArray[indexPath.row] fireDate];
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [alarmTime shortTime]];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [alarmTime shortDate]];
     cell.textLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize] + 2];
     cell.detailTextLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont labelFontSize]];
-    cell.gestureRecognizers = nil;
 }
 
 #pragma mark - SlidingViewController calls
@@ -106,10 +111,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlarmCell"];
-    
-    // Theme the cells with the primary theme
-    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
-    [themeSetter themeViewBackground:cell];
     
     [self updateCell:cell atIndex:indexPath];
     
