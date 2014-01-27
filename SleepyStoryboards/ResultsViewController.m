@@ -13,6 +13,7 @@
 #import "SettingsAPI.h"
 #import "SchedulerAPI.h"
 #import "ActionSheetPresenter.h"
+#import "ActionSheetHandler.h"
 
 @interface ResultsViewController () <UIGestureRecognizerDelegate, ActionSheetPresenterDelegate>
 
@@ -20,6 +21,7 @@
 @property (nonatomic, assign) BOOL isPongRefreshControlVisible;
 @property (nonatomic, strong) BOZPongRefreshControl *pongRefreshControl;
 @property (nonatomic, strong) ActionSheetPresenter *actionSheetPresenter;
+@property (nonatomic, strong) ActionSheetHandler *actionSheetHandler;
 
 // The top and bottom mask view are covering the slide to refresh view controller
 @property (weak, nonatomic) IBOutlet UIView *topMaskView;
@@ -218,6 +220,11 @@
                 // Build the action sheet present and add it's window
                 self.actionSheetPresenter = [[ActionSheetPresenter alloc] init];
                 self.actionSheetPresenter.presenterWindow = self.view.window;
+                
+                // Lazy initialize the actionSheetHandler and set as presenter delegate
+                if (!self.actionSheetHandler)
+                    self.actionSheetHandler = [[ActionSheetHandler alloc] init];
+                self.actionSheetPresenter.delegate = self.actionSheetHandler;
                 
                 // Send the selected time from date picker to sharedScheduler
                 [[SchedulerAPI sharedScheduler] setSelectedTime:self.selectedTime];
