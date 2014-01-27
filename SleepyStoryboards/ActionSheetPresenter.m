@@ -106,7 +106,7 @@
                                          otherButtonTitles:tomorrowButtonTitle, nil];
     }
     
-    self.alarmTimesPair = @[wakeTime, tomorrowsDate];
+    self.alarmTimesPair = @[tomorrowsDate, wakeTime];
     
     return actionSheet;
 }
@@ -175,7 +175,6 @@
             break;
     }
     
-
 }
 
 

@@ -8,6 +8,13 @@
 
 #import "ActionSheetHandler.h"
 #import "SchedulerAPI.h"
+#import "NSDate+SleepTime.h"
+
+@interface ActionSheetHandler ()
+
+@property (nonatomic, strong) NSArray *datePairs;
+
+@end
 
 @implementation ActionSheetHandler
 
@@ -15,9 +22,16 @@
         clickedButtonAtIndex:(NSInteger)buttonIndex
               forActionSheet:(UIActionSheet *)actionSheet
                      withTag:(AFActionSheetTag)tag
+                    andDates:(NSArray *)datePairs
 {
+    // The datePairs array should contain two dates.
+    assert(datePairs.count == 2);
+    
     if (buttonIndex != actionSheet.cancelButtonIndex)
         return;
+    
+    // Assign the date pair values
+    self.datePairs = datePairs;
     
     switch (actionSheet.tag) {
         case AFActionSheetTagAlarm:
@@ -38,12 +52,19 @@
 - (void)performAlarmActionForIndex:(AFActionSheetAlarm)index
 {
     // Zero the alarm seconds
-    NSDate *alarmTime = self.alarmTime;
+    NSDate *alarmTime = (NSDate *)self.datePairs[index];
     
-    if (index == AFActionSheetAlarmTomorrow)
-        alarmTime = [self.alarmTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
-    
-    [self addAlarmForTime:[alarmTime zeroDateSeconds]];
+    [[SchedulerAPI sharedScheduler] createAlarmNotificationForDate:[alarmTime zeroDateSeconds]];
 }
+
+#pragma mark - Reminder Preparation
+- (void)performReminderActionForIndex:(AFActionSheetReminder)index
+{
+    // First zero seconds
+    NSDate *reminderTargetTime = (NSDate *)self.datePairs[index];
+    
+    [[SchedulerAPI sharedScheduler] createReminderForDate:[reminderTargetTime zeroDateSeconds]];
+}
+
 
 @end
