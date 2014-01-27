@@ -121,6 +121,8 @@
     BOOL reverse = (self.selectedUserMode == AFSelectedUserModeCalculateBedTime) ? YES: NO;
     
     id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
+    
+    // Indivudally theme the table cell
     [themeSetter themeTableViewCell:cell
                         inTableView:self.resultsTableView
                         atIndexPath:indexPath
