@@ -98,6 +98,8 @@
     switch (selectedUserMode) {
         case AFSelectedUserModeCalculateWakeTime:
             self.resultsInformationLabel.text = @"You should wake up at these times:";
+            // Hide the selectedTimeAlarm UIBarButtonItem from the navigation bar
+            self.navigationItem.rightBarButtonItem = nil;
             break;
             
         case AFSelectedUserModeCalculateBedTime:
