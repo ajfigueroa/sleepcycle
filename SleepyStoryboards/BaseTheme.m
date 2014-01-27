@@ -250,6 +250,11 @@
     }
 }
 
+- (void)themeCell:(UITableViewCell *)cell
+{
+    [self themeViewBackground:cell];
+}
+
 - (void)themeSwitch:(UISwitch *)switchControl
 {
     switchControl.onTintColor = self.primaryBackgroundColor;

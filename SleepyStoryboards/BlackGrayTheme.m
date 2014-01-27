@@ -33,6 +33,13 @@
     label.textColor = self.primaryTextColor;
 }
 
+- (void)themeCell:(UITableViewCell *)cell
+{
+    [self themeViewBackground:cell];
+    cell.textLabel.textColor = self.primaryTextColor;
+    cell.detailTextLabel.textColor = self.primaryTextColor;
+}
+
 - (void)themeTextField:(UITextField *)textField
 {
     textField.textColor = self.primaryTextColor;
@@ -50,5 +57,6 @@
     view.layer.borderColor = borderColor;
     view.layer.borderWidth = 1.5f;
 }
+
 
 @end

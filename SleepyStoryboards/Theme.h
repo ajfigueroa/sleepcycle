@@ -46,6 +46,9 @@
           withImageView:(UIImageView *)imageView
          forThemeOption:(NSInteger)themeOption;
 
+// Theme general UITableViewCell
+- (void)themeCell:(UITableViewCell *)cell;
+
 // Theme the UISwitch
 - (void)themeSwitch:(UISwitch *)switchControl;
 
