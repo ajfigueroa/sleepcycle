@@ -16,7 +16,7 @@
 @property (nonatomic, assign) NSString *reminderNote;
 @property (nonatomic, weak) id <ReminderSchedulerDelegate> delegate;
 
-- (void)addReminderForTime:(NSDate *)reminderTime;
+- (void)createReminderForDate:(NSDate *)reminderTime;
 
 @end
 

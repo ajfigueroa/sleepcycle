@@ -15,8 +15,8 @@
 
 + (instancetype)sharedScheduler;
 
-- (void)createAlarmNotificationForDate:(NSDate *)alarmDate;
-- (void)createReminderForDate:(NSDate *)reminderDate;
+- (void)createAlarmNotificationForDate:(NSDate *)alarmTime;
+- (void)createReminderForDate:(NSDate *)reminderTime;
 
 // Returns bool indicating if the time exists today and tomorrow
 // or just tomorrow

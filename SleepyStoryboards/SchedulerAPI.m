@@ -57,19 +57,19 @@
 
 
 #pragma mark - Public Scheduling Methods
-- (void)createAlarmNotificationForDate:(NSDate *)alarmDate
+- (void)createAlarmNotificationForDate:(NSDate *)alarmTime
 {
     
 }
 
-- (void)createReminderForDate:(NSDate *)reminderDate
+- (void)createReminderForDate:(NSDate *)reminderTime
 {
     // Configure the reminder note and send the reminder request
     [self configureReminderSchedulerNote];
-    [self.reminderScheduler addReminderForTime:reminderDate];
+    [self.reminderScheduler createReminderForDate:reminderTime];
 }
 
-#pragma mark - Time Verification Methods
+#pragma mark - Public Time Verification Methods
 - (BOOL)spansMultipleDaysForTime:(NSDate *)candidateTime
 {
     // Compare the candidateTime with currentTime to validate alarm/reminder setting

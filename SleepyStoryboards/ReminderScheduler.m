@@ -18,7 +18,7 @@
 
 @implementation ReminderScheduler
 
-- (void)addReminderForTime:(NSDate *)reminderTime
+- (void)createReminderForDate:(NSDate *)reminderTime;
 {
     _reminderTime = reminderTime;
     
