@@ -16,7 +16,9 @@
 @required
 - (void)actionSheetPresenter:(ActionSheetPresenter *)actionSheetPresenter
         clickedButtonAtIndex:(NSInteger)buttonIndex
-           forActionSheetTag:(AFActionSheetTag)tag;
+              forActionSheet:(UIActionSheet *)actionSheet
+                     withTag:(AFActionSheetTag)tag
+                    andDates:(NSArray *)datePairs;
 
 
 @end

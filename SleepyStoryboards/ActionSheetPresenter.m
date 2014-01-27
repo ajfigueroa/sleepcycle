@@ -13,6 +13,17 @@
 #define MINUTES_AS_SECONDS(x) (x * 60)
 #define HOURS_AS_SECONDS(x) (x * 60 * 60)
 
+@interface ActionSheetPresenter ()
+
+// The desired scheduled time
+@property (nonatomic, strong) NSDate *desiredScheduledTime;
+
+// Keep a reference to the pairs of Reminder and Alarm Times (prone to overwrites)
+@property (nonatomic, strong) NSArray *alarmTimesPair;
+@property (nonatomic, strong) NSArray *reminderTimesPair;
+
+@end
+
 @implementation ActionSheetPresenter
 {}
 
@@ -95,7 +106,7 @@
                                          otherButtonTitles:tomorrowButtonTitle, nil];
     }
     
-    
+    self.alarmTimesPair = @[wakeTime, tomorrowsDate];
     
     return actionSheet;
 }
@@ -135,15 +146,36 @@
                                          otherButtonTitles:tomorrowButtonTitle, nil];
     }
     
+    self.reminderTimesPair = @[sleepTime, tomorrowsDate];
+    
     return actionSheet;
 }
 
 #pragma mark - UIActionSheetDelegate
 -  (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self.delegate actionSheetPresenter:self
-                   clickedButtonAtIndex:buttonIndex
-                      forActionSheetTag:actionSheet.tag];
+    switch (actionSheet.tag) {
+        case AFActionSheetTagAlarm:
+            [self.delegate actionSheetPresenter:self
+                           clickedButtonAtIndex:buttonIndex
+                                 forActionSheet:actionSheet
+                                        withTag:actionSheet.tag
+                                       andDates:self.alarmTimesPair];
+            break;
+            
+        case AFActionSheetTagReminder:
+            [self.delegate actionSheetPresenter:self
+                           clickedButtonAtIndex:buttonIndex
+                                 forActionSheet:actionSheet
+                                        withTag:actionSheet.tag
+                                       andDates:self.reminderTimesPair];
+            break;
+            
+        default:
+            break;
+    }
+    
+
 }
 
 

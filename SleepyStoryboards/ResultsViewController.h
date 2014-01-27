@@ -15,6 +15,7 @@
 @property (nonatomic, strong) id <SleepTimeModelProtocol> model;
 @property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
 @property (nonatomic, assign) AFSelectedUserMode selectedUserMode;
+// The time passed in from the datePicker of the TimeSelectionViewController (aka Destination Time)
 @property (nonatomic, strong) NSDate *selectedTime;
 
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;

@@ -14,7 +14,7 @@
 #import "SchedulerAPI.h"
 #import "ActionSheetPresenter.h"
 
-@interface ResultsViewController () <SchedulerDelegate, UIGestureRecognizerDelegate, ActionSheetPresenterDelegate>
+@interface ResultsViewController () <UIGestureRecognizerDelegate, ActionSheetPresenterDelegate>
 
 @property (nonatomic, strong) NSArray *resultTimes;
 @property (nonatomic, assign) BOOL isPongRefreshControlVisible;
@@ -245,18 +245,6 @@
 {
     
 }
-
-#pragma mark - SchedulerDelegate
-- (void)reminderPosted:(BOOL)success
-{
-    NSLog(@"Reminder Posted: %hhd", success);
-}
-
-- (void)alarmPosted:(BOOL)success
-{
-    NSLog(@"Alarm Posted: %hhd", success);
-}
-
 
 #pragma mark - End of Life
 - (void)dealloc
