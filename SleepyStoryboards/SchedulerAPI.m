@@ -57,11 +57,18 @@
     NSString *reminderNote = [NSString stringWithFormat:NSLocalizedString(@"Hello, it's SleepCycle!\n"
                                                                           @"You should be in bed about now so that "
                                                                           @"you'll fall asleep in time to wake up at "
-                                                                          @"your desired time of %@"
-                                                                          , nil), [self.selectedTime shortTime]];
+                                                                          @"your desired time of %@", nil),
+                                                                            [self.selectedTime shortTime]];
     self.reminderScheduler.reminderNote = reminderNote;
 }
 
+- (void)configureAlarmSchedulerBody
+{
+    NSString *alertBody = [NSString stringWithFormat:NSLocalizedString(@"Time to wake up for your %@ alarm!", nil),
+                                                                            [self.selectedTime shortTimeLowerCase]];
+    
+    self.alarmScheduler.alarmAlertBody = alertBody;
+}
 
 #pragma mark - Public Scheduling Methods
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime
