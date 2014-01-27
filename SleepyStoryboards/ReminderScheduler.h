@@ -14,11 +14,13 @@
 
 @property (nonatomic, readonly) NSDate *reminderTime;
 @property (nonatomic, assign) NSString *reminderNote;
+@property (nonatomic, weak) id <ReminderSchedulerDelegate> delegate;
 
 - (void)addReminderForTime:(NSDate *)reminderTime;
 
 @end
 
+// Protocol Definition
 @protocol ReminderSchedulerDelegate <NSObject>
 
 @optional
