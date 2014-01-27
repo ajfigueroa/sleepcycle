@@ -226,28 +226,33 @@
         
         if (indexPath)
         {
-            if (!self.actionSheetPresenter)
-            {
-                // Build the action sheet present and add it's window
-                self.actionSheetPresenter = [[ActionSheetPresenter alloc] init];
-            }
-            
-            self.actionSheetPresenter.presenterWindow = self.view.window;
-            
-            // Lazy initialize the actionSheetHandler and set as presenter delegate
-            if (!self.actionSheetHandler)
-                self.actionSheetHandler = [[ActionSheetHandler alloc] init];
-            
-            self.actionSheetPresenter.delegate = self.actionSheetHandler;
-            
-            // Send the selected time from date picker to sharedScheduler
-            [[SchedulerAPI sharedScheduler] setSelectedTime:self.selectedTime];
-            
-            
-            [self.actionSheetPresenter buildActionSheetForState:self.selectedUserMode
-                                                        andDate:date];
+            [self buildActionSheetPresenterAndHandler:date andState:self.selectedUserMode];
         }
     }
+}
+
+- (void)buildActionSheetPresenterAndHandler:(NSDate *)date andState:(AFSelectedUserMode)selectedUserMode
+{
+    if (!self.actionSheetPresenter)
+    {
+        // Build the action sheet present and add it's window
+        self.actionSheetPresenter = [[ActionSheetPresenter alloc] init];
+    }
+    
+    self.actionSheetPresenter.presenterWindow = self.view.window;
+    
+    // Lazy initialize the actionSheetHandler and set as presenter delegate
+    if (!self.actionSheetHandler)
+        self.actionSheetHandler = [[ActionSheetHandler alloc] init];
+    
+    self.actionSheetPresenter.delegate = self.actionSheetHandler;
+    
+    // Send the selected time from date picker to sharedScheduler
+    [[SchedulerAPI sharedScheduler] setSelectedTime:self.selectedTime];
+    
+    
+    [self.actionSheetPresenter buildActionSheetForState:selectedUserMode
+                                                andDate:date];
 }
 
 #pragma mark - Reminder/Alarm Notifications
