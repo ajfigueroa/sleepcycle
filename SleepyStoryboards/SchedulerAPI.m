@@ -9,11 +9,13 @@
 
 #import "SchedulerAPI.h"
 #import "ReminderScheduler.h"
+#import "AlarmNotificationScheduler.h"
 #import "NSDate+SleepTime.h"
 
-@interface SchedulerAPI () <ReminderSchedulerDelegate>
+@interface SchedulerAPI () <ReminderSchedulerDelegate, AlarmNotificationSchedulerDelegate>
 
 @property (nonatomic, strong) ReminderScheduler *reminderScheduler;
+@property (nonatomic, strong) AlarmNotificationScheduler *alarmScheduler;
 
 @end
 
@@ -37,8 +39,13 @@
     
     if (self)
     {
+        // Set reminderScheduler delegate
         self.reminderScheduler = [[ReminderScheduler alloc] init];
         self.reminderScheduler.delegate = (id <ReminderSchedulerDelegate>)self;
+        
+        // Set alarmScheduler delegate
+        self.alarmScheduler = [[AlarmNotificationScheduler alloc] init];
+        self.alarmScheduler.delegate = (id <AlarmNotificationSchedulerDelegate>)self;
     }
     
     return self;
@@ -59,7 +66,9 @@
 #pragma mark - Public Scheduling Methods
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime
 {
-    
+    // Configure alert body and send alarm notification post
+    [self configureAlarmSchedulerBody];
+    [self.alarmScheduler createAlarmNotificationForDate:alarmTime];
 }
 
 - (void)createReminderForDate:(NSDate *)reminderTime
