@@ -15,7 +15,7 @@
 #import "SchedulerAPI.h"
 
 
-@interface ResultsViewController () <SchedulerDelegate>
+@interface ResultsViewController () <SchedulerDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSArray *resultTimes;
 @property (nonatomic, assign) BOOL isPongRefreshControlVisible;

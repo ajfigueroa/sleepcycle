@@ -7,34 +7,136 @@
 //
 
 #import "ActionSheetPresenter.h"
+#import "SchedulerAPI.h"
+#import "NSDate+SleepTime.h"
+#import "SettingsAPI.h"
 
-typedef NS_ENUM(NSInteger, AFActionSheetType)
+#define MINUTES_AS_SECONDS(x) (x * 60)
+#define HOURS_AS_SECONDS(x) (x * 60 * 60)
+
+typedef NS_ENUM(NSInteger, ActionSheetMode)
 {
-    AFActionSheetTypeSelectedTimeAlarm
+    ActionSheetModeReminder,
+    ActionSheetModeAlarm
+};
+
+typedef NS_ENUM(NSInteger, ActionSheetReminder)
+{
+    ActionSheetReminderToday,
+    ActionSheetReminderTomorrow
+};
+
+typedef NS_ENUM(NSInteger, ActionSheetAlarm)
+{
+    ActionSheetAlarmTomorrow,
+    ActionSheetAlarmToday
 };
 
 @implementation ActionSheetPresenter
 
-#pragma mark - UIActionSheetDelegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+#pragma mark - Action Sheet Methods
+- (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date
 {
-
+    UIActionSheet *actionSheet;
+    
+    switch (state) {
+        case AFSelectedUserModeCalculateWakeTime:
+            {
+                NSDate *alarmTime = date;
+                actionSheet = [self alarmActionSheetForWakeTime:alarmTime];
+                actionSheet.tag = ActionSheetModeAlarm;
+            }
+            break;
+            
+        case AFSelectedUserModeCalculateBedTime:
+            {
+                NSDate *reminderTime = date;
+                actionSheet = [self reminderActionSheetForSleepTime:reminderTime];
+                actionSheet.tag = ActionSheetModeReminder;
+            }
+            break;
+            
+        default:
+            NSLog(@"%s: Performing no action sheet display", __PRETTY_FUNCTION__);
+            break;
+    }
+    
+    // Display action sheet
+    [actionSheet showInView:self.presenterWindow];
 }
 
-#pragma mark - ActionSheet Presentation Methods
-- (void)postAlarmActionSheetForSelectedTime
+- (UIActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime
 {
-    NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Set Alarm for %@", nil)];
-    NSString *cancelTitle = NSLocalizedString(@"Nevermind", nil);
+    NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Set Alarm for %@", nil),
+                                                                [wakeTime shortTimeLowerCase]];
     
-    // Create actionsheet with tag
-    UIActionSheet *selectedTimeAlarmActionSheet = [[UIActionSheet alloc] initWithTitle:title
-                                                                              delegate:self
-                                                                     cancelButtonTitle:cancelTitle
-                                                                destructiveButtonTitle:nil
-                                                                     otherButtonTitles:nil];
+    NSString *todayButtonTitle = [NSString stringWithFormat:NSLocalizedString(@"Today (%@)", nil),
+                                                                            [wakeTime shortDate]];
     
-    selectedTimeAlarmActionSheet.tag = AFActionSheetTypeSelectedTimeAlarm;
+    // Fast forward date by 24 hours
+    NSDate *tomorrowsDate = [wakeTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
+    NSString *tomorrowButtonTitle = [NSString stringWithFormat:NSLocalizedString(@"Tomorrow (%@)", nil),
+                                                                             [tomorrowsDate shortDate]];
+    
+    // Present appropriate otherButtonTitles depending on date relative to current time
+    UIActionSheet *actionSheet;
+    
+    if ([[SchedulerAPI sharedScheduler] spansMultipleDaysForTime:wakeTime])
+    {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                  delegate:self
+                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:tomorrowButtonTitle, todayButtonTitle, nil];
+    } else {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                  delegate:self
+                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:tomorrowButtonTitle, nil];
+    }
+    
+    
+    
+    return actionSheet;
+}
+
+- (UIActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime
+{
+    // Create date set back by the user defined time to fall asleep (default 14)
+    NSInteger timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
+    NSDate *earlierTime = [sleepTime dateByAddingTimeInterval:(-1 * (MINUTES_AS_SECONDS(timeToFallAsleep)))];
+    
+    NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Remind me to be in bed at %@", nil),
+                                                                                [earlierTime shortTime]];
+    
+    NSString *todayButtonTitle = [NSString stringWithFormat:NSLocalizedString(@"Today - %@", nil),
+                                                                          [earlierTime shortDate]];
+    
+    // Shift date by 24 hours forward
+    NSDate *tomorrowsDate = [earlierTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
+    NSString *tomorrowButtonTitle = [NSString stringWithFormat:NSLocalizedString(@"Tomorrow - %@", nil),
+                                                                             [tomorrowsDate shortDate]];
+    
+    // Present appropriate otherButtonTitles depending on date relative to current time
+    UIActionSheet *actionSheet;
+
+    if ([[SchedulerAPI sharedScheduler] spansMultipleDaysForTime:earlierTime])
+    {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                  delegate:self
+                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:todayButtonTitle, tomorrowButtonTitle, nil];
+    } else {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                  delegate:self
+                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:tomorrowButtonTitle, nil];
+    }
+    
+    return actionSheet;
 }
 
 

@@ -10,8 +10,7 @@
 #import "SleepTimeModelProtocol.h"
 #import "ApplicationSlidingViewControllerProtocol.h"
 
-@interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,
-                                                     UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) id <SleepTimeModelProtocol> model;
 @property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;

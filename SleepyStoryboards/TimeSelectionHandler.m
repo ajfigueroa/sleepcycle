@@ -15,7 +15,6 @@
 
 @interface TimeSelectionHandler ()
 
-@property (nonatomic, strong) UIWindow *window;
 @property (nonatomic) AFSelectedUserMode selectedUserMode;
 @property (nonatomic, strong) NSDate *reminderTime;
 @property (nonatomic, strong) NSDate *alarmTime;

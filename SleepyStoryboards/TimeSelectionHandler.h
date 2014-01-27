@@ -8,15 +8,12 @@
 //  Responsible for handling all Reminder and LocalNotification requests
 
 #import <Foundation/Foundation.h>
-@import EventKit;
 
 @interface TimeSelectionHandler : NSObject <UIActionSheetDelegate>
 
-@property (nonatomic, strong) EKEventStore *eventStore;
 @property (nonatomic, strong) NSDate *destinationTime;
+@property (nonatomic, weak) UIWindow *presenterWindow;
 
-- (instancetype)initWithWindow:(UIWindow *)window;
 - (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date;
-- (BOOL)isTriggerTimeValid:(NSDate *)triggerTime;
 
 @end
