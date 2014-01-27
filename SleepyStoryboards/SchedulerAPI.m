@@ -104,10 +104,7 @@
     for (UILocalNotification *notification in allScheduledNotification)
     {
         if ([notification.fireDate isEqualToDate:date])
-        {
-            NSLog(@"Already a date...");
             return YES;
-        }
     }
     
     return NO;
