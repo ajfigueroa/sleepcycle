@@ -20,9 +20,6 @@
 
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime;
 - (void)createReminderForDate:(NSDate *)reminderTime;
-// Returns bool indicating if the time exists today and tomorrow
-// or just tomorrow
-- (BOOL)spansMultipleDaysForTime:(NSDate *)candidateTime;
 
 @end
 

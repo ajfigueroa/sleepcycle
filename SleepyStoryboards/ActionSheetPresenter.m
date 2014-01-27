@@ -65,6 +65,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     [actionSheet showInView:self.presenterWindow];
 }
 
+#pragma mark - Custom Action Sheets for Modes
 - (UIActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime
 {
     NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Set Alarm for %@", nil),
@@ -137,6 +138,12 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     }
     
     return actionSheet;
+}
+
+#pragma mark - UIActionSheetDelegate
+-  (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
 }
 
 

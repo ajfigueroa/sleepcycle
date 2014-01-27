@@ -10,6 +10,10 @@
 
 @interface NSDate (SleepTime)
 
+// Returns bool indicating if the time exists today and tomorrow
+// or just tomorrow
++ (BOOL)spansMultipleDaysForTime:(NSDate *)candidateTime;
+
 - (NSString *)stringUsingFormatter:(NSDateFormatter *)formatter;
 - (NSString *)shortTime;
 - (NSString *)shortTimeLowerCase;
