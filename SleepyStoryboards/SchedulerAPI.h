@@ -16,6 +16,7 @@
 
 + (instancetype)sharedScheduler;
 
+- (void)createAlarmNotificationForDatePickerSelectedTime;
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime;
 - (void)createReminderForDate:(NSDate *)reminderTime;
 
