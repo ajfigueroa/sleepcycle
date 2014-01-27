@@ -13,29 +13,28 @@
 #define MINUTES_AS_SECONDS(x) (x * 60)
 #define HOURS_AS_SECONDS(x) (x * 60 * 60)
 
-typedef NS_ENUM(NSInteger, ActionSheetTag)
-{
-    ActionSheetTagReminder,
-    ActionSheetTagAlarm
-};
-
-typedef NS_ENUM(NSInteger, ActionSheetReminder)
-{
-    ActionSheetReminderToday,
-    ActionSheetReminderTomorrow
-};
-
-typedef NS_ENUM(NSInteger, ActionSheetAlarm)
-{
-    ActionSheetAlarmTomorrow,
-    ActionSheetAlarmToday
-};
-
 @implementation ActionSheetPresenter
+{}
+
+- (instancetype)initWithPresenterWindow:(UIWindow *)presenterWindow
+{
+    self = [super init];
+    
+    if (self)
+    {
+        // Ensure a window exists to load action sheets unto
+        self.presenterWindow = presenterWindow;
+    }
+    
+    return self;
+}
 
 #pragma mark - Action Sheet Methods
 - (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date
 {
+    // Ensure the presenter window exists prior to loading actionsheet
+    assert(self.presenterWindow != nil);
+    
     UIActionSheet *actionSheet;
     
     switch (state) {
@@ -43,7 +42,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
             {
                 NSDate *alarmTime = date;
                 actionSheet = [self alarmActionSheetForWakeTime:alarmTime];
-                actionSheet.tag = ActionSheetTagAlarm;
+                actionSheet.tag = AFActionSheetTagAlarm;
             }
             break;
             
@@ -51,7 +50,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
             {
                 NSDate *reminderTime = date;
                 actionSheet = [self reminderActionSheetForSleepTime:reminderTime];
-                actionSheet.tag = ActionSheetTagReminder;
+                actionSheet.tag = AFActionSheetTagReminder;
             }
             break;
             

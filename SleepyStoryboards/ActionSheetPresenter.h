@@ -8,17 +8,19 @@
 //  Responsible for presenting all action sheets and scheduling
 
 #import <Foundation/Foundation.h>
+#import "ActionSheetConstants.h"
 
 @protocol ActionSheetPresenterDelegate;
 
 @interface ActionSheetPresenter : NSObject <UIActionSheetDelegate>
 
 // The window on which to present the action sheet unto
-@property (nonatomic, weak) UIWindow *presenterWindow;
+@property (nonatomic, strong) UIWindow *presenterWindow;
 // The delegate to notify of selections between various action sheets
 @property (nonatomic, weak) id <ActionSheetPresenterDelegate> delegate;
 
-// Action Sheet Builder
+- (instancetype)initWithPresenterWindow:(UIWindow *)presenterWindow;
+// Action Sheet Builder Method
 - (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date;
 
 @end
@@ -26,6 +28,6 @@
 @protocol ActionSheetPresenterDelegate <NSObject>
 
 @required
-- (void)actionSheetPresenter:(ActionSheetPresenter *)actionSheetPresenter clickedButtonAtIndex:(NSInteger)buttonIndex forActionSheetTag:(NSInteger)tag;
+- (void)actionSheetPresenter:(ActionSheetPresenter *)actionSheetPresenter clickedButtonAtIndex:(NSInteger)buttonIndex forActionSheetTag:(AFActionSheetTag)tag;
 
 @end

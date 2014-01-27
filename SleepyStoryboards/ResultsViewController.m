@@ -10,22 +10,22 @@
 #import "BOZPongRefreshControl.h"
 #import "ThemeFactory.h"
 #import "NSDate+SleepTime.h"
-#import "TimeSelectionHandler.h"
 #import "SettingsAPI.h"
 #import "SchedulerAPI.h"
+#import "ActionSheetPresenter.h"
 
-
-@interface ResultsViewController () <SchedulerDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface ResultsViewController () <SchedulerDelegate, UIGestureRecognizerDelegate, ActionSheetPresenterDelegate>
 
 @property (nonatomic, strong) NSArray *resultTimes;
 @property (nonatomic, assign) BOOL isPongRefreshControlVisible;
 @property (nonatomic, strong) BOZPongRefreshControl *pongRefreshControl;
-@property (nonatomic, strong) TimeSelectionHandler *timeSelectionHandler;
+@property (nonatomic, strong) ActionSheetPresenter *actionSheetPresenter;
 
 // The top and bottom mask view are covering the slide to refresh view controller
 @property (weak, nonatomic) IBOutlet UIView *topMaskView;
 @property (weak, nonatomic) IBOutlet UIView *bottomMaskView;
-// Add alarmButton outlet to control visibility
+
+// alarmButton outlet to control visibility
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *selectedTimeAlarmButton;
 
 @end
@@ -213,13 +213,18 @@
         
         if (indexPath)
         {
-            if (!self.timeSelectionHandler)
+            if (!self.actionSheetPresenter)
             {
-                self.timeSelectionHandler = [[TimeSelectionHandler alloc] initWithWindow:self.view.window];
-                self.timeSelectionHandler.destinationTime = self.selectedTime;
+                // Build the action sheet present and add it's window
+                self.actionSheetPresenter = [[ActionSheetPresenter alloc] init];
+                self.actionSheetPresenter.presenterWindow = self.view.window;
+                
+                // Send the selected time from date picker to sharedScheduler
+                [[SchedulerAPI sharedScheduler] setSelectedTime:self.selectedTime];
             }
             
-            [self.timeSelectionHandler buildActionSheetForState:self.selectedUserMode andDate:date];
+            [self.actionSheetPresenter buildActionSheetForState:self.selectedUserMode
+                                                        andDate:date];
         }
     }
 }
@@ -238,9 +243,8 @@
 
 - (IBAction)addSelectedTimeAlarm:(id)sender
 {
-    [self postAlarmActionSheetForSelectedTime];
+    
 }
-
 
 #pragma mark - SchedulerDelegate
 - (void)reminderPosted:(BOOL)success
