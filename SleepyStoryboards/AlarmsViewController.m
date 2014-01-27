@@ -40,6 +40,15 @@
                                                  name:AFThemeHasChangedNotification
                                                object:nil];
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // Disable edit mode
+    [self.tableView setEditing:NO animated:YES];
+}
+
 #pragma mark - Data Source
 - (void)populateAlarmsArray
 {
