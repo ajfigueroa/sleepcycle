@@ -90,23 +90,31 @@
 - (void)reminderScheduler:(ReminderScheduler *)scheduler didFailWithError:(NSError *)error
 {
     NSLog(@"Error: %@", error.localizedDescription);
-    [self.delegate reminderPosted:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFReminderHasPosted
+                                                        object:nil
+                                                      userInfo:@{AFAlarmReminderNotificationSuccess: @NO}];
 }
 
 - (void)reminderSchedulerDidPostReminder:(ReminderScheduler *)scheduler
 {
-    [self.delegate reminderPosted:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFReminderHasPosted
+                                                        object:nil
+                                                      userInfo:@{AFAlarmReminderNotificationSuccess: @YES}];
 }
 
 #pragma mark - AlarmNotificationSchedulerDelegate
 - (void)alarmNotificationSchedulerDidFailPost:(AlarmNotificationScheduler *)alarmScheduler
 {
-    [self.delegate alarmPosted:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFAlarmHasPosted
+                                                        object:nil
+                                                      userInfo:@{AFAlarmReminderNotificationSuccess: @NO}];
 }
 
 - (void)alarmNotificationDidPostNotification:(AlarmNotificationScheduler *)alarmScheduler
 {
-    [self.delegate alarmPosted:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFAlarmHasPosted
+                                                        object:nil
+                                                      userInfo:@{AFAlarmReminderNotificationSuccess: @YES}];
 }
 
 @end
