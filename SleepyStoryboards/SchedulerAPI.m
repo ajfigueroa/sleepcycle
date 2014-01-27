@@ -82,7 +82,8 @@
  
     // Configure alert body and send alarm notification post
     [self configureAlarmSchedulerBody];
-    [self.alarmScheduler createAlarmNotificationForDate:alarmTime];
+    if (![self alarmAlreadyExistsForTime:_scheduledTime])
+        [self.alarmScheduler createAlarmNotificationForDate:alarmTime];
 }
 
 - (void)createReminderForDate:(NSDate *)reminderTime
@@ -94,6 +95,23 @@
     [self.reminderScheduler createReminderForDate:reminderTime];
 }
 
+#pragma mark - Helpers
+- (BOOL)alarmAlreadyExistsForTime:(NSDate *)date
+{
+    // No need for alarm or notification
+    NSArray *allScheduledNotification = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    
+    for (UILocalNotification *notification in allScheduledNotification)
+    {
+        if ([notification.fireDate isEqualToDate:date])
+        {
+            NSLog(@"Already a date...");
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
 #pragma mark - ReminderSchedulerDelegate
 - (void)reminderScheduler:(ReminderScheduler *)scheduler didFailWithError:(NSError *)error

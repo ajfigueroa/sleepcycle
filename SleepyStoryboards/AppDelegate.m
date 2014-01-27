@@ -44,6 +44,8 @@
     self.slidingViewController.showsDropShadows = YES;
     self.slidingViewController.useBouncyAnimations = NO;
     
+    [application cancelAllLocalNotifications];
+    
     self.window.rootViewController = self.slidingViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
