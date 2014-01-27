@@ -84,5 +84,16 @@
     }
 }
 
+#pragma mark - ReminderSchedulerDelegate
+- (void)reminderScheduler:(ReminderScheduler *)scheduler didFailWithError:(NSError *)error
+{
+    
+}
+
+- (void)reminderSchedulerDidPostReminder:(ReminderScheduler *)scheduler
+{
+    
+}
+
 
 @end
