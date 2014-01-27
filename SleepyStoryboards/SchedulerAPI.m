@@ -139,6 +139,7 @@
 
 - (void)alarmNotificationDidPostNotification:(AlarmNotificationScheduler *)alarmScheduler
 {
+    NSLog(@"%s is sending notification", __PRETTY_FUNCTION__);
     [[NSNotificationCenter defaultCenter] postNotificationName:AFAlarmHasPostedNotification
                                                         object:nil
                                                       userInfo:@{AFAlarmReminderNotificationSuccessKey: @YES,

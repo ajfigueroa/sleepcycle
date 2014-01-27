@@ -97,7 +97,7 @@
 {
     NSInteger rowCount = self.alarmsArray.count;
     
-    if (rowCount > 0)
+    if (rowCount == 0)
         self.navigationItem.rightBarButtonItem = nil;
     else
         self.navigationItem.rightBarButtonItem = self.editButton;
