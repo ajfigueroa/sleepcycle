@@ -230,16 +230,19 @@
             {
                 // Build the action sheet present and add it's window
                 self.actionSheetPresenter = [[ActionSheetPresenter alloc] init];
-                self.actionSheetPresenter.presenterWindow = self.view.window;
-                
-                // Lazy initialize the actionSheetHandler and set as presenter delegate
-                if (!self.actionSheetHandler)
-                    self.actionSheetHandler = [[ActionSheetHandler alloc] init];
-                self.actionSheetPresenter.delegate = self.actionSheetHandler;
-                
-                // Send the selected time from date picker to sharedScheduler
-                [[SchedulerAPI sharedScheduler] setSelectedTime:self.selectedTime];
             }
+            
+            self.actionSheetPresenter.presenterWindow = self.view.window;
+            
+            // Lazy initialize the actionSheetHandler and set as presenter delegate
+            if (!self.actionSheetHandler)
+                self.actionSheetHandler = [[ActionSheetHandler alloc] init];
+            
+            self.actionSheetPresenter.delegate = self.actionSheetHandler;
+            
+            // Send the selected time from date picker to sharedScheduler
+            [[SchedulerAPI sharedScheduler] setSelectedTime:self.selectedTime];
+            
             
             [self.actionSheetPresenter buildActionSheetForState:self.selectedUserMode
                                                         andDate:date];
