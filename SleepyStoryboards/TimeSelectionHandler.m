@@ -197,7 +197,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     alarmNotification.timeZone = [NSTimeZone localTimeZone];
     alarmNotification.alertBody = [NSString stringWithFormat:@"Time to wake up for your %@ alarm", [alarmDate shortTime]];
     alarmNotification.alertAction = @"I'm awake";
-    alarmNotification.soundName = @"alarmclocksound.caf";
+    alarmNotification.soundName = @"newalarmsounds.caf";
     alarmNotification.applicationIconBadgeNumber = 0;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:alarmNotification];
