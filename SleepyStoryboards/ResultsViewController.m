@@ -15,7 +15,7 @@
 #import "ActionSheetPresenter.h"
 #import "ActionSheetHandler.h"
 
-@interface ResultsViewController () <UIGestureRecognizerDelegate, ActionSheetPresenterDelegate>
+@interface ResultsViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSArray *resultTimes;
 @property (nonatomic, assign) BOOL isPongRefreshControlVisible;
@@ -42,6 +42,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applyTheme)
                                                  name:AFThemeHasChangedNotification
+                                               object:nil];
+    
+    // Register for Alarm and Reminder status notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(alarmPosted:)
+                                                 name:AFAlarmHasPostedNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reminderPosted:)
+                                                 name:AFReminderHasPostedNotification
                                                object:nil];
 }
 

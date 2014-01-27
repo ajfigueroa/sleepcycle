@@ -37,8 +37,8 @@ static NSString *const AFThemeHasChangedNotification = @"AFThemeHasChangedNotifi
 static NSString *const AFSelectedCalculateBedTimeNotification = @"AFSelectedCalculateBedTimeNotification";
 static NSString *const AFSelectedCalculateWakeTimeNotification = @"AFSelectedCalculateWakeTimeNotification";
 static NSString *const AFColorMappingResetNotification = @"AFColorMappingResetNotification";
-static NSString *const AFAlarmHasPosted = @"AFAlarmHasPosted";
-static NSString *const AFReminderHasPosted = @"AFReminderHasPosted";
+static NSString *const AFAlarmHasPostedNotification = @"AFAlarmHasPostedNotification";
+static NSString *const AFReminderHasPostedNotification = @"AFReminderHasPostedNotification";
 
 // NSNotification User Info Keys
 static NSString *const AFAlarmReminderNotificationSuccess = @"AFAlarmReminderNotificationSuccess";

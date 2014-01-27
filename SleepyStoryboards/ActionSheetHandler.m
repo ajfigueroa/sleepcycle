@@ -27,7 +27,7 @@
     // The datePairs array should contain two dates.
     assert(datePairs.count == 2);
     
-    if (buttonIndex != actionSheet.cancelButtonIndex)
+    if (buttonIndex == actionSheet.cancelButtonIndex)
         return;
     
     // Assign the date pair values

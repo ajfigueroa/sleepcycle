@@ -78,6 +78,7 @@
     // Configure alert body and send alarm notification post
     [self configureAlarmSchedulerBody];
     [self.alarmScheduler createAlarmNotificationForDate:alarmTime];
+    NSLog(@"Creating alarm for: %@", [alarmTime descriptionWithLocale:[NSLocale currentLocale]]);
 }
 
 - (void)createReminderForDate:(NSDate *)reminderTime
@@ -87,6 +88,7 @@
     // Configure the reminder note and send the reminder request
     [self configureReminderSchedulerNote];
     [self.reminderScheduler createReminderForDate:reminderTime];
+        NSLog(@"Creating alarm for: %@", [reminderTime descriptionWithLocale:[NSLocale currentLocale]]);
 }
 
 
@@ -94,14 +96,14 @@
 - (void)reminderScheduler:(ReminderScheduler *)scheduler didFailWithError:(NSError *)error
 {
     NSLog(@"Error: %@", error.localizedDescription);
-    [[NSNotificationCenter defaultCenter] postNotificationName:AFReminderHasPosted
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFReminderHasPostedNotification
                                                         object:nil
                                                       userInfo:@{AFAlarmReminderNotificationSuccess: @NO}];
 }
 
 - (void)reminderSchedulerDidPostReminder:(ReminderScheduler *)scheduler
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:AFReminderHasPosted
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFReminderHasPostedNotification
                                                         object:nil
                                                       userInfo:@{AFAlarmReminderNotificationSuccess: @YES}];
 }
@@ -109,14 +111,14 @@
 #pragma mark - AlarmNotificationSchedulerDelegate
 - (void)alarmNotificationSchedulerDidFailPost:(AlarmNotificationScheduler *)alarmScheduler
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:AFAlarmHasPosted
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFAlarmHasPostedNotification
                                                         object:nil
                                                       userInfo:@{AFAlarmReminderNotificationSuccess: @NO}];
 }
 
 - (void)alarmNotificationDidPostNotification:(AlarmNotificationScheduler *)alarmScheduler
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:AFAlarmHasPosted
+    [[NSNotificationCenter defaultCenter] postNotificationName:AFAlarmHasPostedNotification
                                                         object:nil
                                                       userInfo:@{AFAlarmReminderNotificationSuccess: @YES}];
 }
