@@ -250,13 +250,61 @@
 #pragma mark - Reminder/Alarm Notifications
 - (void)alarmPosted:(NSNotification *)aNotification
 {
-    BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccess];
-    NSLog(@"%s, %d", __PRETTY_FUNCTION__, success);
+    BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccessKey];
+    NSDate *date = (NSDate *)aNotification.userInfo[AFScheduledTimeKey];
+
+    NSString *title;
+    NSString *message;
+    
+    if (success)
+    {
+        title = NSLocalizedString(@"Success!", nil);
+        message = [NSString stringWithFormat:NSLocalizedString(@"Alarm at %@ created.", nil),
+                   [date shortTimeLowerCase]];
+    } else
+    {
+        title = NSLocalizedString(@"Uh Oh!", nil);
+        message = NSLocalizedString(@"Something went wrong with creating the alarm.\n"
+                                    @"If this issue persists, please contact the developer (me)", nil);
+    }
+    
+    [self alertViewWithTitle:title message:message];
 }
 
 - (void)reminderPosted:(NSNotification *)aNotification
 {
-    BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccess];
+    BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccessKey];
+    
+    NSDate *date = (NSDate *)aNotification.userInfo[AFScheduledTimeKey];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *title;
+        NSString *message;
+        
+        if (success)
+        {
+            title = NSLocalizedString(@"Success!", nil);
+            message = [NSString stringWithFormat:NSLocalizedString(@"Reminder for %@ added", nil),
+                       [date shortTimeLowerCase]];
+        } else
+        {
+            title = NSLocalizedString(@"Uh Oh!", nil);
+            message = NSLocalizedString(@"Something went wrong with creating the reminder.\n"
+                                        @"If this issue persists, please contact the developer (me)", nil);
+        }
+        
+        [self alertViewWithTitle:title message:message];
+    });
+}
+
+- (void)alertViewWithTitle:(NSString *)title message:(NSString *)message
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+                                              otherButtonTitles:nil];
+    [alertView show];
 }
 
 #pragma mark - Target Action Methods
