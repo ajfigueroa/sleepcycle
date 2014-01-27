@@ -23,7 +23,10 @@
     
     if (!alarmNotification)
     {
-        // Notify the delegate if necessary
+        // Notify the delegate if possible
+        if ([self.delegate respondsToSelector:@selector(alarmNotificationSchedulerDidFailPost:)])
+            [self.delegate alarmNotificationSchedulerDidFailPost:self];
+            
         return;
     }
     
@@ -41,7 +44,10 @@
     
     // Post notification
     [[UIApplication sharedApplication] scheduleLocalNotification:alarmNotification];
-    // Post success delegate message
+    
+    // Notify the delegate that the notification has been posted
+    if ([self.delegate respondsToSelector:@selector(alarmNotificationDidPostNotification:)])
+        [self.delegate alarmNotificationDidPostNotification:self];
 }
 
 @end
