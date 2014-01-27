@@ -12,8 +12,9 @@
 #import "NSDate+SleepTime.h"
 #import "TimeSelectionHandler.h"
 #import "SettingsAPI.h"
+#import "SchedulerAPI.h"
 
-@interface ResultsViewController ()
+@interface ResultsViewController () <SchedulerDelegate>
 
 @property (nonatomic, strong) NSArray *resultTimes;
 @property (nonatomic, assign) BOOL isPongRefreshControlVisible;
@@ -234,6 +235,23 @@
     });
 }
 
+- (IBAction)addSelectedTimeAlarm:(id)sender
+{
+    
+}
+
+#pragma mark - SchedulerDelegate
+- (void)reminderPosted:(BOOL)success
+{
+    NSLog(@"Reminder Posted: %hhd", success);
+}
+
+- (void)alarmPosted:(BOOL)success
+{
+    NSLog(@"Alarm Posted: %hhd", success);
+}
+
+
 #pragma mark - End of Life
 - (void)dealloc
 {
@@ -242,6 +260,5 @@
     
 }
 
-- (IBAction)addSelectedTimeAlarm:(id)sender {
-}
+
 @end
