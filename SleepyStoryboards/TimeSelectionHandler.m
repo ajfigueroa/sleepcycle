@@ -181,7 +181,6 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     if (index == ActionSheetAlarmTomorrow)
         alarmTime = [self.alarmTime dateByAddingTimeInterval:HOURS_AS_SECONDS(24)];
     
-    NSLog(@"%s: %@", __PRETTY_FUNCTION__, [alarmTime descriptionWithLocale:[NSLocale currentLocale]]);
     [self addAlarmForTime:[alarmTime zeroDateSeconds]];
 }
 
@@ -200,7 +199,6 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
     alarmNotification.soundName = @"newalarmsounds.caf";
     alarmNotification.applicationIconBadgeNumber = 0;
     
-        NSLog(@"%s: %@", __PRETTY_FUNCTION__, [alarmDate descriptionWithLocale:[NSLocale currentLocale]]);
     [[UIApplication sharedApplication] scheduleLocalNotification:alarmNotification];
 }
 
