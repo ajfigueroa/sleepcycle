@@ -29,7 +29,8 @@ typedef NS_ENUM(NSInteger, AFThemeSelectionOption)
 typedef NS_ENUM(NSInteger, AFSelectedUserMode)
 {
     AFSelectedUserModeCalculateBedTime,
-    AFSelectedUserModeCalculateWakeTime
+    AFSelectedUserModeCalculateWakeTime,
+    AFSelectedUserModeCalculateBedTimeWithAlarmTime
 };
 
 // Notifications

@@ -328,7 +328,9 @@
 
 - (IBAction)addSelectedTimeAlarm:(id)sender
 {
-    
+    // Take advantage of special enum mode
+    [self buildActionSheetPresenterAndHandler:self.selectedTime
+                                     andState:AFSelectedUserModeCalculateBedTimeWithAlarmTime];
 }
 
 #pragma mark - End of Life

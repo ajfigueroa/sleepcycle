@@ -65,6 +65,14 @@
             }
             break;
             
+        case AFSelectedUserModeCalculateBedTimeWithAlarmTime:
+            {
+                NSDate *alarmTime = date;
+                actionSheet = [self alarmActionSheetForWakeTime:alarmTime];
+                actionSheet.tag = AFActionSheetTagAlarm;
+            }
+            break;
+            
         default:
             NSLog(@"%s: Performing no action sheet display", __PRETTY_FUNCTION__);
             break;
