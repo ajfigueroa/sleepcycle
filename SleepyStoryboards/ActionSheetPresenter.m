@@ -13,10 +13,10 @@
 #define MINUTES_AS_SECONDS(x) (x * 60)
 #define HOURS_AS_SECONDS(x) (x * 60 * 60)
 
-typedef NS_ENUM(NSInteger, ActionSheetMode)
+typedef NS_ENUM(NSInteger, ActionSheetTag)
 {
-    ActionSheetModeReminder,
-    ActionSheetModeAlarm
+    ActionSheetTagReminder,
+    ActionSheetTagAlarm
 };
 
 typedef NS_ENUM(NSInteger, ActionSheetReminder)
@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
             {
                 NSDate *alarmTime = date;
                 actionSheet = [self alarmActionSheetForWakeTime:alarmTime];
-                actionSheet.tag = ActionSheetModeAlarm;
+                actionSheet.tag = ActionSheetTagAlarm;
             }
             break;
             
@@ -51,7 +51,7 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
             {
                 NSDate *reminderTime = date;
                 actionSheet = [self reminderActionSheetForSleepTime:reminderTime];
-                actionSheet.tag = ActionSheetModeReminder;
+                actionSheet.tag = ActionSheetTagReminder;
             }
             break;
             
@@ -142,7 +142,9 @@ typedef NS_ENUM(NSInteger, ActionSheetAlarm)
 #pragma mark - UIActionSheetDelegate
 -  (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
+    [self.delegate actionSheetPresenter:self
+                   clickedButtonAtIndex:buttonIndex
+                      forActionSheetTag:actionSheet.tag];
 }
 
 
