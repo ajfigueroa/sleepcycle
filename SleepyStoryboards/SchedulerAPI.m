@@ -125,5 +125,15 @@
     
 }
 
+#pragma mark - AlarmNotificationSchedulerDelegate
+- (void)alarmNotificationSchedulerDidFailPost:(AlarmNotificationScheduler *)alarmScheduler
+{
+    
+}
+
+- (void)alarmNotificationDidPostNotification:(AlarmNotificationScheduler *)alarmScheduler
+{
+    
+}
 
 @end
