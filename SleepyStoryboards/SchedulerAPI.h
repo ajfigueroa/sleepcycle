@@ -8,25 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SchedulerDelegate;
-
 @interface SchedulerAPI : NSObject
 
 // The date/time that was selected in the TimeSelection datePicker
 @property (nonatomic, strong) NSDate *selectedTime;
-@property (nonatomic, weak) id <SchedulerDelegate> delegate;
 
 + (instancetype)sharedScheduler;
 
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime;
 - (void)createReminderForDate:(NSDate *)reminderTime;
-
-@end
-
-@protocol SchedulerDelegate <NSObject>
-
-@required
-- (void)reminderPosted:(BOOL)success;
-- (void)alarmPosted:(BOOL)success;
 
 @end
