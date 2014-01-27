@@ -117,23 +117,24 @@
 #pragma mark - ReminderSchedulerDelegate
 - (void)reminderScheduler:(ReminderScheduler *)scheduler didFailWithError:(NSError *)error
 {
-    
+    NSLog(@"Error: %@", error.localizedDescription);
+    [self.delegate reminderPosted:NO];
 }
 
 - (void)reminderSchedulerDidPostReminder:(ReminderScheduler *)scheduler
 {
-    
+    [self.delegate reminderPosted:YES];
 }
 
 #pragma mark - AlarmNotificationSchedulerDelegate
 - (void)alarmNotificationSchedulerDidFailPost:(AlarmNotificationScheduler *)alarmScheduler
 {
-    
+    [self.delegate alarmPosted:NO];
 }
 
 - (void)alarmNotificationDidPostNotification:(AlarmNotificationScheduler *)alarmScheduler
 {
-    
+    [self.delegate alarmPosted:YES];
 }
 
 @end
