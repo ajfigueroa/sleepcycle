@@ -112,13 +112,13 @@
 {
     switch (selectedUserMode) {
         case AFSelectedUserModeCalculateWakeTime:
-            self.resultsInformationLabel.text = @"You should wake up at these times:";
+            self.resultsInformationLabel.text = NSLocalizedString(@"You should wake up at these times:", nil);
             // Hide the selectedTimeAlarm UIBarButtonItem from the navigation bar
             self.navigationItem.rightBarButtonItem = nil;
             break;
             
         case AFSelectedUserModeCalculateBedTime:
-            self.resultsInformationLabel.text = @"You should fall asleep at these times:";
+            self.resultsInformationLabel.text = NSLocalizedString(@"You should fall asleep at these times:", nil);
             break;
         
         default:
