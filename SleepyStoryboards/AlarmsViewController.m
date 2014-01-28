@@ -52,6 +52,34 @@
     [self.tableView setEditing:NO animated:YES];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Pull to Refresh", nil)];
+    
+    [refreshControl addTarget:self
+                       action:@selector(getNotifications)
+             forControlEvents:UIControlEventValueChanged];
+    
+    self.refreshControl = refreshControl;
+}
+
+- (void)getNotifications
+{
+    [self populateAlarmsArray];
+    
+    [self performSelector:@selector(stopRefresh)
+               withObject:nil
+               afterDelay:2.5];
+}
+
+- (void)stopRefresh
+{
+    [self.refreshControl endRefreshing];
+}
+
 #pragma mark - Data Source
 - (void)populateAlarmsArray
 {
@@ -104,11 +132,13 @@
 {
     [self.navigationItem setRightBarButtonItem:nil animated:YES];
     self.tableView.backgroundView.hidden = NO;
+    self.tableView.scrollEnabled = NO;
 }
 
 - (void)configureViewForNonEmptyTableView
 {
     self.tableView.backgroundView.hidden = YES;
+    self.tableView.scrollEnabled = YES;
 }
 
 #pragma mark - UITableViewDelegate

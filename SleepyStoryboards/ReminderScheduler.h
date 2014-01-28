@@ -13,7 +13,7 @@
 @interface ReminderScheduler : NSObject
 
 @property (nonatomic, readonly) NSDate *reminderTime;
-@property (nonatomic, assign) NSString *reminderNote;
+@property (nonatomic, strong) NSString *reminderNote;
 @property (nonatomic, weak) id <ReminderSchedulerDelegate> delegate;
 
 - (void)createReminderForDate:(NSDate *)reminderTime;
