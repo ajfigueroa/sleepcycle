@@ -14,7 +14,7 @@
 #import "SchedulerAPI.h"
 #import "ActionSheetPresenter.h"
 #import "ActionSheetHandler.h"
-#import "FSAlertView.h"
+#import "SVProgressHUD.h"
 
 @interface ResultsViewController () <UIGestureRecognizerDelegate>
 
@@ -260,62 +260,22 @@
 - (void)alarmPosted:(NSNotification *)aNotification
 {
     BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccessKey];
-    NSDate *date = (NSDate *)aNotification.userInfo[AFScheduledTimeKey];
-
-    NSString *title;
-    NSString *message;
     
     if (success)
-    {
-        title = NSLocalizedString(@"Success!", nil);
-        message = [NSString stringWithFormat:NSLocalizedString(@"Alarm at %@ created.", nil),
-                   [date shortTimeLowerCase]];
-    } else
-    {
-        title = NSLocalizedString(@"Uh Oh!", nil);
-        message = NSLocalizedString(@"Something went wrong with creating the alarm.\n"
-                                    @"If this issue persists, please contact the developer (me)", nil);
-    }
-    
-    [self alertViewWithTitle:title message:message];
+        [SVProgressHUD showSuccessWithStatus:@"Success!"];
+    else
+        [SVProgressHUD showErrorWithStatus:@"Something went wrong :(!"];
 }
 
 - (void)reminderPosted:(NSNotification *)aNotification
 {
     BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccessKey];
     
-    NSDate *date = (NSDate *)aNotification.userInfo[AFScheduledTimeKey];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *title;
-        NSString *message;
-        
-        if (success)
-        {
-            title = NSLocalizedString(@"Success!", nil);
-            message = [NSString stringWithFormat:NSLocalizedString(@"Reminder for %@ added", nil),
-                       [date shortTimeLowerCase]];
-        } else
-        {
-            title = NSLocalizedString(@"Uh Oh!", nil);
-            message = NSLocalizedString(@"Something went wrong with creating the reminder.\n"
-                                        @"If this issue persists, please contact the developer (me)", nil);
-        }
-        
-        [self alertViewWithTitle:title message:message];
-    });
+    if (success)
+        [SVProgressHUD showSuccessWithStatus:@"Success!"];
+    else
+        [SVProgressHUD showErrorWithStatus:@"Something went wrong :(!"];
 }
-
-- (void)alertViewWithTitle:(NSString *)title message:(NSString *)message
-{
-    FSAlertView *alertView = [[FSAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                              otherButtonTitles:nil];
-    [alertView showWithDismissHandler:nil];
-}
-
 
 #pragma mark - Target Action Methods
 - (void)refreshTriggered
