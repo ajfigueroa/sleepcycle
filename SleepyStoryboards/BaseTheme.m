@@ -12,6 +12,7 @@
 #import "BOZPongRefreshControl.h"
 #import "NSArray+Ordering.h"
 #import "ImageViewManagerFactory.h"
+#import "AlarmCell.h"
 
 @interface BaseTheme ()
 
@@ -251,6 +252,11 @@
 }
 
 - (void)themeCell:(UITableViewCell *)cell
+{
+    [self themeViewBackground:cell];
+}
+
+- (void)themeAlarmCell:(AlarmCell *)cell
 {
     [self themeViewBackground:cell];
 }

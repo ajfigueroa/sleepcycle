@@ -8,6 +8,7 @@
 
 #import "BlackGrayTheme.h"
 #import "UIColor+Colours.h"
+#import "AlarmCell.h"
 
 @implementation BlackGrayTheme
 
@@ -38,6 +39,13 @@
     [self themeViewBackground:cell];
     cell.textLabel.textColor = self.primaryTextColor;
     cell.detailTextLabel.textColor = self.primaryTextColor;
+}
+
+- (void)themeAlarmCell:(AlarmCell *)cell
+{
+    [self themeViewBackground:cell];
+    cell.alarmTimeLabel.textColor = self.primaryTextColor;
+    cell.alarmDateLabel.textColor = self.primaryTextColor;
 }
 
 - (void)themeTextField:(UITextField *)textField

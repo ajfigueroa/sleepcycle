@@ -8,6 +8,7 @@
 //  Define the protocol which every theme must adhere to
 
 #import <Foundation/Foundation.h>
+@class AlarmCell;
 
 @protocol Theme <NSObject>
 
@@ -48,6 +49,9 @@
 
 // Theme general UITableViewCell
 - (void)themeCell:(UITableViewCell *)cell;
+
+// Theme AlarmCells
+- (void)themeAlarmCell:(AlarmCell *)cell;
 
 // Theme the UISwitch
 - (void)themeSwitch:(UISwitch *)switchControl;
