@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ActionSheetConstants.h"
+@class IBActionSheet;
 
 @class ActionSheetPresenter;
 
@@ -16,7 +17,7 @@
 @required
 - (void)actionSheetPresenter:(ActionSheetPresenter *)actionSheetPresenter
         clickedButtonAtIndex:(NSInteger)buttonIndex
-              forActionSheet:(UIActionSheet *)actionSheet
+              forActionSheet:(IBActionSheet *)actionSheet
                      withTag:(AFActionSheetTag)tag
                     andDates:(NSArray *)datePairs;
 

@@ -9,8 +9,9 @@
 
 #import <Foundation/Foundation.h>
 #import "ActionSheetPresenterDelegate.h"
+#import "IBActionSheet.h"
 
-@interface ActionSheetPresenter : NSObject <UIActionSheetDelegate>
+@interface ActionSheetPresenter : NSObject <IBActionSheetDelegate>
 
 // The window on which to present the action sheet unto
 @property (nonatomic, strong) UIWindow *presenterWindow;

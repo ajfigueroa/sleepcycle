@@ -46,7 +46,7 @@
     // Ensure the presenter window exists prior to loading actionsheet
     assert(self.presenterWindow != nil);
     
-    UIActionSheet *actionSheet;
+    IBActionSheet *actionSheet;
     
     switch (state) {
         case AFSelectedUserModeCalculateWakeTime:
@@ -83,7 +83,7 @@
 }
 
 #pragma mark - Custom Action Sheets for Modes
-- (UIActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime
+- (IBActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime
 {
     NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Set Alarm for %@", nil),
                                                                 [wakeTime shortTimeLowerCase]];
@@ -97,17 +97,17 @@
                                                                              [tomorrowsDate shortDate]];
     
     // Present appropriate otherButtonTitles depending on date relative to current time
-    UIActionSheet *actionSheet;
+    IBActionSheet *actionSheet;
     
     if ([NSDate spansMultipleDaysForTime:wakeTime])
     {
-        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+        actionSheet = [[IBActionSheet alloc] initWithTitle:title
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
                                          otherButtonTitles:tomorrowButtonTitle, todayButtonTitle, nil];
     } else {
-        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+        actionSheet = [[IBActionSheet alloc] initWithTitle:title
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
@@ -119,7 +119,7 @@
     return actionSheet;
 }
 
-- (UIActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime
+- (IBActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime
 {
     // Create date set back by the user defined time to fall asleep (default 14)
     NSInteger timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
@@ -137,17 +137,17 @@
                                                                              [tomorrowsDate shortDate]];
     
     // Present appropriate otherButtonTitles depending on date relative to current time
-    UIActionSheet *actionSheet;
+    IBActionSheet *actionSheet;
 
     if ([NSDate spansMultipleDaysForTime:earlierTime])
     {
-        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+        actionSheet = [[IBActionSheet alloc] initWithTitle:title
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
                                          otherButtonTitles:todayButtonTitle, tomorrowButtonTitle, nil];
     } else {
-        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+        actionSheet = [[IBActionSheet alloc] initWithTitle:title
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
@@ -160,7 +160,7 @@
 }
 
 #pragma mark - UIActionSheetDelegate
--  (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+-  (void)actionSheet:(IBActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (actionSheet.tag) {
         case AFActionSheetTagAlarm:
