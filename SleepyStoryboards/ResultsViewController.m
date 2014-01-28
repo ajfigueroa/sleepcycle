@@ -259,12 +259,14 @@
 #pragma mark - Reminder/Alarm Notifications
 - (void)alarmPosted:(NSNotification *)aNotification
 {
+
     BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccessKey];
     
     if (success)
-        [SVProgressHUD showSuccessWithStatus:@"Success!"];
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
     else
-        [SVProgressHUD showErrorWithStatus:@"Something went wrong :(!"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Something went wrong :(!", nil)];
+
 }
 
 - (void)reminderPosted:(NSNotification *)aNotification
@@ -272,9 +274,9 @@
     BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccessKey];
     
     if (success)
-        [SVProgressHUD showSuccessWithStatus:@"Success!"];
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
     else
-        [SVProgressHUD showErrorWithStatus:@"Something went wrong :(!"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Something went wrong :(!", nil)];
 }
 
 #pragma mark - Target Action Methods
