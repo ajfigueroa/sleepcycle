@@ -9,6 +9,7 @@
 #import "ActionSheetPresenter.h"
 #import "NSDate+SleepTime.h"
 #import "SettingsAPI.h"
+#import "ThemeFactory.h"
 
 #define MINUTES_AS_SECONDS(x) (x * 60)
 #define HOURS_AS_SECONDS(x) (x * 60 * 60)
@@ -114,6 +115,11 @@
                                          otherButtonTitles:tomorrowButtonTitle, nil];
     }
     
+    // Theme actionSheet
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
+    [themeSetter themeIBActionSheet:actionSheet];
+    
+    // Build the time pairs to send via notification
     self.alarmTimesPair = @[tomorrowsDate, wakeTime];
     
     return actionSheet;
@@ -154,6 +160,11 @@
                                          otherButtonTitles:tomorrowButtonTitle, nil];
     }
     
+    // Theme actionSheet
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
+    [themeSetter themeIBActionSheet:actionSheet];
+    
+    // Set up reminder time pairs to send via notification
     self.reminderTimesPair = @[earlierTime, tomorrowsDate];
     
     return actionSheet;

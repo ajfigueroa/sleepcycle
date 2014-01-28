@@ -9,6 +9,7 @@
 #import "BlackGrayTheme.h"
 #import "UIColor+Colours.h"
 #import "AlarmCell.h"
+#import "IBActionSheet.h"
 
 @implementation BlackGrayTheme
 
@@ -64,6 +65,15 @@
     
     view.layer.borderColor = borderColor;
     view.layer.borderWidth = 1.5f;
+}
+
+- (void)themeIBActionSheet:(IBActionSheet *)actionSheet
+{
+    [super themeIBActionSheet:actionSheet];
+    
+    [actionSheet setTitleTextColor:self.primaryTextColor];
+    [actionSheet setButtonTextColor:self.primaryTextColor];
+    
 }
 
 

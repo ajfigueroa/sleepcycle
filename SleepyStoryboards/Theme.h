@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 @class AlarmCell;
+@class IBActionSheet;
 
 @protocol Theme <NSObject>
 
@@ -64,5 +65,8 @@
 
 // Theme the border used for a given view
 - (void)themeBorderForView:(UIView *)view visible:(BOOL)isVisible;
+
+// Theme Action Sheet of type IBAction
+- (void)themeIBActionSheet:(IBActionSheet *)actionSheet;
 
 @end

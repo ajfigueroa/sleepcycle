@@ -13,6 +13,7 @@
 #import "NSArray+Ordering.h"
 #import "ImageViewManagerFactory.h"
 #import "AlarmCell.h"
+#import "IBActionSheet.h"
 
 @interface BaseTheme ()
 
@@ -287,6 +288,16 @@
     
     view.layer.borderColor = borderColor;
     view.layer.borderWidth = 1.5f;
+}
+
+- (void)themeIBActionSheet:(IBActionSheet *)actionSheet
+{
+    // Theme all subviews
+    [actionSheet setTitleTextColor:self.primaryTextColor];
+    [actionSheet setTitleBackgroundColor:self.secondaryBackgroundColor];
+    [actionSheet setButtonBackgroundColor:self.secondaryBackgroundColor];
+    [actionSheet setButtonTextColor:self.primaryBackgroundColor];
+    
 }
 
 #pragma mark - Target Action Method
