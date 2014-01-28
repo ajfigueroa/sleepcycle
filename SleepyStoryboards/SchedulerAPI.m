@@ -79,7 +79,7 @@
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime
 {
     _scheduledTime = alarmTime;
- 
+    
     // Configure alert body and send alarm notification post
     [self configureAlarmSchedulerBody];
     if (![self alarmAlreadyExistsForTime:_scheduledTime])
