@@ -34,6 +34,7 @@
         self.emptyTableMessageLabel.text = emptyTableMessage;
         self.emptyTableMessageLabel.font = labelFont;
         self.emptyTableMessageLabel.textAlignment = NSTextAlignmentCenter;
+        self.emptyTableMessageLabel.textColor = [UIColor whiteColor];
         
         // Add to subview
         [self addSubview:self.emptyTableMessageLabel];

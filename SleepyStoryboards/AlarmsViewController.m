@@ -10,6 +10,7 @@
 #import "ThemeFactory.h"
 #import "NSDate+SleepTime.h"
 #import "AlarmCell.h"
+#import "EmptyTableViewBackground.h"
 
 @interface AlarmsViewController ()
 
@@ -31,6 +32,7 @@
     
     // Get rid of unwanted UITableViewCells
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.backgroundView = [[EmptyTableViewBackground alloc] initWithFrame:self.tableView.frame];
     
     // Apply theme
     [self applyTheme];
@@ -97,6 +99,18 @@
     [self.tableView setEditing:!self.tableView.editing animated:YES];
 }
 
+#pragma mark - Helpers
+- (void)configureViewForEmptyTableView
+{
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    self.tableView.backgroundView.hidden = NO;
+}
+
+- (void)configureViewForNonEmptyTableView
+{
+    self.tableView.backgroundView.hidden = YES;
+}
+
 #pragma mark - UITableViewDelegate
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -114,8 +128,10 @@
     NSInteger rowCount = self.alarmsArray.count;
     
     if (rowCount == 0)
-        [self.navigationItem setRightBarButtonItem:nil animated:YES];
-
+        [self configureViewForEmptyTableView];
+    else
+        [self configureViewForNonEmptyTableView];
+    
     return rowCount;
 }
 
