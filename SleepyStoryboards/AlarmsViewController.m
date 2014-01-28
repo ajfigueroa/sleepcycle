@@ -9,6 +9,7 @@
 #import "AlarmsViewController.h"
 #import "ThemeFactory.h"
 #import "NSDate+SleepTime.h"
+#import "AlarmCell.h"
 
 @interface AlarmsViewController ()
 
@@ -71,17 +72,18 @@
     [self.tableView reloadData];
 }
 
-- (void)updateCell:(UITableViewCell *)cell atIndex:(NSIndexPath *)indexPath
+- (void)updateCell:(AlarmCell *)cell atIndex:(NSIndexPath *)indexPath
 {
     // Theme the cells with the primary theme
     id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
-    [themeSetter themeCell:cell];
+    [themeSetter themeAlarmCell:cell];
     
     NSDate *alarmTime = [(UILocalNotification *)self.alarmsArray[indexPath.row] fireDate];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [alarmTime shortTime]];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [alarmTime shortDate]];
-    cell.textLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize] + 2];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont labelFontSize]];
+    
+    cell.alarmTimeLabel.text = [NSString stringWithFormat:@"%@", [alarmTime shortTime]];
+    cell.alarmDateLabel.text = [NSString stringWithFormat:@"%@", [alarmTime shortDate]];
+    cell.alarmTimeLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize] + 2];
+    cell.alarmDateLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont labelFontSize]];
 }
 
 #pragma mark - SlidingViewController calls
@@ -119,7 +121,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlarmCell"];
+    AlarmCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlarmCell"];
     
     [self updateCell:cell atIndex:indexPath];
     
