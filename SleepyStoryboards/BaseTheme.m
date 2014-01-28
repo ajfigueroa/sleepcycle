@@ -260,6 +260,8 @@
 - (void)themeAlarmCell:(AlarmCell *)cell
 {
     [self themeViewBackground:cell];
+    cell.alarmTimeLabel.textColor = self.secondaryTextColor;
+    cell.alarmDateLabel.textColor = self.secondaryTextColor;
 }
 
 - (void)themeSwitch:(UISwitch *)switchControl

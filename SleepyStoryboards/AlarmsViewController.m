@@ -100,6 +100,7 @@
     self.tableView.separatorColor = [UIColor blackColor];
     
     [self.tableView reloadData];
+    [self.tableView reloadInputViews];
 }
 
 - (void)updateCell:(AlarmCell *)cell atIndex:(NSIndexPath *)indexPath
