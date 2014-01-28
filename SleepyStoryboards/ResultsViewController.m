@@ -273,10 +273,13 @@
 {
     BOOL success = (BOOL)aNotification.userInfo[AFAlarmReminderNotificationSuccessKey];
     
-    if (success)
-        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
-    else
-        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Something went wrong :(!", nil)];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (success)
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Success!", nil)];
+        else
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Something went wrong :(!", nil)];
+
+    });
 }
 
 #pragma mark - Target Action Methods
