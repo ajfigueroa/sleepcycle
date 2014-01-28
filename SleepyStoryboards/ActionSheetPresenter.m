@@ -87,7 +87,7 @@
 - (IBActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime
 {
     NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Set Alarm for %@", nil),
-                                                                [wakeTime shortTimeLowerCase]];
+                                                                        [wakeTime shortTime]];
     
     NSString *todayButtonTitle = [NSString stringWithFormat:NSLocalizedString(@"Today (%@)", nil),
                                                                             [wakeTime shortDate]];
