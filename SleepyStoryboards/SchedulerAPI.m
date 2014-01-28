@@ -65,7 +65,7 @@
 - (void)configureAlarmSchedulerBody
 {
     NSString *alertBody = [NSString stringWithFormat:NSLocalizedString(@"Time to wake up for your %@ alarm!", nil),
-                                                                            [self.selectedTime shortTimeLowerCase]];
+                                                                            [_scheduledTime shortTimeLowerCase]];
     
     self.alarmScheduler.alarmAlertBody = alertBody;
 }
@@ -83,7 +83,7 @@
     // Configure alert body and send alarm notification post
     [self configureAlarmSchedulerBody];
     if (![self alarmAlreadyExistsForTime:_scheduledTime])
-        [self.alarmScheduler createAlarmNotificationForDate:alarmTime];
+        [self.alarmScheduler createAlarmNotificationForDate:_scheduledTime];
 }
 
 - (void)createReminderForDate:(NSDate *)reminderTime

@@ -57,7 +57,8 @@
     [super viewDidLoad];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Pull to Refresh", nil)];
+    refreshControl.attributedTitle = [[NSAttributedString alloc]
+                                        initWithString:NSLocalizedString(@"Pull to Refresh", nil)];
     
     [refreshControl addTarget:self
                        action:@selector(getNotifications)
