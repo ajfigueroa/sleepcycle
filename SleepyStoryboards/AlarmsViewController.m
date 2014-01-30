@@ -193,6 +193,7 @@
                      withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+
 #pragma mark - SettingsViewControllerDelegate
 - (void)settingsViewControllerDidFinish:(SettingsViewController *)controller
 {

@@ -159,7 +159,7 @@
             [themeSetter themeNavigationBar:self.navigationController.navigationBar];
             
             // Theme pong refresh control
-            [themeSetter themeRefreshControl:self.pongRefreshControl];
+            [themeSetter themePongRefreshControl:self.pongRefreshControl];
             
             // Theme the background view
             [themeSetter themeViewBackground:self.view];

@@ -124,9 +124,8 @@
     label.textColor = self.primaryBackgroundColor;
 }
 
-- (void)themeRefreshControl:(UIRefreshControl *)refreshControl
+- (void)themePongRefreshControl:(BOZPongRefreshControl *)pongRefreshControl
 {
-    BOZPongRefreshControl *pongRefreshControl = (BOZPongRefreshControl *)refreshControl;
     pongRefreshControl.foregroundColor = self.secondaryBackgroundColor;
     pongRefreshControl.backgroundColor = self.primaryBackgroundColor;
 }
@@ -225,7 +224,7 @@
 
 - (void)themeOptionCell:(UITableViewCell *)cell
           withImageView:(UIImageView *)imageView
-         forThemeOption:(NSInteger)themeOption
+         forThemeOption:(AFSettingsTableOption)themeOption
 {
     cell.backgroundColor = self.secondaryBackgroundColor;
     cell.textLabel.textColor = self.secondaryTextColor;
