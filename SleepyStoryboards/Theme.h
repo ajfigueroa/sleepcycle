@@ -104,27 +104,50 @@
 
 /**
  @brief Theme the cell's backgroundColor.
- This method can simply call -themeViewBackground: passing in cell as the parameter
+ This method can simply call -themeViewBackground: passing in cell as the parameter.
  @param cell The UITableViewCell to theme.
  */
 - (void)themeCell:(UITableViewCell *)cell;
 
-// Theme AlarmCells
+/**
+ @brief Theme the AlarmViewController specific cells.
+ Specifically, the alarmTimeLabel and alarmDateLabel.
+ @param cell The AlarmCell object to theme.
+ @sa AlarmCell.h
+ */
 - (void)themeAlarmCell:(AlarmCell *)cell;
 
-// Theme the UISwitch
+/**
+@brief Theme the switchControl's onTintColor.
+@param switchControl The UISwitch object to theme.
+ */
 - (void)themeSwitch:(UISwitch *)switchControl;
 
-// Theme the UISlider
+/**
+@brief Theme the slider's tintColor.
+@param slider The UISlider to theme.
+ */
 - (void)themeSlider:(UISlider *)slider;
 
-// Theme the UITextField
+/**
+@brief Theme the textField's textColor property
+@param textField The UITextField to theme
+ */
 - (void)themeTextField:(UITextField *)textField;
 
-// Theme the border used for a given view
+/**
+@brief Apply, theme, and control visibility of a border on a given view.
+@param view The UIView to apply a border to through the use of layer property
+@param isVisible The BOOL to control the border visibility.
+@sa CALayer.h
+ */
 - (void)themeBorderForView:(UIView *)view visible:(BOOL)isVisible;
 
-// Theme Action Sheet of type IBAction
+/**
+@brief Theme the actionSheet's titleTextColor, titleBackgroundColor, 
+buttonBackgroundColor, and buttonTextColor.
+@param actionSheet The IBActionSheet object to theme.
+ */
 - (void)themeIBActionSheet:(IBActionSheet *)actionSheet;
 
 @end

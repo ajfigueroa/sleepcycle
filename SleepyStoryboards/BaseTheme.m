@@ -17,9 +17,13 @@
 
 @interface BaseTheme ()
 
-// Holds all brightness variants
+/**
+ @brief The color map to apply to a UITableView's cells. It contains the three brightness variants.
+ */
 @property (nonatomic, strong) NSArray *tableViewCellColorMapping;
-// Keeps track of the last section
+/**
+ @brief The last section that a color map was applied to. Different sections may want different color maps.
+ */
 @property (nonatomic, assign) NSUInteger previousTableViewSection;
 
 @end
@@ -51,6 +55,10 @@
 }
 
 #pragma mark - Build Helper Functions
+/**
+ @brief A method to add an observer for the AFColorMappingResetNotification so that the
+ clearColorMapping method can be called and reset the tableViewCellColorMapping property.
+ */
 - (void)addNotificationObserverForColorMapClearing
 {
     // Register for clearing notifications of the color map
@@ -143,9 +151,7 @@
 {
 
     // Build color map array
-    [self buildColorMappingArrayInReverseOrder:reverseOrder
-                                   atIndexPath:indexPath
-                                   inTableView:tableView];
+    [self buildColorMapForTableView:tableView inSection:indexPath.section reversed:reverseOrder];
     
     // Theme the UITableViewCell
     cell.backgroundColor = (UIColor *)self.tableViewCellColorMapping[(NSUInteger)indexPath.row];
@@ -153,15 +159,21 @@
     cell.textLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont labelFontSize]];
 }
 
-- (void)buildColorMappingArrayInReverseOrder:(BOOL)reverse
-                                 atIndexPath:(NSIndexPath *)indexPath
-                                 inTableView:(UITableView *)tableView
+/**
+@brief A specific method to help with -[BaseTheme themeTableViewCell:inTableView:atIndexPath:reverseOrder:]
+ that builds a color mapped array on the BaseTheme's tableViewCellColorMapping array property.
+@param tableView A UITableView on which to build the tableViewCellColorMapping for.
+@param section An NSInteger that represents the current section in the tableView.
+@param reverse A BOOL control that indicates the order of the tableViewCellColorMapping array property.
+@sa -[BaseTheme themeTableViewCell:inTableView:atIndexPath:reverseOrder:]
+ */
+- (void)buildColorMapForTableView:(UITableView *)tableView inSection:(NSInteger)section reversed:(BOOL)reverse
 {
     //  Reinitialize color mapping array on null or new section (UITableView section)
     if (!(self.tableViewCellColorMapping ||
-          self.previousTableViewSection != indexPath.section))
+          self.previousTableViewSection != section))
     {
-        self.previousTableViewSection = (NSUInteger)indexPath.section;
+        self.previousTableViewSection = (NSUInteger)section;
         self.tableViewCellColorMapping = [self themeTableViewCellMappingInTableView:tableView
                                                                           atSection:self.previousTableViewSection];
         
@@ -174,6 +186,17 @@
     }
 }
 
+/**
+ @brief Generates an array of three colors based on the primaryBackgroundColor property.
+ The three sections of colors are darker, normal, and brighter. It is @b recommended
+  that the -[UITableView numberOfRowsInSection] method returns a count divisible by 3.
+ @param tableView The UITableView that the color map will base itself off.
+ @param section The section index of the tableView on which the color map will be applied
+ to
+ @returns An NSArray of three sections, each a variation of the primaryBackgroundColor.
+ @sa -[BaseTheme buildColorMappingArrayInReverseOrder:atIndexPath:inTableView:]
+ @sa -[BaseTheme themeTableViewCell:inTableView:atIndexPath:reverseOrder:]
+ */
 - (NSArray *)themeTableViewCellMappingInTableView:(UITableView *)tableView
                                         atSection:(NSUInteger)section
 {
@@ -302,6 +325,9 @@
 }
 
 #pragma mark - Target Action Method
+/**
+ @brief Clear the tableViewCellColorMapping array by setting it to nil.
+ */
 - (void)clearColorMapping
 {
     self.tableViewCellColorMapping = nil;

@@ -11,21 +11,53 @@
 
 @interface BaseTheme : NSObject <Theme>
 
-// Primary color is usually the UINavigationBar background color
+/**
+@brief The UIColor to apply to UINavigationBar, UITabBar, UIToolBar etc. 
+In the init, this is the backgroundColor parameter.
+*/
 @property (nonatomic, strong) UIColor *primaryBackgroundColor;
 
-// Secondary color is the actual view background color and alternate can be used for dark themes
+/**
+@brief The UIColor to apply to UIView backgrounds and complementary text. 
+In the init, this is the secondaryBackgroundColor parameter.
+ */
 @property (nonatomic, strong) UIColor *secondaryBackgroundColor;
+
+/**
+@brief The alternate UIColor to apply to view backgrounds and complementary text. 
+In the init, this is the altSecondaryBackgroundColor parameter.
+*/
 @property (nonatomic, strong) UIColor *alternateSecondaryBackgroundColor;
 
-// The text colors to be used to contrast with the background colors
+/**
+@brief The primary color to use for all textColor properties of Labels and Buttons. 
+In the init, this is the textColor parameter.
+*/
 @property (nonatomic, strong) UIColor *primaryTextColor;
+
+/**
+@brief The secondary color to use for all textColor properties of Labels and Buttons
+where it would make sense to use a different color. 
+In the init, this is the secondaryTextColor property.
+*/
 @property (nonatomic, strong) UIColor *secondaryTextColor;
 
-// The enum to be used for any factory methods
+/**
+@brief The enumeration value that represents the AFThemeSelectionOption value of the subclass object.
+@sa AFThemeSelectionOption constants in SleepyTimeConstants.h
+*/
 @property (nonatomic, assign) NSInteger themeEnum;
 
-
+/**
+@brief Initialize the BaseTheme with set color properties for views and text.
+@param backgroundColor The UIColor to apply to UINavigationBar, UITabBar, UIToolBar etc.
+@param secondaryBackgroundColor The UIColor to apply to UIView backgrounds and complementary text.
+@param altSecondaryBackgroundColor The alternate UIColor to apply to view backgrounds and complementary text.
+@param textColor The primary color to use for all textColor properties of Labels and Buttons
+@param secondaryTextColor The secondary color to use for all textColor properties of Labels and Buttons
+where it would make sense to use a different color.
+@returns An initialized BaseTheme object.
+ */
 - (instancetype)initWithBackgroundColor:(UIColor *)backgroundColor
                secondaryBackgroundColor:(UIColor *)secondaryBackgroundColor
       alternateSecondaryBackgroundColor:(UIColor *)altSecondaryBackgroundColor
