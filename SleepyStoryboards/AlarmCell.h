@@ -10,7 +10,13 @@
 
 @interface AlarmCell : UITableViewCell
 
+/** 
+ @brief Label that displays the human readable alarm time.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *alarmTimeLabel;
+/**
+ @brief Label that displays the human readable alarm date.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *alarmDateLabel;
 
 @end

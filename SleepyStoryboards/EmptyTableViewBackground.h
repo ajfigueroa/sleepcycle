@@ -10,6 +10,9 @@
 
 @interface EmptyTableViewBackground : UIView
 
+/**
+ @brief Label that is displayed in the center of a UITableView's background view.
+ */
 @property (nonatomic, strong) UILabel *emptyTableMessageLabel;
 
 @end

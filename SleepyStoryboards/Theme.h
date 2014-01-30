@@ -15,10 +15,16 @@
 
 @required
 
-// Themes the background color of the view in primary fashion
+/**
+ @brief Themes the backgroundColor property of a view in a primary manner.
+ @param view The view object to theme.
+ */
 - (void)themeViewBackground:(UIView *)view;
 
-// Themes the background view in the alternate fashion
+/**
+ @brief Theme the backgroundColor property of a view in a secondary manner.
+ @param view The view object to theme.
+ */
 - (void)alternateThemeViewBackground:(UIView *)view;
 
 // Theme the UINavigationBar

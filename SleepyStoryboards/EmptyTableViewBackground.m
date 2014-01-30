@@ -24,6 +24,7 @@
         UIFont *labelFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize] + 2];
         CGSize labelSizeWithFont = [emptyTableMessage sizeWithAttributes:@{NSFontAttributeName: labelFont}];
         
+        // Customize the emptyTableMessageLabel
         self.emptyTableMessageLabel.frame = (CGRect){
             .origin.x = self.center.x - labelSizeWithFont.width / 2.0f,
             .origin.y = self.center.y - labelSizeWithFont.height / 2.0f,
