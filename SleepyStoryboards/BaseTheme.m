@@ -21,6 +21,7 @@
  @brief The color map to apply to a UITableView's cells. It contains the three brightness variants.
  */
 @property (nonatomic, strong) NSArray *tableViewCellColorMapping;
+
 /**
  @brief The last section that a color map was applied to. Different sections may want different color maps.
  */
