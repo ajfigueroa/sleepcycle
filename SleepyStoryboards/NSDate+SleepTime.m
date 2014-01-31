@@ -13,9 +13,8 @@
 + (BOOL)spansMultipleDaysForTime:(NSDate *)candidateTime
 {
     // Compare the candidateTime with currentTime to validate alarm/reminder setting
-    // If candidateTime is earlier than currentTime, only a time in the future
-    // 24 hours is possible. Otherwise, a time within 24 hours and in the next 24 hours
-    // are possible
+    // trigger times.
+    
     NSDate *currentDate = [NSDate date];
     NSComparisonResult timeCompare = [candidateTime compareTimes:currentDate];
     
@@ -75,18 +74,6 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSHourCalendarUnit fromDate:self];
     return components.hour;
-}
-
-- (NSArray *)allDateComponents
-{
-    // Return the day, hour, minute, and second components as an array
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:self];
-    
-    return @[@(components.day),
-             @(components.hour),
-             @(components.minute),
-             @(components.second)];
 }
 
 - (NSDate *)zeroDateSeconds
@@ -196,6 +183,8 @@
     NSComparisonResult hourCompare = [self compareHours:anotherDate];
     NSComparisonResult minuteCompare = [self compareMinutes:anotherDate];
     
+    // If the hours are the same, the result of the minutes comparison determines
+    // the overall result
     if (hourCompare == NSOrderedSame)
         return minuteCompare;
     else
