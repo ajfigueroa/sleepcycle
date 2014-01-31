@@ -21,11 +21,12 @@ const static NSInteger kTwelveHours = 43200;
 
 @implementation SleepyTimeModel
 {
-    // Instance variable to handle timeToFallAsleep changes
+    // Instance variable to handle timeToFallAsleep changes since synthesize does not
+    // generate an ivar for the timeToFallAsleep property.
     NSInteger _timeToFallAsleep;
 }
 
-// Synthesize the properties from the SleepTImeModelProtocol
+// Synthesize the properties from the SleepTimeModelProtocol
 @synthesize internalTimeDataSource, sleepCycleInterval, timeToFallAsleep, totalSleepCycles, timeDataSource;
 
 - (instancetype)init
@@ -35,13 +36,12 @@ const static NSInteger kTwelveHours = 43200;
     if (self) {
         
         // Assign default property values
-        
         // Data source array is empty upon initialization
         self.internalTimeDataSource = [[NSMutableArray alloc] init];
         self.sleepCycleInterval = 5400; // 1.5 hours in seconds
         self.timeToFallAsleep = 840; // 14 min in seconds
         self.totalSleepCycles = 6;
-
+        
     }
     
     return self;
@@ -93,12 +93,19 @@ const static NSInteger kTwelveHours = 43200;
                                                     totalCycles:self.totalSleepCycles];
 }
 
+/**
+ @brief Creates a mutable array that contains the startTime shifted consecutively by shiftInSeconds 
+ for cycleLimit times.
+ @param startTime The seed time that all shifts are performed relative to.
+ @param shiftInSeconds The amount to shift in seconds during each iteration.
+ @param cycleLimit The amount of shifts to perform.
+ @returns A NSMutableArray of the shifted times.
+ */
 - (NSMutableArray *)modifyTimesForStartTime:(NSDate *)startTime
                                   timeShift:(NSInteger)shiftInSeconds
                                 totalCycles:(NSUInteger)cycleLimit
 {
     // Shifts the input time by consecutive shifts for a limit of cycles
-    // Returns an array of the shifted times
     NSMutableArray *outputTimes = [[NSMutableArray alloc] init];
     
     for (int i = 1; i <= cycleLimit; i++){

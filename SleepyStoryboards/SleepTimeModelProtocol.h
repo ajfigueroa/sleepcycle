@@ -34,6 +34,7 @@
  */
 @property (nonatomic, readonly) NSArray *timeDataSource;
 
+
 /**
  @brief Populates the internal data source with wake times with the sleepTime set to the current time.
  */
