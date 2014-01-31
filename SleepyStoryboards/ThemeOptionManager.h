@@ -12,11 +12,26 @@
 
 @interface ThemeOptionManager : NSObject
 
-// Methods for comprehending theme options
+/**
+ @brief Transforms the corresponding appThemeSelectionOption constant to a human readable string.
+ This method name takes inspiration from __PRETTY_FUNCTION__.
+ @param appThemeSelectionOption The AFThemeSelectionOption constant that represents the theme.
+ @returns The human readable version of the theme's name.
+ */
 - (NSString *)prettyThemeName:(AFThemeSelectionOption)appThemeSelectionOption;
+
+/**
+ @brief Transforms a themeName to it's corresponding AFThemeSelectionOption constant
+ @param themeName The NSString that represents the human readable version of the theme.
+ @returns The AFThemeSelectionOption constant that corresponds to the themeName string.
+ */
 - (AFThemeSelectionOption)themeSelectionOptionForName:(NSString *)themeName;
 
-// Sorted theme names (by AFThemeSelectionOption)
+/**
+ @brief Creates and returns an array of human readable theme names sorted by their enumeration values.
+ @returns An array of human readable theme names sorted by enumeration value (AFThemeSelectionOption).
+ @sa AFThemeSelectionOption constants in SleepyTimeConstants.h
+ */
 - (NSArray *)themeNamesSortedByEnumeration;
 
 @end

@@ -28,6 +28,11 @@
 }
 
 #pragma mark - Helpers
+/**
+ @brief Creates and maps the human readable versions of themeNames to their enumeration value as a string
+ @note Creates dictionary of mapping: {enumerationAsString: themeName}
+ @returns A NSMutableDictionary that contains the mapping of themeNames to their enumeration constants.
+ */
 - (NSMutableDictionary *)buildThemeIndexDictionary
 {
     NSMutableDictionary *themeDictionary = [NSMutableDictionary dictionary];
@@ -35,6 +40,7 @@
     // Map the string version of indices to theme name values
     for (NSInteger i = 0; i < AFAvailableThemesCount; i++)
     {
+        // Cast the integer value to an NSInteger and set the string version as they key
         NSString *key = [@(i) stringValue];
         NSString *obj = [self themeNameForIndex:i];
         
