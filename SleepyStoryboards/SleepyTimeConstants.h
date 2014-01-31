@@ -15,9 +15,6 @@ static NSString *const AFShowEasterEgg = @"ShowEasterEgg";
 static NSString *const AFShowDatePickerBorder = @"ShowBorder";
 static NSString *const AFTimeToFallAsleepInMinutes = @"TimeToFallAsleepInMinutes";
 
-/**
- The enumeration for Theme constants.
- */
 typedef NS_ENUM(NSInteger, AFThemeSelectionOption)
 {
     AFThemeSelectionOptionBlueBeigeTheme, /**< The Blue and Beige color scheme, referred to as Default */

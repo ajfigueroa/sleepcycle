@@ -10,6 +10,10 @@
 
 @interface NSArray (Ordering)
 
+/**
+ @brief Reverse the order of the receiver's copy.
+ @returns A copy of the receiver that is in the reverse order.
+ */
 - (NSArray *)reverseArray;
 
 @end
