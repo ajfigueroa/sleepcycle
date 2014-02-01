@@ -10,14 +10,38 @@
 
 @interface SchedulerAPI : NSObject
 
-// The date/time that was selected in the TimeSelection datePicker
+/**
+ @brief The selected time that was the seed time that produced the scheduledTime. This
+ is usually the time from the UIDatePicker when it was selected.
+ */
 @property (nonatomic, strong) NSDate *selectedTime;
+
+/**
+ @brief The time that is used to set the trigger time for both alarms and/or reminders.
+ */
 @property (nonatomic, readonly) NSDate *scheduledTime;
 
+/**
+ @brief Returns the shared scheduler instance used for setting up alarms and notification tasks.
+ @returns The shared scheduler instance.
+ */
 + (instancetype)sharedScheduler;
 
+/**
+ @brief Sets up a UILocalNotification alarm to trigger at the selectedTime property.
+ */
 - (void)createAlarmNotificationForDatePickerSelectedTime;
+
+/**
+ @brief Sets up a UILocalNotification alarm to trigger at the alarmTime.
+ @param alarmTime The date to set as the trigger for the UILocalNotification.
+ */
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime;
+
+/**
+ @brief Sets up a reminder instance to trigger at the reminderTime.
+ @param reminderTime The time to trigger the reminder at.
+ */
 - (void)createReminderForDate:(NSDate *)reminderTime;
 
 @end
