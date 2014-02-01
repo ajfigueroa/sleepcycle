@@ -12,15 +12,29 @@
 
 @interface AlarmNotificationScheduler : NSObject
 
+/**
+ @brief The time to trigger the alarm notification.
+ */
 @property (nonatomic, readonly) NSDate *alarmTime;
+
+/**
+ @brief The body to attach to the alarm notification.
+ */
 @property (nonatomic, strong) NSString *alarmAlertBody;
+
+/**
+ @brief The delegate object to receive updates on the status of setting an alarm notification.
+ */
 @property (nonatomic, weak) id <AlarmNotificationSchedulerDelegate> delegate;
 
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime;
 
 @end
 
-// Protocol Definition
+/**
+ The delegate of the AlarmNotificationScheduler must adhere to this protocol. The optional
+ methods provide updates on the status of the alarm notification posting.
+ */
 @protocol AlarmNotificationSchedulerDelegate <NSObject>
 
 @optional

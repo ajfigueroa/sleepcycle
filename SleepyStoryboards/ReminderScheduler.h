@@ -12,15 +12,30 @@
 
 @interface ReminderScheduler : NSObject
 
+/**
+ @brief The time that the reminder will be set to trigger at.
+ */
 @property (nonatomic, readonly) NSDate *reminderTime;
+
+/**
+ @brief The note that will be added to the reminder.
+ */
 @property (nonatomic, strong) NSString *reminderNote;
+
+/**
+ @brief The delegate object to recieve updates on the status of a reminder.
+ */
 @property (nonatomic, weak) id <ReminderSchedulerDelegate> delegate;
+
 
 - (void)createReminderForDate:(NSDate *)reminderTime;
 
 @end
 
-// Protocol Definition
+/**
+ @brief The delegate of the ReminderScheduler object must adhere to this protocol. 
+ The optional methods provide updates on whether or not a reminder did post successfully.
+ */
 @protocol ReminderSchedulerDelegate <NSObject>
 
 @optional

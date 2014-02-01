@@ -29,18 +29,21 @@
 
 /**
  @brief Sets up a UILocalNotification alarm to trigger at the selectedTime property.
+ @note This is the SchedulerAPI's interface of the AlarmNotificationScheduler's method with the same name.
  */
 - (void)createAlarmNotificationForDatePickerSelectedTime;
 
 /**
  @brief Sets up a UILocalNotification alarm to trigger at the alarmTime.
  @param alarmTime The date to set as the trigger for the UILocalNotification.
+ @note This is the SchedulerAPI's interface of the AlarmNotificationScheduler's method with the same name.
  */
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime;
 
 /**
  @brief Sets up a reminder instance to trigger at the reminderTime.
  @param reminderTime The time to trigger the reminder at.
+ @note This is the SchedulerAPI's interface of the ReminderScheduler's method with the same name.
  */
 - (void)createReminderForDate:(NSDate *)reminderTime;
 

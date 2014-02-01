@@ -12,6 +12,11 @@
 @class IBActionSheet;
 @class BOZPongRefreshControl;
 
+/**
+@brief The Theme protocol defines methods that an object must implement in order to be a valid theme in this
+ application. It must be able to handle all basic UIControl and UIViews as well as custom subclasses
+ or extensions of these controls and views.
+ */
 @protocol Theme <NSObject>
 
 @required

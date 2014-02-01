@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ @brief The ImageViewManager protocol defines methods that must be implemented in order to provide
+ UIImages to the various setting cells found in the MenuViewController storyboard.
+ */
 @protocol ImageViewManager <NSObject>
 
 /**

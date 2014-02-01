@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ @brief The SleepTimeModelProtocol declares properties and methods that are required for a model to allow
+ it to provide sufficient information for any sleep cycle calculations.
+ */
 @protocol SleepTimeModelProtocol <NSObject>
 
 @required
