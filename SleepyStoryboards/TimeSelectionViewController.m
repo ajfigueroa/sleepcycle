@@ -111,13 +111,13 @@
 }
 
 #pragma mark - Model Configuration
-- (void)configureModel:(id <SleepTimeModelProtocol>)model
+- (void)configureModel:(id <SleepTimeModeller>)model
 {
     // Implement with additional properties
     model.timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
 }
 
-- (void)performModelCalculation:(id <SleepTimeModelProtocol>)model
+- (void)performModelCalculation:(id <SleepTimeModeller>)model
 {
     NSDate *selectedDate = self.timeSelectionDatePicker.date;
     
@@ -150,7 +150,7 @@
     resultsViewController.applicationDelegate = self.applicationDelegate;
     
     // Create the model to be used with the resultsViewController
-    SleepyTimeModel *model = (id <SleepTimeModelProtocol>)[[SleepyTimeModel alloc] init];
+    SleepyTimeModel *model = (id <SleepTimeModeller>)[[SleepyTimeModel alloc] init];
 
     // Configure the model depending on the button segue
     if ([segue.identifier isEqualToString:AFConfirmTimeButtonSegue])

@@ -9,8 +9,8 @@
 //  the timeDataSource and updating the current value of it depending on the desired actions.
 
 #import <Foundation/Foundation.h>
-#import "SleepTimeModelProtocol.h"
+#import "SleepTimeModeller.h"
 
-@interface SleepyTimeModel : NSObject <SleepTimeModelProtocol>
+@interface SleepyTimeModel : NSObject <SleepTimeModeller>
 
 @end

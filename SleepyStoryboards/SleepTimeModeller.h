@@ -1,18 +1,18 @@
 //
-//  SleepTimeModelProtocol.h
+//  SleepTimeModeller.h
 //  SleepyStoryboards
 //
-//  Created by Alexander Figueroa on 1/22/2014.
+//  Created by Alexander Figueroa on 2/3/2014.
 //  Copyright (c) 2014 Alexander Figueroa. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 /**
- @brief The SleepTimeModelProtocol declares properties and methods that are required for a model to allow
+ @brief The SleepTimeModeller Protocol declares properties and methods that are required for a model to allow
  it to provide sufficient information for any sleep cycle calculations.
  */
-@protocol SleepTimeModelProtocol <NSObject>
+@protocol SleepTimeModeller <NSObject>
 
 @required
 
@@ -55,5 +55,6 @@
  @param wakeTime The NSDate that represents the desired wake up time.
  */
 - (void)calculateBedTimesWithWakeTime:(NSDate *)wakeTime;
+
 
 @end
