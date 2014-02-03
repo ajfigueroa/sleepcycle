@@ -30,9 +30,11 @@
  */
 - (instancetype)initWithPresenterWindow:(UIWindow *)presenterWindow;
 
-// Action Sheet Builder Method
 /**
- @brief Creates an action sheet based on the given AFSelectedUserMode constant and info.
+ @brief Creates an action sheet based on the given AFSelectedUserMode constant and seed date.
+ @param state The AFSelectedUserMode constant that represents the applications mode.
+ @sa AFSelectedUserMode constants and TimeSelectionViewController
+ @param date The seed date that can either be a reminder time or alarm time.
  */
 - (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date;
 

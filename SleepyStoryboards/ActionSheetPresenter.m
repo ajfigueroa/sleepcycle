@@ -16,11 +16,19 @@
 
 @interface ActionSheetPresenter ()
 
-// The desired scheduled time
+/**
+ @brief The desired date to trigger the alarm or reminder at.
+ */
 @property (nonatomic, strong) NSDate *desiredScheduledTime;
 
-// Keep a reference to the pairs of Reminder and Alarm Times (prone to overwrites)
+/**
+ @brief The pair of alarm times where the order of dates are: Tomorrow and Today.
+*/
 @property (nonatomic, strong) NSArray *alarmTimesPair;
+
+/**
+ @brief The pair of reminder times where the order of dates are: Today and Tomorrow
+ */
 @property (nonatomic, strong) NSArray *reminderTimesPair;
 
 @end
@@ -84,6 +92,12 @@
 }
 
 #pragma mark - Custom Action Sheets for Modes
+/**
+ @brief Creates and returns the Action Sheet for an Alarm with the fire date of wakeTime.
+ @param wakeTime The NSDate that represents the desired alarm wake up time.
+ @returns An IBActionSheet configured with the alarm set to wakeTime and one (or two) versions of the date. One of them
+ is set to Tomorrow and the other Today).
+ */
 - (IBActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime
 {
     NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Set Alarm for %@", nil),
@@ -125,6 +139,13 @@
     return actionSheet;
 }
 
+/**
+ @brief Creates and returns an Action Sheet used for a Reminder set to fire at the sleepTime subtract 
+ the timeToFallAsleep. That is, the Reminder fire date is (sleepTime - timeToFallAsleep).
+ @param sleepTime The time to set the reminder at prior to subtracting the timeToFallAsleep.
+ @returns An IBActionSheet configured with the the reminder set to fire at (sleepTime - timeToFallAsleep) and one 
+ (or two) versions of its date. One if set to Today and the other is set to Tomorrow.
+ */
 - (IBActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime
 {
     // Create date set back by the user defined time to fall asleep (default 14)
@@ -170,8 +191,8 @@
     return actionSheet;
 }
 
-#pragma mark - UIActionSheetDelegate
--  (void)actionSheet:(IBActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+#pragma mark - IBActionSheetDelegate
+- (void)actionSheet:(IBActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (actionSheet.tag) {
         case AFActionSheetTagAlarm:
