@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SleepTimeModelProtocol.h"
-#import "ApplicationSlidingViewControllerProtocol.h"
+#import "SliderMenuApplicationDelegate.h"
 
 @interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) id <SleepTimeModelProtocol> model;
-@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
+@property (nonatomic, weak) id <SliderMenuApplicationDelegate> applicationDelegate;
 @property (nonatomic, assign) AFSelectedUserMode selectedUserMode;
 // The time passed in from the datePicker of the TimeSelectionViewController (aka Destination Time)
 @property (nonatomic, strong) NSDate *selectedTime;

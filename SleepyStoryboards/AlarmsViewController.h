@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ApplicationSlidingViewControllerProtocol.h"
+#import "SliderMenuApplicationDelegate.h"
 #import "SettingsViewControllerDelegate.h"
 
 @interface AlarmsViewController : UITableViewController <SettingsViewControllerDelegate>
 
-@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
+@property (nonatomic, weak) id <SliderMenuApplicationDelegate> applicationDelegate;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
 // Toggle the Menu Slider
