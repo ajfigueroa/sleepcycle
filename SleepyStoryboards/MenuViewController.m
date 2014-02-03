@@ -237,11 +237,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)self.mainNavigationController.viewControllers.firstObject;
     timeSelectionViewController.selectedUserMode = option;
     
-    if (![[self.applicationDelegate slidingViewController].frontViewController isEqual:self.mainNavigationController])
+    if (![[self.applicationDelegate frontViewController] isEqual:self.mainNavigationController])
     {
-        [[self.applicationDelegate slidingViewController] setFrontViewController:self.mainNavigationController
-                                                                        animated:YES
-                                                                      completion:nil];
+        [self.applicationDelegate setFrontViewController:self.mainNavigationController];
     }
 }
 
@@ -253,9 +251,9 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     AlarmsViewController *alarmsViewController = (AlarmsViewController *)self.alarmsNavigationViewController.viewControllers.firstObject;
     alarmsViewController.applicationDelegate = self.applicationDelegate;
     
-    if (![[self.applicationDelegate slidingViewController].frontViewController isEqual:self.alarmsNavigationViewController])
+    if (![[self.applicationDelegate frontViewController] isEqual:self.alarmsNavigationViewController])
     {
-        [[self.applicationDelegate slidingViewController] setFrontViewController:self.alarmsNavigationViewController animated:YES completion:nil];
+        [self.applicationDelegate setFrontViewController:self.alarmsNavigationViewController];
     }
 }
 

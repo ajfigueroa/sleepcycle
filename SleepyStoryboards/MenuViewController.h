@@ -8,7 +8,7 @@
 //  Mediator for interactions between the view controller
 
 #import <UIKit/UIKit.h>
-#import "ApplicationSlidingViewControllerProtocol.h"
+#import "SliderMenuApplicationDelegate.h"
 #import "SettingsViewControllerDelegate.h"
 
 @class JSSlidingViewController;
@@ -16,7 +16,7 @@
 
 @interface MenuViewController : UITableViewController <SettingsViewControllerDelegate>
 
-@property (nonatomic, weak) id <ApplicationSlidingViewControllerProtocol> applicationDelegate;
+@property (nonatomic, weak) id <SliderMenuApplicationDelegate> applicationDelegate;
 @property (nonatomic, strong) UINavigationController *mainNavigationController;
 @property (nonatomic, strong) UINavigationController *settingsNavigationViewController;
 @property (nonatomic, strong) UINavigationController *alarmsNavigationViewController;
