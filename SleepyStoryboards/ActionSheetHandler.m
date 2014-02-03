@@ -18,7 +18,9 @@
 @end
 
 @implementation ActionSheetHandler
+{}
 
+#pragma mark - ActionSheetPresenterDelegate Protocol
 - (void)actionSheetPresenter:(ActionSheetPresenter *)actionSheetPresenter
         clickedButtonAtIndex:(NSInteger)buttonIndex
               forActionSheet:(IBActionSheet *)actionSheet
@@ -49,6 +51,12 @@
 }
 
 #pragma mark - Alarm Preparation
+/**
+ @brief Requests that the SchedulerAPI sets up an alarm for the time located at index, which corresponds
+ to an AFActionSheetAlarm constant.
+ @sa SchedulerAPI.h
+ @param index The AFActionSheetAlarm constant that indicates which time to use off the Action Sheet
+ */
 - (void)performAlarmActionForIndex:(AFActionSheetAlarm)index
 {
     // Zero the alarm seconds
@@ -58,6 +66,12 @@
 }
 
 #pragma mark - Reminder Preparation
+/**
+ @brief Requests that the SchedulerAPI sets up a reminder for the time located at index, which corresponds
+ to an AFActionSheetReminder constant.
+ @sa SchedulerAPI.h
+ @param index The AFActionSheetReminder constant that indicates which time to use off the Action Sheet
+ */
 - (void)performReminderActionForIndex:(AFActionSheetReminder)index
 {
     // First zero seconds
