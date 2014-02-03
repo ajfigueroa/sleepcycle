@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JSSlidingViewController.h"
-#import "MenuViewController.h"
+#import "SliderMenuApplicationDelegate.h"
 
-@interface AppDelegate : UIResponder <ApplicationSlidingViewControllerProtocol>
+@interface AppDelegate : UIResponder <SliderMenuApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 

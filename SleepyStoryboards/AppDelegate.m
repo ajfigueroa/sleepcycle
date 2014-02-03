@@ -8,11 +8,20 @@
 
 #import "AppDelegate.h"
 #import "TimeSelectionViewController.h"
+#import "JSSlidingViewController.h"
+#import "MenuViewController.h"
+
+@interface AppDelegate ()
+
+/**
+ @brief The Sliding View Controller that this AppDelegate will manage. It'll be also
+ used to implement some of the SliderMenuApplicationDelegate protocol.
+ */
+@property (nonatomic, strong) JSSlidingViewController *slidingViewController;
+
+@end
 
 @implementation AppDelegate
-
-// Synthesizing property to conform to ApplicationSlidingViewControllerProtocol
-@synthesize slidingViewController;
 
 + (void)initialize
 {
@@ -97,6 +106,16 @@
 - (void)unlockSlider
 {
     self.slidingViewController.locked = NO;
+}
+
+- (UIViewController *)frontViewController
+{
+    return self.slidingViewController.frontViewController;
+}
+
+- (void)setFrontViewController:(UIViewController *)viewController
+{
+    [self.slidingViewController setFrontViewController:viewController animated:YES completion:nil];
 }
 
 @end
