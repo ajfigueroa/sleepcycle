@@ -22,29 +22,28 @@
 - (void)actionSheetPresenter:(ActionSheetPresenter *)actionSheetPresenter
         clickedButtonAtIndex:(NSInteger)buttonIndex
               forActionSheet:(IBActionSheet *)actionSheet
-                     withTag:(AFActionSheetTag)tag
-                    andDates:(NSArray *)datePairs
+                     andInfo:(NSDictionary *)info
 {
-    // The datePairs array should contain two dates.
-    assert(datePairs.count == 2);
+    // The info in this case should be a dictionary that contain two dates.
+    assert(info.count == 2);
     
     if (actionSheet.hasCancelButton && buttonIndex == actionSheet.buttons.count - 1)
         return;
     
-    // Assign the date pair values
-    self.datePairs = datePairs;
-    
     switch (actionSheet.tag) {
         case AFActionSheetTagAlarm:
+            // Assign the date pair values
+            self.datePairs = @[info[@"Tomorrow"], info[@"Today"]];
             [self performAlarmActionForIndex:buttonIndex];
             break;
             
         case AFActionSheetTagReminder:
+            self.datePairs = @[info[@"Today"], info[@"Tomorrow"]];
             [self performReminderActionForIndex:buttonIndex];
             break;
             
         default:
-            NSLog(@"%s: %@", __PRETTY_FUNCTION__, @"Default case");
+            NSLog(@"%s - Warning; Scheduler is running default case", __PRETTY_FUNCTION__);
             break;
         }
 }

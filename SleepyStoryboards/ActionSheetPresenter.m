@@ -178,16 +178,16 @@
             [self.delegate actionSheetPresenter:self
                            clickedButtonAtIndex:buttonIndex
                                  forActionSheet:actionSheet
-                                        withTag:actionSheet.tag
-                                       andDates:self.alarmTimesPair];
+                                        andInfo:@{@"Tomorrow": (NSDate *)self.alarmTimesPair.firstObject,
+                                                  @"Today": (NSDate *)self.alarmTimesPair.lastObject}];
             break;
             
         case AFActionSheetTagReminder:
             [self.delegate actionSheetPresenter:self
                            clickedButtonAtIndex:buttonIndex
                                  forActionSheet:actionSheet
-                                        withTag:actionSheet.tag
-                                       andDates:self.reminderTimesPair];
+                                        andInfo:@{@"Today": (NSDate *)self.reminderTimesPair.firstObject,
+                                                  @"Tomorrow": (NSDate *)self.reminderTimesPair.lastObject}];
             break;
             
         default:

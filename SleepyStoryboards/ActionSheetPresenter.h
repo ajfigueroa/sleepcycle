@@ -13,15 +13,27 @@
 
 @interface ActionSheetPresenter : NSObject <IBActionSheetDelegate>
 
-// The window on which to present the action sheet unto
+/**
+ @brief The window to which present the action sheet upon.
+ */
 @property (nonatomic, strong) UIWindow *presenterWindow;
 
-// The delegate to notify of selections between various action sheets
+/**
+ @brief The delegate object to receive information on any interactions that occur on a given action
+ sheet as well as the appropriate data needed.
+ */
 @property (nonatomic, weak) id <ActionSheetPresenterDelegate> delegate;
 
+/**
+ @brief Initialize the presenterWindow property that the action sheets will present themselves upon.
+ @sa -[UIActionSheet showInView:]
+ */
 - (instancetype)initWithPresenterWindow:(UIWindow *)presenterWindow;
 
 // Action Sheet Builder Method
+/**
+ @brief Creates an action sheet based on the given AFSelectedUserMode constant and info.
+ */
 - (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date;
 
 @end
