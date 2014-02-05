@@ -7,7 +7,6 @@
 //
 
 #import "MenuViewController.h"
-#import "JSSlidingViewController.h"
 #import "ThemeFactory.h"
 #import "SettingsSelectionConstants.h"
 #import "TimeSelectionViewController.h"

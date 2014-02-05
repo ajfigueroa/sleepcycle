@@ -198,8 +198,10 @@
     // Remove from application scheduled notifications
     [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
     
-    [tableView deleteRowsAtIndexPaths:@[indexPath]
-                     withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (indexPath.row != self.alarmsArray.count)
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    else
+        [tableView reloadData];
 }
 
 
