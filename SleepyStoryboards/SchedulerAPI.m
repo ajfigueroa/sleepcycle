@@ -82,6 +82,7 @@
     
     // Configure alert body and send alarm notification post
     [self configureAlarmSchedulerBody];
+    
     if (![self alarmAlreadyExistsForTime:_scheduledTime])
         [self.alarmScheduler createAlarmNotificationForDate:_scheduledTime];
 }

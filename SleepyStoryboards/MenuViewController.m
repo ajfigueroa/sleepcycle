@@ -16,9 +16,10 @@
 #import "SettingsViewController.h"
 #import "SliderMenuApplicationDelegate.h"
 
-#define SETTINGS_TABLE_ROWS 7
-
-// These enums refer to the static table view cells in the slider menu (refer to MainStoryboard file)
+/**
+ @brief The AFSettingsTableHeader constants refer to the cell row indexes in the static table view of
+ the main application's Slider Menu (Refer to the main storyboard)
+ */
 typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 {
     AFSettingsTableHeaderSettings,
@@ -41,6 +42,8 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 
 @end
 
+// Constants
+static NSInteger const settingsTableRowCount = 7;
 
 @implementation MenuViewController
 
@@ -167,7 +170,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 
 - (void)themeTableViewCellsWithThemeSetter:(id <Theme>)themeSetter
 {
-    for (int i = 0; i < SETTINGS_TABLE_ROWS; i++)
+    for (int i = 0; i < settingsTableRowCount; i++)
     {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         
