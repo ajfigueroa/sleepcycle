@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     [super viewDidLoad];
     
     // Initialize the application delegate reference
-    self.sliderApplication = (id <SliderMenuApplicationDelegate>)[UIApplication sharedApplication];
+    self.sliderApplication = (id <SliderMenuApplicationDelegate>)[UIApplication sharedApplication].delegate;
 }
 
 #pragma mark - Override Accessor Methods
@@ -253,7 +253,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     timeSelectionViewController.selectedUserMode = option;
 
     if (![[self.sliderApplication frontViewController] isEqual:self.mainNavigationController])
-        [self.sliderApplication isEqual:self.mainNavigationController];
+        [self.sliderApplication setFrontViewController:self.mainNavigationController];
 }
 
 - (void)presentAlarmViewController

@@ -60,7 +60,7 @@
     [self.resultsTableView addGestureRecognizer:longPressGestureRecognizer];
     
     // Initialize the application delegate reference
-    self.sliderApplication = (id <SliderMenuApplicationDelegate>)[UIApplication sharedApplication];
+    self.sliderApplication = (id <SliderMenuApplicationDelegate>)[UIApplication sharedApplication].delegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated
