@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SliderMenuApplicationDelegate.h"
 #import "SettingsViewControllerDelegate.h"
 
 @class FUIButton;
 
 @interface TimeSelectionViewController : UIViewController <SettingsViewControllerDelegate>
 
-@property (nonatomic, weak) id <SliderMenuApplicationDelegate> applicationDelegate;
 @property (nonatomic, assign) AFSelectedUserMode selectedUserMode;
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *timeSelectionDatePicker;

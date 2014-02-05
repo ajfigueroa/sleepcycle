@@ -13,8 +13,15 @@
 #import "SleepyTimeModel.h"
 #import "SettingsAPI.h"
 #import "FUIButton.h"
+#import "SliderMenuApplicationDelegate.h"
 
 @interface TimeSelectionViewController ()
+
+/**
+ @brief An internal reference to the application delegate that conforms to the SliderMenuApplicationDelegate
+ and thus can handle all interactions of the ApplicationDelegate's slider menu controller.
+ */
+@property (nonatomic, strong) id <SliderMenuApplicationDelegate> sliderApplication;
 
 @end
 
@@ -33,6 +40,14 @@
 
 
 #pragma mark - View Management
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Initialize the application delegate reference
+    self.sliderApplication = (id <SliderMenuApplicationDelegate>)[UIApplication sharedApplication];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -41,7 +56,7 @@
     [self applyTheme];
     
     // Unlock the slider if this view controller is the current frontViewController
-    [self.applicationDelegate unlockSlider];
+    [self.sliderApplication unlockSlider];
     
     // Register for Theme Change Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -139,7 +154,7 @@
 #pragma mark - Sliding View Management
 - (IBAction)toggleSlider:(id)sender
 {
-    [self.applicationDelegate toggleSlider];
+    [self.sliderApplication toggleSlider];
 }
 
 #pragma mark - View Transitioning
@@ -147,7 +162,6 @@
 {
     ResultsViewController *resultsViewController = (ResultsViewController *)segue.destinationViewController;
     resultsViewController.selectedUserMode = self.selectedUserMode;
-    resultsViewController.applicationDelegate = self.applicationDelegate;
     
     // Create the model to be used with the resultsViewController
     SleepyTimeModel *model = (id <SleepTimeModeller>)[[SleepyTimeModel alloc] init];

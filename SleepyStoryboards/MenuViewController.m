@@ -14,6 +14,7 @@
 #import "AlarmsViewController.h"
 #import "SettingsAPI.h"
 #import "SettingsViewController.h"
+#import "SliderMenuApplicationDelegate.h"
 
 #define SETTINGS_TABLE_ROWS 7
 
@@ -31,6 +32,12 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 @property (nonatomic, assign) NSInteger lastIndex;
 // Keep track of the current UINavigationController on the stack
 @property (nonatomic, strong) UINavigationController *currentNavigationController;
+
+/**
+ @brief An internal reference to the application delegate that conforms to the SliderMenuApplicationDelegate
+ and thus can handle all interactions of the ApplicationDelegate's slider menu controller.
+ */
+@property (nonatomic, strong) id <SliderMenuApplicationDelegate> sliderApplication;
 
 @end
 
@@ -52,6 +59,14 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     
     // Register for theme change notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Initialize the application delegate reference
+    self.sliderApplication = (id <SliderMenuApplicationDelegate>)[UIApplication sharedApplication];
 }
 
 #pragma mark - Override Accessor Methods
@@ -203,7 +218,7 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 
 #pragma mark - JSSlidingViewController Helpers
 - (void)toggleSlider {
-    [self.applicationDelegate toggleSlider];
+    [self.sliderApplication toggleSlider];
 }
 
 #pragma mark - Presenters
@@ -236,25 +251,18 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
     // Update the mode of the TimeSelectionViewController
     TimeSelectionViewController *timeSelectionViewController = (TimeSelectionViewController *)self.mainNavigationController.viewControllers.firstObject;
     timeSelectionViewController.selectedUserMode = option;
-    
-    if (![[self.applicationDelegate frontViewController] isEqual:self.mainNavigationController])
-    {
-        [self.applicationDelegate setFrontViewController:self.mainNavigationController];
-    }
+
+    if (![[self.sliderApplication frontViewController] isEqual:self.mainNavigationController])
+        [self.sliderApplication isEqual:self.mainNavigationController];
 }
 
 - (void)presentAlarmViewController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     self.alarmsNavigationViewController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"AlarmsNav"];
-    
-    AlarmsViewController *alarmsViewController = (AlarmsViewController *)self.alarmsNavigationViewController.viewControllers.firstObject;
-    alarmsViewController.applicationDelegate = self.applicationDelegate;
-    
-    if (![[self.applicationDelegate frontViewController] isEqual:self.alarmsNavigationViewController])
-    {
-        [self.applicationDelegate setFrontViewController:self.alarmsNavigationViewController];
-    }
+
+    if (![[self.sliderApplication frontViewController] isEqual:self.alarmsNavigationViewController])
+        [self.sliderApplication setFrontViewController:self.alarmsNavigationViewController];
 }
 
 #pragma mark - SettingsViewControllerDelegate

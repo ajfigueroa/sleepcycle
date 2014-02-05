@@ -15,6 +15,7 @@
 #import "ActionSheetPresenter.h"
 #import "ActionSheetHandler.h"
 #import "SVProgressHUD.h"
+#import "SliderMenuApplicationDelegate.h"
 
 @interface ResultsViewController () <UIGestureRecognizerDelegate>
 
@@ -31,12 +32,37 @@
 // alarmButton outlet to control visibility
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *selectedTimeAlarmButton;
 
+/**
+ @brief An internal reference to the application delegate that conforms to the SliderMenuApplicationDelegate
+ and thus can handle all interactions of the ApplicationDelegate's slider menu controller.
+ */
+@property (nonatomic, strong) id <SliderMenuApplicationDelegate> sliderApplication;
+
 @end
 
 @implementation ResultsViewController
 {}
 
 #pragma mark - View Management
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Set up model
+    self.resultTimes = self.model.timeDataSource;
+    
+    // Create long press gesture recognizer
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longPressGestureRecognizer.minimumPressDuration = 1.0f; // seconds
+    longPressGestureRecognizer.delegate = self;
+    
+    // Add to table view
+    [self.resultsTableView addGestureRecognizer:longPressGestureRecognizer];
+    
+    // Initialize the application delegate reference
+    self.sliderApplication = (id <SliderMenuApplicationDelegate>)[UIApplication sharedApplication];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     // Register for theme change notifications
@@ -61,32 +87,15 @@
 {
     [super viewDidAppear:animated];
     
-    [self.applicationDelegate lockSlider];
+    [self.sliderApplication lockSlider];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    [self.applicationDelegate unlockSlider];
+    [self.sliderApplication unlockSlider];
 }
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Set up model
-    self.resultTimes = self.model.timeDataSource;
-    
-    // Create long press gesture recognizer
-    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longPressGestureRecognizer.minimumPressDuration = 1.0f; // seconds
-    longPressGestureRecognizer.delegate = self;
-    
-    // Add to table view
-    [self.resultsTableView addGestureRecognizer:longPressGestureRecognizer];
-}
-
 
 - (void)viewDidLayoutSubviews
 {

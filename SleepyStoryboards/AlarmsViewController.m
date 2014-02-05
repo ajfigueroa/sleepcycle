@@ -11,11 +11,18 @@
 #import "NSDate+SleepTime.h"
 #import "AlarmCell.h"
 #import "EmptyTableViewBackground.h"
+#import "SliderMenuApplicationDelegate.h"
 
 @interface AlarmsViewController ()
 
 @property (nonatomic, strong) NSMutableArray *alarmsArray;
 @property (nonatomic, strong) UILabel *emptyTableLabel;
+
+/**
+ @brief An internal reference to the application delegate that conforms to the SliderMenuApplicationDelegate
+ and thus can handle all interactions of the ApplicationDelegate's slider menu controller.
+ */
+@property (nonatomic, strong) id <SliderMenuApplicationDelegate> sliderApplication;
 
 @end
 
@@ -23,6 +30,24 @@
 {}
 
 #pragma mark - View Management
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.attributedTitle = [[NSAttributedString alloc]
+                                      initWithString:NSLocalizedString(@"Pull to Refresh", nil)];
+    
+    [refreshControl addTarget:self
+                       action:@selector(getNotifications)
+             forControlEvents:UIControlEventValueChanged];
+    
+    self.refreshControl = refreshControl;
+    
+    // Initialize the application delegate reference
+    self.sliderApplication = (id <SliderMenuApplicationDelegate>)[UIApplication sharedApplication];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -50,22 +75,6 @@
     
     // Disable edit mode
     [self.tableView setEditing:NO animated:YES];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.attributedTitle = [[NSAttributedString alloc]
-                                        initWithString:NSLocalizedString(@"Pull to Refresh", nil)];
-    
-    [refreshControl addTarget:self
-                       action:@selector(getNotifications)
-             forControlEvents:UIControlEventValueChanged];
-    
-    self.refreshControl = refreshControl;
-    
 }
 
 
@@ -124,7 +133,7 @@
 #pragma mark - SlidingViewController calls
 - (IBAction)toggleSlider:(id)sender
 {
-    [self.applicationDelegate toggleSlider];
+    [self.sliderApplication toggleSlider];
 }
 
 - (IBAction)toggleEditMode:(id)sender
