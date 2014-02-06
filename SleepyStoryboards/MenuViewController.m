@@ -7,11 +7,11 @@
 //
 
 #import "MenuViewController.h"
-#import "ThemeFactory.h"
-#import "TimeSelectionViewController.h"
-#import "AlarmsViewController.h"
 #import "SettingsAPI.h"
+#import "ThemeFactory.h"
+#import "AlarmsViewController.h"
 #import "SettingsViewController.h"
+#import "TimeSelectionViewController.h"
 #import "SliderMenuApplicationDelegate.h"
 
 /**
@@ -27,9 +27,15 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 
 @interface MenuViewController ()
 
-// Last index touched that is not the Settings index
+/**
+ @brief The last index touched in the side Menu View Controller. This is meant
+ to keep track of the last touched index when the user enters the Settings view.
+*/
 @property (nonatomic, assign) NSInteger lastIndex;
-// Keep track of the current UINavigationController on the stack
+
+/**
+ @brief The current navigation controller that is set as frontViewController stack.
+*/
 @property (nonatomic, strong) UINavigationController *currentNavigationController;
 
 /**
@@ -40,8 +46,8 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 
 @end
 
-// Constants
-static NSInteger const settingsTableRowCount = 7;
+// The constant value represents the number of options in the menu table including headers
+static NSInteger const AFSliderMenuSelectionOptions = 7;
 
 @implementation MenuViewController
 
@@ -59,18 +65,13 @@ static NSInteger const settingsTableRowCount = 7;
     [self applyTheme];
     
     // Register for theme change notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyTheme) name:AFThemeHasChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(applyTheme) 
+                                                 name:AFThemeHasChangedNotification 
+                                               object:nil];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Initialize the application delegate reference
-    self.sliderApplication = (id <SliderMenuApplicationDelegate>)[UIApplication sharedApplication].delegate;
-}
-
-#pragma mark - Override Accessor Methods
+#pragma mark - Navigation View Controller Setup Methods
 - (UINavigationController *)mainNavigationController
 {
     if (!_mainNavigationController)
@@ -112,6 +113,14 @@ static NSInteger const settingsTableRowCount = 7;
 }
 
 #pragma mark - View Management
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Initialize the application delegate reference
+    self.sliderApplication = (id <SliderMenuApplicationDelegate>)[UIApplication sharedApplication].delegate;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -129,23 +138,27 @@ static NSInteger const settingsTableRowCount = 7;
 {
     switch (indexPath.row) {
         case AFSettingsTableOptionSettings:
+            // Toggle slider first and present the view controller (modally)
             [self toggleSlider];
             [self presentSettingsViewController];
             break;
             
         case AFSettingsTableOptionBedTime:
+            // Update the front view controller then toggle slider
             [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateBedTime];
             self.lastIndex = AFSettingsTableOptionBedTime;
             [self toggleSlider];
             break;
             
         case AFSettingsTableOptionWakeTime:
+            // Update the front view controller then toggle slider
             [self presentTimeSelectionControllerWithSelectedUserMode:AFSelectedUserModeCalculateWakeTime];
             self.lastIndex = AFSettingsTableOptionWakeTime;
             [self toggleSlider];
             break;
             
         case AFSettingsTableOptionAlarm:
+            // Update the front view controller then toggle slider
             [self presentAlarmViewController];
             self.lastIndex = AFSettingsTableOptionAlarm;
             [self toggleSlider];
@@ -161,14 +174,16 @@ static NSInteger const settingsTableRowCount = 7;
 {
     id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
 
+    // Theme the table view background
     [themeSetter themeViewBackground:self.tableView];
     
+    // Theme the static table view cells represent the slider menu options
     [self themeTableViewCellsWithThemeSetter:themeSetter];
 }
 
 - (void)themeTableViewCellsWithThemeSetter:(id <Theme>)themeSetter
 {
-    for (int i = 0; i < settingsTableRowCount; i++)
+    for (int i = 0; i < AFSliderMenuSelectionOptions; i++)
     {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         
