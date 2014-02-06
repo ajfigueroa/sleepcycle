@@ -34,6 +34,9 @@
 {
     [super viewDidLoad];
     
+    // Set up data source array
+    [self populateAlarmsArray];
+    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     
     [refreshControl addTarget:self
@@ -61,10 +64,9 @@
                                              selector:@selector(applyTheme)
                                                  name:AFThemeHasChangedNotification
                                                object:nil];
-    
-    // Update the data source array and reload the table view
-    [self populateAlarmsArray];
+
     [self.tableView reloadData];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -80,6 +82,7 @@
 - (void)getNotifications
 {
     [self populateAlarmsArray];
+    [self.tableView reloadData];
     
     [self performSelector:@selector(stopRefresh)
                withObject:nil
@@ -167,14 +170,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger rowCount = self.alarmsArray.count;
-    
-    if (rowCount == 0)
+    if (!self.alarmsArray.count)
         [self configureViewForEmptyTableView];
     else
         [self configureViewForNonEmptyTableView];
     
-    return rowCount;
+    return (NSInteger)self.alarmsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
