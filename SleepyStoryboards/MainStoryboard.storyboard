@@ -517,10 +517,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1245" y="760"/>
         </scene>
-        <!--View Controller - About-->
+        <!--About View Controller - About-->
         <scene sceneID="TfD-dD-TME">
             <objects>
-                <viewController id="qsb-vN-qgi" sceneMemberID="viewController">
+                <viewController id="qsb-vN-qgi" customClass="AboutViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0gF-ao-8aQ"/>
                         <viewControllerLayoutGuide type="bottom" id="qBt-eU-sWc"/>
@@ -536,10 +536,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1245" y="1491"/>
         </scene>
-        <!--View Controller - Attributions-->
+        <!--Attributions View Controller - Attributions-->
         <scene sceneID="gk8-Ng-e0d">
             <objects>
-                <viewController id="IEQ-Zw-VbJ" sceneMemberID="viewController">
+                <viewController id="IEQ-Zw-VbJ" customClass="AttributionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YYH-Re-eiq"/>
                         <viewControllerLayoutGuide type="bottom" id="4nq-Ea-TR0"/>
@@ -547,9 +547,22 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <view key="view" contentMode="scaleToFill" id="gIt-4N-5ss">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mbq-4P-jvS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Attributions" id="Kih-Nq-yUQ"/>
+                    <connections>
+                        <outlet property="attributionTextView" destination="mbq-4P-jvS" id="NyC-rC-eQT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAV-ZY-uRB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
