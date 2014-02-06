@@ -434,9 +434,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Imx-Lo-isZ" kind="push" identifier="FeedbackSelectionSegue" id="gxt-Wk-utE"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bmI-3m-cIh">
                                         <rect key="frame" x="0.0" y="568" width="320" height="44"/>
@@ -539,25 +536,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1245" y="1491"/>
         </scene>
-        <!--View Controller - Feedback-->
-        <scene sceneID="Zlk-g6-9Yi">
-            <objects>
-                <viewController id="Imx-Lo-isZ" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="56P-4a-ySY"/>
-                        <viewControllerLayoutGuide type="bottom" id="6Gj-yC-DbT"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ueo-45-pjK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Feedback" id="vyh-00-n6c"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0W2-Z0-uZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1245" y="2287"/>
-        </scene>
         <!--View Controller - Attributions-->
         <scene sceneID="gk8-Ng-e0d">
             <objects>
@@ -575,7 +553,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAV-ZY-uRB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1245" y="3071"/>
+            <point key="canvasLocation" x="1245" y="2295"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="pbB-u0-1Qk">

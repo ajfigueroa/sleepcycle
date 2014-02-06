@@ -7,9 +7,22 @@
 //
 
 #import "SettingsViewController.h"
-#import "SettingsSelectionConstants.h"
 #import "SettingsAPI.h"
 #import "ThemeFactory.h"
+
+typedef NS_ENUM(NSInteger, AFSettingsHeader)
+{
+    AFSettingsHeaderAppearance,
+    AFSettingsHeaderBehaviour,
+    AFSettingsHeaderSupport
+};
+
+typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
+{
+    AFSettingsSupportSectionAbout,
+    AFSettingsSupportSectionFeedback,
+    AFSettingsSupportSectionAttributions
+};
 
 @interface SettingsViewController ()
 

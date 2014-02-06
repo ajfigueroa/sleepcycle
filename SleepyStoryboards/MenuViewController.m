@@ -8,7 +8,6 @@
 
 #import "MenuViewController.h"
 #import "ThemeFactory.h"
-#import "SettingsSelectionConstants.h"
 #import "TimeSelectionViewController.h"
 #import "AlarmsViewController.h"
 #import "SettingsAPI.h"

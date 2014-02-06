@@ -54,7 +54,6 @@ static NSString *const AFConfirmTimeButtonSegue = @"ConfirmTimeButtonSegue";
 static NSString *const AFSleepNowButtonSegue = @"SleepNowButtonSegue";
 static NSString *const AFAlarmClockSegue = @"AlarmClockSegue";
 static NSString *const AFAboutSelectionSegue = @"AboutSelectionSegue";
-static NSString *const AFFeedbackSelectionSegue = @"FeedbackSelectionSegue";
 static NSString *const AFAttributionSelectionSegue = @"AttributionSelectionSegue";
 
 // Theme count for ThemeSelectionController
