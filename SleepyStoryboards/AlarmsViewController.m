@@ -35,8 +35,6 @@
     [super viewDidLoad];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.attributedTitle = [[NSAttributedString alloc]
-                                      initWithString:NSLocalizedString(@"Pull to Refresh", nil)];
     
     [refreshControl addTarget:self
                        action:@selector(getNotifications)
@@ -109,6 +107,9 @@
     
     [themeSetter themeNavigationBar:self.navigationController.navigationBar];
     [themeSetter alternateThemeViewBackground:self.view];
+    [themeSetter themeRefreshControl:self.refreshControl];
+    
+    // Theme the tableView with black separator color (not implemented in BaseTheme method)
     [themeSetter themeTableView:self.tableView];
     self.tableView.separatorColor = [UIColor blackColor];
     
@@ -198,7 +199,10 @@
     // Remove from application scheduled notifications
     [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
     
-    if (indexPath.row != self.alarmsArray.count)
+    // To avoid a glitch with UITableView deletion of the last row in iOS7, when the last cell is about to
+    // be deleted, instead of performing deleteRowsAtIndexPaths:withRowAnimation:, the reloadData
+    // message will be sent to the tableView.
+    if (self.alarmsArray.count)
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     else
         [tableView reloadData];

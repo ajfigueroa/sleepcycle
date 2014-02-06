@@ -74,8 +74,14 @@
 - (void)alternateThemeLabel:(UILabel *)label withFont:(UIFont *)font;
 
 /**
- @brief Theme the refreshControl's backgroundColor
+ @brief Theme the refreshControl's tint color.
  @param refreshControl The UIRefreshControl to theme.
+ */
+- (void)themeRefreshControl:(UIRefreshControl *)refreshControl;
+
+/**
+ @brief Theme the pongRefreshControl's backgroundColor
+ @param pongRefreshControl The BOZRefreshControl to theme.
  */
 - (void)themePongRefreshControl:(BOZPongRefreshControl *)pongRefreshControl;
 

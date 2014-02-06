@@ -133,6 +133,11 @@
     label.textColor = self.primaryBackgroundColor;
 }
 
+- (void)themeRefreshControl:(UIRefreshControl *)refreshControl
+{
+    refreshControl.tintColor = [UIColor whiteColor];
+}
+
 - (void)themePongRefreshControl:(BOZPongRefreshControl *)pongRefreshControl
 {
     pongRefreshControl.foregroundColor = self.secondaryBackgroundColor;
