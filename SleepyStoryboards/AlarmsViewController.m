@@ -39,7 +39,6 @@
     [refreshControl addTarget:self
                        action:@selector(getNotifications)
              forControlEvents:UIControlEventValueChanged];
-    
     self.refreshControl = refreshControl;
     
     // Initialize the application delegate reference
@@ -49,9 +48,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    // Set up data source
-    [self populateAlarmsArray];
     
     // Get rid of unwanted UITableViewCells
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -65,6 +61,10 @@
                                              selector:@selector(applyTheme)
                                                  name:AFThemeHasChangedNotification
                                                object:nil];
+    
+    // Update the data source array and reload the table view
+    [self populateAlarmsArray];
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -112,9 +112,6 @@
     // Theme the tableView with black separator color (not implemented in BaseTheme method)
     [themeSetter themeTableView:self.tableView];
     self.tableView.separatorColor = [UIColor blackColor];
-    
-    [self.tableView reloadData];
-    [self.tableView reloadInputViews];
 }
 
 - (void)updateCell:(AlarmCell *)cell atIndex:(NSIndexPath *)indexPath
