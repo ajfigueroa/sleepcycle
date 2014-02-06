@@ -10,6 +10,4 @@
 #define SleepyStoryboards_SettingsSelectionConstants_h
 
 
-
-
 #endif
