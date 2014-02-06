@@ -125,7 +125,10 @@ static NSInteger const AFSliderMenuSelectionOptions = 7;
 {
     [super viewDidAppear:animated];
     
-    if (![self.tableView indexPathForSelectedRow]) {
+    if (![self.tableView indexPathForSelectedRow])
+    {
+        // Since the options in the slider menu consists of purely cells (headers are pseudo-headers).
+        // The section is all unified and thus the lastIndex updates in seciton 0.
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.lastIndex inSection:0]
                                     animated:YES
                               scrollPosition:UITableViewScrollPositionNone];
@@ -237,7 +240,7 @@ static NSInteger const AFSliderMenuSelectionOptions = 7;
     [self.sliderApplication toggleSlider];
 }
 
-#pragma mark - Presenters
+#pragma mark - Presenting Navigation View Controllers
 - (void)presentSettingsViewController
 {
     // Take currentNavigationController and verify it conforms to the SettingsViewControllerDelegate
