@@ -9,6 +9,7 @@
 #import "SettingsViewController.h"
 #import "SettingsAPI.h"
 #import "ThemeFactory.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
 typedef NS_ENUM(NSInteger, AFSettingsHeader)
 {
@@ -24,7 +25,7 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
     AFSettingsSupportSectionAttributions
 };
 
-@interface SettingsViewController ()
+@interface SettingsViewController () <MFMailComposeViewControllerDelegate>
 
 @end
 
@@ -160,6 +161,57 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
         themeSelectionViewController.themeName = [[SettingsAPI sharedSettingsAPI] appThemeName];
         themeSelectionViewController.themes = [[SettingsAPI sharedSettingsAPI] themeNames];
     }
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case AFSettingsHeaderSupport:
+            [self configureSupportSectionOption:indexPath.row];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - Support Settings Method
+- (void)configureSupportSectionOption:(NSInteger)option
+{
+    switch (option) {
+        case AFSettingsSupportSectionFeedback:
+            [self buildFeedbackMailComposer];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - MFMailComposer Builder
+- (void)buildFeedbackMailComposer
+{
+    // Verify the user can send mail
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+        composer.mailComposeDelegate = self;
+        
+        // Set up subject line
+        [composer setSubject:NSLocalizedString(@"Feedback to your favourite neighbourhood developer!", nil)];
+        
+        // Set up recepients
+        [composer setToRecipients:@[@"alexjfigueroa+feedback@gmail.com"]];
+        
+        [self presentViewController:composer animated:YES completion:nil];
+    }
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - End of Life
