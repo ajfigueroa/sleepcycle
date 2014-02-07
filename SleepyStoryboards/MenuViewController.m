@@ -20,8 +20,17 @@
  */
 typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 {
+    /**
+     @brief The header with the label "Settings"
+     */
     AFSettingsTableHeaderSettings,
+    /**
+     @brief The header with the label "Calculate"
+     */
     AFSettingsTableHeaderCalculate = 2,
+    /**
+     @brief The header with the label "Manage"
+     */
     AFSettingsTableHeaderManage = 5
 };
 
@@ -128,7 +137,7 @@ static NSInteger const AFSliderMenuSelectionOptions = 7;
     if (![self.tableView indexPathForSelectedRow])
     {
         // Since the options in the slider menu consists of purely cells (headers are pseudo-headers).
-        // The section is all unified and thus the lastIndex updates in seciton 0.
+        // The section is unified and thus the lastIndex updates in section 0.
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.lastIndex inSection:0]
                                     animated:YES
                               scrollPosition:UITableViewScrollPositionNone];
