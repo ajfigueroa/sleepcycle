@@ -139,6 +139,8 @@ static NSInteger const AFSliderMenuSelectionOptions = 7;
 #pragma mark - UITableViewDelegate Method
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Switch based on the indexPath row that corresponds to a selectable row:
+    // AFSettingsTableOption constants
     switch (indexPath.row) {
         case AFSettingsTableOptionSettings:
             // Toggle slider first and present the view controller (modally)
@@ -184,6 +186,10 @@ static NSInteger const AFSliderMenuSelectionOptions = 7;
     [self themeTableViewCellsWithThemeSetter:themeSetter];
 }
 
+/**
+ @brief Themes each of the Slider Menu Setting Cells including the Headers.
+ @param themeSetter The object that conforms to the Theme protocol and is responsible for theming the cells.
+ */
 - (void)themeTableViewCellsWithThemeSetter:(id <Theme>)themeSetter
 {
     for (int i = 0; i < AFSliderMenuSelectionOptions; i++)
@@ -241,6 +247,11 @@ static NSInteger const AFSliderMenuSelectionOptions = 7;
 }
 
 #pragma mark - Presenting Navigation View Controllers
+/**
+ @brief Creates and presents (modally) the Settings Navigation View Controller. The view stack that this
+ Settings Navigation View Controller pushes itself on must conform to the SettingsViewControllerDelegate
+ protocol as it will need to handle dismissal of the Settings Navigation View Controller
+ */
 - (void)presentSettingsViewController
 {
     // Take currentNavigationController and verify it conforms to the SettingsViewControllerDelegate
@@ -265,6 +276,11 @@ static NSInteger const AFSliderMenuSelectionOptions = 7;
     }
 }
 
+/**
+ @brief Creates and sets the main navigation controller (whose root view controller is the Time Selection
+ View Controller) as the Slider Application's frontViewController.
+ @param option The AFSelectedUserMode constant that configures the TimeSelectionViewController.
+ */
 - (void)presentTimeSelectionControllerWithSelectedUserMode:(AFSelectedUserMode)option
 {
     // Update the mode of the TimeSelectionViewController
@@ -275,6 +291,10 @@ static NSInteger const AFSliderMenuSelectionOptions = 7;
         [self.sliderApplication setFrontViewController:self.mainNavigationController];
 }
 
+/**
+ @brief Creates and sets the alarms navigation controller (whose root view is the AlarmsViewController)
+ as the Slider Application's frontViewController.
+ */
 - (void)presentAlarmViewController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
