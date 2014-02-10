@@ -14,6 +14,7 @@
 #import "ImageViewManagerFactory.h"
 #import "AlarmCell.h"
 #import "IBActionSheet.h"
+#import "UIToolbar+FlatUI.h"
 
 @interface BaseTheme ()
 
@@ -328,6 +329,12 @@
     [actionSheet setButtonBackgroundColor:self.secondaryBackgroundColor];
     [actionSheet setButtonTextColor:self.primaryBackgroundColor];
     
+}
+
+- (void)themeToolbar:(UIToolbar *)toolbar
+{
+    [toolbar configureFlatToolbarWithColor:self.primaryBackgroundColor];
+    toolbar.barStyle = UIBarStyleBlack;
 }
 
 #pragma mark - Target Action Method

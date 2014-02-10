@@ -7,10 +7,12 @@
 //
 
 #import "AttributionsViewController.h"
+#import "WebViewController.h"
 
-@interface AttributionsViewController ()
+@interface AttributionsViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *attributionTextView;
+@property (nonatomic, strong) WebViewController *webViewController;
 
 @end
 
@@ -21,6 +23,9 @@
     [super viewDidAppear:animated];
     
     [self buildAttributionsText];
+    
+    // Assign self as the delegate of the textView
+    self.attributionTextView.delegate = self;
 }
 
 - (void)buildAttributionsText
@@ -56,6 +61,19 @@
     self.attributionTextView.textContainerInset = UIEdgeInsetsZero;
     self.attributionTextView.editable = NO;
     self.attributionTextView.dataDetectorTypes = UIDataDetectorTypeAll;
+}
+
+#pragma mark - UITextViewDelegate
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange
+{
+    // Initialize the webView with the URL
+    self.webViewController = [[WebViewController alloc] initWithRequestURL:URL];
+    
+    // Push the view onto the stack
+    [self.navigationController pushViewController:self.webViewController animated:YES];
+    
+    // Return no as we will handle this
+    return NO;
 }
 
 @end

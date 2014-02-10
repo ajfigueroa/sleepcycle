@@ -8,11 +8,11 @@
 
 #import "WebViewController.h"
 #import "UIColor+FlatUI.h"
+#import "ThemeFactory.h"
 
 @interface WebViewController ()
 
 @property (nonatomic, strong) NSURLRequest *linkRequest;
-@property (nonatomic, strong) UIToolbar *toolbar;
 
 @end
 
@@ -83,6 +83,10 @@
                             self.backButton,
                             interButtonSpace,
                             self.forwardButton]];
+    
+    // Theme the tool bar
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
+    [themeSetter themeToolbar:self.navigationController.toolbar];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

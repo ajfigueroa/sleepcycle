@@ -161,4 +161,10 @@ buttonBackgroundColor, and buttonTextColor.
  */
 - (void)themeIBActionSheet:(IBActionSheet *)actionSheet;
 
+/**
+ @brief Theme the toolbar's background color to match the navigation bar
+ @param toolbar The UIToolbar object to theme.
+ */
+- (void)themeToolbar:(UIToolbar *)toolbar;
+
 @end
