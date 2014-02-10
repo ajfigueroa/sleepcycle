@@ -99,9 +99,15 @@
 - (void)buildBrowserButtons
 {
     // Create the forward and back buttons for the web browser
-    self.backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(goBack)];
+    self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"leftbarbuttonitem"]
+                                                       style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(goBack)];
     
-    self.forwardButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(goForward)];
+    self.forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"rightbarbuttonitem"]
+                                                          style:UIBarButtonItemStylePlain
+                                                         target:self
+                                                         action:@selector(goForward)];
 }
 
 - (void)updateButtons
@@ -115,12 +121,10 @@
 {
     // Turn on activation bar
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSLog(@"webViewDidStart...");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"webViewDidFinishLoad");
     // Change the background so any views that blend with their views appear as normal
     self.webView.backgroundColor = [UIColor whiteColor];
     
