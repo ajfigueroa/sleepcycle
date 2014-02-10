@@ -13,8 +13,7 @@
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIBarButtonItem *backButton;
 @property (nonatomic, strong) UIBarButtonItem *forwardButton;
-@property (nonatomic, strong) UIBarButtonItem *shareButton;
 
-- (id)initWithRequestURL:(NSURL *)requestURL andTitle:(NSString *)title;
+- (instancetype)initWithRequestURL:(NSURL *)requestURL;
 
 @end

@@ -8,7 +8,6 @@
 
 #import "WebViewController.h"
 #import "UIColor+FlatUI.h"
-#import "TUSafariActivity.h"
 
 @interface WebViewController ()
 
@@ -19,13 +18,11 @@
 
 @implementation WebViewController
 
-- (id)initWithRequestURL:(NSURL *)requestURL andTitle:(NSString *)title;
+- (instancetype)initWithRequestURL:(NSURL *)requestURL
 {
     self = [super init];
     
     if (self) {
-        // Set the title (may conatenate)
-        self.title = title;
         
         // Store the request (link)
         self.linkRequest = [NSURLRequest requestWithURL:requestURL];
@@ -48,7 +45,7 @@
     
     // Don't explode the users retina.
     [self.webView setOpaque:NO];
-    self.webView.backgroundColor = [UIColor lightSalmonColor];
+    self.webView.backgroundColor = [UIColor blackColor];
     
     // Configure the webview
     self.webView.delegate = self;
@@ -81,16 +78,11 @@
     UIBarButtonItem *horizontalPaddingSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     horizontalPaddingSpace.width = 8.0;
     
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    
     // Add these to the toolbar that is now visible
     [self setToolbarItems:@[horizontalPaddingSpace,
                             self.backButton,
                             interButtonSpace,
-                            self.forwardButton,
-                            flexibleSpace,
-                            self.shareButton]];
+                            self.forwardButton]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -106,9 +98,6 @@
     self.backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(goBack)];
     
     self.forwardButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(goForward)];
-    
-    // Lastly, build the share button (SET TO NIL for now)
-    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareLink)];
 }
 
 - (void)updateButtons
@@ -165,72 +154,6 @@
     // Go forward in the Web View page
     [self.webView goForward];
     [self updateButtons];
-}
-
-- (void)shareLink
-{
-    // Create the open in safari activity view
-    TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
-    
-    // Configure the share activity view controller
-    UIActivityViewController *shareActivityViewController = [[UIActivityViewController alloc]
-                                        initWithActivityItems:@[self.linkRequest.URL]
-                                        applicationActivities:@[safariActivity]];
-    shareActivityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
-    
-    shareActivityViewController.completionHandler = ^(NSString *activityType, BOOL completed){
-        NSLog(@"Activity: %@", activityType);
-        NSLog(@"Completed Status: %d", completed);
-        
-        if (completed && activityType == UIActivityTypeCopyToPasteboard) {
-            NSString *title = @"Huzzah";
-            NSString *message = @"Copied to clipboard!";
-            
-            UIAlertView *shareStatusAlertView = [[UIAlertView alloc] initWithTitle:title
-                                                                           message:message
-                                                                          delegate:nil
-                                                                 cancelButtonTitle:@"Dismiss"
-                                                                 otherButtonTitles:nil];
-            [shareStatusAlertView show];
-            shareStatusAlertView = nil;
-        }
-        
-        else if (completed && (activityType == UIActivityTypePostToFacebook || activityType == UIActivityTypePostToTwitter)) {
-            NSString *title = @"Huzzah";
-            NSString *message = @"Succesfully posted!";
-            
-            UIAlertView *shareStatusAlertView = [[UIAlertView alloc] initWithTitle:title
-                                                                           message:message
-                                                                          delegate:nil
-                                                                 cancelButtonTitle:@"Dismiss"
-                                                                 otherButtonTitles:nil];
-            [shareStatusAlertView show];
-            shareStatusAlertView = nil;
-        }
-        else if (completed && (activityType == UIActivityTypeMessage || activityType == UIActivityTypeMail)) {
-            NSString *title = @"Huzzah";
-            NSString *message = @"Succesfully sent!";
-            
-            UIAlertView *shareStatusAlertView = [[UIAlertView alloc] initWithTitle:title
-                                                                           message:message
-                                                                          delegate:nil
-                                                                 cancelButtonTitle:@"Dismiss"
-                                                                 otherButtonTitles:nil];
-            [shareStatusAlertView show];
-            shareStatusAlertView = nil;
-        }
-    };
-    
-    // Present the activity indicator
-    [self presentViewController:shareActivityViewController
-                       animated:YES
-                     completion:nil];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
