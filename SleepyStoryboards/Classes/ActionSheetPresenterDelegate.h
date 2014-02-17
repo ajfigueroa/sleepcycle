@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ActionSheetConstants.h"
+#import "AFActionSheetConstants.h"
 @class IBActionSheet;
 @class ActionSheetPresenter;
 

@@ -7,6 +7,7 @@
 //
 
 #import "SettingsPersistencyManager.h"
+#import "AFUserDefaultKeyConstants.h"
 
 @implementation SettingsPersistencyManager
 

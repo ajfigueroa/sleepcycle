@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SettingsViewControllerDelegate.h"
+#import "AFSleepCycleConstants.h"
 
 @class FUIButton;
 

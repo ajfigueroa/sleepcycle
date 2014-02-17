@@ -13,6 +13,7 @@
 #import "SettingsViewController.h"
 #import "TimeSelectionViewController.h"
 #import "SliderMenuApplicationDelegate.h"
+#import "AFNotificationConstants.h"
 
 /**
  @brief The AFSettingsTableHeader constants refer to the cell row indexes in the static table view of

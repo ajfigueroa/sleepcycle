@@ -8,6 +8,8 @@
 //  Define the protocol which every theme must adhere to
 
 #import <Foundation/Foundation.h>
+#import "AFSettingsTableConstants.h"
+
 @class AlarmCell;
 @class IBActionSheet;
 @class BOZPongRefreshControl;

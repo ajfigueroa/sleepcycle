@@ -12,6 +12,7 @@
 #import "AlarmCell.h"
 #import "EmptyTableViewBackground.h"
 #import "SliderMenuApplicationDelegate.h"
+#import "AFNotificationConstants.h"
 
 @interface AlarmsViewController ()
 

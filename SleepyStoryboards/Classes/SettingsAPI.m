@@ -9,6 +9,8 @@
 #import "SettingsAPI.h"
 #import "SettingsPersistencyManager.h"
 #import "ThemeOptionManager.h"
+#import "AFThemeConstants.h"
+#import "AFNotificationConstants.h"
 
 @interface SettingsAPI ()
 

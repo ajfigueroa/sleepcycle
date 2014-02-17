@@ -8,6 +8,7 @@
 
 #import "ThemeSelectionViewController.h"
 #import "ThemeFactory.h"
+#import "AFNotificationConstants.h"
 
 @interface ThemeSelectionViewController ()
 

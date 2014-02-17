@@ -9,6 +9,9 @@
 #ifndef SleepyStoryboards_AFThemeConstants_h
 #define SleepyStoryboards_AFThemeConstants_h
 
+// Theme count
+static NSInteger const AFAvailableThemesCount = 3;
+
 typedef NS_ENUM(NSInteger, AFThemeSelectionOption)
 {
     AFThemeSelectionOptionBlueBeigeTheme, /** The Blue and Beige color scheme, referred to as Default */

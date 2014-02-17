@@ -16,6 +16,7 @@
 #import "ActionSheetHandler.h"
 #import "SVProgressHUD.h"
 #import "SliderMenuApplicationDelegate.h"
+#import "AFNotificationConstants.h" 
 
 @interface ResultsViewController () <UIGestureRecognizerDelegate>
 

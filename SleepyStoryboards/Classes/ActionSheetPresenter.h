@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "ActionSheetPresenterDelegate.h"
 #import "IBActionSheet.h"
+#import "AFSleepCycleConstants.h"
 
 @interface ActionSheetPresenter : NSObject <IBActionSheetDelegate>
 

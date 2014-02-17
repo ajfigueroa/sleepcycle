@@ -11,6 +11,7 @@
 #import "ReminderScheduler.h"
 #import "AlarmNotificationScheduler.h"
 #import "NSDate+SleepTime.h"
+#import "AFNotificationConstants.h"
 
 @interface SchedulerAPI () <ReminderSchedulerDelegate, AlarmNotificationSchedulerDelegate>
 

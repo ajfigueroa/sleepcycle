@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ImageViewManager.h"
+#import "AFThemeConstants.h"
 
 @interface ImageViewManagerFactory : NSObject
 

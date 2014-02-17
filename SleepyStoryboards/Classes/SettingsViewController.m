@@ -10,6 +10,8 @@
 #import "SettingsAPI.h"
 #import "ThemeFactory.h"
 #import <MessageUI/MFMailComposeViewController.h>
+#import "AFNotificationConstants.h"
+#import "AFSegueIdentifierConstants.h"
 
 typedef NS_ENUM(NSInteger, AFSettingsHeader)
 {

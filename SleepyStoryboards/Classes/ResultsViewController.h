@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SleepTimeModeller.h"
+#import "AFSleepCycleConstants.h"
 
 @interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 

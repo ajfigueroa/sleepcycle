@@ -10,6 +10,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Theme.h"
+#import "AFThemeConstants.h"
 
 @interface ThemeFactory : NSObject
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Theme.h"
+#import "AFThemeConstants.h"
 
 @interface BaseTheme : NSObject <Theme>
 

@@ -9,6 +9,7 @@
 //  Responsible for managing the representation and data source methods of the Theme options
 
 #import <Foundation/Foundation.h>
+#import "AFThemeConstants.h"
 
 @interface ThemeOptionManager : NSObject
 
