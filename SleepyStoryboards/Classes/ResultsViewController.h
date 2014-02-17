@@ -11,7 +11,15 @@
 
 @interface ResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+/**
+ @brief The model object that conforms to the SleepTimeModeller protocol that provides sleep time/wake time
+ calculation data.
+ */
 @property (nonatomic, strong) id <SleepTimeModeller> model;
+
+/**
+ 
+ */
 @property (nonatomic, assign) AFSelectedUserMode selectedUserMode;
 // The time passed in from the datePicker of the TimeSelectionViewController (aka Destination Time)
 @property (nonatomic, strong) NSDate *selectedTime;
