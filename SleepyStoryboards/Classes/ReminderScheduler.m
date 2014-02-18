@@ -7,6 +7,7 @@
 //
 
 #import "ReminderScheduler.h"
+#import "SVProgressHUD.h"
 @import EventKit;
 
 @interface ReminderScheduler ()
@@ -28,10 +29,18 @@
     [self.eventStore requestAccessToEntityType:EKEntityTypeReminder completion:^(BOOL granted, NSError *error) {
         
         if (granted)
-            [self setReminderForReminderTime];
-        else
-            [self showReminderFailureAlert];
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self setReminderForReminderTime];
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showReminderFailureAlert];
+            });
+        }
     }];
+
 }
 
 - (void)setReminderForReminderTime
@@ -76,9 +85,10 @@
 {
     NSString *title = NSLocalizedString(@"I'm sorry, Dave", nil);
     NSString *message = NSLocalizedString(@"I'm afraid I can't do that.\n"
-                                          @"It seems reminders has been disabled. To enable:\n"
+                                          @"It seems reminders has been disabled.\n"
+                                          @"To enable, go to:\n"
                                           @"Settings > Privacy > Reminders\n"
-                                          @"and turn the SleepCycle switch on.", nil);
+                                          @"and flip the SleepCycle switch on.", nil);
     NSString *cancelTitle = NSLocalizedString(@"Dismiss", nil);
     
     UIAlertView *deniedReminderAccess = [[UIAlertView alloc] initWithTitle:title
