@@ -25,6 +25,19 @@
  */
 @property (nonatomic, strong) id <SliderMenuApplicationDelegate> sliderApplication;
 
+/*
+ UI Components (Refer to storyboards for placement)
+ */
+@property (weak, nonatomic) IBOutlet UIDatePicker *timeSelectionDatePicker;
+
+@property (weak, nonatomic) IBOutlet FUIButton *confirmTimeButton;
+
+@property (weak, nonatomic) IBOutlet FUIButton *sleepNowButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *informationLabel;
+
+- (IBAction)toggleSlider:(id)sender;
+
 @end
 
 @implementation TimeSelectionViewController

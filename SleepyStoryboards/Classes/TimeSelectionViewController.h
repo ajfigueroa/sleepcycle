@@ -16,12 +16,4 @@
 
 @property (nonatomic, assign) AFSelectedUserMode selectedUserMode;
 
-@property (weak, nonatomic) IBOutlet UIDatePicker *timeSelectionDatePicker;
-@property (weak, nonatomic) IBOutlet FUIButton *confirmTimeButton;
-@property (weak, nonatomic) IBOutlet FUIButton *sleepNowButton;
-@property (weak, nonatomic) IBOutlet UILabel *informationLabel;
-
-// Toggle the Menu Slider
-- (IBAction)toggleSlider:(id)sender;
-
 @end
