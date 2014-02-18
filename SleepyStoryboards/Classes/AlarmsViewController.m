@@ -25,6 +25,10 @@
  */
 @property (nonatomic, strong) id <SliderMenuApplicationDelegate> sliderApplication;
 
+- (IBAction)toggleEditMode:(id)sender;
+- (IBAction)toggleSlider:(id)sender;
+
+
 @end
 
 @implementation AlarmsViewController

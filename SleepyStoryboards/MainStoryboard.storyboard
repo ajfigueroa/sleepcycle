@@ -64,18 +64,15 @@
                     <navigationItem key="navigationItem" title="Alarms" id="395-Ts-DXg">
                         <barButtonItem key="leftBarButtonItem" image="listicon.png" id="hS9-kL-0fk">
                             <connections>
-                                <action selector="toggleSlider:" destination="KvB-CP-kop" id="46m-0H-rrg"/>
+                                <action selector="toggleSlider:" destination="KvB-CP-kop" id="ycq-A2-5jx"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="CQJ-LT-CBT">
                             <connections>
-                                <action selector="toggleEditMode:" destination="KvB-CP-kop" id="u3a-9A-zCl"/>
+                                <action selector="toggleEditMode:" destination="KvB-CP-kop" id="ez6-jJ-Zgd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="editButton" destination="CQJ-LT-CBT" id="ChK-4r-g9p"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ca-Ls-jjI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

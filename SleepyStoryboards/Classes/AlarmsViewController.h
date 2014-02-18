@@ -11,10 +11,4 @@
 
 @interface AlarmsViewController : UITableViewController <SettingsViewControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
-
-// Toggle the Menu Slider
-- (IBAction)toggleSlider:(id)sender;
-- (IBAction)toggleEditMode:(id)sender;
-
 @end
