@@ -10,10 +10,11 @@
 
 @interface WebViewController : UIViewController <UIWebViewDelegate>
 
-@property (nonatomic, strong) UIWebView *webView;
-@property (nonatomic, strong) UIBarButtonItem *backButton;
-@property (nonatomic, strong) UIBarButtonItem *forwardButton;
-
+/**
+ @brief Initializes the WebViewController with the request URL
+ @param requestURL The NSURL that the WebViewController is to load.
+ @returns An instance of this view controller.
+ */
 - (instancetype)initWithRequestURL:(NSURL *)requestURL;
 
 @end

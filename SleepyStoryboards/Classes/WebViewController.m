@@ -14,6 +14,12 @@
 
 @property (nonatomic, strong) NSURLRequest *linkRequest;
 
+@property (nonatomic, strong) UIWebView *webView;
+
+@property (nonatomic, strong) UIBarButtonItem *backButton;
+
+@property (nonatomic, strong) UIBarButtonItem *forwardButton;
+
 @end
 
 @implementation WebViewController
