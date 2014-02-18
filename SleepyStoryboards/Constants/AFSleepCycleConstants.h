@@ -15,8 +15,12 @@
  */
 typedef NS_ENUM(NSInteger, AFSelectedUserMode)
 {
+    /** The mode that calculates bed time based on input wake time */
     AFSelectedUserModeCalculateBedTime,
+    /** The mode that calcualates wake time based on input bed time */
     AFSelectedUserModeCalculateWakeTime,
+    /** The mode that calculates the bed time based on input wake time. This is specific
+     for alarms using the seed time (wake time). */
     AFSelectedUserModeCalculateBedTimeWithAlarmTime
 };
 

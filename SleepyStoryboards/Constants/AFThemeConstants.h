@@ -9,14 +9,19 @@
 #ifndef SleepyStoryboards_AFThemeConstants_h
 #define SleepyStoryboards_AFThemeConstants_h
 
-// Theme count
+/**
+ @brief The current number of available themes.
+ */
 static NSInteger const AFAvailableThemesCount = 3;
 
 typedef NS_ENUM(NSInteger, AFThemeSelectionOption)
 {
-    AFThemeSelectionOptionBlueBeigeTheme, /** The Blue and Beige color scheme, referred to as Default */
-    AFThemeSelectionOptionBlackGrayTheme, /** The Black and Gray color scheme, referrred to as Dark */
-    AFThemeSelectionOptionRedRoseTheme /** The Red and Rose color scheme, referred to as Red Rose*/
+    /** The Blue and Beige color scheme, referred to as Default */
+    AFThemeSelectionOptionBlueBeigeTheme,
+    /** The Black and Gray color scheme, referrred to as Dark */
+    AFThemeSelectionOptionBlackGrayTheme,
+    /** The Red and Rose color scheme, referred to as Red Rose*/
+    AFThemeSelectionOptionRedRoseTheme
 };
 
 #endif

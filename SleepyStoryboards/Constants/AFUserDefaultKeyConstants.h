@@ -9,10 +9,13 @@
 #ifndef SleepyStoryboards_AFUserDefaultKeyConstants_h
 #define SleepyStoryboards_AFUserDefaultKeyConstants_h
 
-// Key for accessing themes across view controllers (NSUserDefaults key)
+// The following keys retrieve and set their respective values in NSUserDefaults
 static NSString *const AFAppTheme = @"AppTheme";
+
 static NSString *const AFShowEasterEgg = @"ShowEasterEgg";
+
 static NSString *const AFShowDatePickerBorder = @"ShowBorder";
+
 static NSString *const AFTimeToFallAsleepInMinutes = @"TimeToFallAsleepInMinutes";
 
 #endif

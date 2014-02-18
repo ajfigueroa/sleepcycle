@@ -11,10 +11,17 @@
 
 typedef NS_ENUM(NSInteger, AFActionSheetTag)
 {
+    /** The tag to be attached to an action sheet that sets up reminders */
     AFActionSheetTagReminder,
+    /** The tag to be attached to an action sheet that sets up alarms */
     AFActionSheetTagAlarm
 };
 
+/*
+ The following AFActionSheetReminder and AFActionSheetAlarm represent the order at which
+ dates for today and tomorrow come in. They are different for both and this is to keep track
+ of the differences.
+ */
 typedef NS_ENUM(NSInteger, AFActionSheetReminder)
 {
     AFActionSheetReminderToday,

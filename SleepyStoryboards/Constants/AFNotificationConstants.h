@@ -11,14 +11,20 @@
 
 // Notification Keys
 static NSString *const AFThemeHasChangedNotification = @"AFThemeHasChangedNotification";
+
 static NSString *const AFSelectedCalculateBedTimeNotification = @"AFSelectedCalculateBedTimeNotification";
+
 static NSString *const AFSelectedCalculateWakeTimeNotification = @"AFSelectedCalculateWakeTimeNotification";
+
 static NSString *const AFColorMappingResetNotification = @"AFColorMappingResetNotification";
+
 static NSString *const AFAlarmHasPostedNotification = @"AFAlarmHasPostedNotification";
+
 static NSString *const AFReminderHasPostedNotification = @"AFReminderHasPostedNotification";
 
-// NSNotification User Info Keys
+// NSNotification userInfo Keys
 static NSString *const AFAlarmReminderNotificationSuccessKey = @"AFAlarmReminderNotificationSuccessKey";
+
 static NSString *const AFScheduledTimeKey = @"AFScheduledTimeKey";
 
 
