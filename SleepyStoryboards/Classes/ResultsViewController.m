@@ -39,6 +39,12 @@
  */
 @property (nonatomic, strong) id <SliderMenuApplicationDelegate> sliderApplication;
 
+@property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
+@property (weak, nonatomic) IBOutlet UILabel *resultsInformationLabel;
+
+- (IBAction)addSelectedTimeAlarm:(id)sender;
+
+
 @end
 
 @implementation ResultsViewController
@@ -316,6 +322,5 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
-
 
 @end
