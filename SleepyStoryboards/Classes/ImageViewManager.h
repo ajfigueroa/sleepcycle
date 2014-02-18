@@ -14,6 +14,7 @@
  */
 @protocol ImageViewManager <NSObject>
 
+@required
 /**
  @brief Returns the image to be used for the Settings cell
  @returns The UIImage to be used in the Settings cell's imageView.

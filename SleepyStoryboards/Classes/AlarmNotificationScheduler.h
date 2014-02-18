@@ -39,6 +39,7 @@
 
 @optional
 - (void)alarmNotificationDidPostNotification:(AlarmNotificationScheduler *)alarmScheduler;
+
 - (void)alarmNotificationSchedulerDidFailPost:(AlarmNotificationScheduler *)alarmScheduler;
 
 @end

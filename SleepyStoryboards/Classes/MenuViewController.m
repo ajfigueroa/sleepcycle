@@ -68,20 +68,28 @@ typedef NS_ENUM(NSInteger, AFSettingsTableHeader)
 
 // The Settings table static cell text fields
 @property (weak, nonatomic) IBOutlet UITextField *settingsTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *bedTimeTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *wakeTimeTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *alarmsTextField;
 
 // The Settings table static cell image views
 @property (weak, nonatomic) IBOutlet UIImageView *settingsImageView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *bedTimeImageView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *wakeUpTimeImageView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *alarmImageView;
 
 @end
 
-// The constant value represents the number of options in the menu table including headers
-static NSInteger const AFSliderMenuSelectionOptions = 7;
+/** 
+ @brief The constant value represents the number of options in the menu table including headers.
+*/
+ static NSInteger const AFSliderMenuSelectionOptions = 7;
 
 @implementation MenuViewController
 

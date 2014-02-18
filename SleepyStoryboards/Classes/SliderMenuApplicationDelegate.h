@@ -16,11 +16,15 @@
  */
 @protocol SliderMenuApplicationDelegate <NSObject, UIApplicationDelegate>
 
+@required
 - (void)toggleSlider;
+
 - (void)lockSlider;
+
 - (void)unlockSlider;
 
 - (UIViewController *)frontViewController;
+
 - (void)setFrontViewController:(UIViewController *)viewController;
 
 @end

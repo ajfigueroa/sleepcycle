@@ -40,6 +40,7 @@
 
 @optional
 - (void)reminderSchedulerDidPostReminder:(ReminderScheduler *)scheduler;
+
 - (void)reminderScheduler:(ReminderScheduler *)scheduler
          didFailWithError:(NSError *)error;
 

@@ -16,18 +16,19 @@
 
 @interface AlarmsViewController ()
 
-@property (nonatomic, strong) NSMutableArray *alarmsArray;
-@property (nonatomic, strong) UILabel *emptyTableLabel;
-
 /**
  @brief An internal reference to the application delegate that conforms to the SliderMenuApplicationDelegate
  and thus can handle all interactions of the ApplicationDelegate's slider menu controller.
  */
 @property (nonatomic, strong) id <SliderMenuApplicationDelegate> sliderApplication;
 
-- (IBAction)toggleEditMode:(id)sender;
-- (IBAction)toggleSlider:(id)sender;
+@property (nonatomic, strong) NSMutableArray *alarmsArray;
 
+@property (nonatomic, strong) UILabel *emptyTableLabel;
+
+- (IBAction)toggleEditMode:(id)sender;
+
+- (IBAction)toggleSlider:(id)sender;
 
 @end
 

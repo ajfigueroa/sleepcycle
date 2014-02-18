@@ -10,10 +10,13 @@
 
 @interface SettingsPersistencyManager : NSObject
 
-// Settings State
+// Setting States
 @property (nonatomic, assign) NSInteger timeToFallAsleep;
+
 @property (nonatomic, assign) NSInteger appTheme;
+
 @property (nonatomic, assign) BOOL showBorder;
+
 @property (nonatomic, assign) BOOL showEasterEgg;
 
 // Save all settings to local defaults

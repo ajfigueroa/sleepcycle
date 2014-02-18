@@ -12,6 +12,7 @@
 @interface AttributionsViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *attributionTextView;
+
 @property (nonatomic, strong) WebViewController *webViewController;
 
 @end

@@ -20,18 +20,24 @@
 
 @interface ResultsViewController () <UIGestureRecognizerDelegate>
 
+/**
+ @brief The array that stores the model's response data to be used for the resultsTableView.
+ */
 @property (nonatomic, strong) NSArray *resultTimes;
-@property (nonatomic, assign) BOOL isPongRefreshControlVisible;
+
 @property (nonatomic, strong) BOZPongRefreshControl *pongRefreshControl;
+
+@property (nonatomic, assign) BOOL isPongRefreshControlVisible;
+
 @property (nonatomic, strong) ActionSheetPresenter *actionSheetPresenter;
+
 @property (nonatomic, strong) ActionSheetHandler *actionSheetHandler;
 
-// The top and bottom mask view are covering the slide to refresh view controller
+// The top and bottom mask view that cover the slide to refresh view controllers refresh view.
+// Note: This solution is not ideal for long term.
 @property (weak, nonatomic) IBOutlet UIView *topMaskView;
-@property (weak, nonatomic) IBOutlet UIView *bottomMaskView;
 
-// alarmButton outlet to control visibility
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *selectedTimeAlarmButton;
+@property (weak, nonatomic) IBOutlet UIView *bottomMaskView;
 
 /**
  @brief An internal reference to the application delegate that conforms to the SliderMenuApplicationDelegate
@@ -39,9 +45,19 @@
  */
 @property (nonatomic, strong) id <SliderMenuApplicationDelegate> sliderApplication;
 
+/**
+ @brief The table view that displays the suggested wake/sleep times.
+ */
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
+
+/**
+ @brief Header label used to inform user of the significance of the times in the resultsTableView
+ */
 @property (weak, nonatomic) IBOutlet UILabel *resultsInformationLabel;
 
+/**
+ @brief Adds an alarm for the time set by the selectedTime property.
+ */
 - (IBAction)addSelectedTimeAlarm:(id)sender;
 
 

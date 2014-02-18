@@ -253,7 +253,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="bottomMaskView" destination="yV3-Fu-CFq" id="nWi-2y-t2h"/>
                         <outlet property="resultsInformationLabel" destination="Xjo-T8-R9w" id="6kl-XO-rqh"/>
                         <outlet property="resultsTableView" destination="MjK-k6-6Dd" id="tZ2-AJ-443"/>
-                        <outlet property="selectedTimeAlarmButton" destination="hgb-9J-gCG" id="IZB-VP-r06"/>
                         <outlet property="topMaskView" destination="Rvh-v9-9p2" id="d80-ST-tjc"/>
                     </connections>
                 </viewController>

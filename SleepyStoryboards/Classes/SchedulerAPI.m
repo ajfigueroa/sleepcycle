@@ -16,6 +16,7 @@
 @interface SchedulerAPI () <ReminderSchedulerDelegate, AlarmNotificationSchedulerDelegate>
 
 @property (nonatomic, strong) ReminderScheduler *reminderScheduler;
+
 @property (nonatomic, strong) AlarmNotificationScheduler *alarmScheduler;
 
 @end

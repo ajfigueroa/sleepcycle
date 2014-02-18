@@ -15,6 +15,7 @@
 @interface SettingsAPI ()
 
 @property (nonatomic, strong) SettingsPersistencyManager *persistencyManager;
+
 @property (nonatomic, strong) ThemeOptionManager *themeOptionManager;
 
 @end
