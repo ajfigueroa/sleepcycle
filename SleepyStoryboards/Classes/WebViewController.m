@@ -7,7 +7,6 @@
 //
 
 #import "WebViewController.h"
-#import "UIColor+FlatUI.h"
 #import "ThemeFactory.h"
 
 @interface WebViewController ()
