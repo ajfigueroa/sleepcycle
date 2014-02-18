@@ -78,14 +78,10 @@
     [self buildBrowserButtons];
     
     // Create a fixed space to be used between buttons and before
-    UIBarButtonItem *interButtonSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                                                                      target:nil
-                                                                                      action:nil];
+    UIBarButtonItem *interButtonSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     interButtonSpace.width = 20.0;
     
-    UIBarButtonItem *horizontalPaddingSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                                                                            target:nil
-                                                                                            action:nil];
+    UIBarButtonItem *horizontalPaddingSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     horizontalPaddingSpace.width = 8.0;
     
     // Add these to the toolbar that is now visible
