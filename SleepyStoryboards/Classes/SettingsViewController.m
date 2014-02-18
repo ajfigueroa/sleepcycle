@@ -42,7 +42,10 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
 
 @property (weak, nonatomic) IBOutlet UISwitch *showTutorialSwitch;
 
-// Action for 'Done' BarButtonItem
+/**
+ @brief The corresponding target for the left bar button "Done" that notifies the delegate to
+ dismiss this object.
+ */
 - (IBAction)done:(id)sender;
 
 @end

@@ -10,7 +10,7 @@
 @class SettingsViewController;
 
 /**
- @brief The SettingsViewController protocol defines methods that  view controller should adhere to to 
+ @brief The SettingsViewController protocol defines methods that a view controller should adhere to to 
  receive updates on the ending of the modal presentation of the SettingsViewController object. 
  The delegate is responsible for handling dismissal of the view controller.
  */
