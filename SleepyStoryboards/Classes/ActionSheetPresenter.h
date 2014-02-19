@@ -5,7 +5,7 @@
 //  Created by Alexander Figueroa on 1/27/2014.
 //  Copyright (c) 2014 Alexander Figueroa. All rights reserved.
 //
-//  Responsible for presenting all action sheets and scheduling
+//  Responsible for building action sheets and handling post interactions.
 
 #import <Foundation/Foundation.h>
 #import "ActionSheetPresenterDelegate.h"
