@@ -270,8 +270,6 @@
         self.actionSheetPresenter = [[ActionSheetPresenter alloc] init];
     }
     
-    self.actionSheetPresenter.presenterWindow = self.view.window;
-    
     // Lazy initialize the actionSheetHandler and set as presenter delegate
     if (!self.actionSheetHandler)
         self.actionSheetHandler = [[ActionSheetHandler alloc] init];
@@ -281,8 +279,9 @@
     // Send the selected time from date picker to sharedScheduler
     [[SchedulerAPI sharedScheduler] setSelectedTime:self.selectedTime];
     
-    [self.actionSheetPresenter buildActionSheetForState:selectedUserMode
-                                                andDate:date];
+    IBActionSheet *actionSheet = [self.actionSheetPresenter buildActionSheetForState:selectedUserMode
+                                                                             andDate:date];
+    [actionSheet showInView:self.view.window];
 }
 
 #pragma mark - Reminder/Alarm Notifications

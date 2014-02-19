@@ -36,25 +36,9 @@
 @implementation ActionSheetPresenter
 {}
 
-- (instancetype)initWithPresenterWindow:(UIWindow *)presenterWindow
-{
-    self = [super init];
-    
-    if (self)
-    {
-        // Ensure a window exists to load action sheets unto
-        self.presenterWindow = presenterWindow;
-    }
-    
-    return self;
-}
-
 #pragma mark - Action Sheet Methods
 - (IBActionSheet *)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date
 {
-    // Ensure the presenter window exists prior to loading actionsheet
-    assert(self.presenterWindow != nil);
-    
     IBActionSheet *actionSheet;
     
     switch (state) {
@@ -86,9 +70,7 @@
             NSLog(@"%s: Performing no action sheet display", __PRETTY_FUNCTION__);
             break;
     }
-    
-    // Display action sheet
-    [actionSheet showInView:self.presenterWindow];
+
     return actionSheet;
 }
 
