@@ -68,6 +68,7 @@
             
         default:
             NSLog(@"%s: Performing no action sheet display", __PRETTY_FUNCTION__);
+            actionSheet = nil;
             break;
     }
 

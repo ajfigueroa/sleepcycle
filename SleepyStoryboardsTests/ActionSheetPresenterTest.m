@@ -40,14 +40,51 @@
 #pragma mark - -buildActionSheetForState:andDate Test Methods
 - (void)testBuildActionSheetForInvalidState
 {
-    // Method should return nil on invalid state parameter.
-    // Valid parameters are 0-3
+    /* Method should return nil on invalid state parameter.
+     Valid parameters are:
+     
+     AFSelectedUserModeCalculateWakeTime - 0
+     AFSelectedUserModeCalculateBedTime - 1
+     AFSelectedUserModeCalculateBedTimeWithAlarm - 2
+     */
     NSArray *invalidInputs = @[@(-1), @(4), @"a", @"", @(NAN), @(INFINITY)];
     
     [invalidInputs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         XCTAssertNil([self.subject buildActionSheetForState:(AFSelectedUserMode)obj andDate:[NSDate date]],
                      @"Nil was not returned");
     }];
+}
+
+- (void)testBuildActionSheetForValidStates
+{
+    /* Method should return IBActionSheets on succesful return. 
+     The valid parameters correspond to:
+     
+     AFSelectedUserModeCalculateWakeTime - 0
+     AFSelectedUserModeCalculateBedTime - 1
+     AFSelectedUserModeCalculateBedTimeWithAlarm - 2
+     
+     which then match to alarm sheets with the following respective tags:
+     AFActionSheetTagAlarm
+     AFActionSheetTagReminder
+     AFAcetionSheetTagAlarm
+     */
+    NSArray *validParameters = @[@(AFSelectedUserModeCalculateWakeTime),
+                                 @(AFSelectedUserModeCalculateBedTime),
+                                 @(AFSelectedUserModeCalculateBedTimeWithAlarmTime)];
+    
+    NSArray *expectedTagResponse = @[@(AFActionSheetTagAlarm),
+                                     @(AFActionSheetTagReminder),
+                                     @(AFActionSheetTagAlarm)];
+    
+    [validParameters enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        IBActionSheet *actionSheet = [self.subject buildActionSheetForState:[obj integerValue]
+                                                                    andDate:[NSDate date]];
+        AFActionSheetTag actualTagResponse = actionSheet.tag;
+        AFActionSheetTag expectedTag = [expectedTagResponse[idx] integerValue];
+        XCTAssertEqual(expectedTag, actualTagResponse, @"The tags do not match");
+    }];
+    
 }
 
 @end
