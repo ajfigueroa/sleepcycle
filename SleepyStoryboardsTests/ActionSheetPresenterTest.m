@@ -7,8 +7,15 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "ActionSheetPresenter.h"
+
+@interface ActionSheetPresenter (Test)
+
+@end
 
 @interface ActionSheetPresenterTest : XCTestCase
+
+@property (nonatomic, strong) ActionSheetPresenter *subject;
 
 @end
 
@@ -17,18 +24,30 @@
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here; it will be run once, before the first test case.
+    
+    // Set up ActionSheetPresenter subject to test on
+    self.subject = [[ActionSheetPresenter alloc] init];
 }
 
 - (void)tearDown
 {
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
+    self.subject = nil;
 }
 
-- (void)testExample
+
+#pragma mark - -buildActionSheetForState:andDate Test Methods
+- (void)testBuildActionSheetForInvalidState
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    // Method should return nil on invalid state parameter.
+    // Valid parameters are 0-3
+    NSArray *invalidInputs = @[@(-1), @(4), @"a", @"", @(NAN), @(INFINITY)];
+    
+    [invalidInputs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        XCTAssertNil([self.subject buildActionSheetForState:(AFSelectedUserMode)obj andDate:[NSDate date]],
+                     @"Nil was not returned");
+    }];
 }
 
 @end
