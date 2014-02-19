@@ -50,7 +50,7 @@
 }
 
 #pragma mark - Action Sheet Methods
-- (void)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date
+- (IBActionSheet *)buildActionSheetForState:(AFSelectedUserMode)state andDate:(NSDate *)date
 {
     // Ensure the presenter window exists prior to loading actionsheet
     assert(self.presenterWindow != nil);
@@ -89,6 +89,7 @@
     
     // Display action sheet
     [actionSheet showInView:self.presenterWindow];
+    return actionSheet;
 }
 
 #pragma mark - Custom Action Sheets for Modes

@@ -281,7 +281,6 @@
     // Send the selected time from date picker to sharedScheduler
     [[SchedulerAPI sharedScheduler] setSelectedTime:self.selectedTime];
     
-    
     [self.actionSheetPresenter buildActionSheetForState:selectedUserMode
                                                 andDate:date];
 }
