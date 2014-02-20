@@ -41,7 +41,7 @@ The "Sleep Now" button presents suggest wake times based on the current time plu
 
 Essentially, performing the suggested wake time calculations on input bed time of: 
 
-> [[NSDate date] dateByAddingInterval:(timeToFallAsleep)];
+> [[NSDate date] dateByAddingTimeInterval:(timeToFallAsleep)];
 
 From the suggested wake times, long pressing any of the wake times brings up a prompt for setting an alarm. 
 
