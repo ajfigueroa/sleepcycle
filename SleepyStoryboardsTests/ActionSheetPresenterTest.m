@@ -12,9 +12,11 @@
 
 @interface ActionSheetPresenter (Test)
 
+@property (nonatomic, strong) NSArray *alarmTimesPair;
+@property (nonatomic, strong) NSArray *reminderTimesPair;
+
 - (IBActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime;
 - (IBActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime;
-
 
 @end
 
@@ -135,6 +137,42 @@
     }];
 }
 
+- (void)testValidAlarmTimesPair
+{
+    /*
+     The ActionSheetPresenter creates two alarm times to be sent off to the delegate
+     when interaction occurs of the action sheet.
+     For the alarmActionSheetForWakeTime method, the alarmTimesPair sent off should 
+     include, in order, the input date forwarded by 24 hours and the current input date.
+     */
+    
+    // Create test times
+    NSDate *testWakeTime = [NSDate date];
+    NSDate *testWakeTimeTomorrow = [testWakeTime dateByAddingTimeInterval:(24 * 60 * 60)];
+    
+    // Perform alarmActionSheetForWakeTime: but do not store return value
+    [self.subject alarmActionSheetForWakeTime:testWakeTime];
+    
+    // Generate expected pair array
+    NSArray *expectedAlarmTimesPair = @[testWakeTimeTomorrow, testWakeTime];
+    
+    XCTAssertEqualObjects(expectedAlarmTimesPair, self.subject.alarmTimesPair, @"The arrays do not match times");
+}
+
+- (void)testNilAlarmTimesPair
+{
+    /*
+     To avoid sending off the previous version of the alarmsTimePair in case one input 
+     was nil and the proceeding was not-nil.
+     The alarmTimesPair needs to be set to nil when the wakeTime is nil.
+     */
+    
+    // Perform alarmActionSheetForWakeTime: but do not store return value
+    [self.subject alarmActionSheetForWakeTime:nil];
+    
+    XCTAssertNil(self.subject.alarmTimesPair, @"The alarmTimesPair was not set to nil");
+}
+
 #pragma mark - -reminderActionSheetForSleepTime: Tests
 - (void)testNilSleepTimeCheck
 {
@@ -147,9 +185,7 @@
 - (void)testCorrectActionSheetButtonCountForReminderActionSheet
 {
     /*
-     Depending on the date, the returned action sheet for both the AFSelectedUserMode:
-     AFSelectedUserModeCalculateWakeTime
-     AFSelectedUserModeCalculateBedTimeWithAlarmTime
+     Depending on the date, the returned action sheet for: AFSelectedUserModeCalculateBedTime
      will either return one (1) or two (2) buttons depending on the input time.
      Note: Add one to the count due to the "Cancel" button so two (2) and three (3) respectively.
      

@@ -81,7 +81,10 @@
 {
     // Return nil IBActionSheet if there is no wake time
     if (!wakeTime)
+    {
+        self.alarmTimesPair = nil;
         return nil;
+    }
     
     NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Set Alarm for %@", nil),
                                                                         [wakeTime shortTime]];
@@ -132,7 +135,10 @@
 - (IBActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime
 {
     if (!sleepTime)
+    {
+        self.reminderTimesPair = nil;
         return nil;
+    }
     
     // Create date set back by the user defined time to fall asleep (default 14)
     NSInteger timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
