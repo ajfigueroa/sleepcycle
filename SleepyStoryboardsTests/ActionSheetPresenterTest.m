@@ -21,9 +21,10 @@
 @end
 
 
-@interface ActionSheetPresenterTest : XCTestCase
+@interface ActionSheetPresenterTest : XCTestCase <ActionSheetPresenterDelegate>
 
 @property (nonatomic, strong) ActionSheetPresenter *subject;
+@property (nonatomic, assign) BOOL delegateCallBackReceived;
 
 @end
 
@@ -256,6 +257,67 @@
     [self.subject reminderActionSheetForSleepTime:nil];
     
     XCTAssertNil(self.subject.reminderTimesPair, @"The reminderTimesPair was not set to nil");
+}
+
+#pragma mark - delegate Test Methods
+- (void)testActionSheetPresenterDelegate
+{
+    /*
+     Verify that when assigning a delegate, that it receives the
+     actionSheetPresenter:clickedButtonAtIndex:forActionSheet:andInfo method
+     whenever the action sheet button is selected.
+     */
+    
+    // Assign self as delegate
+    self.subject.delegate = self;
+    
+    // Create the action sheets but don't show
+    IBActionSheet *alarmActionSheet = [self.subject alarmActionSheetForWakeTime:[NSDate date]];
+    IBActionSheet *reminderActionSheet = [self.subject reminderActionSheetForSleepTime:[NSDate date]];
+    
+    NSArray *actionSheets = @[alarmActionSheet, reminderActionSheet];
+    
+    // Select the first button of each and verify the delegateCallBackReceived is YES
+    [actionSheets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        IBActionSheet *actionSheet = (IBActionSheet *)obj;
+        [actionSheet.delegate actionSheet:actionSheet clickedButtonAtIndex:0];
+        
+        XCTAssertEqual(YES, self.delegateCallBackReceived, @"The callback was not received");
+        self.delegateCallBackReceived = NO;
+    }];
+    
+}
+
+- (void)testNilActionSheetPresenterDelegate
+{
+    /*
+     Verify with no ActionSheetPresenter delegate assigned, that we receive no call backs.
+     */
+    // Assign self as delegate
+    self.subject.delegate = nil;
+    
+    // Create the action sheets but don't show
+    IBActionSheet *alarmActionSheet = [self.subject alarmActionSheetForWakeTime:[NSDate date]];
+    IBActionSheet *reminderActionSheet = [self.subject reminderActionSheetForSleepTime:[NSDate date]];
+    
+    NSArray *actionSheets = @[alarmActionSheet, reminderActionSheet];
+    
+    // Select the first button of each and verify the delegateCallBackReceived is YES
+    [actionSheets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        IBActionSheet *actionSheet = (IBActionSheet *)obj;
+        [actionSheet.delegate actionSheet:actionSheet clickedButtonAtIndex:0];
+        
+        XCTAssertEqual(NO, self.delegateCallBackReceived, @"The callback was not received");
+    }];
+}
+
+#pragma mark - ActionSheetPresenterDelegate
+- (void)actionSheetPresenter:(ActionSheetPresenter *)actionSheetPresenter
+        clickedButtonAtIndex:(NSInteger)buttonIndex
+              forActionSheet:(IBActionSheet *)actionSheet
+                     andInfo:(NSDictionary *)info
+{
+    self.delegateCallBackReceived = YES;
 }
 
 
