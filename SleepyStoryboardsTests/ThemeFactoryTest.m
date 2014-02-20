@@ -38,19 +38,20 @@
 - (void)testValidThemeBuildRequest
 {
     /*
-     Verify for each enumeration of AFThemeSelectionOption, the proper object is returned.
-     */
-    NSArray *validEnumerations = @[@(AFThemeSelectionOptionBlueBeigeTheme),
-                                   @(AFThemeSelectionOptionBlackGrayTheme),
-                                   @(AFThemeSelectionOptionRedRoseTheme)];
+     Verify for each enumeration of AFThemeSelectionOption, the proper object that conforms to the Theme protocol
+     is returned.     */
+    NSArray *themeOptions = @[@(AFThemeSelectionOptionBlueBeigeTheme),
+                              @(AFThemeSelectionOptionBlackGrayTheme),
+                              @(AFThemeSelectionOptionRedRoseTheme)];
     
     NSArray *classNames = @[[BlueBeigeTheme class],
                             [BlackGrayTheme class],
                             [RedRoseTheme class]];
     
-    [validEnumerations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [themeOptions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         AFThemeSelectionOption option = (AFThemeSelectionOption)[obj integerValue];
         id <Theme> themeObj = [[ThemeFactory sharedThemeFactory] buildThemeForKey:option];
+        
         XCTAssert([themeObj isKindOfClass:(Class)classNames[idx]], @"The object is not of the appropriate class");
     }];
 }
@@ -59,14 +60,14 @@
 {
     /*
      Nil should be returned for invalid inputs.
-     Valid inputs are enumerations 0 - 2
+     Valid inputs are enumerations 0 - 2 in AFThemeSelectionOption
      */
     NSArray *invalidInputs = @[@(-1), @(3), @(NAN), @(INFINITY)];
     
     [invalidInputs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSInteger intValue = [obj integerValue];
-        AFThemeSelectionOption option = (AFThemeSelectionOption)intValue;
+        AFThemeSelectionOption option = (AFThemeSelectionOption)[obj integerValue];
         id <Theme> themeObj = [[ThemeFactory sharedThemeFactory] buildThemeForKey:option];
+        
         XCTAssertNil(themeObj, @"The returned theme object was not nil");
     }];
 }
