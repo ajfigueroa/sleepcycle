@@ -234,5 +234,40 @@
     XCTAssertNil(testTimeStamps, @"The array returned is not nil");
 }
 
+#pragma mark - -shortTime Test Method
+- (void)testValidShortTime
+{
+    /*
+     Generate an array of short time stamps 
+     (generateTimeStampsFromTime:inIntervals:forCount:) and compare to an
+     array of times with the -shortTime method applied to each and stored in a
+     string array.
+     */
+    
+    // Create seed time
+    NSDate *seedTime = [NSDate noonDate];
+    NSTimeInterval hourInterval = 1 * 60 * 60;
+    NSInteger count = 24;
+    
+    NSArray *expectedTimeStamps = [self generateTimeStampsFromTime:seedTime
+                                                       inIntervals:hourInterval
+                                                          forCount:count];
+    
+    // Generate array of NSDate times
+    NSMutableArray *testTimes = [NSMutableArray arrayWithCapacity:count];
+    
+    for (int i = 0; i < count; i++) {
+        testTimes[i] = [seedTime dateByAddingTimeInterval:(i * hourInterval)];
+    }
+    
+    [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *timeStamp = [(NSDate *)obj shortTime];
+        
+        XCTAssertEqualObjects((NSString *)expectedTimeStamps[idx], timeStamp,
+                              @"The time stamps are not equal");
+    }];
+    
+    
+}
 
 @end
