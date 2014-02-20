@@ -12,6 +12,8 @@
 @interface ActionSheetPresenter (Test)
 
 - (IBActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime;
+- (IBActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime;
+
 
 @end
 
@@ -90,13 +92,13 @@
     
 }
 
-#pragma mark - -alarmActionSheetForWakeTime:wakeTime Tests
-- (void)testErrorForWakeTimeAssertion
+#pragma mark - -alarmActionSheetForWakeTime: Tests
+- (void)testNilWakeTimeCheck
 {
     /* 
      Verify that on nil input, a nil action sheet is return
     */
-    XCTAssertNil([self.subject alarmActionSheetForWakeTime:nil], @"Error was not thrown on wakeTimeAssertion");
+    XCTAssertNil([self.subject alarmActionSheetForWakeTime:nil], @"Nil action sheet was not returned for nil wakeTime");
 }
 
 - (void)testCorrectActionSheetButtonCountForAlarmActionSheet
@@ -130,6 +132,15 @@
         NSInteger expectedButtonCount = [expectedButtonCounts[idx] integerValue];
         XCTAssertEqual(expectedButtonCount, actualButtonCount, @"The button counts are not equal");
     }];
+}
+
+#pragma mark - -reminderActionSheetForSleepTime: Tests
+- (void)testNilSleepTimeCheck
+{
+    /*
+     Verify that on nil input, a nil action sheet is return
+     */
+    XCTAssertNil([self.subject reminderActionSheetForSleepTime:nil], @"Nil action sheet was not returned for nil sleepTime");
 }
 
 @end

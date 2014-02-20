@@ -132,10 +132,13 @@
  the timeToFallAsleep. That is, the Reminder fire date is (sleepTime - timeToFallAsleep).
  @param sleepTime The time to set the reminder at prior to subtracting the timeToFallAsleep.
  @returns An IBActionSheet configured with the the reminder set to fire at (sleepTime - timeToFallAsleep) and one 
- (or two) versions of its date. One if set to Today and the other is set to Tomorrow.
+ (or two) versions of its date. One if set to Today and the other is set to Tomorrow. Returns nil if sleepTime is nil.
  */
 - (IBActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime
 {
+    if (!sleepTime)
+        return nil;
+    
     // Create date set back by the user defined time to fall asleep (default 14)
     NSInteger timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
     NSDate *earlierTime = [sleepTime dateByAddingTimeInterval:(-1 * (MINUTES_AS_SECONDS(timeToFallAsleep)))];
