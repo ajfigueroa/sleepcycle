@@ -11,7 +11,10 @@
 
 @interface ActionSheetPresenter (Test)
 
+- (IBActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime;
+
 @end
+
 
 @interface ActionSheetPresenterTest : XCTestCase
 
@@ -37,7 +40,7 @@
 }
 
 
-#pragma mark - -buildActionSheetForState:andDate Test Methods
+#pragma mark - -buildActionSheetForState:andDate Tests
 - (void)testBuildActionSheetForInvalidState
 {
     /* Method should return nil on invalid state parameter.
@@ -85,6 +88,48 @@
         XCTAssertEqual(expectedTag, actualTagResponse, @"The tags do not match");
     }];
     
+}
+
+#pragma mark - -alarmActionSheetForWakeTime:wakeTime Tests
+- (void)testErrorForWakeTimeAssertion
+{
+    /* 
+     Verify that on nil input, a nil action sheet is return
+    */
+    XCTAssertNil([self.subject alarmActionSheetForWakeTime:nil], @"Error was not thrown on wakeTimeAssertion");
+}
+
+- (void)testCorrectActionSheetButtonCountForAlarmActionSheet
+{
+    /*
+     Depending on the date, the returned action sheet for both the AFSelectedUserMode:
+        AFSelectedUserModeCalculateWakeTime
+        AFSelectedUserModeCalculateBedTimeWithAlarmTime
+     will either return one (1) or two (2) buttons depending on the input time.
+     Note: Add one to the count due to the "Cancel" button so two (2) and three (3) respectively.
+     
+     That is, if the time entered for an alarm is AFTER the current time, then both
+     the options to set the alarm for today or tomorrow exist.
+     Else, if the time entered for the alarm is BEFORE the current time, then only
+     the option to set the alarm for tomorrow exists. (You can't set an alarm in the
+     past unless you're Marty McFly).
+     */
+    
+    // Create an array with a time before the current time and one after
+    NSDate *currentTime = [NSDate date];
+    NSDate *before = [currentTime dateByAddingTimeInterval:(- 1 * 60 * 60)]; // 1 hour behind
+    NSDate *after = [currentTime dateByAddingTimeInterval:(1 * 60 * 60)]; // 1 hour ahead
+    NSArray *inputTimes = @[before, after];
+    
+    // Define expected button count from the IBActionSheet
+    NSArray *expectedButtonCounts = @[@(2), @(3)];
+    
+    [inputTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        IBActionSheet *actionSheet = [self.subject alarmActionSheetForWakeTime:(NSDate *)obj];
+        NSInteger actualButtonCount = [actionSheet numberOfButtons];
+        NSInteger expectedButtonCount = [expectedButtonCounts[idx] integerValue];
+        XCTAssertEqual(expectedButtonCount, actualButtonCount, @"The button counts are not equal");
+    }];
 }
 
 @end

@@ -80,10 +80,14 @@
  @brief Creates and returns the Action Sheet for an Alarm with the fire date of wakeTime.
  @param wakeTime The NSDate that represents the desired alarm wake up time.
  @returns An IBActionSheet configured with the alarm set to wakeTime and one (or two) versions of the date. One of them
- is set to Tomorrow and the other Today).
+ is set to Tomorrow and the other Today). Returns nil if the wakeTime is nil.
  */
 - (IBActionSheet *)alarmActionSheetForWakeTime:(NSDate *)wakeTime
 {
+    // Return nil IBActionSheet if there is no wake time
+    if (!wakeTime)
+        return nil;
+    
     NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Set Alarm for %@", nil),
                                                                         [wakeTime shortTime]];
     
