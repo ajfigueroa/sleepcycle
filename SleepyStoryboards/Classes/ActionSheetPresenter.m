@@ -17,11 +17,6 @@
 @interface ActionSheetPresenter ()
 
 /**
- @brief The desired date to trigger the alarm or reminder at.
- */
-@property (nonatomic, strong) NSDate *desiredScheduledTime;
-
-/**
  @brief The pair of alarm times where the order of dates are: Tomorrow and Today.
 */
 @property (nonatomic, strong) NSArray *alarmTimesPair;
