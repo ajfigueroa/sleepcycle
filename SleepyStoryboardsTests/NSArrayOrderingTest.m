@@ -28,7 +28,7 @@
 }
 
 #pragma mark - -reversedArray Test Method
-- (void)testOriginArrayReturned
+- (void)testOriginalArrayReturned
 {
     /*
      Given an array in a defined order, performing [[array reversedArray] reversedArray] should return the
@@ -44,6 +44,72 @@
     
     NSArray *doubleReversedArray = [[array reversedArray] reversedArray];
     XCTAssertEqualObjects((NSArray *)array, doubleReversedArray, @"The arrays are not equal");
+}
+
+- (void)testCorrectReversedArrayReturned
+{
+    /*
+     Given two arrays, both defined as the reverse of each other.
+     When the -reversedArray is called, they should equal regardless of which was reversed.
+     Combinations for comparing are, given array A and array B:
+        A compared to B reversed.
+        A reversed compared to B
+        A reversed twice compared to B reversed
+        A reversed compared to B reversed twice
+     */
+    NSInteger arrayCapacity = 100;
+    
+    NSMutableArray *ascendingArray = [NSMutableArray arrayWithCapacity:arrayCapacity];
+    
+    for (NSInteger i = 0; i < arrayCapacity; i++) {
+        ascendingArray[i] = [NSNumber numberWithInteger:i];
+    }
+    
+    NSMutableArray *descendingArray = [NSMutableArray arrayWithCapacity:arrayCapacity];
+    
+    for (NSInteger i = 0; i < arrayCapacity; i++) {
+        descendingArray[i] = [NSNumber numberWithInteger:(arrayCapacity - 1 - i)];
+    }
+    
+    // Check that the two sizes are correct and equal
+    assert(ascendingArray.count == descendingArray.count);
+    
+    NSInteger testCombinations = 4;
+    
+    for (int i = 0; i < testCombinations; i++) {
+        switch (i) {
+            case 0:
+                XCTAssertEqualObjects(ascendingArray, [descendingArray reversedArray],
+                                      @"Case 0: A and B reversed did not equal");
+                break;
+            case 1:
+                XCTAssertEqualObjects([ascendingArray reversedArray], descendingArray,
+                                      @"Case 1: A reversed and B did not equal");
+                break;
+            case 2:
+                XCTAssertEqualObjects([[ascendingArray reversedArray] reversedArray], [descendingArray reversedArray],
+                                      @"Case 2: A reversed twice and B reversed did not equal");
+                break;
+            case 3:
+                XCTAssertEqualObjects([ascendingArray reversedArray], [[descendingArray reversedArray] reversedArray],
+                                      @"Case 3: A reversed and B reversed twice did not equal");
+                break;
+            default:
+                // Ideally, should not reach here.
+                NSLog(@"Default switch reached in %s", __PRETTY_FUNCTION__);
+                break;
+        }
+    }
+        
+}
+
+- (void)testNilArrayReturned
+{
+    /*
+     If nil is entered, nil should be expected back.
+     */
+    NSArray *nilArray = nil;
+    XCTAssertNil([nilArray reversedArray], @"Nil was not returned");
 }
 
 @end
