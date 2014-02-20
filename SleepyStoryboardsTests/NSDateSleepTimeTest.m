@@ -41,11 +41,11 @@
 + (NSDate *)todaysDateWithHour:(NSInteger)hour minute:(NSInteger)minute
 {
     // To prevent potentially unexpected behaviour, change hour and minute if invalid
-    if (hour > 23)
-        hour = hour % 24;
+    if (hour > 23 || hour < 0)
+        hour = ABS(hour) % 24;
     
-    if (minute > 59)
-        minute = minute % 60;
+    if (minute > 59 || minute < 0)
+        minute = ABS(minute) % 60;
     
     // Grab current calendar
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -93,6 +93,9 @@
                             inIntervals:(NSTimeInterval)interval
                                forCount:(NSInteger)count
 {
+    if (!startTime)
+        return nil;
+    
     NSMutableArray *timeStamps = [NSMutableArray arrayWithCapacity:count];
     
     // Create formatter
@@ -168,7 +171,68 @@
     }];
 }
 
-#pragma mark - -shortTime Test Method
+#pragma mark - -generateTimeStampsFromTime:inIntervals:forCount: Test Method
+- (void)testValidGenerateTimeStampsCompare
+{
+    /*
+     Test the returned time stamps equals a desired time stamp array
+     */
+    
+    NSArray *controlTimeStamps = @[@"12:00 AM",
+                                   @"1:00 AM",
+                                   @"2:00 AM",
+                                   @"3:00 AM",
+                                   @"4:00 AM",
+                                   @"5:00 AM",
+                                   @"6:00 AM",
+                                   @"7:00 AM",
+                                   @"8:00 AM",
+                                   @"9:00 AM",
+                                   @"10:00 AM",
+                                   @"11:00 AM",
+                                   @"12:00 PM",
+                                   @"1:00 PM",
+                                   @"2:00 PM",
+                                   @"3:00 PM",
+                                   @"4:00 PM",
+                                   @"5:00 PM",
+                                   @"6:00 PM",
+                                   @"7:00 PM",
+                                   @"8:00 PM",
+                                   @"9:00 PM",
+                                   @"10:00 PM",
+                                   @"11:00 PM"];
+    
+    // Create seed time
+    NSDate *seedTime = [NSDate todaysDateWithHour:0 minute:0];
+    NSTimeInterval hourInterval = 1 * 60 * 60;
+    NSInteger count = controlTimeStamps.count;
+    
+    NSArray *testTimeStamps = [self generateTimeStampsFromTime:seedTime
+                                                   inIntervals:hourInterval
+                                                      forCount:count];
+    
+    XCTAssertEqualObjects(controlTimeStamps, testTimeStamps,
+                          @"The time stamp arrays are not equal");
+}
+
+- (void)testNilGenerateTimeStamps
+{
+    /*
+     Test that on nil date, a nil array is returned.
+     */
+    
+    // Create seed time
+    NSDate *seedTime = nil;
+    NSTimeInterval hourInterval = 1 * 60 * 60;
+    NSInteger count = 24;
+    
+    NSArray *testTimeStamps = [self generateTimeStampsFromTime:seedTime
+                                                   inIntervals:hourInterval
+                                                      forCount:count];
+    
+    XCTAssertNil(testTimeStamps, @"The array returned is not nil");
+}
 
 
 @end
