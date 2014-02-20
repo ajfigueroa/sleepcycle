@@ -108,7 +108,7 @@
     
     // Extract the day unit from currentDate (today)
     NSDate *currentDate = [NSDate date];
-    NSDateComponents *currentComponents = [calendar components:(NSDayCalendarUnit | NSYearCalendarUnit) fromDate:currentDate];
+    NSDateComponents *currentComponents = [calendar components:(NSDayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSTimeZoneCalendarUnit) fromDate:currentDate];
     
     // Create a new date with componenets set to everything from oldDate minus the NSDayCalendarUnit
     NSDateComponents *newComponents = [[NSDateComponents alloc] init];
@@ -117,9 +117,9 @@
     [newComponents setMinute:oldComponents.minute];
     [newComponents setSecond:oldComponents.second];
     [newComponents setDay:currentComponents.day];
-    [newComponents setMonth:oldComponents.month];
+    [newComponents setMonth:currentComponents.month];
     [newComponents setYear:currentComponents.year];
-    [newComponents setTimeZone:oldComponents.timeZone];
+    [newComponents setTimeZone:currentComponents.timeZone];
     
     return [calendar dateFromComponents:newComponents];
 }
