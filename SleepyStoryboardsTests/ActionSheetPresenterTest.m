@@ -162,9 +162,9 @@
 - (void)testNilAlarmTimesPair
 {
     /*
-     To avoid sending off the previous version of the alarmsTimePair in case one input 
-     was nil and the proceeding was not-nil.
-     The alarmTimesPair needs to be set to nil when the wakeTime is nil.
+     To avoid sending off the previous version of the alarmTimesPair in case one input
+     was nil and the proceeding was not-nil, the alarmTimesPair needs to be set to 
+     nil when the wakeTime is nil.
      */
     
     // Perform alarmActionSheetForWakeTime: but do not store return value
@@ -215,5 +215,48 @@
         XCTAssertEqual(expectedButtonCount, actualButtonCount, @"The button counts are not equal");
     }];
 }
+
+- (void)testValidReminderTimesPair
+{
+    /*
+     The ActionSheetPresenter creates two reminder times to be sent off to the delegate.
+     However, the input time will have a copy of it decremented by the timeToFallAsleep
+     property of the SettingsAPI class.
+     Therefore, the expected pair for an inputTime is:
+        inputTime - timeToFallAsleep
+        inputTime - timeToFallAsleep + 24 hours
+     in that order.
+     */
+    
+    // Create test times
+    NSInteger timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
+    NSDate *testBedTime = [NSDate date];
+    NSDate *testBedTimeWithOffset = [testBedTime dateByAddingTimeInterval:(-timeToFallAsleep * 60)];
+    NSDate *testBedTimeWithOffsetTomorrow = [testBedTimeWithOffset dateByAddingTimeInterval:(24 * 60 * 60)];
+    
+    // Perform reminderActionSheetForSleepTime but do not store return value
+    [self.subject reminderActionSheetForSleepTime:testBedTime];
+    
+    // Generate expected pair array
+    NSArray *expectedReminderTimesPair = @[testBedTimeWithOffset,
+                                           testBedTimeWithOffsetTomorrow];
+    
+    XCTAssertEqualObjects(expectedReminderTimesPair, self.subject.reminderTimesPair, @"The arrays do not match times");
+}
+
+- (void)testNilReminderTimesPair
+{
+    /*
+     To avoid sending off the previous version of the reminderTimesPair in case one input
+     was nil and the proceeding was not-nil, the reminderTimesPair needs to be set to
+     nil when the bedTime is nil.
+     */
+    
+    // Perform reminderActionSheetForSleepTime: but do not store return value
+    [self.subject reminderActionSheetForSleepTime:nil];
+    
+    XCTAssertNil(self.subject.reminderTimesPair, @"The reminderTimesPair was not set to nil");
+}
+
 
 @end
