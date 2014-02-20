@@ -73,7 +73,7 @@
 - (NSComparisonResult)compareMinutes:(NSDate *)anotherDate;
 
 /**
- @brief Compares the overall times of the receiver against anotherDate.
+ @brief Compares the hours and minutes of the receiver against anotherDate.
  @returns @b NSOrderedDescending, if the time of the receiver is greater than anotherDate. @b NSOrderedAscending, if the time of receiver is less than anotherDate. @b NSOrderedSame, if the times are equal.
  */
 - (NSComparisonResult)compareTimes:(NSDate *)anotherDate;

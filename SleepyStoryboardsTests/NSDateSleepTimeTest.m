@@ -234,6 +234,41 @@
     XCTAssertNil(testTimeStamps, @"The array returned is not nil");
 }
 
+#pragma mark - +spansMultipleDaysForTime:
+- (void)testSpansMultipleDaysForTime
+{
+    /*
+     There is an issue with this test case and that is, since the method depends
+     on the current time ([NSDate date]). This test will fail if adding or subtracting
+     1 minute from the current time pushes you past the date lines (i.e. 
+     If it's currently 11:59 pm or 12:00 am).
+     
+     Nonetheless, the method should return YES or NO depending on whether the time is
+     */
+    NSDate *beforeMidnight = [NSDate todaysDateWithHour:23 minute:59];
+    NSDate *afterMidnight = [NSDate todaysDateWithHour:0 minute:0];
+    
+    NSDate *currentTime = [NSDate date];
+    
+    // If the time is 11:59pm or 12:00am, fail the test and explain
+    if ([currentTime compareTimes:beforeMidnight] == NSOrderedSame ||
+        [currentTime compareTimes:afterMidnight] == NSOrderedSame) {
+        XCTAssertNotNil(nil, @"This time scenario makes the test fail. Read test information, I'm working on fix");
+    }
+    
+    NSArray *testTimeIntervals = @[@(-60), @(0), @(60)];
+    NSArray *expectedBools = @[@(NO), @(NO), @(YES)];
+    
+    [testTimeIntervals enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSInteger interval = [(NSNumber *)obj integerValue];
+        NSDate *testTime = [[NSDate date] dateByAddingTimeInterval:interval];
+        BOOL spans = [NSDate spansMultipleDaysForTime:testTime];
+        
+        XCTAssertEqual([expectedBools[idx] boolValue], spans,
+                       @"The spans value does not equal the expected boolean value");
+    }];
+}
+
 #pragma mark - -shortTime Test Method
 - (void)testValidShortTime
 {
@@ -266,8 +301,19 @@
         XCTAssertEqualObjects((NSString *)expectedTimeStamps[idx], timeStamp,
                               @"The time stamps are not equal");
     }];
-    
-    
 }
+
+- (void)testNilShortTime
+{
+    /*
+     Test nil is returned on nil input date.
+     */
+    NSDate *testDate = nil;
+    NSString *testTimeStamps = [testDate shortTime];
+    
+    XCTAssertNil(testTimeStamps, @"The returned string was not nil");
+}
+
+#pragma mark -
 
 @end
