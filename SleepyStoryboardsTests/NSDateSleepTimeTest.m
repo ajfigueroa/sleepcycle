@@ -269,6 +269,16 @@
     }];
 }
 
+- (void)testSpansMultipleDaysForNilInputTime
+{
+    /*
+     Verify that NO is returned if the receiver is set to nil.
+     */
+    NSDate *testDate = nil;
+    
+    XCTAssertEqual(NO, [NSDate spansMultipleDaysForTime:testDate], @"The nil date does not return NO.");
+}
+
 #pragma mark - -shortTime Test Method
 - (void)testValidShortTime
 {
@@ -314,6 +324,57 @@
     XCTAssertNil(testTimeStamps, @"The returned string was not nil");
 }
 
-#pragma mark -
+#pragma mark - -shortTimeLowerCase Test Method
+- (void)testValidShortTimeLowerCase
+{
+    /*
+     Procedure is the same as the shortTime test method just with an additional
+     lowercaseString added to it.
+     */
+    
+    // Create seed time
+    NSDate *seedTime = [NSDate noonDate];
+    NSTimeInterval hourInterval = 1 * 60 * 60;
+    NSInteger count = 24;
+    
+    // Change time stamps to lower case version
+    NSArray *expectedTimeStamps = [self generateTimeStampsFromTime:seedTime
+                                                       inIntervals:hourInterval
+                                                          forCount:count];
+    
+    NSMutableArray *mutableExpectedTimeStamps = [NSMutableArray arrayWithCapacity:expectedTimeStamps.count];
+    
+    for (int i = 0; i < expectedTimeStamps.count; i++) {
+        mutableExpectedTimeStamps[i] = [(NSString *)expectedTimeStamps[i] lowercaseString];
+    }
+    
+    expectedTimeStamps = (NSArray *)mutableExpectedTimeStamps;
+    
+    // Generate array of NSDate times
+    NSMutableArray *testTimes = [NSMutableArray arrayWithCapacity:count];
+    
+    for (int i = 0; i < count; i++) {
+        testTimes[i] = [seedTime dateByAddingTimeInterval:(i * hourInterval)];
+    }
+    
+    [testTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *timeStamp = [(NSDate *)obj shortTimeLowerCase];
+        
+        XCTAssertEqualObjects((NSString *)expectedTimeStamps[idx], timeStamp,
+                              @"The time stamps are not equal when lower cased.");
+    }];
+}
+
+
+- (void)testNilShortTimeLowerCase
+{
+    /*
+     Test nil is returned on nil input date.
+     */
+    NSDate *testDate = nil;
+    NSString *testTimeStamps = [testDate shortTimeLowerCase];
+    
+    XCTAssertNil(testTimeStamps, @"The returned lower case string was not nil");
+}
 
 @end
