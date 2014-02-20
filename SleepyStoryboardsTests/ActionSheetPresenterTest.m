@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "ActionSheetPresenter.h"
 #import "SettingsAPI.h"
+#import "NSDate+SleepTime.h"
 
 @interface ActionSheetPresenter (Test)
 
@@ -19,7 +20,6 @@
 - (IBActionSheet *)reminderActionSheetForSleepTime:(NSDate *)sleepTime;
 
 @end
-
 
 @interface ActionSheetPresenterTest : XCTestCase <ActionSheetPresenterDelegate>
 
@@ -56,10 +56,11 @@
      AFSelectedUserModeCalculateBedTime - 1
      AFSelectedUserModeCalculateBedTimeWithAlarm - 2
      */
-    NSArray *invalidInputs = @[@(-1), @(4), @"a", @"", @(NAN), @(INFINITY)];
+    NSArray *invalidInputs = @[@(-1), @(4), @(NAN), @(INFINITY)];
     
+    __weak ActionSheetPresenterTest *weakSelf = self;
     [invalidInputs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XCTAssertNil([self.subject buildActionSheetForState:(AFSelectedUserMode)obj andDate:[NSDate date]],
+        XCTAssertNil([weakSelf.subject buildActionSheetForState:(AFSelectedUserMode)obj andDate:[NSDate date]],
                      @"Nil was not returned");
     }];
 }
@@ -86,9 +87,10 @@
                                      @(AFActionSheetTagReminder),
                                      @(AFActionSheetTagAlarm)];
     
+    __weak ActionSheetPresenterTest *weakSelf = self;
     [validParameters enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        IBActionSheet *actionSheet = [self.subject buildActionSheetForState:[obj integerValue]
-                                                                    andDate:[NSDate date]];
+        IBActionSheet *actionSheet = [weakSelf.subject buildActionSheetForState:[obj integerValue]
+                                                                        andDate:[NSDate date]];
         AFActionSheetTag actualTagResponse = actionSheet.tag;
         AFActionSheetTag expectedTag = [expectedTagResponse[idx] integerValue];
         XCTAssertEqual(expectedTag, actualTagResponse, @"The tags do not match");
@@ -122,16 +124,25 @@
      */
     
     // Create an array with a time before the current time and one after
-    NSDate *currentTime = [NSDate date];
-    NSDate *before = [currentTime dateByAddingTimeInterval:(- 1 * 60 * 60)]; // 1 hour behind
-    NSDate *after = [currentTime dateByAddingTimeInterval:(1 * 60 * 60)]; // 1 hour ahead
+    NSDate *baseTime = [NSDate date];
+    NSDate *before = [baseTime dateByAddingTimeInterval:(- 1 * 60 * 60)]; // 1 hour behind
+    NSDate *after = [baseTime dateByAddingTimeInterval:(1 * 60 * 60)]; // 1 hour ahead
     NSArray *inputTimes = @[before, after];
     
-    // Define expected button count from the IBActionSheet
-    NSArray *expectedButtonCounts = @[@(2), @(3)];
+    // Define expected button count array from the IBActionSheet
+    NSMutableArray *expectedButtonCounts = [NSMutableArray arrayWithCapacity:inputTimes.count];
     
+    // Populate expected button counts
+    for (int i = 0; i < inputTimes.count; i++) {
+        if ([NSDate spansMultipleDaysForTime:(NSDate *)inputTimes[i]])
+            expectedButtonCounts[i] = @(3);
+        else
+            expectedButtonCounts[i] = @(2);
+    }
+    
+    __weak ActionSheetPresenterTest *weakSelf = self;
     [inputTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        IBActionSheet *actionSheet = [self.subject alarmActionSheetForWakeTime:(NSDate *)obj];
+        IBActionSheet *actionSheet = [weakSelf.subject alarmActionSheetForWakeTime:(NSDate *)obj];
         NSInteger actualButtonCount = [actionSheet numberOfButtons];
         NSInteger expectedButtonCount = [expectedButtonCounts[idx] integerValue];
         XCTAssertEqual(expectedButtonCount, actualButtonCount, @"The button counts are not equal");
@@ -195,22 +206,32 @@
      negative offset
      */
     // Create an array with a time before the current time and one after
-    NSDate *currentTime = [NSDate date];
-    NSDate *before = [currentTime dateByAddingTimeInterval:(- 1 * 60 * 60)]; // 1 hour behind
-    NSDate *after = [currentTime dateByAddingTimeInterval:(1 * 60 * 60)]; // 1 hour ahead
+    NSDate *baseTime = [NSDate date];
+    NSDate *before = [baseTime dateByAddingTimeInterval:(- 1 * 60 * 60)]; // 1 hour behind
+    NSDate *after = [baseTime dateByAddingTimeInterval:(1 * 60 * 60)]; // 1 hour ahead
     
     // Create time with offset timeToFallAsleep in the future.
     NSInteger timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
-    NSDate *afterByTimeToFallAsleep = [currentTime dateByAddingTimeInterval:(timeToFallAsleep * 60)];
+    NSDate *afterByTimeToFallAsleep = [baseTime dateByAddingTimeInterval:(timeToFallAsleep * 60)];
     
     // Add all times to the inputTimesArray
     NSArray *inputTimes = @[before, after, afterByTimeToFallAsleep];
     
-    // Define expected button count from the IBActionSheet
-    NSArray *expectedButtonCounts = @[@(2), @(3), @(2)];
+    // Define expected button count array from the IBActionSheet
+    NSMutableArray *expectedButtonCounts = [NSMutableArray arrayWithCapacity:inputTimes.count];
     
+    // Populate expected button counts
+    for (int i = 0; i < inputTimes.count; i++) {
+        NSDate *adjustedTime = [(NSDate *)inputTimes[i] dateByAddingTimeInterval:(-timeToFallAsleep * 60)];
+        if ([NSDate spansMultipleDaysForTime:adjustedTime])
+            expectedButtonCounts[i] = @(3);
+        else
+            expectedButtonCounts[i] = @(2);
+    }
+    
+    __weak ActionSheetPresenterTest *weakSelf = self;
     [inputTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        IBActionSheet *actionSheet = [self.subject reminderActionSheetForSleepTime:(NSDate *)obj];
+        IBActionSheet *actionSheet = [weakSelf.subject reminderActionSheetForSleepTime:(NSDate *)obj];
         NSInteger actualButtonCount = [actionSheet numberOfButtons];
         NSInteger expectedButtonCount = [expectedButtonCounts[idx] integerValue];
         XCTAssertEqual(expectedButtonCount, actualButtonCount, @"The button counts are not equal");
@@ -277,13 +298,14 @@
     
     NSArray *actionSheets = @[alarmActionSheet, reminderActionSheet];
     
+    __weak ActionSheetPresenterTest *weakSelf = self;
     // Select the first button of each and verify the delegateCallBackReceived is YES
     [actionSheets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         IBActionSheet *actionSheet = (IBActionSheet *)obj;
         [actionSheet.delegate actionSheet:actionSheet clickedButtonAtIndex:0];
         
-        XCTAssertEqual(YES, self.delegateCallBackReceived, @"The callback was not received");
-        self.delegateCallBackReceived = NO;
+        XCTAssertEqual(YES, weakSelf.delegateCallBackReceived, @"The callback was not received");
+        weakSelf.delegateCallBackReceived = NO;
     }];
     
 }
@@ -302,12 +324,13 @@
     
     NSArray *actionSheets = @[alarmActionSheet, reminderActionSheet];
     
+    __weak ActionSheetPresenterTest *weakSelf = self;
     // Select the first button of each and verify the delegateCallBackReceived is YES
     [actionSheets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         IBActionSheet *actionSheet = (IBActionSheet *)obj;
         [actionSheet.delegate actionSheet:actionSheet clickedButtonAtIndex:0];
         
-        XCTAssertEqual(NO, self.delegateCallBackReceived, @"The callback was not received");
+        XCTAssertEqual(NO, weakSelf.delegateCallBackReceived, @"The callback was not received");
     }];
 }
 

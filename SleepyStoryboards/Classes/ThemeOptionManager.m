@@ -97,8 +97,9 @@
     
     NSMutableArray *sortedValues = [NSMutableArray arrayWithCapacity:sortedKeys.count];
     
+    __weak ThemeOptionManager *weakSelf = self;
     [sortedKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        sortedValues[idx] = (NSString *)self.themeIndexDictionary[(NSString *)obj];
+        sortedValues[idx] = (NSString *)weakSelf.themeIndexDictionary[(NSString *)obj];
     }];
     
     return (NSArray *)sortedValues;
