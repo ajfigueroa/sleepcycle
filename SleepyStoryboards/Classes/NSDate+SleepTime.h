@@ -58,7 +58,7 @@
  @brief Sets a copy of the receiver to have it's date properties set to the current date (today).
  @returns A copy of the receiver that is set in the current date.
  */
-- (NSDate *)currentDateVersion;
+- (NSDate *)currentDateTransform;
 
 /**
  @brief Compares the hours of the receiver against anotherDate.

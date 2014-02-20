@@ -86,7 +86,7 @@
     return [selfDate dateByAddingTimeInterval:(-1 * seconds)];
 }
 
-- (NSDate *)currentDateVersion
+- (NSDate *)currentDateTransform
 {
     // Transform the self date to the current date implementation
     NSDate *oldDate = [self copy];
