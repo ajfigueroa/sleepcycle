@@ -19,11 +19,16 @@
 
 @implementation AttributionsViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self buildAttributionsText];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [self buildAttributionsText];
     
     // Assign self as the delegate of the textView
     self.attributionTextView.delegate = self;
@@ -31,7 +36,7 @@
 
 - (void)buildAttributionsText
 {
-    NSString *text = @"\nLIBRARIES\n\n"
+    NSString *text = @"\nLibraries\n\n"
                      @"FlatUIKit\n"
                      @"https://github.com/grouper/flatuikit\n\n"
                      @"IBActionSheet\n"
@@ -45,15 +50,15 @@
                      @"Colors-for-iOS\n"
                      @"https://github.com/bennyguitar/Colours\n\n"
                      @"------------------------------------------------------------"
-                     @"\n\nICONS\n\n"
+                     @"\n\nIcons\n\n"
                      @"Moon, Sun, Clock, Settings, and List\n"
                      @"http://somerandomdude.com/work/iconic/\n\n"
                      @"------------------------------------------------------------"
-                     @"\n\nSOUNDS\n\n"
+                     @"\n\nSounds\n\n"
                      @"Alarm Sound was made by Joe DeShon\n"
                      @"http://www.freesound.org/people/joedeshon/\n\n"
                      @"------------------------------------------------------------"
-                     @"\n\nICONS and SOUNDS under Creative Commons License\n"
+                     @"\n\nIcons and Sounds under Creative Commons License\n"
                      @"http://creativecommons.org/licenses/by/3.0/\n\n";
     
     self.attributionTextView.text = NSLocalizedString(text, nil);
