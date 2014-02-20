@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "ActionSheetPresenter.h"
+#import "SettingsAPI.h"
 
 @interface ActionSheetPresenter (Test)
 
@@ -141,6 +142,42 @@
      Verify that on nil input, a nil action sheet is return
      */
     XCTAssertNil([self.subject reminderActionSheetForSleepTime:nil], @"Nil action sheet was not returned for nil sleepTime");
+}
+
+- (void)testCorrectActionSheetButtonCountForReminderActionSheet
+{
+    /*
+     Depending on the date, the returned action sheet for both the AFSelectedUserMode:
+     AFSelectedUserModeCalculateWakeTime
+     AFSelectedUserModeCalculateBedTimeWithAlarmTime
+     will either return one (1) or two (2) buttons depending on the input time.
+     Note: Add one to the count due to the "Cancel" button so two (2) and three (3) respectively.
+     
+     Refer to -testCorrectActionSheetButtonCountForAlarmActionSheet for more information.
+     The main difference is that the time it takes to fall asleep creates an initial 
+     negative offset
+     */
+    // Create an array with a time before the current time and one after
+    NSDate *currentTime = [NSDate date];
+    NSDate *before = [currentTime dateByAddingTimeInterval:(- 1 * 60 * 60)]; // 1 hour behind
+    NSDate *after = [currentTime dateByAddingTimeInterval:(1 * 60 * 60)]; // 1 hour ahead
+    
+    // Create time with offset timeToFallAsleep in the future.
+    NSInteger timeToFallAsleep = [[SettingsAPI sharedSettingsAPI] timeToFallAsleep];
+    NSDate *afterByTimeToFallAsleep = [currentTime dateByAddingTimeInterval:(timeToFallAsleep * 60)];
+    
+    // Add all times to the inputTimesArray
+    NSArray *inputTimes = @[before, after, afterByTimeToFallAsleep];
+    
+    // Define expected button count from the IBActionSheet
+    NSArray *expectedButtonCounts = @[@(2), @(3), @(2)];
+    
+    [inputTimes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        IBActionSheet *actionSheet = [self.subject reminderActionSheetForSleepTime:(NSDate *)obj];
+        NSInteger actualButtonCount = [actionSheet numberOfButtons];
+        NSInteger expectedButtonCount = [expectedButtonCounts[idx] integerValue];
+        XCTAssertEqual(expectedButtonCount, actualButtonCount, @"The button counts are not equal");
+    }];
 }
 
 @end

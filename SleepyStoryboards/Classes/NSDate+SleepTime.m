@@ -12,9 +12,6 @@
 
 + (BOOL)spansMultipleDaysForTime:(NSDate *)candidateTime
 {
-    // Compare the candidateTime with currentTime to validate alarm/reminder setting
-    // trigger times.
-    
     NSDate *currentDate = [NSDate date];
     NSComparisonResult timeCompare = [candidateTime compareTimes:currentDate];
     
