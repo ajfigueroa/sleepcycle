@@ -10,7 +10,7 @@
 
 @implementation NSArray (Ordering)
 
-- (NSArray *)reverseArray
+- (NSArray *)reversedArray
 {
     // Reverses the order of the elements within the array
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.count];

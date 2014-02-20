@@ -189,7 +189,7 @@
         if (reverse)
         {
             NSArray *copyArray = [NSArray arrayWithArray:self.tableViewCellColorMapping];
-            self.tableViewCellColorMapping = [copyArray reverseArray];
+            self.tableViewCellColorMapping = [copyArray reversedArray];
         }
     }
 }
