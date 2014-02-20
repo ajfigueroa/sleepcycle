@@ -75,7 +75,7 @@
 #pragma mark - Public Scheduling Methods
 - (void)createAlarmNotificationForDatePickerSelectedTime
 {
-    [self createAlarmNotificationForDate:[self.selectedTime zeroDateSeconds]];
+    [self createAlarmNotificationForDate:[self.selectedTime zeroedSeconds]];
 }
 
 - (void)createAlarmNotificationForDate:(NSDate *)alarmTime

@@ -73,7 +73,7 @@
     return components.hour;
 }
 
-- (NSDate *)zeroDateSeconds
+- (NSDate *)zeroedSeconds
 {
     // Zero the seconds of the current date's time
     NSDate *selfDate = [self copy];

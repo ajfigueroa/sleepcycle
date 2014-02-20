@@ -52,7 +52,7 @@
  @brief Sets a copy of receiver's seconds to zero (0)
  @returns A copy of the receiver that has it seconds equal to 0.
  */
-- (NSDate *)zeroDateSeconds;
+- (NSDate *)zeroedSeconds;
 
 /**
  @brief Sets a copy of the receiver to have it's date properties set to the current date (today).

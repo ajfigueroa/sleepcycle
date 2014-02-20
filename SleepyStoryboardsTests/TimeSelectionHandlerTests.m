@@ -249,7 +249,7 @@
     NSDate *slightlyNoon = [calendar dateFromComponents:controlDateComponents];
     
     // Zero the seconds of this date and ensures it equals 0
-    NSDate *dateWithZeroSeconds = [slightlyNoon zeroDateSeconds];
+    NSDate *dateWithZeroSeconds = [slightlyNoon zeroedSeconds];
     
     // Grab the seconds component
     NSDateComponents *testDateComponents = [calendar components:NSCalendarUnitSecond

@@ -62,7 +62,7 @@
     // Zero the alarm seconds
     NSDate *alarmTime = (NSDate *)self.datePairs[index];
     
-    [[SchedulerAPI sharedScheduler] createAlarmNotificationForDate:[alarmTime zeroDateSeconds]];
+    [[SchedulerAPI sharedScheduler] createAlarmNotificationForDate:[alarmTime zeroedSeconds]];
 }
 
 #pragma mark - Reminder Preparation
@@ -77,7 +77,7 @@
     // First zero seconds
     NSDate *reminderTargetTime = (NSDate *)self.datePairs[index];
     
-    [[SchedulerAPI sharedScheduler] createReminderForDate:[reminderTargetTime zeroDateSeconds]];
+    [[SchedulerAPI sharedScheduler] createReminderForDate:[reminderTargetTime zeroedSeconds]];
 }
 
 
