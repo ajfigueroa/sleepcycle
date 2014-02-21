@@ -31,7 +31,7 @@
 /**
  @brief Creates and returns an array of human readable theme names sorted by their enumeration values.
  @returns An array of human readable theme names sorted by enumeration value (AFThemeSelectionOption).
- @sa AFThemeSelectionOption constants in SleepyTimeConstants.h
+ @sa AFThemeSelectionOption constants
  */
 - (NSArray *)themeNamesSortedByEnumeration;
 

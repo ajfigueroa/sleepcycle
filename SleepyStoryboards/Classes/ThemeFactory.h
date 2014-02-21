@@ -25,7 +25,7 @@
  @brief Asks the sharedThemeFactory to build a Theme object that corresponds to
  the themeKey constant provided.
  @param themeKey The AFThemeSelectionOption constant that corresponds to the desired theme.
- @sa AFThemeSelectionOption constants in SleepyTimeConstants.h
+ @sa AFThemeSelectionOption constants
  @returns An object that conforms to the Theme protocol to be used for theming UIControls and UIViews. Returns nil if themeKey is not valid.
  */
 - (id <Theme>)buildThemeForKey:(AFThemeSelectionOption)themeKey;

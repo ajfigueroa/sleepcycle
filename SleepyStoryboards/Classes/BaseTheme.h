@@ -45,7 +45,7 @@ In the init, this is the secondaryTextColor property.
 
 /**
 @brief The enumeration value that represents the AFThemeSelectionOption value of the subclass object.
-@sa AFThemeSelectionOption constants in SleepyTimeConstants.h
+@sa AFThemeSelectionOption constants
 */
 @property (nonatomic, assign) NSInteger themeEnum;
 
