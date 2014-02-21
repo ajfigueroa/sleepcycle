@@ -74,7 +74,7 @@
     self.sectionHeaderTitles = @[@"Libraries",
                                  @"Icons",
                                  @"Sounds",
-                                 @"Icons and Sounds Licenses"];
+                                 @"Icon and Sounds Licenses"];
 }
 
 - (void)buildAttributionData
@@ -168,6 +168,7 @@
     NSArray *attributionInfoList = (NSArray *)self.attributionData[sectionKey];
     AttributionInfo *info = (AttributionInfo *)attributionInfoList[indexPath.row];
     cell.textLabel.text = info.title;
+    cell.textLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont systemFontSize]];
 }
 
 #pragma mark - UITableViewDataSource Methods
@@ -208,6 +209,11 @@
     NSArray *attributionInfoList = (NSArray *)self.attributionData[sectionKey];
     AttributionInfo *info = (AttributionInfo *)attributionInfoList[indexPath.row];
     NSLog(@"Clicked Attribution Info:\nTitle:%@\nLink:%@", info.title, info.url);
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 44.0f;
 }
 
 @end
