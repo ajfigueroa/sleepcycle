@@ -19,7 +19,9 @@
 @end
 
 @implementation AboutViewController
+{}
 
+#pragma mark - View Management
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -28,6 +30,12 @@
     [self buildLinkTitles];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+}
+
+#pragma mark - Builder Methods
 - (void)buildAboutText
 {
     NSString *text = @"SleepCycle was inspired by the website sleepyti.me, feel free to check it out.\n\n"
@@ -45,12 +53,15 @@
 
 - (void)buildLinkTitles
 {
-    
+    self.linkTitles = @[@"Follow Developer", @"SleepCycle Github Repository", @"sleepyti.me"];
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (!self.linkTitles)
+        [self buildLinkTitles];
+    
     return self.linkTitles.count;
 }
 

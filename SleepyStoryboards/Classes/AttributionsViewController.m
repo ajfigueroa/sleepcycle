@@ -9,6 +9,7 @@
 #import "AttributionsViewController.h"
 #import "WebViewController.h"
 
+#pragma mark - AttributionInfo
 /*
  Object to hold our attribution titles and links
  */
@@ -38,7 +39,7 @@
 
 @end
 
-
+#pragma mark - AttributionsViewController
 @interface AttributionsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *attributionTableView;
@@ -52,7 +53,9 @@
 @end
 
 @implementation AttributionsViewController
+{}
 
+#pragma mark - View Management
 - (void)viewDidLoad
 {
     [super viewDidLoad];
