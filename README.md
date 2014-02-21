@@ -1,13 +1,21 @@
 SleepCycle
 ==========
 
-Not to be confused with the popular sleep tracking application of the similar name. 
-SleepCycle is meant as a mobile alternative to the fantastic website sleepyti.me.
+Not to be confused with the popular sleep tracking application of similar name. 
+SleepCycle (stylized with no space in between) is meant as an unofficial mobile alternative to the fantastic website sleepyti.me.
+
+I open sourced this application (which is free and was in need of a big overhaul) in hopes that it can help someone who is learning how to develop for iOS with what I found to be the hardest part, connecting the pieces and getting started. 
+
+## Build Requirements
+* Xcode 5, targeting either iOS 7.0 and above
+* Dependencies should already be included.
+
 
 ## To Do
 * Complete Unit Test Coverage
 * Implement Brief Tutorial using [iPhone-IntroductionTutorial](https://github.com/MatthewYork/iPhone-IntroductionTutorial)
 * Finish "About" section in Settings
+* Add "Spanish" language support.
 * Inform user that the alarm feature is not meant to be a replacement to their alarm app but a supplement. A design decision was made to not force the user to keep the app running (i.e. similar to "do not lock the phone" type alarms).
 * Fix GIF color issue, the app is much brighter when in non-gif form.
 
