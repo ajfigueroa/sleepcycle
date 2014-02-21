@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *aboutTextView;
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *linkTitles;
 
@@ -32,7 +32,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     
+    // Get rid of empty cells.
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 #pragma mark - Builder Methods
@@ -56,6 +59,15 @@
     self.linkTitles = @[@"Follow Developer", @"SleepCycle Github Repository", @"sleepyti.me"];
 }
 
+#pragma mark - UITableViewCell customization methods
+- (void)updateCell:(UITableViewCell *)cell atIndex:(NSIndexPath *)indexPath
+{
+    cell.textLabel.text = (NSString *)self.linkTitles[indexPath.row];
+    cell.textLabel.font = [UIFont fontWithName:@"Futura" size:12.0f];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.backgroundColor = [UIColor blueColor];
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -63,6 +75,15 @@
         [self buildLinkTitles];
     
     return self.linkTitles.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AboutCell" forIndexPath:indexPath];
+    
+    [self updateCell:cell atIndex:indexPath];
+    
+    return cell;
 }
 
 @end

@@ -525,19 +525,53 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="M3e-rv-7pP">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="323"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="M3e-rv-7pP">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="305"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="KfT-YW-2Vw"/>
+                                    <constraint firstAttribute="height" constant="305" id="z6v-gB-s3q"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7ts-7q-2Xd">
+                                <rect key="frame" x="0.0" y="304" width="320" height="265"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="15z-Nl-E1U"/>
+                                    <constraint firstAttribute="height" constant="265" id="pva-U1-G7V"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AboutCell" id="Qpj-Vf-uMA">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qpj-Vf-uMA" id="cuL-9m-qsg">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="qsb-vN-qgi" id="DeR-0i-8p9"/>
+                                    <outlet property="delegate" destination="qsb-vN-qgi" id="b7Q-UZ-L3K"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="M3e-rv-7pP" secondAttribute="centerX" id="E5H-x5-mxv"/>
+                            <constraint firstAttribute="centerX" secondItem="7ts-7q-2Xd" secondAttribute="centerX" id="I6q-pY-w1S"/>
+                            <constraint firstItem="7ts-7q-2Xd" firstAttribute="top" secondItem="uy3-ST-FiY" secondAttribute="top" constant="304" id="R5Q-fB-2k8"/>
+                            <constraint firstItem="7ts-7q-2Xd" firstAttribute="top" secondItem="M3e-rv-7pP" secondAttribute="bottom" constant="-1" id="U8F-Cc-kqH"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About" id="heT-uU-oOE"/>
                     <connections>
                         <outlet property="aboutTextView" destination="M3e-rv-7pP" id="QIt-e6-BQ4"/>
+                        <outlet property="tableView" destination="7ts-7q-2Xd" id="Qpz-k8-i7Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wdw-hz-lT4" userLabel="First Responder" sceneMemberID="firstResponder"/>
