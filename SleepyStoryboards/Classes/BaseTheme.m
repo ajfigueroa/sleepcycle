@@ -334,8 +334,7 @@
 
 - (void)themeToolbar:(UIToolbar *)toolbar
 {
-    [toolbar configureFlatToolbarWithColor:self.primaryBackgroundColor];
-    toolbar.barStyle = UIBarStyleBlack;
+    toolbar.tintColor = self.primaryBackgroundColor;
 }
 
 #pragma mark - Target Action Method

@@ -210,10 +210,18 @@
     // Deselect row right away.
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    // Grab list of AttributionInfo objects
     NSString *sectionKey = (NSString *)self.sectionHeaderTitles[indexPath.section];
     NSArray *attributionInfoList = (NSArray *)self.attributionData[sectionKey];
+    
+    // Grab attribution info object from the list.
     AttributionInfo *info = (AttributionInfo *)attributionInfoList[indexPath.row];
-    NSLog(@"Clicked Attribution Info:\nTitle:%@\nLink:%@", info.title, info.url);
+    
+    // Load into the webview controller
+    self.webViewController = [[WebViewController alloc] initWithRequestURL:info.url];
+    
+    // Push onto the stack
+    [self.navigationController pushViewController:self.webViewController animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
