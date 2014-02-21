@@ -164,7 +164,7 @@
     return (NSArray *)attributionInfoList;
 }
 
-#pragma mark - UITableViewCell customization methods
+#pragma mark - UITableViewCell Customization Methods
 - (void)updateCell:(UITableViewCell *)cell atIndex:(NSIndexPath *)indexPath
 {
     NSString *sectionKey = (NSString *)self.sectionHeaderTitles[indexPath.section];

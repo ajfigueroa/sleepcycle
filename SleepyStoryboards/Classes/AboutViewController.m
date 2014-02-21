@@ -7,6 +7,15 @@
 //
 
 #import "AboutViewController.h"
+#import "WebViewController.h"
+
+typedef NS_ENUM(NSInteger, AFLinkType)
+{
+    /**
+     This enumeration represents the twitter link index in the linkURLS array.
+     */
+    AFLinkTypeTwitter
+};
 
 @interface AboutViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -15,6 +24,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *linkTitles;
+
+@property (nonatomic, strong) NSArray *linkURLS;
+
+@property (nonatomic, strong) WebViewController *webViewController;
 
 @end
 
@@ -28,6 +41,10 @@
     
     [self buildAboutText];
     [self buildLinkTitles];
+    [self buildLinkURLS];
+    
+    // Verify buildLinkTitles and buildLinkURLS produce arrays with the same size
+    assert(self.linkTitles.count == self.linkURLS.count);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -59,7 +76,14 @@
     self.linkTitles = @[@"Follow @alexjfigueroa", @"SleepCycle Github Repo", @"sleepyti.me"];
 }
 
-#pragma mark - UITableViewCell customization methods
+- (void)buildLinkURLS
+{
+    self.linkURLS = @[[NSURL URLWithString:@"twitter://user?id=alexjfigueroa"],
+                      [NSURL URLWithString:@"https://github.com/ajfigueroa/sleepcycle"],
+                      [NSURL URLWithString:@"http://sleepyti.me/"]];
+}
+
+#pragma mark - UITableViewCell Customization Methods
 - (void)updateCell:(UITableViewCell *)cell atIndex:(NSIndexPath *)indexPath
 {
     cell.textLabel.text = (NSString *)self.linkTitles[indexPath.row];
@@ -67,7 +91,7 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
-#pragma mark - UITableViewDataSource
+#pragma mark - UITableViewDataSource Method
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (!self.linkTitles)
@@ -83,6 +107,29 @@
     [self updateCell:cell atIndex:indexPath];
     
     return cell;
+}
+
+#pragma mark - UITableViewDelegate Method
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Deselect the row right away
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == AFLinkTypeTwitter)
+        [self loadTwitterLink:(NSURL *)self.linkURLS[AFLinkTypeTwitter]];
+    else
+        [self loadLink:(NSURL *)self.linkURLS[indexPath.row]];
+}
+
+#pragma mark - NSURL Handling
+- (void)loadTwitterLink:(NSURL *)twitterLink
+{
+    
+}
+
+- (void)loadLink:(NSURL *)link
+{
+    
 }
 
 @end
