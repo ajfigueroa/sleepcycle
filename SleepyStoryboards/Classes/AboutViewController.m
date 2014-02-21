@@ -124,12 +124,29 @@ typedef NS_ENUM(NSInteger, AFLinkType)
 #pragma mark - NSURL Handling
 - (void)loadTwitterLink:(NSURL *)twitterLink
 {
+    // Check if the user has the twitter app installed.
+    // Thanks to stackoverflow for this one:
+    // stackoverflow.com/questions/10424275/how-can-i-open-a-twitter-tweet-using-the-native-twitter-app-on-ios
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]])
+    {
+        [[UIApplication sharedApplication] openURL:twitterLink];
+    }
+    else
+    {
+        // Try in the webview controller.
+        [self loadLink:twitterLink];
+    }
     
 }
 
 - (void)loadLink:(NSURL *)link
 {
+    // Load into the webview controller
+    self.webViewController = [[WebViewController alloc] initWithRequestURL:link];
     
+    // Push onto the stack
+    [self.navigationController pushViewController:self.webViewController animated:YES];
 }
 
 @end
