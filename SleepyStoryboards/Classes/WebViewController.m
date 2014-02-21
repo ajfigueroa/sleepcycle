@@ -100,6 +100,16 @@
     [[self navigationController] setToolbarHidden:YES animated:NO];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    // If the view gets reverted, stop loading the web view.
+    [self.webView stopLoading];
+    // Turn off network activity indicator
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
 #pragma mark - Helper Functions
 - (void)buildBrowserButtons
 {
@@ -124,7 +134,7 @@
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    // Turn on activation bar
+    // Turn on network activity indicator
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
@@ -136,7 +146,7 @@
     // Update the toolbar buttons
     [self updateButtons];
     
-    // Turn on activation bar
+    // Turn off network activity indicator
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 
 }
