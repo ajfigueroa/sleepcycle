@@ -78,7 +78,7 @@ typedef NS_ENUM(NSInteger, AFLinkType)
 
 - (void)buildLinkURLS
 {
-    self.linkURLS = @[[NSURL URLWithString:@"twitter://user?id=alexjfigueroa"],
+    self.linkURLS = @[[NSURL URLWithString:@"twitter://user?id=50904091"],
                       [NSURL URLWithString:@"https://github.com/ajfigueroa/sleepcycle"],
                       [NSURL URLWithString:@"http://sleepyti.me/"]];
 }
@@ -116,17 +116,18 @@ typedef NS_ENUM(NSInteger, AFLinkType)
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row == AFLinkTypeTwitter)
-        [self loadTwitterLink:(NSURL *)self.linkURLS[AFLinkTypeTwitter]];
+        [self loadDeveloperTwitterLink:(NSURL *)self.linkURLS[AFLinkTypeTwitter]];
     else
         [self loadLink:(NSURL *)self.linkURLS[indexPath.row]];
 }
 
 #pragma mark - NSURL Handling
-- (void)loadTwitterLink:(NSURL *)twitterLink
+- (void)loadDeveloperTwitterLink:(NSURL *)twitterLink
 {
     // Check if the user has the twitter app installed.
     // Thanks to stackoverflow for this one:
     // stackoverflow.com/questions/10424275/how-can-i-open-a-twitter-tweet-using-the-native-twitter-app-on-ios
+    // This method is very specific to this view controller and application.
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]])
     {
@@ -135,7 +136,7 @@ typedef NS_ENUM(NSInteger, AFLinkType)
     else
     {
         // Try in the webview controller.
-        [self loadLink:twitterLink];
+        [self loadLink:[NSURL URLWithString:@"https://twitter.com/AlexJFigueroa"]];
     }
     
 }
