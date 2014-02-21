@@ -2,7 +2,7 @@ SleepCycle
 ==========
 
 Not to be confused with the popular sleep tracking application of similar name. 
-SleepCycle (stylized with no space in between) is meant as an unofficial mobile alternative to the fantastic website sleepyti.me.
+SleepCycle (stylized with no space in-between) is meant as an unofficial mobile alternative to the fantastic website sleepyti.me.
 
 I open sourced this application (which is free and was in need of a big overhaul) in hopes that it can help someone who is learning how to develop for iOS with what I found to be the hardest part, connecting the pieces and getting started. 
 
