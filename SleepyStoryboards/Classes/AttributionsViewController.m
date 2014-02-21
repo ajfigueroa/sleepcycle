@@ -149,16 +149,16 @@
     if (!titles || !urls || (titles.count != urls.count))
         return nil;
     
-    NSMutableArray *attributionInfoArray = [NSMutableArray arrayWithCapacity:titles.count];
+    NSMutableArray *attributionInfoList = [NSMutableArray arrayWithCapacity:titles.count];
     
     [titles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *title = (NSString *)obj;
         NSURL *url = (NSURL *)urls[idx];
         
-        attributionInfoArray[idx] = [[AttributionInfo alloc] initWithTitle:title url:url];
+        attributionInfoList[idx] = [[AttributionInfo alloc] initWithTitle:title url:url];
     }];
     
-    return (NSArray *)attributionInfoArray;
+    return (NSArray *)attributionInfoList;
 }
 
 #pragma mark - UITableViewCell customization methods
@@ -166,9 +166,14 @@
 {
     NSString *sectionKey = (NSString *)self.sectionHeaderTitles[indexPath.section];
     NSArray *attributionInfoList = (NSArray *)self.attributionData[sectionKey];
+    
+    // Grab AttributionInfo object from list
     AttributionInfo *info = (AttributionInfo *)attributionInfoList[indexPath.row];
+    
+    // Customize the cell
     cell.textLabel.text = info.title;
     cell.textLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont systemFontSize]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 #pragma mark - UITableViewDataSource Methods
