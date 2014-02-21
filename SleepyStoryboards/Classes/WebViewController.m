@@ -104,12 +104,12 @@
 - (void)buildBrowserButtons
 {
     // Create the forward and back buttons for the web browser
-    self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"leftbarbuttonitem"]
+    self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"leftbackbutton"]
                                                        style:UIBarButtonItemStylePlain
                                                       target:self
                                                       action:@selector(goBack)];
     
-    self.forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"rightbarbuttonitem"]
+    self.forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"rightbackbutton"]
                                                           style:UIBarButtonItemStylePlain
                                                          target:self
                                                          action:@selector(goForward)];
