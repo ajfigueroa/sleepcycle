@@ -56,16 +56,15 @@
 
 - (void)buildLinkTitles
 {
-    self.linkTitles = @[@"Follow Developer", @"SleepCycle Github Repository", @"sleepyti.me"];
+    self.linkTitles = @[@"Follow @alexjfigueroa", @"SleepCycle Github Repo", @"sleepyti.me"];
 }
 
 #pragma mark - UITableViewCell customization methods
 - (void)updateCell:(UITableViewCell *)cell atIndex:(NSIndexPath *)indexPath
 {
     cell.textLabel.text = (NSString *)self.linkTitles[indexPath.row];
-    cell.textLabel.font = [UIFont fontWithName:@"Futura" size:12.0f];
+    cell.textLabel.font = [UIFont fontWithName:@"Futura" size:14.0f];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.backgroundColor = [UIColor blueColor];
 }
 
 #pragma mark - UITableViewDataSource
