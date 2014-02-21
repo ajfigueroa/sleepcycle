@@ -29,6 +29,12 @@
  */
 + (NSDate *)todaysDateWithHour:(NSInteger)hour minute:(NSInteger)minute;
 
+/* 
+ Private method to be used for testing in place of +spansMultipleDaysForTime:
+ Ignore warning in implementation 
+ */
++ (BOOL)spansMultipleDaysForTime:(NSDate *)candidateTime relativeToTime:(NSDate *)baseTime;
+
 @end
 
 @implementation NSDate (Test)
@@ -234,39 +240,61 @@
     XCTAssertNil(testTimeStamps, @"The array returned is not nil");
 }
 
-#pragma mark - +spansMultipleDaysForTime:
-- (void)testSpansMultipleDaysForTime
+#pragma mark - +spansMultipleDaysForTime:relativeToTime:
+- (void)testSpansMultipleDaysForTimesBeforeAndIncludingRelativeTime
 {
     /*
-     There is an issue with this test case and that is, since the method depends
-     on the current time ([NSDate date]). This test will fail if adding or subtracting
-     1 minute from the current time pushes you past the date lines (i.e. 
-     If it's currently 11:59 pm or 12:00 am).
-     
-     Nonetheless, the method should return YES or NO depending on whether the time is
+     Verify that when comparing hours and minutes (seconds are assumed to be zero and thus
+     irrelevant in the comparison) that all times before and including a relativeTime return NO.
      */
-    NSDate *beforeMidnight = [NSDate todaysDateWithHour:23 minute:59];
-    NSDate *afterMidnight = [NSDate todaysDateWithHour:0 minute:0];
     
-    NSDate *currentTime = [NSDate date];
+    // Relative time is noon.
+    NSDate *relativeTime = [NSDate noonDate];
     
-    // If the time is 11:59pm or 12:00am, fail the test and explain
-    if ([currentTime compareTimes:beforeMidnight] == NSOrderedSame ||
-        [currentTime compareTimes:afterMidnight] == NSOrderedSame) {
-        XCTAssertNotNil(nil, @"This time scenario makes the test fail. Read test information, I'm working on fix");
+    // Generate times before noon up and including 12 pm
+    NSInteger hoursBeforeAndIncludingNoon = 13;
+    NSMutableArray *timesBeforeNoon = [NSMutableArray arrayWithCapacity:hoursBeforeAndIncludingNoon];
+    
+    for (int i = 0; i < hoursBeforeAndIncludingNoon; i++) {
+        timesBeforeNoon[i] = [NSDate todaysDateWithHour:i minute:0];
     }
     
-    NSArray *testTimeIntervals = @[@(-60), @(0), @(60)];
-    NSArray *expectedBools = @[@(NO), @(NO), @(YES)];
+    // Assert array is not nil.
+    assert(timesBeforeNoon);
     
-    [testTimeIntervals enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSInteger interval = [(NSNumber *)obj integerValue];
-        NSDate *testTime = [[NSDate date] dateByAddingTimeInterval:interval];
-        BOOL spans = [NSDate spansMultipleDaysForTime:testTime];
-        
-        XCTAssertEqual([expectedBools[idx] boolValue], spans,
-                       @"The spans value does not equal the expected boolean value");
+    [timesBeforeNoon enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDate *testTime = (NSDate *)obj;
+        XCTAssertEqual(NO, [NSDate spansMultipleDaysForTime:testTime relativeToTime:relativeTime],
+                       @"Comparison does not equal the expected boolean NO.");
     }];
+}
+
+- (void)testSpansMultipleDaysForTimesAfterRelativeTime
+{
+    /*
+     Verify that when comparing hours and minutes (seconds are assumed to be zero and thus
+     irrelevant in the comparison) that all times after relativeTime return YES.
+     */
+
+    // Relative time is noon.
+    NSDate *relativeTime = [NSDate noonDate];
+
+    // Generate times after noon until 11 pm
+    NSInteger hoursAfterNoon = 11;
+    NSMutableArray *timesAfterNoon = [NSMutableArray arrayWithCapacity:hoursAfterNoon];
+    
+    for (int i = 0; i < hoursAfterNoon; i++) {
+        timesAfterNoon[i] = [NSDate todaysDateWithHour:(13 + i) minute:0];
+    }
+    
+    assert(timesAfterNoon);
+    
+    [timesAfterNoon enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDate *testTime = (NSDate *)obj;
+        XCTAssertEqual(YES, [NSDate spansMultipleDaysForTime:testTime relativeToTime:relativeTime],
+                       @"Comparison does not equal the expected boolean YES.");
+    }];
+    
 }
 
 - (void)testSpansMultipleDaysForNilInputTime

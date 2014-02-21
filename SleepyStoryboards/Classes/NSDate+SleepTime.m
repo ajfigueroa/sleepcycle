@@ -12,8 +12,21 @@
 
 + (BOOL)spansMultipleDaysForTime:(NSDate *)candidateTime
 {
-    NSDate *currentDate = [NSDate date];
-    NSComparisonResult timeCompare = [candidateTime compareTimes:currentDate];
+    return [NSDate spansMultipleDaysForTime:candidateTime relativeToTime:[NSDate date]];
+}
+
+/**
+ @brief A helper method for +spansMultipleDaysForTime: useful for testing. Returns YES
+ if the candidateTime is greater than the baseTime and returns NO if the candidateTime
+ is less than or equal to the baseTime.
+ @param candidateTime The NSDate object whose time will be checked to determine if the date is valid for today and tomorrow or tomorrow only, relative to baseTime.
+ @param baseTime The time that candidateTime will be compared to.
+ @returns Returns YES if candidateTime is greater than baseTime. Returns NO if candidateTime
+ is less than or equal to baseTime.
+ */
++ (BOOL)spansMultipleDaysForTime:(NSDate *)candidateTime relativeToTime:(NSDate *)baseTime
+{
+    NSComparisonResult timeCompare = [candidateTime compareTimes:baseTime];
     
     switch (timeCompare) {
         case NSOrderedAscending:
