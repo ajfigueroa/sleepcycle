@@ -50,54 +50,6 @@
     
     // Create an array of AttributionInfo objects with the header titles as dictionary
     // keys for attributionData dictionary.
-    NSMutableDictionary *attributionDataMutable = [NSMutableDictionary dictionary];
-    
-    // Generate corresponding title and link data
-    NSArray *libraryRowTitles = @[@"FlatUIKit",
-                                  @"IBActionSheet",
-                                  @"SVProgressHUD",
-                                  @"JSSlidingViewController",
-                                  @"BOZPongRefreshControl",
-                                  @"Colors-for-iOS"];
-    
-    NSArray *libraryRowURLS = @[[NSURL URLWithString:@"https://github.com/grouper/flatuikit"],
-                                [NSURL URLWithString:@"https://github.com/ianb821/IBActionSheet"],
-                                [NSURL URLWithString:@"https://github.com/samvermette/SVProgressHUD"],
-                                [NSURL URLWithString:@"https://github.com/jaredsinclair/JSSlidingViewController"],
-                                [NSURL URLWithString:@"https://github.com/boztalay/BOZPongRefreshControl"],
-                                [NSURL URLWithString:@"https://github.com/bennyguitar/Colours"]];
-    
-    NSArray *iconRowTitles = @[@"Iconic",
-                               @"Ionicons"];
-    
-    NSArray *iconRowURLS = @[[NSURL URLWithString:@"http://somerandomdude.com/work/iconic/"],
-                             [NSURL URLWithString:@"http://ionicons.com/"]];
-    
-    NSArray *soundRowTitles = @[@"Joe DeShon"];
-    
-    NSArray *soundRowURLS = @[[NSURL URLWithString:@"http://www.freesound.org/people/joedeshon/"]];
-    
-    NSArray *licensesRowTitles = @[@"Creative Commons License",
-                                   @"MIT License"];
-    
-    NSArray *licenseRowURLS = @[[NSURL URLWithString:@"http://creativecommons.org/licenses/by/3.0/"],
-                                [NSURL URLWithString:@"http://opensource.org/licenses/MIT"]];
-    
-    // Create the lists for each of the above Titles and URL pairs
-    NSArray *allRowTitles = @[libraryRowTitles, iconRowTitles, soundRowTitles, licensesRowTitles];
-    NSArray *allRowURLS = @[libraryRowURLS, iconRowURLS, soundRowURLS, licenseRowURLS];
-    
-    // Verify counts are equal.
-    assert(allRowTitles.count == allRowURLS.count);
-    
-    // Create the dictionary data source
-    __weak AttributionsViewController *weakSelf = self;
-    [weakSelf.sectionHeaderTitles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *headerTitle = (NSString *)obj;
-        attributionDataMutable[headerTitle] = [weakSelf attributionInfoFromTitles:allRowTitles[idx]
-                                                                          andURLS:allRowURLS[idx]];
-    }];
-    
     self.attributionData = (NSDictionary *)attributionDataMutable;
 }
 

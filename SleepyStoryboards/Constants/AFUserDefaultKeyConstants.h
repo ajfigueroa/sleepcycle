@@ -18,4 +18,6 @@ static NSString *const AFShowDatePickerBorder = @"ShowBorder";
 
 static NSString *const AFTimeToFallAsleepInMinutes = @"TimeToFallAsleepInMinutes";
 
+static NSString *const AFAttributionsDictionary = @"AttributionsDictionary";
+
 #endif
