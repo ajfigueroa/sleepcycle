@@ -14,7 +14,6 @@ I open sourced this application (which is free and was in need of a big overhaul
 ## To Do
 * Complete Unit Test Coverage
 * Implement Brief Tutorial using [iPhone-IntroductionTutorial](https://github.com/MatthewYork/iPhone-IntroductionTutorial)
-* Finish "About" section in Settings
 * Add "Spanish" language support.
 * Inform user that the alarm feature is not meant to be a replacement to their alarm app but a supplement. A design decision was made to not force the user to keep the app running (i.e. similar to "do not lock the phone" type alarms).
 * Fix GIF color issue, the app is much brighter when in non-gif form.
@@ -86,7 +85,7 @@ As mentioned before, the time to fall asleep (minutes) property can be adjusted.
 ![Adjusting time to fall asleep (in minutes)](README%20Images/adjustminutestofallasleep.gif)
 ----------------------------------------------------
 
-Users can provide feedback through the Feedback option, which presents an MFMailComposerViewController.
+Users can provide feedback through the Feedback option, which presents an MFMailComposeViewController.
 
 ![Feedback](README%20Images/feedback.gif)
 ----------------------------------------------------
