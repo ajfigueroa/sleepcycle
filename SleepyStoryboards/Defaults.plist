@@ -8,6 +8,67 @@
 	<false/>
 	<key>ShowEasterEgg</key>
 	<true/>
+	<key>AttributionsDictionary</key>
+	<dict>
+		<key>Icon and Sounds Licenses</key>
+		<array>
+			<array>
+				<string>MIT License</string>
+				<string>http://opensource.org/licenses/MIT</string>
+			</array>
+			<array>
+				<string>Creative Commons License</string>
+				<string>http://creativecommons.org/licenses/by/3.0/</string>
+			</array>
+		</array>
+		<key>Sounds</key>
+		<array>
+			<array>
+				<string>Joe DeShon</string>
+				<string>http://www.freesound.org/people/joedeshon/</string>
+			</array>
+		</array>
+		<key>Icons</key>
+		<array>
+			<array>
+				<array>
+					<string>Iconic</string>
+					<string>http://somerandomdude.com/work/iconic/</string>
+				</array>
+				<array>
+					<string>Ionicons</string>
+					<string>http://ionicons.com/</string>
+				</array>
+			</array>
+		</array>
+		<key>Libraries</key>
+		<array>
+			<array>
+				<string>FlatUIKit</string>
+				<string>https://github.com/grouper/flatuikit</string>
+			</array>
+			<array>
+				<string>IBActionSheet</string>
+				<string>https://github.com/ianb821/IBActionSheet</string>
+			</array>
+			<array>
+				<string>SVProgressHUD</string>
+				<string>https://github.com/samvermette/SVProgressHUD</string>
+			</array>
+			<array>
+				<string>JSSlidingViewController</string>
+				<string>https://github.com/jaredsinclair/JSSlidingViewController</string>
+			</array>
+			<array>
+				<string>BOZPongRefreshControl</string>
+				<string>https://github.com/boztalay/BOZPongRefreshControl</string>
+			</array>
+			<array>
+				<string>Colors-for-iOS</string>
+				<string>https://github.com/bennyguitar/Colours</string>
+			</array>
+		</array>
+	</dict>
 	<key>AppTheme</key>
 	<integer>0</integer>
 </dict>
