@@ -76,6 +76,9 @@
     // Create the bar button items
     [self buildBrowserButtons];
     
+    // Initially disable the bar button items
+    [self disableButtons];
+    
     // Create a fixed space to be used between buttons and before
     UIBarButtonItem *interButtonSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     interButtonSpace.width = 20.0;
@@ -129,6 +132,12 @@
 {
     self.backButton.enabled = self.webView.canGoBack;
     self.forwardButton.enabled = self.webView.canGoForward;
+}
+
+- (void)disableButtons
+{
+    self.backButton.enabled = NO;
+    self.forwardButton.enabled = NO;
 }
 
 #pragma mark - UIWebViewDelegate

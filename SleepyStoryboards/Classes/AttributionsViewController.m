@@ -80,7 +80,7 @@
     // Grabs an array of title and url pairs as strings.
     // Look into Defaults.plist for further clarification
     NSArray *attributionInfoList = (NSArray *)self.attributionData[sectionKey];
-    NSLog(@"%@", attributionInfoList);
+    
     return attributionInfoList.count;
 }
 
