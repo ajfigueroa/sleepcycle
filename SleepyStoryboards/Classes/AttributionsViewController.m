@@ -34,21 +34,6 @@
     [self buildAttributionData];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // Gets rid of trailing empty cells.
-    self.attributionTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self.attributionTableView reloadData];
-}
-
 #pragma mark - Builder Functions
 - (void)buildSectionHeaderTitles
 {
