@@ -8,36 +8,7 @@
 
 #import "AttributionsViewController.h"
 #import "WebViewController.h"
-
-#pragma mark - AttributionInfo
-/*
- Object to hold our attribution titles and links
- */
-@interface AttributionInfo : NSObject
-
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSURL *url;
-
-- (instancetype)initWithTitle:(NSString *)title url:(NSURL *)url;
-
-@end
-
-@implementation AttributionInfo
-
-- (instancetype)initWithTitle:(NSString *)title url:(NSURL *)url
-{
-    self = [super init];
-    
-    if (self)
-    {
-        self.title = title;
-        self.url = url;
-    }
-
-    return self;
-}
-
-@end
+#import "AttributionInfo.h"
 
 #pragma mark - AttributionsViewController
 @interface AttributionsViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -69,6 +40,13 @@
     
     // Gets rid of trailing empty cells.
     self.attributionTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.attributionTableView reloadData];
 }
 
 #pragma mark - Builder Functions
@@ -225,11 +203,6 @@
     
     // Push onto the stack
     [self.navigationController pushViewController:self.webViewController animated:YES];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 44.0f;
 }
 
 @end
