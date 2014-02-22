@@ -8,7 +8,7 @@
 
 #import "AttributionsViewController.h"
 #import "WebViewController.h"
-#import "AttributionInfo.h"
+#import "AFUserDefaultKeyConstants.h"
 
 #pragma mark - AttributionsViewController
 @interface AttributionsViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -37,6 +37,7 @@
 #pragma mark - Builder Functions
 - (void)buildSectionHeaderTitles
 {
+    // These are the keys for the attributionData dictionary
     self.sectionHeaderTitles = @[@"Libraries",
                                  @"Icons",
                                  @"Sounds",
@@ -48,48 +49,24 @@
     if (!self.sectionHeaderTitles)
         [self buildSectionHeaderTitles];
     
-    // Create an array of AttributionInfo objects with the header titles as dictionary
-    // keys for attributionData dictionary.
-    self.attributionData = (NSDictionary *)attributionDataMutable;
-}
-
-/**
- @brief From two lists of titles and urls return a list of AttributionInfo objects.
- @param titles A list of NSString titles.
- @param urls A list of links that correspond to each of the NSStrings in titles.
- @returns An immutable array of AttributionInfo objects. Returns nil if arrays aren't the same size or if either are 
- nil.
- @sa AttributionInfo defined in AttributionsViewController
- */
-- (NSArray *)attributionInfoFromTitles:(NSArray *)titles andURLS:(NSArray *)urls
-{
-    // Compare size of arrays and check for nil
-    if (!titles || !urls || (titles.count != urls.count))
-        return nil;
-    
-    NSMutableArray *attributionInfoList = [NSMutableArray arrayWithCapacity:titles.count];
-    
-    [titles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *title = (NSString *)obj;
-        NSURL *url = (NSURL *)urls[idx];
-        
-        attributionInfoList[idx] = [[AttributionInfo alloc] initWithTitle:title url:url];
-    }];
-    
-    return (NSArray *)attributionInfoList;
+    // Grab attribution date from user defaults.
+    self.attributionData = (NSDictionary *)[[NSUserDefaults standardUserDefaults] dictionaryForKey:AFAttributionsDictionary];
 }
 
 #pragma mark - UITableViewCell Customization Methods
 - (void)updateCell:(UITableViewCell *)cell atIndex:(NSIndexPath *)indexPath
 {
     NSString *sectionKey = (NSString *)self.sectionHeaderTitles[indexPath.section];
+    
+    // Grabs an array of title and url pairs (as strings).
+    // Look into Defaults.plist for further clarification
     NSArray *attributionInfoList = (NSArray *)self.attributionData[sectionKey];
-    
-    // Grab AttributionInfo object from list
-    AttributionInfo *info = (AttributionInfo *)attributionInfoList[indexPath.row];
-    
+
+    // Grab title and url pair
+    NSArray *attributionInfo = attributionInfoList[indexPath.row];
+
     // Customize the cell
-    cell.textLabel.text = info.title;
+    cell.textLabel.text = (NSString *)attributionInfo.firstObject;
     cell.textLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont systemFontSize]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
@@ -98,8 +75,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return count of array in dictionary for key at index section in sectionHeaderTitles
-    NSArray *rowData = (NSArray *)[self.attributionData objectForKey:(NSString *)self.sectionHeaderTitles[section]];
-    return rowData.count;
+    NSString *sectionKey = (NSString *)self.sectionHeaderTitles[section];
+    
+    // Grabs an array of title and url pairs as strings.
+    // Look into Defaults.plist for further clarification
+    NSArray *attributionInfoList = (NSArray *)self.attributionData[sectionKey];
+    NSLog(@"%@", attributionInfoList);
+    return attributionInfoList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -128,15 +110,18 @@
     // Deselect row right away.
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    // Grab list of AttributionInfo objects
+    // Grab list of link url pairs (as strings).
     NSString *sectionKey = (NSString *)self.sectionHeaderTitles[indexPath.section];
     NSArray *attributionInfoList = (NSArray *)self.attributionData[sectionKey];
     
-    // Grab attribution info object from the list.
-    AttributionInfo *info = (AttributionInfo *)attributionInfoList[indexPath.row];
+    // Grab title and url pair.
+    NSArray *attributionInfo = attributionInfoList[indexPath.row];
+    
+    // Create url from url string.
+    NSURL *url = [NSURL URLWithString:(NSString *)attributionInfo.lastObject];
     
     // Load into the webview controller
-    self.webViewController = [[WebViewController alloc] initWithRequestURL:info.url];
+    self.webViewController = [[WebViewController alloc] initWithRequestURL:url];
     
     // Push onto the stack
     [self.navigationController pushViewController:self.webViewController animated:YES];

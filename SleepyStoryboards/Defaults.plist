@@ -31,14 +31,12 @@
 		<key>Icons</key>
 		<array>
 			<array>
-				<array>
-					<string>Iconic</string>
-					<string>http://somerandomdude.com/work/iconic/</string>
-				</array>
-				<array>
-					<string>Ionicons</string>
-					<string>http://ionicons.com/</string>
-				</array>
+				<string>Iconic</string>
+				<string>http://somerandomdude.com/work/iconic/</string>
+			</array>
+			<array>
+				<string>Ionicons</string>
+				<string>http://ionicons.com/</string>
 			</array>
 		</array>
 		<key>Libraries</key>
