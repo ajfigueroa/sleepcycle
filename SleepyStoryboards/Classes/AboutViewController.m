@@ -53,6 +53,8 @@ typedef NS_ENUM(NSInteger, AFLinkType)
     
     // Get rid of empty cells.
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    // Disable scroll
+    self.tableView.scrollEnabled = NO;
 }
 
 #pragma mark - Builder Methods
