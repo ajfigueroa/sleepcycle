@@ -10,7 +10,6 @@ I open sourced this application (which is free and was in need of a big overhaul
 * Xcode 5, targeting either iOS 7.0 and above
 * Dependencies should already be included.
 
-
 ## To Do
 * Complete Unit Test Coverage
 * Implement Brief Tutorial using [iPhone-IntroductionTutorial](https://github.com/MatthewYork/iPhone-IntroductionTutorial)
