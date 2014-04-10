@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) UIBarButtonItem *forwardButton;
 
+@property (nonatomic, strong) UIBarButtonItem *refreshButton;
+
 @end
 
 @implementation WebViewController
@@ -86,11 +88,15 @@
     UIBarButtonItem *horizontalPaddingSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     horizontalPaddingSpace.width = 8.0;
     
+    UIBarButtonItem *horizontalFlexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
     // Add these to the toolbar that is now visible
     [self setToolbarItems:@[horizontalPaddingSpace,
                             self.backButton,
                             interButtonSpace,
-                            self.forwardButton]];
+                            self.forwardButton,
+                            horizontalFlexSpace,
+                            self.refreshButton]];
     
     // Theme the tool bar
     id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
@@ -126,6 +132,10 @@
                                                           style:UIBarButtonItemStylePlain
                                                          target:self
                                                          action:@selector(goForward)];
+    
+    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                       target:self
+                                                                       action:@selector(refreshPage)];
 }
 
 - (void)updateButtons
@@ -138,6 +148,11 @@
 {
     self.backButton.enabled = NO;
     self.forwardButton.enabled = NO;
+}
+
+- (void)refreshPage
+{
+    [self.webView reload];
 }
 
 #pragma mark - UIWebViewDelegate
