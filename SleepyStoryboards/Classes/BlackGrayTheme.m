@@ -10,6 +10,7 @@
 #import "UIColor+Colours.h"
 #import "AlarmCell.h"
 #import "IBActionSheet.h"
+#import "FUIAlertView.h"
 
 @implementation BlackGrayTheme
 
@@ -76,5 +77,13 @@
     
 }
 
+- (void)themeAlertView:(FUIAlertView *)alertView
+{
+    [super themeAlertView:alertView];
+    
+    alertView.titleLabel.textColor = self.primaryTextColor;
+    alertView.messageLabel.textColor = self.primaryTextColor;
+    alertView.defaultButtonTitleColor = self.primaryTextColor;
+}
 
 @end
