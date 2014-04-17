@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
 
 @property (weak, nonatomic) IBOutlet UISwitch *showPingPongSwitch;
 
-@property (weak, nonatomic) IBOutlet UISwitch *showTutorialSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *showStartInfoSwitch;
 
 /**
  @brief The corresponding target for the left bar button "Done" that notifies the delegate to
@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
     [themeSetter themeNavigationBar:self.navigationController.navigationBar];
     [themeSetter themeSwitch:self.showBorderSwitch];
     [themeSetter themeSwitch:self.showPingPongSwitch];
-    [themeSetter themeSwitch:self.showTutorialSwitch];
+    [themeSetter themeSwitch:self.showStartInfoSwitch];
     [themeSetter themeSlider:self.minutesSlider];
     
 }
@@ -145,9 +145,9 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
 - (void)updateMinutesLabel:(NSInteger)minutes
 {
     if (minutes <= 1)
-        self.minutesLabel.text = [NSString stringWithFormat:@"%ld min", (long)minutes];
+        self.minutesLabel.text = [NSString stringWithFormat:@"%ld minute", (long)minutes];
     else
-        self.minutesLabel.text = [NSString stringWithFormat:@"%ld mins", (long)minutes];
+        self.minutesLabel.text = [NSString stringWithFormat:@"%ld minutes", (long)minutes];
 }
 
 - (void)updateAllSettings
