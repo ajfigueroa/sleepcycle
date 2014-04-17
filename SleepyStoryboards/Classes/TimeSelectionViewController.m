@@ -86,7 +86,7 @@
 {
     [super viewDidAppear:YES];
     
-    [self showLaunchInfoAlertView];
+    [self prepareLaunchInfoAlertView];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -210,6 +210,15 @@
         default:
             break;
     }
+}
+
+- (void)prepareLaunchInfoAlertView
+{
+    // Check the settings if we can show the launch view
+    BOOL showInfoAlertView = YES;
+    
+    if (showInfoAlertView)
+        [self showLaunchInfoAlertView];
 }
 
 - (void)showLaunchInfoAlertView
