@@ -16,6 +16,7 @@
 #import "IBActionSheet.h"
 #import "UIToolbar+FlatUI.h"
 #import "AFNotificationConstants.h"
+#import "FUIAlertView.h"
 
 @interface BaseTheme ()
 
@@ -335,6 +336,24 @@
 - (void)themeToolbar:(UIToolbar *)toolbar
 {
     toolbar.tintColor = self.primaryBackgroundColor;
+}
+
+- (void)themeAlertView:(FUIAlertView *)alertView
+{
+    alertView.backgroundColor = [UIColor clearColor];
+    alertView.backgroundOverlay.backgroundColor = [UIColor clearColor];
+    alertView.alertContainer.backgroundColor = self.secondaryBackgroundColor;
+
+    alertView.titleLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
+    alertView.titleLabel.textColor = self.secondaryTextColor;
+    
+    alertView.messageLabel.font = [UIFont fontWithName:@"Futura" size:[UIFont labelFontSize]];
+    alertView.messageLabel.textColor = self.secondaryTextColor;
+    
+    alertView.defaultButtonColor = self.primaryBackgroundColor;
+    alertView.defaultButtonShadowColor = self.secondaryBackgroundColor;
+    alertView.defaultButtonFont = [UIFont fontWithName:@"Futura" size:[UIFont buttonFontSize]];
+    alertView.defaultButtonTitleColor = self.primaryTextColor;
 }
 
 #pragma mark - Target Action Method

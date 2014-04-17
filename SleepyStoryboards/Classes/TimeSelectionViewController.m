@@ -16,6 +16,7 @@
 #import "SliderMenuApplicationDelegate.h"
 #import "AFNotificationConstants.h"
 #import "AFSegueIdentifierConstants.h"
+#import "FUIAlertView.h"
 
 @interface TimeSelectionViewController ()
 
@@ -81,24 +82,11 @@
     
 }
 
-- (void)updateViewWithSelectedUserMode:(AFSelectedUserMode)selectedUserMode
+- (void)viewDidAppear:(BOOL)animated
 {
-    // Modify the information label based on state and hide the sleep now button if
-    // in AFSelectedUserModeCalculateBedTime mode
-    switch (selectedUserMode) {
-        case AFSelectedUserModeCalculateWakeTime:
-            self.informationLabel.text = NSLocalizedString(@"I plan to sleep at", nil);
-            self.sleepNowButton.hidden = NO;
-            break;
-            
-        case AFSelectedUserModeCalculateBedTime:
-            self.informationLabel.text = NSLocalizedString(@"I would like to wake up at", nil);
-            self.sleepNowButton.hidden = YES;
-            break;
-            
-        default:
-            break;
-    }
+    [super viewDidAppear:YES];
+    
+    [self showLaunchInfoAlertView];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -165,7 +153,6 @@
     }
 }
 
-
 #pragma mark - Sliding View Management
 - (IBAction)toggleSlider:(id)sender
 {
@@ -202,6 +189,57 @@
 - (void)settingsViewControllerDidFinish:(SettingsViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Helpers
+- (void)updateViewWithSelectedUserMode:(AFSelectedUserMode)selectedUserMode
+{
+    // Modify the information label based on state and hide the sleep now button if
+    // in AFSelectedUserModeCalculateBedTime mode
+    switch (selectedUserMode) {
+        case AFSelectedUserModeCalculateWakeTime:
+            self.informationLabel.text = NSLocalizedString(@"I plan to sleep at", nil);
+            self.sleepNowButton.hidden = NO;
+            break;
+            
+        case AFSelectedUserModeCalculateBedTime:
+            self.informationLabel.text = NSLocalizedString(@"I would like to wake up at", nil);
+            self.sleepNowButton.hidden = YES;
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)showLaunchInfoAlertView
+{
+    // The message to display to the user.
+    NSString *text = @"The in-app alarm is meant to act as a supplement to the "
+                     @"stock Alarm app and not as a replacement.\n\n"
+                     @"The Sleep Now button takes into account the time it takes to fall asleep. You can change "
+                     @"this in the Settings to the left.\n\n"
+                     @"Enjoy :)";
+    
+    // Building the alertview
+    FUIAlertView *launchInfoAlertView = (FUIAlertView *)[self buildAlertView:NSLocalizedString(text, nil)];
+    
+    // Grab the themeSetter object
+    id <Theme> themeSetter = [[ThemeFactory sharedThemeFactory] buildThemeForSettingsKey];
+    [themeSetter themeAlertView:launchInfoAlertView];
+    
+    // Show the alert view.
+    [launchInfoAlertView show];
+}
+
+- (FUIAlertView *)buildAlertView:(NSString *)alertMessage
+{
+    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome!", nil)
+                                                          message:alertMessage
+                                                         delegate:nil
+                                                cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                                otherButtonTitles:nil];
+    return alertView;
 }
 
 #pragma mark - End of Life
