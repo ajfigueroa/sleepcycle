@@ -43,6 +43,11 @@
 @property (nonatomic, assign) NSString *appThemeName;
 
 /**
+ @brief The bool that controls whether the information alert view will be displayed at launch
+ */
+@property (nonatomic, assign) BOOL showInfoAtLaunch;
+
+/**
  @brief Returns the shared Settings API object.
  @returns The shared SettingsAPI object to manage Persistency and Theme formatting.
  */
