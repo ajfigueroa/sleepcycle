@@ -46,7 +46,7 @@
 - (void)setReminderForReminderTime
 {
     EKReminder *reminder = [EKReminder reminderWithEventStore:self.eventStore];
-    reminder.title = NSLocalizedString(@"You should be in bed now", nil);
+    reminder.title = NSLocalizedString(@"You should be in bed now!", nil);
     reminder.timeZone = [NSTimeZone localTimeZone];
     
     // Lazy initialize the reminderNote if not already set
