@@ -10,6 +10,7 @@
 #import "TimeSelectionViewController.h"
 #import "JSSlidingViewController.h"
 #import "MenuViewController.h"
+#import "SettingsAPI.h"
 
 @interface AppDelegate ()
 
@@ -38,6 +39,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // Set appJustLaunch value to YES
+    [[SettingsAPI sharedSettingsAPI] setAppJustLaunched:YES];
+    
     // Override point for customization after application launch.
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
 
