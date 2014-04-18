@@ -215,10 +215,16 @@
 - (void)prepareLaunchInfoAlertView
 {
     // Check the settings if we can show the launch view
-    BOOL showInfoAlertView = YES;
+    // It's the result of the AND of appJustLaunched and showInfoAlertView
+    BOOL showInfoAlertView = [[SettingsAPI sharedSettingsAPI] showInfoAtLaunch];
+    BOOL appJustLaunched = [[SettingsAPI sharedSettingsAPI] appJustLaunched];
+    BOOL showAlertView = showInfoAlertView && appJustLaunched;
     
-    if (showInfoAlertView)
+    if (showAlertView)
         [self showLaunchInfoAlertView];
+    
+    // Set the appJustLaunched to NO now.
+    [[SettingsAPI sharedSettingsAPI] setAppJustLaunched:NO];
 }
 
 - (void)showLaunchInfoAlertView
