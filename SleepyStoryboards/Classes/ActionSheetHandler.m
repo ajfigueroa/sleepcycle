@@ -72,7 +72,7 @@
  @sa SchedulerAPI.h
  @param index The AFActionSheetReminder constant that indicates which time to use off the Action Sheet
  */
-- (void)performReminderActionForIndex:(AFActionSheetReminder)index
+- (void)performReminderActionForIndex:(ac)index
 {
     // First zero seconds
     NSDate *reminderTargetTime = (NSDate *)self.datePairs[index];

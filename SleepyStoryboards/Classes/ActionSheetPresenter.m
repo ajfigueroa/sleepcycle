@@ -26,6 +26,11 @@
  */
 @property (nonatomic, strong) NSArray *reminderTimesPair;
 
+/**
+ @brief The count of times (both alarms or reminders) presented to the user.
+ */
+@property (nonatomic, assign) NSInteger presentedTimes;
+
 @end
 
 @implementation ActionSheetPresenter
@@ -107,12 +112,14 @@
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
                                          otherButtonTitles:tomorrowButtonTitle, todayButtonTitle, nil];
+        self.presentedTimes = 2;
     } else {
         actionSheet = [[IBActionSheet alloc] initWithTitle:title
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
                                          otherButtonTitles:tomorrowButtonTitle, nil];
+        self.presentedTimes = 1;
     }
     
     // Theme actionSheet
@@ -165,12 +172,14 @@
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
                                          otherButtonTitles:todayButtonTitle, tomorrowButtonTitle, nil];
+        self.presentedTimes = 2;
     } else {
         actionSheet = [[IBActionSheet alloc] initWithTitle:title
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
                                          otherButtonTitles:tomorrowButtonTitle, nil];
+        self.presentedTimes = 1;
     }
     
     // Theme actionSheet
@@ -192,7 +201,8 @@
                            clickedButtonAtIndex:buttonIndex
                                  forActionSheet:actionSheet
                                         andInfo:@{@"Tomorrow": (NSDate *)self.alarmTimesPair.firstObject,
-                                                  @"Today": (NSDate *)self.alarmTimesPair.lastObject}];
+                                                  @"Today": (NSDate *)self.alarmTimesPair.lastObject,
+                                                  @"Presented Times": [NSNumber numberWithInteger:self.presentedTimes]}];
             break;
             
         case AFActionSheetTagReminder:
@@ -200,7 +210,8 @@
                            clickedButtonAtIndex:buttonIndex
                                  forActionSheet:actionSheet
                                         andInfo:@{@"Today": (NSDate *)self.reminderTimesPair.firstObject,
-                                                  @"Tomorrow": (NSDate *)self.reminderTimesPair.lastObject}];
+                                                  @"Tomorrow": (NSDate *)self.reminderTimesPair.lastObject,
+                                                  @"Presented Times": [NSNumber numberWithInteger:self.presentedTimes]}];
             break;
             
         default:
