@@ -95,6 +95,26 @@
     self.persistencyManager.showEasterEgg = showEasterEgg;
 }
 
+- (BOOL)showInfoAtLaunch
+{
+    return self.persistencyManager.showInfoAtLaunch;
+}
+
+- (void)setShowInfoAtLaunch:(BOOL)showInfoAtLaunch
+{
+    self.persistencyManager.showInfoAtLaunch = showInfoAtLaunch;
+}
+
+- (BOOL)appJustLaunched
+{
+    return self.persistencyManager.showInfoAtLaunch;
+}
+
+- (void)setAppJustLaunched:(BOOL)appJustLaunched
+{
+    self.persistencyManager.appJustLaunched = appJustLaunched;
+}
+
 #pragma mark - Persistency Methods
 - (void)saveAllSettings
 {

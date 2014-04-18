@@ -36,6 +36,8 @@
     _appTheme = [self readIntegerValueForKey:AFAppTheme];
     _showEasterEgg = [self readBoolValueForKey:AFShowEasterEgg];
     _showBorder = [self readBoolValueForKey:AFShowDatePickerBorder];
+    _showInfoAtLaunch = [self readBoolValueForKey:AFShowInfoAtLaunch];
+    _appJustLaunched = [self readBoolValueForKey:AFAppJustLaunched];
 }
 
 - (void)commitAllSettings
@@ -45,6 +47,8 @@
     [self writeIntegerToDefaultsValue:_appTheme forKey:AFAppTheme];
     [self writeBoolToDefaultsValue:_showBorder forKey:AFShowDatePickerBorder];
     [self writeBoolToDefaultsValue:_showEasterEgg forKey:AFShowEasterEgg];
+    [self writeBoolToDefaultsValue:_showInfoAtLaunch forKey:AFShowInfoAtLaunch];
+    [self writeBoolToDefaultsValue:_appJustLaunched forKey:AFAppJustLaunched];
 }
 
 #pragma mark - NSUserDefaults Helpers

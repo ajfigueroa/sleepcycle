@@ -38,14 +38,22 @@
 @property (nonatomic, assign) BOOL showEasterEgg;
 
 /**
+ @brief The bool that controls whether the information alert view will be displayed at launch
+ @note This is part of the SettingsAPI interface.
+ */
+@property (nonatomic, assign) BOOL showInfoAtLaunch;
+
+/**
+ @brief The bool that determines if the app has just launched and displayed its first view controller.
+ @note This is part of the SettingsAPI interface.
+ */
+@property (nonatomic, assign) BOOL appJustLaunched;
+
+
+/**
  @brief The NSString representation of the appTheme's name. This is used for formatting to the views.
  */
 @property (nonatomic, assign) NSString *appThemeName;
-
-/**
- @brief The bool that controls whether the information alert view will be displayed at launch
- */
-@property (nonatomic, assign) BOOL showInfoAtLaunch;
 
 /**
  @brief Returns the shared Settings API object.
