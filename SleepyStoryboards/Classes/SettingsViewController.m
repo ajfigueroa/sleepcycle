@@ -9,9 +9,9 @@
 #import "SettingsViewController.h"
 #import "SettingsAPI.h"
 #import "ThemeFactory.h"
-#import <MessageUI/MFMailComposeViewController.h>
 #import "AFNotificationConstants.h"
 #import "AFSegueIdentifierConstants.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
 typedef NS_ENUM(NSInteger, AFSettingsHeader)
 {
@@ -85,6 +85,7 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
     // Commit current state of toggle buttons
     [[SettingsAPI sharedSettingsAPI] setShowBorder:self.showBorderSwitch.on];
     [[SettingsAPI sharedSettingsAPI] setShowEasterEgg:self.showPingPongSwitch.on];
+    [[SettingsAPI sharedSettingsAPI] setShowInfoAtLaunch:self.showStartInfoSwitch.on];
     [[SettingsAPI sharedSettingsAPI] saveAllSettings];
 }
 
@@ -117,7 +118,6 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
     self.themeSelectionLabel.text = [[SettingsAPI sharedSettingsAPI] appThemeName];
 }
 
-
 - (void)updateShowPingPongEasterEggSetting
 {
     self.showPingPongSwitch.on = [[SettingsAPI sharedSettingsAPI] showEasterEgg];
@@ -126,6 +126,11 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
 - (void)updateShowBorderSetting
 {
     self.showBorderSwitch.on = [[SettingsAPI sharedSettingsAPI] showBorder];
+}
+
+- (void)updateShowStartInfoSetting
+{
+    self.showStartInfoSwitch.on = [[SettingsAPI sharedSettingsAPI] showInfoAtLaunch];
 }
 
 - (void)updateMinuteSlider
@@ -157,6 +162,7 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
     [self updateShowPingPongEasterEggSetting];
     [self updateShowBorderSetting];
     [self updateMinuteSlider];
+    [self updateShowStartInfoSetting];
 }
 
 #pragma mark - Target Action Methods

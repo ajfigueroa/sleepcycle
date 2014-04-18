@@ -107,7 +107,7 @@
 
 - (BOOL)appJustLaunched
 {
-    return self.persistencyManager.showInfoAtLaunch;
+    return self.persistencyManager.appJustLaunched;
 }
 
 - (void)setAppJustLaunched:(BOOL)appJustLaunched

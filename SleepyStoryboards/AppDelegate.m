@@ -42,6 +42,7 @@
     
     // Set appJustLaunch value to YES
     [[SettingsAPI sharedSettingsAPI] setAppJustLaunched:YES];
+    [[SettingsAPI sharedSettingsAPI] saveAllSettings];
     
     // Override point for customization after application launch.
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];

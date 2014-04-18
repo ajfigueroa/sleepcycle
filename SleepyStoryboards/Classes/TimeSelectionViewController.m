@@ -220,11 +220,16 @@
     BOOL appJustLaunched = [[SettingsAPI sharedSettingsAPI] appJustLaunched];
     BOOL showAlertView = showInfoAlertView && appJustLaunched;
     
-    if (showAlertView)
+    if (showAlertView) {
         [self showLaunchInfoAlertView];
+        [[SettingsAPI sharedSettingsAPI] setShowInfoAtLaunch:NO];
+    }
     
     // Set the appJustLaunched to NO now.
     [[SettingsAPI sharedSettingsAPI] setAppJustLaunched:NO];
+    
+    // Save settings
+    [[SettingsAPI sharedSettingsAPI] saveAllSettings];
 }
 
 - (void)showLaunchInfoAlertView
