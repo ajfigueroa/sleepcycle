@@ -26,23 +26,42 @@
               forActionSheet:(IBActionSheet *)actionSheet
                      andInfo:(NSDictionary *)info
 {
-    // The info in this case should be a dictionary that contain two dates.
-    assert(info.count == 2);
+    // The info in this case should be a dictionary that contain two dates and a count for presented counts.
+    assert(info.count == 3);
     
     if (actionSheet.hasCancelButton && buttonIndex == actionSheet.buttons.count - 1)
         return;
     
+    // Grab presented time count
+    // This is used to determine if we are dealing with Today and Tomorrow times or just a Tomorrow time.
+    // If the latter, then simply pass the index that gives the Tomorrow date.
+    NSInteger presentedTimes = [(NSNumber *)info[@"Presented Times"] integerValue];
+    
     switch (actionSheet.tag) {
         case AFActionSheetTagAlarm:
+        {
             // Assign the date pair values
             self.datePairs = @[info[@"Tomorrow"], info[@"Today"]];
-            [self performAlarmActionForIndex:buttonIndex];
+            
+            if (presentedTimes > 1)
+                [self performAlarmActionForIndex:buttonIndex];
+            else
+                [self performAlarmActionForIndex:AFActionSheetAlarmTomorrow];
+            
             break;
+        }
             
         case AFActionSheetTagReminder:
+        {
             self.datePairs = @[info[@"Today"], info[@"Tomorrow"]];
-            [self performReminderActionForIndex:buttonIndex];
+            
+            if (presentedTimes > 1)
+                [self performReminderActionForIndex:buttonIndex];
+            else
+                [self performReminderActionForIndex:AFActionSheetReminderTomorrow];
+            
             break;
+        }
             
         default:
             NSLog(@"%s - Warning; Scheduler is running default case", __PRETTY_FUNCTION__);
@@ -72,7 +91,7 @@
  @sa SchedulerAPI.h
  @param index The AFActionSheetReminder constant that indicates which time to use off the Action Sheet
  */
-- (void)performReminderActionForIndex:(ac)index
+- (void)performReminderActionForIndex:(AFActionSheetReminder)index
 {
     // First zero seconds
     NSDate *reminderTargetTime = (NSDate *)self.datePairs[index];
