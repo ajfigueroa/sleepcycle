@@ -98,7 +98,7 @@
         CGRect alertContainerFrame = CGRectInset(contentContainerFrame, -padding, -padding);
         alertContainerFrame.origin = CGPointMake(floorf((self.frame.size.width - alertContainerFrame.size.width) / 2),
                                                  floorf((self.frame.size.height - alertContainerFrame.size.height) / 2));
-        alertContainerFrame.origin.y = MAX(30, alertContainerFrame.origin.y - 30);
+        alertContainerFrame.origin.y = MAX(60, alertContainerFrame.origin.y - 30);
         self.alertContainer.frame = alertContainerFrame;
         CGRect titleFrame = self.titleLabel.frame;
         titleFrame.size.width = self.alertContentContainer.frame.size.width;

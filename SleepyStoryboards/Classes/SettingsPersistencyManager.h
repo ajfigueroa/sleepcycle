@@ -19,6 +19,10 @@
 
 @property (nonatomic, assign) BOOL showEasterEgg;
 
+@property (nonatomic, assign) BOOL showInfoAtLaunch;
+
+@property (nonatomic, assign) BOOL appJustLaunched;
+
 // Save all settings to local defaults
 - (void)saveSettings;
 

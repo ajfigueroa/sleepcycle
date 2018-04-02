@@ -9,9 +9,9 @@
 #import "SettingsViewController.h"
 #import "SettingsAPI.h"
 #import "ThemeFactory.h"
-#import <MessageUI/MFMailComposeViewController.h>
 #import "AFNotificationConstants.h"
 #import "AFSegueIdentifierConstants.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
 typedef NS_ENUM(NSInteger, AFSettingsHeader)
 {
@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
 
 @property (weak, nonatomic) IBOutlet UISwitch *showPingPongSwitch;
 
-@property (weak, nonatomic) IBOutlet UISwitch *showTutorialSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *showStartInfoSwitch;
 
 /**
  @brief The corresponding target for the left bar button "Done" that notifies the delegate to
@@ -85,6 +85,7 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
     // Commit current state of toggle buttons
     [[SettingsAPI sharedSettingsAPI] setShowBorder:self.showBorderSwitch.on];
     [[SettingsAPI sharedSettingsAPI] setShowEasterEgg:self.showPingPongSwitch.on];
+    [[SettingsAPI sharedSettingsAPI] setShowInfoAtLaunch:self.showStartInfoSwitch.on];
     [[SettingsAPI sharedSettingsAPI] saveAllSettings];
 }
 
@@ -97,7 +98,7 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
     [themeSetter themeNavigationBar:self.navigationController.navigationBar];
     [themeSetter themeSwitch:self.showBorderSwitch];
     [themeSetter themeSwitch:self.showPingPongSwitch];
-    [themeSetter themeSwitch:self.showTutorialSwitch];
+    [themeSetter themeSwitch:self.showStartInfoSwitch];
     [themeSetter themeSlider:self.minutesSlider];
     
 }
@@ -117,7 +118,6 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
     self.themeSelectionLabel.text = [[SettingsAPI sharedSettingsAPI] appThemeName];
 }
 
-
 - (void)updateShowPingPongEasterEggSetting
 {
     self.showPingPongSwitch.on = [[SettingsAPI sharedSettingsAPI] showEasterEgg];
@@ -126,6 +126,11 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
 - (void)updateShowBorderSetting
 {
     self.showBorderSwitch.on = [[SettingsAPI sharedSettingsAPI] showBorder];
+}
+
+- (void)updateShowStartInfoSetting
+{
+    self.showStartInfoSwitch.on = [[SettingsAPI sharedSettingsAPI] showInfoAtLaunch];
 }
 
 - (void)updateMinuteSlider
@@ -145,9 +150,9 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
 - (void)updateMinutesLabel:(NSInteger)minutes
 {
     if (minutes <= 1)
-        self.minutesLabel.text = [NSString stringWithFormat:@"%ld min", (long)minutes];
+        self.minutesLabel.text = [NSString stringWithFormat:@"%ld minute", (long)minutes];
     else
-        self.minutesLabel.text = [NSString stringWithFormat:@"%ld mins", (long)minutes];
+        self.minutesLabel.text = [NSString stringWithFormat:@"%ld minutes", (long)minutes];
 }
 
 - (void)updateAllSettings
@@ -157,6 +162,7 @@ typedef NS_ENUM(NSInteger, AFSettingsSupportSection)
     [self updateShowPingPongEasterEggSetting];
     [self updateShowBorderSetting];
     [self updateMinuteSlider];
+    [self updateShowStartInfoSetting];
 }
 
 #pragma mark - Target Action Methods

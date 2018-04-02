@@ -13,6 +13,7 @@
 @class AlarmCell;
 @class IBActionSheet;
 @class BOZPongRefreshControl;
+@class FUIAlertView;
 
 /**
 @brief The Theme protocol defines methods that an object must implement in order to be a valid theme in this
@@ -168,5 +169,11 @@ buttonBackgroundColor, and buttonTextColor.
  @param toolbar The UIToolbar object to theme.
  */
 - (void)themeToolbar:(UIToolbar *)toolbar;
+
+/**
+ *  @brief Theme the alert view's background, container, button and fonts.
+ *  @param alertView The FUIAlertView object to theme.
+ */
+- (void)themeAlertView:(FUIAlertView *)alertView;
 
 @end

@@ -56,10 +56,9 @@
 #pragma mark - Reminder Configuration
 - (void)configureReminderSchedulerNote
 {
-    NSString *reminderNote = [NSString stringWithFormat:NSLocalizedString(@"Hello, it's SleepCycle!\n"
-                                                                          @"You should be in bed about now so that "
-                                                                          @"you'll fall asleep in time to wake up at "
-                                                                          @"your desired time of %@", nil),
+    NSString *reminderNote = [NSString stringWithFormat:NSLocalizedString(@"Hello, SleepCycle here!\n"
+                                                                          @"You should ideally be in bed now so you can"
+                                                                          @" wake up for %@", nil),
                                                                             [self.selectedTime shortTime]];
     self.reminderScheduler.reminderNote = reminderNote;
 }

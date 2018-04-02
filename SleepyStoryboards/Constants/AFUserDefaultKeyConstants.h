@@ -20,4 +20,8 @@ static NSString *const AFTimeToFallAsleepInMinutes = @"TimeToFallAsleepInMinutes
 
 static NSString *const AFAttributionsDictionary = @"AttributionsDictionary";
 
+static NSString *const AFShowInfoAtLaunch = @"ShowInfoAtLaunch";
+
+static NSString *const AFAppJustLaunched = @"AppJustLaunched";
+
 #endif
