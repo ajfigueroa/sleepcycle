@@ -1,6 +1,8 @@
 SleepCycle
 ==========
 
+**This project is from a long time ago when I was just learning iOS. I made a huge mistake and added .pbxproj to the .gitignore so the project never got committed. This project is now archived and I'll try to update it so others can potentially learn from it.**
+
 Not to be confused with the popular sleep tracking application of similar name. 
 SleepCycle (stylized with no space in-between) is meant as an unofficial mobile alternative to the fantastic website sleepyti.me.
 
